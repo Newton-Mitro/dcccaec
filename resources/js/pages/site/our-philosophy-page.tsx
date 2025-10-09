@@ -1,11 +1,10 @@
 import { Head } from '@inertiajs/react';
 import PageLayout from '../../layouts/page-layout';
 import { Page } from '../../types/page';
-import ImageWrappedContentSection from './components/image-wrapped-content-section';
+import ImageContentBlock from './components/image-content-block';
 import PageBanner from './components/page-banner';
 import RenderSectionContent from './components/render-section-content';
 import SectionGallery from './components/section-gallery';
-import SectionHeader from './components/section-header';
 
 interface OurPhilosophyPageProps {
     page: Page;
@@ -55,13 +54,12 @@ const OurPhilosophyPage: React.FC<OurPhilosophyPageProps> = ({ page }) => {
                                 .map((section, index) => (
                                     <div key={section.id || index} className="mb-30 w-full space-y-10 lg:container">
                                         {/* Section Heading */}
-                                        <SectionHeader heading={section?.heading} sub_heading={section?.sub_heading} />
-
-                                        <ImageWrappedContentSection
-                                            mediaUrl={section.media?.url}
-                                            mimeType={section.media?.file_type}
-                                            contentHtml={section.content || ''}
-                                            shape="octagon-left"
+                                        <ImageContentBlock
+                                            heading={section?.heading}
+                                            sub_heading={section?.sub_heading}
+                                            imageUrl={section?.media?.url}
+                                            content={section?.content}
+                                            reverse={index % 2 === 1}
                                         />
 
                                         <div className="py-6">{section.json_array && <RenderSectionContent jsonItems={section.json_array} />}</div>

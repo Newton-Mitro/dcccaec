@@ -48,7 +48,7 @@ class CustomPageSeeder extends Seeder
           'content' => '
                 <section>
                     <div class="">
-                        <p class="mb-4">At Dhaka Credit Child Care and Education Center, we are dedicated to fostering a nurturing and inclusive environment where every child feels secure, respected, and inspired to explore their full potential.</p>
+                        <p class="mb-4">At <strong>Dhaka Credit Child Care and Education Center</strong>, we are dedicated to fostering a nurturing and inclusive environment where every child feels secure, respected, and inspired to explore their full potential.</p>
                         <p class="mb-4">We recognize that each child is unique, and we collaborate closely with parents to tailor our programs to support curiosity, creativity, and meaningful social connections.</p>
                         <p class="">Our mission is to provide a creative environment conducive to the optimal growth and holistic development of children. We prioritize safety, health, and positivity, ensuring that our space is a place where children can thrive emotionally, socially, and academically.</p>
                     </div>

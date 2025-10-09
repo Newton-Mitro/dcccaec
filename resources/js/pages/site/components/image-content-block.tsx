@@ -1,12 +1,14 @@
 import React from 'react';
 
 interface ImageContentBlockProps {
+    heading?: string | null;
+    sub_heading?: string | null;
     imageUrl?: string;
     content?: string | null;
     reverse?: boolean; // when true → image on right, text on left
 }
 
-const ImageContentBlock: React.FC<ImageContentBlockProps> = ({ imageUrl, content, reverse = false }) => {
+const ImageContentBlock: React.FC<ImageContentBlockProps> = ({ heading, sub_heading, imageUrl, content, reverse = false }) => {
     const containerClass = reverse ? 'flex flex-col items-center gap-16 md:flex-row-reverse' : 'flex flex-col items-center gap-16 md:flex-row';
 
     const imageClass = reverse
@@ -19,10 +21,17 @@ const ImageContentBlock: React.FC<ImageContentBlockProps> = ({ imageUrl, content
         <div className={containerClass}>
             <img alt="Custom Shape" src={imageUrl} className={imageClass} style={{ clipPath, shapeOutside: clipPath }} />
 
-            <div
-                className="prose prose-sm max-w-none text-muted-foreground [&_h1,h2,h3,h4,h5,h6]:text-foreground [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500"
-                dangerouslySetInnerHTML={{ __html: content || '' }}
-            />
+            <div className="">
+                <div className="flex flex-col">
+                    {heading && <h2 className="mb-1 font-chewy text-3xl text-accent">{heading}</h2>}
+                    {sub_heading && <h3 className="mb-2 text-muted-foreground">{sub_heading}</h3>}
+                    {heading && <div className="mx-auto mb-8 h-1 w-16 bg-secondary md:mx-0"></div>}
+                </div>
+                <div
+                    className="prose prose-sm max-w-none text-muted-foreground [&_h1,h2,h3,h4,h5,h6]:text-foreground [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500"
+                    dangerouslySetInnerHTML={{ __html: content || '' }}
+                />
+            </div>
         </div>
     );
 };

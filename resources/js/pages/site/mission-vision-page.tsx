@@ -1,7 +1,7 @@
 import { Head } from '@inertiajs/react';
 import PageLayout from '../../layouts/page-layout';
 import { Page } from '../../types/page';
-import ImageWrappedContentSection from './components/image-wrapped-content-section';
+import ImageContentBlock from './components/image-content-block';
 import PageBanner from './components/page-banner';
 import RenderSectionContent from './components/render-section-content';
 import SectionGallery from './components/section-gallery';
@@ -57,12 +57,7 @@ const MissionVisionPage: React.FC<MissionVisionPageProps> = ({ page }) => {
                                         {/* Section Heading */}
                                         <SectionHeader heading={section?.heading} sub_heading={section?.sub_heading} />
 
-                                        <ImageWrappedContentSection
-                                            mediaUrl={section.media?.url}
-                                            mimeType={section.media?.file_type}
-                                            contentHtml={section.content || ''}
-                                            shape="octagon-left"
-                                        />
+                                        <ImageContentBlock imageUrl={section.media?.url} content={section.content} />
 
                                         <div className="py-6">{section.json_array && <RenderSectionContent jsonItems={section.json_array} />}</div>
 

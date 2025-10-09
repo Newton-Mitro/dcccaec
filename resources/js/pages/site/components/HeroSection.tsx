@@ -45,7 +45,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ slides, interval = 5 }) => {
                         {currentSlide?.button_text && (
                             <div className="mt-16">
                                 <Link href={currentSlide.button_link || '#'}>
-                                    <button className="flex items-center gap-3 rounded-xl bg-primary px-6 py-2 font-semibold uppercase shadow transition-all hover:bg-yellow-500 hover:shadow-lg">
+                                    <button className="flex items-center gap-3 rounded-xl bg-accent px-6 py-2 font-semibold text-accent-foreground uppercase transition-all hover:bg-secondary hover:shadow">
                                         {currentSlide.button_text}
                                     </button>
                                 </Link>

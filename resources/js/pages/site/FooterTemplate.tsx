@@ -19,7 +19,7 @@ function FooterTemplate() {
                         <img
                             src={settings.site_logo || '/logo.png'}
                             alt="DC Child Care and Education Centre Logo"
-                            className="h-20 w-20 object-contain"
+                            className="h-16 w-16 object-contain"
                         />
                     </div>
                     <div className="flex items-center">

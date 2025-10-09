@@ -75,7 +75,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, services, teams,
                         {/* Left Image (or illustration) */}
                         <div className="relative w-full">
                             <div className="absolute -top-6 -left-6 h-40 w-40 rounded-full bg-primary/20 blur-3xl" />
-                            <img src={about?.media?.url || ''} alt="About Us" className="relative z-10 w-full rounded-3xl object-cover shadow-2xl" />
+                            <img src={about?.media?.url || ''} alt="About Us" className="relative z-10 w-full rounded object-cover shadow" />
                         </div>
 
                         {/* Right Content */}
