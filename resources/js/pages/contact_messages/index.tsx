@@ -4,7 +4,6 @@ import { Eye, Trash2 } from 'lucide-react';
 import React from 'react';
 import Swal from 'sweetalert2';
 import HeadingSmall from '../../components/heading-small';
-import { Button } from '../../components/ui/button';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
 import { ContactMessage } from '../../types/contact_message';
@@ -60,9 +59,6 @@ const Index: React.FC<NoticeProps> = ({ contactMessages }) => {
             <div className="p-6">
                 <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row">
                     <HeadingSmall title="Contact Messages" description="Manage your contact-messages" />
-                    <Button onClick={() => router.visit(route('contact-messages.create'))} className="">
-                        Create Contact Message
-                    </Button>
                 </div>
 
                 <div className="h-[calc(100vh-250px)] overflow-auto rounded border border-gray-200 dark:border-gray-700">

@@ -1,8 +1,7 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
-import { Head, Link, router } from '@inertiajs/react';
-import { Eye, Pencil, Trash2 } from 'lucide-react';
+import { Head, Link } from '@inertiajs/react';
+import { Eye, Pencil } from 'lucide-react';
 import React from 'react';
-import Swal from 'sweetalert2';
 import HeadingSmall from '../../components/heading-small';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
@@ -21,38 +20,6 @@ const Index: React.FC<PageProps> = ({ pages }) => {
         { title: 'Dashboard', href: '/dashboard' },
         { title: 'Pages', href: route('pages.index') },
     ];
-
-    const deletePage = (id: number) => {
-        const isDark = document.documentElement.classList.contains('dark');
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: 'This page will be permanently deleted!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: isDark ? '#ef4444' : '#d33',
-            cancelButtonColor: isDark ? '#3b82f6' : '#3085d6',
-            background: isDark ? '#1f2937' : '#fff',
-            color: isDark ? '#f9fafb' : '#111827',
-            confirmButtonText: 'Yes, delete it!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                router.delete(route('pages.destroy', id), {
-                    preserveScroll: true,
-                    preserveState: true,
-                    onSuccess: () => {
-                        Swal.fire({
-                            title: 'Deleted!',
-                            text: 'Page has been deleted.',
-                            icon: 'success',
-                            background: isDark ? '#1f2937' : '#fff',
-                            color: isDark ? '#f9fafb' : '#111827',
-                        });
-                    },
-                });
-            }
-        });
-    };
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -111,17 +78,6 @@ const Index: React.FC<PageProps> = ({ pages }) => {
                                                         </Link>
                                                     </TooltipTrigger>
                                                     <TooltipContent>Edit</TooltipContent>
-                                                </Tooltip>
-                                                <Tooltip>
-                                                    <TooltipTrigger asChild>
-                                                        <button
-                                                            onClick={() => deletePage(page.id)}
-                                                            className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
-                                                        >
-                                                            <Trash2 className="h-5 w-5" />
-                                                        </button>
-                                                    </TooltipTrigger>
-                                                    <TooltipContent>Delete</TooltipContent>
                                                 </Tooltip>
                                             </div>
                                         </TooltipProvider>

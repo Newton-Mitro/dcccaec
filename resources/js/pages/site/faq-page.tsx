@@ -80,7 +80,7 @@ const FaqPage: React.FC<FaqPageProps> = ({ page }) => {
                                 <div key={section.id} className="w-full space-y-6">
                                     {section.heading && (
                                         <div className="mb-6 text-center">
-                                            <h2 className="mb-1 text-3xl font-semibold text-accent">{section.heading}</h2>
+                                            <h2 className="mb-1 font-chewy text-3xl text-accent">{section.heading}</h2>
                                             {section.sub_heading && <h3 className="text-sm text-muted-foreground">{section.sub_heading}</h3>}
                                             <div className="mx-auto mt-2 h-1 w-16 bg-secondary"></div>
                                         </div>

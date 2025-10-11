@@ -16,7 +16,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
                 {/* Hero */}
                 <PageBanner title="Upcoming Events" subtitle="Discover our events and explore the possibilities." />
 
-                <div className="container-custom mx-auto py-16">
+                <div className="container-custom mx-auto px-4 sm:px-6 md:px-6">
                     {/* Events Grid */}
                     {events.length > 0 ? (
                         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
@@ -70,7 +70,14 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
                             ))}
                         </div>
                     ) : (
-                        <p className="text-center text-gray-500">No events available at the moment.</p>
+                        <section className="my-36 text-center">
+                            <div className="container-custom mx-auto px-4 sm:px-6 md:px-6">
+                                <div className="">
+                                    <h3 className="mb-4 text-2xl font-semibold text-gray-700 dark:text-gray-200">No Events Yet 📢</h3>
+                                    <p className="text-gray-500 dark:text-gray-400">No events available at the moment.</p>
+                                </div>
+                            </div>
+                        </section>
                     )}
                 </div>
             </PageLayout>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Infrastructure\Models\Award;
 use App\Infrastructure\Models\Career;
+use App\Infrastructure\Models\ContactMessage;
 use App\Infrastructure\Models\Event;
 use App\Infrastructure\Models\Gallery;
 use App\Infrastructure\Models\HeroSlider;
@@ -157,6 +158,21 @@ class WebPageController extends Controller
     public function contact()
     {
         return Inertia::render('site/contact-page');
+    }
+
+    public function sendMessage(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'nullable|string|max:20',
+            'subject' => 'nullable|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        ContactMessage::create($validated);
+
+        return back()->with('success', 'Your message has been sent successfully!');
     }
 
     public function teams(Request $request)

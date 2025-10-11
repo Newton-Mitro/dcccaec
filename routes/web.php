@@ -29,6 +29,7 @@ Route::get('/', [WebPageController::class, 'home'])->name('site.home');
 Route::get('/parents/{slug}', [WebPageController::class, 'page'])->name('site.single-page');
 Route::get('/about-us', [WebPageController::class, 'about'])->name('site.about');
 Route::get('/contact-us', [WebPageController::class, 'contact'])->name('site.contact');
+Route::post('/contact', [WebPageController::class, 'sendMessage'])->name('site.send-message');
 Route::get('/about-us/teams', [WebPageController::class, 'teams'])->name('site.teams');
 Route::get('/about-us/principal-message', [WebPageController::class, 'principalMessage'])->name('site.principal-message');
 Route::get('/about-us/president-message', [WebPageController::class, 'presidentMessage'])->name('site.president-message');

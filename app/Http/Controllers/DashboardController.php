@@ -27,7 +27,7 @@ class DashboardController extends Controller
         $stats = [
             'users' => User::count(),
             'pages' => Page::count(),
-            'services' => Program::count(),
+            'programs' => Program::count(),
             'contactMessages' => ContactMessage::count(),
             'notices' => Notice::count(),
             'events' => Event::count(),
