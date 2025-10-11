@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('title')->nullable();
             $table->string('subtitle')->nullable();
+            $table->string('content')->nullable();
             $table->string('button_text')->nullable();
             $table->string('button_link')->nullable();
             $table->foreignId('media_id')->constrained('media')->cascadeOnDelete();

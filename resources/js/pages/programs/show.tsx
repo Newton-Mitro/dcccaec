@@ -3,31 +3,32 @@ import HeadingSmall from '../../components/heading-small';
 import { Badge } from '../../components/ui/badge';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
-import { Service } from '../../types/service';
+import { Program } from '../../types/program';
 
 interface Props {
-    service: Service;
+    program: Program;
 }
 
-export default function Show({ service }: Props) {
+export default function Show({ program }: Props) {
+    console.log(program);
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Dashboard', href: '/dashboard' },
-        { title: 'Services', href: route('services.index') },
-        { title: service.title, href: '' },
+        { title: 'Programs', href: route('programs.index') },
+        { title: program.title, href: '' },
     ];
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title={service.title} />
+            <Head title={program.title} />
             <div className="container-custom w-full space-y-6 p-6">
-                <HeadingSmall title={service.title} description={service.slug} />
+                <HeadingSmall title={program.title} description={program.slug} />
 
                 {/* Top section: main image + summary info */}
                 <div className="space-y-4">
-                    {service.media && (
+                    {program.media && (
                         <img
-                            src={service.media.url}
-                            alt={service.title}
+                            src={program.media.url}
+                            alt={program.title}
                             style={{
                                 clipPath: 'polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%)',
                             }}
@@ -35,41 +36,35 @@ export default function Show({ service }: Props) {
                         />
                     )}
 
-                    {/* Wrapped text content */}
-                    <div className="text-gray-700 dark:text-gray-300">
-                        <div className="mb-1 text-sm text-gray-500 dark:text-gray-400">Category</div>
-                        <div className="font-medium">{service.category?.name || '-'}</div>
-                    </div>
-
                     <div className="text-gray-700 dark:text-gray-300">
                         <div className="mb-1 text-sm text-gray-500 dark:text-gray-400">Status</div>
                         <div className="">
-                            <Badge variant={service.status === 'Active' ? 'default' : 'secondary'} className="mb-3 rounded-xl">
-                                {service.status}
+                            <Badge variant={program.status === 'Active' ? 'default' : 'secondary'} className="mb-3 rounded-xl">
+                                {program.status}
                             </Badge>
                         </div>
                     </div>
 
                     <div
                         className="prose prose-sm max-w-none text-muted-foreground [&_h1,h2,h3,h4,h5,h6]:text-foreground [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500"
-                        dangerouslySetInnerHTML={{ __html: service.description || '-' }}
+                        dangerouslySetInnerHTML={{ __html: program.description || '-' }}
                     />
                 </div>
 
                 {/* Icon Media */}
-                {service.icon_media && (
+                {program.icon_media && (
                     <div className="mt-4">
                         <h3 className="mb-2 font-semibold">Icon</h3>
-                        <img src={service.icon_media.url} alt="Icon" className="h-24 w-24 rounded object-cover" />
+                        <img src={program.icon_media.url} alt="Icon" className="h-24 w-24 rounded object-cover" />
                     </div>
                 )}
 
                 {/* Gallery */}
-                {service.gallery && service.gallery.length > 0 && (
+                {program.gallery && program.gallery.length > 0 && (
                     <div className="clear-both">
                         <h3 className="my-6 font-semibold">Gallery</h3>
                         <div className="flex flex-wrap gap-2">
-                            {service.gallery.map((url, idx) => (
+                            {program.gallery.map((url, idx) => (
                                 <img
                                     key={idx}
                                     src={url}

@@ -2,15 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Infrastructure\Models\Category;
-use App\Infrastructure\Models\Media;
-use App\Infrastructure\Models\Service;
+use App\Infrastructure\Models\Program;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class ServiceFactory extends Factory
+class ProgramFactory extends Factory
 {
-    protected $model = Service::class;
+    protected $model = Program::class;
 
     public function definition(): array
     {
@@ -22,10 +20,6 @@ class ServiceFactory extends Factory
             'description' => $this->faker->paragraph(5),
             'gallery' => null,
             'media_id' => null,
-
-            // ✅ Only pick categories that belong to "Service"
-            'category_id' => null,
-
             'status' => $this->faker->randomElement(['Active', 'Inactive']),
         ];
     }

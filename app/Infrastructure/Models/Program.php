@@ -3,11 +3,11 @@
 namespace App\Infrastructure\Models;
 
 use App\Core\Traits\HasSlug;
-use Database\Factories\ServiceFactory;
+use Database\Factories\ProgramFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Service extends Model
+class Program extends Model
 {
     use HasFactory, HasSlug;
 
@@ -41,7 +41,7 @@ class Service extends Model
     // Factory
     protected static function newFactory()
     {
-        return ServiceFactory::new();
+        return ProgramFactory::new();
     }
 
 

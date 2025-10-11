@@ -7,26 +7,26 @@ import HeadingSmall from '../../components/heading-small';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
 import { PaginationLink } from '../../types/pagination_link';
-import { Service } from '../../types/service';
+import { Program } from '../../types/program';
 
 interface ServiceProps {
-    services: {
-        data: Service[];
+    programs: {
+        data: Program[];
         links: PaginationLink[];
     };
 }
 
-const Index: React.FC<ServiceProps> = ({ services }) => {
+const Index: React.FC<ServiceProps> = ({ programs }) => {
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Dashboard', href: '/dashboard' },
-        { title: 'Services', href: route('services.index') },
+        { title: 'Programs', href: route('programs.index') },
     ];
 
-    const deleteService = (id: number) => {
+    const deleteProgram = (id: number) => {
         const isDark = document.documentElement.classList.contains('dark');
         Swal.fire({
             title: 'Are you sure?',
-            text: 'This service will be permanently deleted!',
+            text: 'This program will be permanently deleted!',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: isDark ? '#ef4444' : '#d33',
@@ -36,13 +36,13 @@ const Index: React.FC<ServiceProps> = ({ services }) => {
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
-                router.delete(route('services.destroy', id), {
+                router.delete(route('programs.destroy', id), {
                     preserveScroll: true,
                     preserveState: true,
                     onSuccess: () => {
                         Swal.fire({
                             title: 'Deleted!',
-                            text: 'Service has been deleted.',
+                            text: 'Program has been deleted.',
                             icon: 'success',
                             background: isDark ? '#1f2937' : '#fff',
                             color: isDark ? '#f9fafb' : '#111827',
@@ -55,15 +55,15 @@ const Index: React.FC<ServiceProps> = ({ services }) => {
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Services" />
+            <Head title="Programs" />
             <div className="p-6">
                 <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row">
-                    <HeadingSmall title="Services" description="Manage your services" />
+                    <HeadingSmall title="Programs" description="Manage your programs" />
                     <Link
-                        href={route('services.create')}
+                        href={route('programs.create')}
                         className="inline-block rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700"
                     >
-                        Create Service
+                        Create Program
                     </Link>
                 </div>
 
@@ -72,34 +72,27 @@ const Index: React.FC<ServiceProps> = ({ services }) => {
                         <thead className="sticky top-0 hidden bg-gray-50 md:table-header-group dark:bg-gray-800">
                             <tr>
                                 <th className="border-b border-gray-200 p-2 text-left dark:border-gray-700">Title</th>
-                                <th className="border-b border-gray-200 p-2 text-left dark:border-gray-700">Category</th>
                                 <th className="border-b border-gray-200 p-2 text-left dark:border-gray-700">Status</th>
                                 <th className="border-b border-gray-200 p-2 text-left dark:border-gray-700">Actions</th>
                             </tr>
                         </thead>
 
                         <tbody className="flex flex-col md:table-row-group">
-                            {services.data.map((service) => (
+                            {programs.data.map((program) => (
                                 <tr
-                                    key={service.id}
+                                    key={program.id}
                                     className="flex flex-col border-b border-gray-200 even:bg-gray-50 md:table-row md:flex-row dark:border-gray-700 dark:even:bg-gray-900"
                                 >
                                     {/* Title */}
                                     <td className="px-2 py-1">
                                         <label className="font-semibold text-gray-700 md:hidden dark:text-gray-300">Title</label>
-                                        <p className="text-gray-900 dark:text-gray-100">{service.title}</p>
-                                    </td>
-
-                                    {/* Category */}
-                                    <td className="px-2 py-1">
-                                        <label className="font-semibold text-gray-700 md:hidden dark:text-gray-300">Category</label>
-                                        <p className="text-gray-900 dark:text-gray-100">{service.category?.name || '-'}</p>
+                                        <p className="text-gray-900 dark:text-gray-100">{program.title}</p>
                                     </td>
 
                                     {/* Status */}
                                     <td className="px-2 py-1">
                                         <label className="font-semibold text-gray-700 md:hidden dark:text-gray-300">Status</label>
-                                        <p className="text-gray-900 dark:text-gray-100">{service.status}</p>
+                                        <p className="text-gray-900 dark:text-gray-100">{program.status}</p>
                                     </td>
 
                                     {/* Actions */}
@@ -110,7 +103,7 @@ const Index: React.FC<ServiceProps> = ({ services }) => {
                                                 <Tooltip>
                                                     <TooltipTrigger asChild>
                                                         <Link
-                                                            href={route('services.show', service.id)}
+                                                            href={route('programs.show', program.id)}
                                                             className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
                                                         >
                                                             <Eye className="h-5 w-5" />
@@ -122,7 +115,7 @@ const Index: React.FC<ServiceProps> = ({ services }) => {
                                                 <Tooltip>
                                                     <TooltipTrigger asChild>
                                                         <Link
-                                                            href={route('services.edit', service.id)}
+                                                            href={route('programs.edit', program.id)}
                                                             className="text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300"
                                                         >
                                                             <Pencil className="h-5 w-5" />
@@ -134,7 +127,7 @@ const Index: React.FC<ServiceProps> = ({ services }) => {
                                                 <Tooltip>
                                                     <TooltipTrigger asChild>
                                                         <button
-                                                            onClick={() => deleteService(service.id)}
+                                                            onClick={() => deleteProgram(program.id)}
                                                             className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
                                                         >
                                                             <Trash2 className="h-5 w-5" />
@@ -153,9 +146,9 @@ const Index: React.FC<ServiceProps> = ({ services }) => {
 
                 {/* Pagination */}
                 <div className="mt-4 flex flex-col items-center justify-between gap-2 md:flex-row">
-                    <span className="text-sm text-gray-600 dark:text-gray-400">Showing {services.data.length} results</span>
+                    <span className="text-sm text-gray-600 dark:text-gray-400">Showing {programs.data.length} results</span>
                     <div className="flex gap-1">
-                        {services.links.map((link, i) => (
+                        {programs.links.map((link, i) => (
                             <Link
                                 key={i}
                                 href={link.url || '#'}

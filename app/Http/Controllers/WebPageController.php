@@ -9,7 +9,7 @@ use App\Infrastructure\Models\Gallery;
 use App\Infrastructure\Models\HeroSlider;
 use App\Infrastructure\Models\Notice;
 use App\Infrastructure\Models\Page;
-use App\Infrastructure\Models\Service;
+use App\Infrastructure\Models\Program;
 use App\Infrastructure\Models\Team;
 use App\Infrastructure\Models\Testimonial;
 use Illuminate\Http\Request;
@@ -23,7 +23,7 @@ class WebPageController extends Controller
             ->orderBy('sort_order')
             ->get();
         $teams = Team::where('status', 'Active')->with('media')->orderBy('sort_order')->take(5)->get();
-        $services = Service::where('status', 'Active')->with(['media'])->orderBy('sort_order')->take(3)->get();
+        $programs = Program::where('status', 'Active')->with(['media'])->orderBy('sort_order')->take(3)->get();
         $testimonials = Testimonial::where('status', 'Active')->with('media')->orderBy('sort_order')->take(5)->get();
         $awards = Award::where('status', 'Active')->with('media')->orderBy('sort_order')->take(5)->get();
         $notices = Notice::where('status', 'Active')->orderBy('sort_order')->take(5)->get();
@@ -36,7 +36,7 @@ class WebPageController extends Controller
             'about' => $about,
             'heroSlides' => $heroSlides,
             'teams' => $teams,
-            'services' => $services,
+            'programs' => $programs,
             'testimonials' => $testimonials,
             'awards' => $awards,
             'notices' => $notices,
@@ -184,7 +184,7 @@ class WebPageController extends Controller
     public function programs(Request $request)
     {
         $perPage = $request->input('perPage', 8);
-        $programs = Service::with('media', 'category')
+        $programs = Program::with('media', 'category')
             ->latest()
             ->get();
         return Inertia::render('site/programs-page', [
@@ -192,13 +192,13 @@ class WebPageController extends Controller
         ]);
     }
 
-    public function showProgram(Service $program, Request $request)
+    public function showProgram(Program $program, Request $request)
     {
         // Load relationships on the existing $team instance
         $program->load('media', 'category');
 
         return Inertia::render('site/single-program-page', [
-            'service' => $program,
+            'program' => $program,
         ]);
     }
 

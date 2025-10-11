@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->string('author_name');
             $table->string('author_designation')->nullable();
             $table->string('company')->nullable();
-            $table->longText('message');
+            $table->longText('message')->nullable();
             $table->foreignId('media_id')->nullable()->constrained('media')->nullOnDelete();
             $table->tinyInteger('rating')->nullable();
             $table->integer('sort_order')->default(0);

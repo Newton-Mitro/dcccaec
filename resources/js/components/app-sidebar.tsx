@@ -4,12 +4,12 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import {
+    BabyIcon,
     BadgeCheckIcon,
     BellDotIcon,
     CalendarClockIcon,
     ContactRoundIcon,
     Globe2,
-    HandPlatterIcon,
     ImagePlusIcon,
     LayoutGrid,
     MailQuestion,
@@ -50,9 +50,9 @@ const mainNavItems: NavItem[] = [
         icon: TagsIcon,
     },
     {
-        title: 'Services',
-        href: '/admin/services',
-        icon: HandPlatterIcon,
+        title: 'Programs',
+        href: '/admin/programs',
+        icon: BabyIcon,
     },
     {
         title: 'Notices',

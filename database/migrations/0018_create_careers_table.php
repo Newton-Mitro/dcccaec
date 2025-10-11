@@ -11,45 +11,45 @@ return new class extends Migration {
             $table->id();
 
             // Basic Info
-            $table->string('title');                     // Job Title
-            $table->string('slug')->unique();            // SEO-friendly URL
-            $table->longText('description')->nullable(); // Job description
-            $table->longText('requirements')->nullable();// Qualifications & requirements
-            $table->longText('responsibilities')->nullable(); // Detailed job duties
-            $table->string('location')->nullable();      // Job location
-            $table->boolean('is_remote')->default(false);// Remote option?
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->longText('description')->nullable();
+            $table->longText('requirements')->nullable();
+            $table->longText('responsibilities')->nullable();
+            $table->string('location')->nullable();
+            $table->boolean('is_remote')->default(false);
 
             // Salary & Benefits
-            $table->string('salary_range')->nullable();  // e.g. "50k-70k/year"
+            $table->string('salary_range')->nullable();
             $table->decimal('min_salary', 12, 2)->nullable();
             $table->decimal('max_salary', 12, 2)->nullable();
             $table->string('currency', 10)->default('USD');
-            $table->json('benefits')->nullable();        // e.g. ["Health Insurance","401k","Paid Time Off"]
+            $table->json('benefits')->nullable();
 
             // Job Details
-            $table->enum('employment_type', [            // Type of employment
+            $table->enum('employment_type', [
                 'full-time',
                 'part-time',
                 'contract',
                 'internship',
                 'temporary'
             ])->default('full-time');
-            $table->enum('experience_level', [           // Required seniority
+            $table->enum('experience_level', [
                 'entry',
                 'junior',
                 'mid',
                 'senior',
                 'lead'
             ])->default('entry');
-            $table->string('department')->nullable();    // e.g. Engineering, HR
-            $table->string('job_function')->nullable();  // e.g. Software Engineer, Accountant
-            $table->string('education_level')->nullable();// e.g. Bachelor's, Master's, PhD
+            $table->string('department')->nullable();
+            $table->string('job_function')->nullable();
+            $table->string('education_level')->nullable();
 
             // Application & Workflow
-            $table->date('deadline')->nullable();        // Application deadline
+            $table->date('deadline')->nullable();
             $table->enum('status', ['open', 'closed', 'draft'])->default('open');
-            $table->integer('positions')->default(1);    // Number of hires for this role
-            $table->integer('applications_count')->default(0); // Counter of applicants
+            $table->integer('positions')->default(1);
+            $table->integer('applications_count')->default(0);
 
             // Meta
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();

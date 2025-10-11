@@ -13,7 +13,7 @@ import { Event } from '../../types/event';
 import { HeroSlide } from '../../types/hero_slide';
 import { Notice } from '../../types/notice';
 import { Page } from '../../types/page';
-import { Service } from '../../types/service';
+import { Program } from '../../types/program';
 import { Team } from '../../types/team';
 import { Testimonial } from '../../types/testimonial';
 import HeroSection from './components/HeroSection';
@@ -22,7 +22,7 @@ import SectionHeader from './components/section-header';
 interface HomePageProps {
     heroSlides: HeroSlide[];
     about: Page;
-    services: Service[];
+    programs: Program[];
     teams: Team[];
     testimonials: Testimonial[];
     awards: Award[];
@@ -30,7 +30,7 @@ interface HomePageProps {
     events: Event[];
 }
 
-const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, services, teams, testimonials, awards }) => {
+const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams, testimonials, awards }) => {
     const pageUrl = typeof window !== 'undefined' ? window.location.href : '';
     const imageUrl = ''; // Replace with default OG image if needed
     const metaTitle = 'Home Page';
@@ -112,14 +112,14 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, services, teams,
 
                 <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 py-16">
                     {/* Services Section */}
-                    {services.length > 0 && (
+                    {programs.length > 0 && (
                         <div className="space-y-10">
-                            <SectionHeader heading="Our Programs" sub_heading="We offer a wide range of services to help you achieve your goals." />
+                            <SectionHeader heading="Our Programs" sub_heading="We offer a wide range of programs to help you achieve your goals." />
 
                             <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                                {services.map((service, index) => (
+                                {programs.map((program, index) => (
                                     <div
-                                        key={service.id}
+                                        key={program.id}
                                         className={`group relative border-2 border-card/50 bg-card p-6 shadow transition-transform duration-300 hover:-translate-y-2 ${
                                             index % 2 === 0 ? 'rounded-tl-4xl rounded-br-4xl' : 'rounded-tr-4xl rounded-bl-4xl'
                                         }`}
@@ -132,16 +132,16 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, services, teams,
                                         ></div>
 
                                         <div className="relative z-10 flex flex-col items-center">
-                                            {service.media?.url && (
+                                            {program.media?.url && (
                                                 <img
-                                                    src={service.media.url}
-                                                    alt={service.title}
+                                                    src={program.media.url}
+                                                    alt={program.title}
                                                     className="mx-auto h-16 w-16 rounded-full border-2 border-primary object-cover p-1"
                                                 />
                                             )}
 
-                                            <h3 className="mt-4 text-center text-xl font-semibold">{service.title}</h3>
-                                            <p className="mt-2 text-center text-muted-foreground">{service.description}</p>
+                                            <h3 className="mt-4 text-center text-xl font-semibold">{program.title}</h3>
+                                            <p className="mt-2 text-center text-muted-foreground">{program.description}</p>
 
                                             {/* Shaped Button */}
                                             <button

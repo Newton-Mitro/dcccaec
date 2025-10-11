@@ -11,7 +11,7 @@ use App\Infrastructure\Models\Notice;
 use App\Infrastructure\Models\Page;
 use App\Infrastructure\Models\Partner;
 use App\Infrastructure\Models\RouteVisitLog;
-use App\Infrastructure\Models\Service;
+use App\Infrastructure\Models\Program;
 use App\Infrastructure\Models\Event;
 use App\Infrastructure\Models\Team;
 use App\Infrastructure\Models\Testimonial;
@@ -27,7 +27,7 @@ class DashboardController extends Controller
         $stats = [
             'users' => User::count(),
             'pages' => Page::count(),
-            'services' => Service::count(),
+            'services' => Program::count(),
             'contactMessages' => ContactMessage::count(),
             'notices' => Notice::count(),
             'events' => Event::count(),

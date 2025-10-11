@@ -15,7 +15,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\VisitorController;
 use App\Http\Controllers\CategoryController;
@@ -76,7 +76,7 @@ Route::prefix('admin')
         Route::resource('pages', PageController::class);
         Route::resource('articles', ArticleController::class);
         Route::resource('route-visit-logs', RouteVisitLogController::class);
-        Route::resource('services', ServiceController::class);
+        Route::resource('programs', ProgramController::class);
         Route::resource('settings', SettingController::class);
         Route::resource('teams', TeamController::class);
         Route::resource('leaders', LeaderController::class);

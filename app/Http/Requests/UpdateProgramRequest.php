@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateServiceRequest extends FormRequest
+class UpdateProgramRequest extends FormRequest
 {
     public function authorize(): bool
     {
@@ -15,7 +15,7 @@ class UpdateServiceRequest extends FormRequest
     {
         return [
             'title' => ['sometimes', 'required', 'string', 'max:255'],
-            'slug' => ['sometimes', 'required', 'string', 'max:255', 'unique:services,slug,' . $this->route('service')],
+            'slug' => ['sometimes', 'required', 'string', 'max:255', 'unique:programs,slug,' . $this->route('program')],
             'description' => ['nullable', 'string'],
             'gallery' => ['nullable', 'array'],
             'gallery.*' => ['string'],

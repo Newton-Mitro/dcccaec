@@ -12,17 +12,14 @@ return new class extends Migration {
             $table->foreignId('page_id')->constrained('pages')->cascadeOnDelete();
             $table->string('heading')->nullable();
             $table->string('sub_heading')->nullable();
-            $table->string('button_text')->nullable();
-            $table->string('button_link')->nullable();
-            $table->enum('content_type', [
-                'HTML',
-                'TEXT'
-            ])->default('HTML');
+            $table->enum('content_type', ['HTML', 'TEXT'])->default('HTML');
             $table->longText('content')->nullable();
             $table->text('excerpt')->nullable();
             $table->json('json_array')->nullable();
             $table->json('gallery')->nullable();
             $table->foreignId('media_id')->nullable()->constrained('media')->nullOnDelete();
+            $table->string('button_text')->nullable();
+            $table->string('button_link')->nullable();
             $table->integer('sort_order')->default(0);
             $table->timestamps();
         });

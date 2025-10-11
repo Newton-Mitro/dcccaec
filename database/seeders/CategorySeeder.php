@@ -12,12 +12,6 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            'Service' => [
-                'Renewable Energy Solutions',
-                'Industrial Solutions & Services',
-                'Consulting Services',
-                'Operation & Maintenance',
-            ],
             'Team' => [
                 'Management',
                 'Engineering',
@@ -27,22 +21,9 @@ class CategorySeeder extends Seeder
                 'Customer Support',
             ],
             'Leader' => ['Directors'],
-            'Student' => [
-                'Class I',
-                'Class II',
-                'Class III',
-                'Class IV',
-                'Class V',
-                'Class VI',
-                'Class VII',
-                'Class VIII',
-                'Class IX',
-                'Class X',
-            ],
             'Article' => ['Tech Insights', 'Business Strategy', 'Lifestyle'],
             'Event' => ['Conferences', 'Workshops', 'Meetups'],
             'Notice' => ['Announcements', 'Exams', 'General Notices'],
-            'Project' => ['Open Source', 'Client Work', 'Internal Tools'],
         ];
 
         // Preload all available image IDs

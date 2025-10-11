@@ -58,10 +58,10 @@ export default function Dashboard() {
                         { label: 'Pages', value: stats.pages, icon: 'fa-solid fa-newspaper', color: 'text-blue-600', route: route('pages.index') },
                         {
                             label: 'Programs',
-                            value: stats.services,
+                            value: stats.programs,
                             icon: 'fa-solid fa-truck-fast',
                             color: 'text-amber-500',
-                            route: route('services.index'),
+                            route: route('programs.index'),
                         },
                         {
                             label: 'Contact Messages',

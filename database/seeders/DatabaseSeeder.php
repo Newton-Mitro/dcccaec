@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
                 // PageSeeder::class,
             CustomPageSeeder::class,
-            ServiceSeeder::class,
+            ProgramSeeder::class,
             TeamSeeder::class,
             TestimonialSeeder::class,
             AwardSeeder::class,

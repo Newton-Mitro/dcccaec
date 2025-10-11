@@ -9,20 +9,7 @@ return new class extends Migration {
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->enum('category_of', [
-                'Team',
-                'Course',
-                'Leader',
-                'Student',
-                'Instructor',
-                'Doctor',
-                'Service',
-                'Product',
-                'Project',
-                'Event',
-                'Notice',
-                'Article'
-            ])->default('Article');
+            $table->enum('category_of', ['Team', 'Leader', 'Instructor', 'Program', 'Event', 'Notice', 'Article'])->default('Article');
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();

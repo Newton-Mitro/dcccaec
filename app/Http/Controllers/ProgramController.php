@@ -2,25 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Infrastructure\Models\Service;
+use App\Infrastructure\Models\Program;
 use App\Infrastructure\Models\Media;
 use App\Infrastructure\Models\Category;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class ServiceController extends Controller
+class ProgramController extends Controller
 {
     public function index(Request $request)
     {
         $perPage = $request->input('perPage', 20);
 
-        $services = Service::with(['media', 'category'])
+        $programs = Program::with(['media', 'category'])
             ->latest()
             ->paginate($perPage)
             ->withQueryString();
 
-        return Inertia::render('services/index', [
-            'services' => $services,
+        return Inertia::render('programs/index', [
+            'programs' => $programs,
         ]);
     }
 
@@ -29,9 +29,9 @@ class ServiceController extends Controller
         $perPage = $request->input('perPage', 10);
 
         $media = Media::latest()->paginate($perPage)->withQueryString();
-        $categories = Category::where('category_of', 'Service')->get();
+        $categories = Category::where('category_of', 'Program')->get();
 
-        return Inertia::render('services/create', [
+        return Inertia::render('programs/create', [
             'media' => $media,
             'categories' => $categories,
         ]);
@@ -52,43 +52,43 @@ class ServiceController extends Controller
         $title = $request->input('title');
 
         // Generate slug (unique)
-        $data['slug'] = $request->input('slug') ?: Service::generateUniqueSlug($title);
+        $data['slug'] = $request->input('slug') ?: Program::generateUniqueSlug($title);
 
         // Set default status
         $data['status'] = 'Active';
 
-        Service::create($data);
+        Program::create($data);
 
-        return redirect()->route('services.index')->with('success', 'Service created.');
+        return redirect()->route('programs.index')->with('success', 'Program created.');
     }
 
 
-    public function show(Service $service)
+    public function show(Program $program)
     {
-        return Inertia::render('services/show', [
-            'service' => $service->load(['media', 'category']),
+        return Inertia::render('programs/show', [
+            'program' => $program->load(['media', 'category']),
         ]);
     }
 
-    public function edit(Service $service, Request $request)
+    public function edit(Program $program, Request $request)
     {
         $perPage = $request->input('perPage', 10);
 
         $media = Media::latest()->paginate($perPage)->withQueryString();
-        $categories = Category::where('category_of', 'Service')->get();
+        $categories = Category::where('category_of', 'Program')->get();
 
-        return Inertia::render('services/edit', [
-            'service' => $service->load(['media']),
+        return Inertia::render('programs/edit', [
+            'program' => $program->load(['media']),
             'media' => $media,
             'categories' => $categories,
         ]);
     }
 
-    public function update(Request $request, Service $service)
+    public function update(Request $request, Program $program)
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'required|string|unique:services,slug,' . $service->id,
+            'slug' => 'required|string|unique:programs,slug,' . $program->id,
             'description' => 'nullable|string',
             'gallery' => 'nullable|array',
             'media_id' => 'nullable|exists:media,id',
@@ -96,14 +96,14 @@ class ServiceController extends Controller
             'status' => 'required|in:Active,Inactive',
         ]);
 
-        $service->update($data);
+        $program->update($data);
 
-        return redirect()->route('services.index')->with('success', 'Service updated.');
+        return redirect()->route('programs.index')->with('success', 'Program updated.');
     }
 
-    public function destroy(Service $service)
+    public function destroy(Program $program)
     {
-        $service->delete();
-        return redirect()->route('services.index')->with('success', 'Service deleted.');
+        $program->delete();
+        return redirect()->route('programs.index')->with('success', 'Program deleted.');
     }
 }
