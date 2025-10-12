@@ -117,6 +117,10 @@ const ContactPage = () => {
                             </form>
                         </div>
                     </div>
+                    <div className="mt-6 w-full overflow-hidden rounded-xl border">
+                        {/* Render Google Map Embed */}
+                        <div className="h-[450px] w-full" dangerouslySetInnerHTML={{ __html: settings.contact_map_embed || '' }} />
+                    </div>
                 </section>
             </PageLayout>
         </>

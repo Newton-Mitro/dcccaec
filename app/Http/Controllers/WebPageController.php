@@ -247,24 +247,24 @@ class WebPageController extends Controller
         ]);
     }
 
-    public function announcements(Request $request)
+    public function notices(Request $request)
     {
         $perPage = $request->input('perPage', 8);
-        $announcements = Notice::with('media', 'category')
+        $notices = Notice::with('media', 'category')
             ->latest()
             ->get();
-        return Inertia::render('site/announcements-page', [
-            'announcements' => $announcements,
+        return Inertia::render('site/notices-page', [
+            'notices' => $notices,
         ]);
     }
 
-    public function showAnnouncement(Notice $announcement, Request $request)
+    public function showNotice(Notice $notice, Request $request)
     {
         // Load relationships on the existing $team instance
-        $announcement->load('media');
+        $notice->load('media');
 
-        return Inertia::render('site/single-announcement-page', [
-            'announcement' => $announcement,
+        return Inertia::render('site/single-notice-page', [
+            'notice' => $notice,
         ]);
     }
 
@@ -276,6 +276,17 @@ class WebPageController extends Controller
             ->get();
         return Inertia::render('site/events-page', [
             'events' => $events,
+        ]);
+    }
+
+    public function holidays(Request $request)
+    {
+        $perPage = $request->input('perPage', 8);
+        $holidays = Event::with('media')
+            ->latest()
+            ->get();
+        return Inertia::render('site/holiday-calendar-page', [
+            'holidays' => [],
         ]);
     }
 

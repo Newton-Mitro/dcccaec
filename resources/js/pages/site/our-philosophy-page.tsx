@@ -52,7 +52,7 @@ const OurPhilosophyPage: React.FC<OurPhilosophyPageProps> = ({ page }) => {
                             {page.sections
                                 .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0))
                                 .map((section, index) => (
-                                    <div key={section.id || index} className="mb-30 w-full space-y-10 lg:container">
+                                    <div key={section.id || index} className="">
                                         {/* Section Heading */}
                                         <ImageContentBlock
                                             heading={section?.heading}

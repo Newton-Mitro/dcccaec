@@ -54,7 +54,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ page }) => {
                             {page.sections
                                 .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0))
                                 .map((section, index) => (
-                                    <div key={section.id || index} className="mb-30 w-full space-y-10 lg:container">
+                                    <div key={section.id || index} className="">
                                         {/* Section Heading */}
                                         <SectionHeader heading={section?.heading} sub_heading={section?.sub_heading} />
 

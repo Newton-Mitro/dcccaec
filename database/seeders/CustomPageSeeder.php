@@ -113,73 +113,81 @@ class CustomPageSeeder extends Seeder
 </section>'
         ]
       ],
-
-      'Child Care' => [
-        [
-          'heading' => 'Program Name',
-          'sub_heading' => 'Caring for your little ones.',
-          'content_type' => 'HTML',
-          'content' => 'Our [Program Name] provides a safe, nurturing, and educational environment tailored to children’s developmental needs. Activities include hands-on learning, creative play, and social engagement, guided by trained professionals.',
-          'button_text' => 'Learn More',
-          'button_link' => '#',
-        ]
-      ],
-      'Infant Care' => [
-        [
-          'heading' => 'Program Name', // e.g., 'Infant Care'
-          'sub_heading' => 'Caring for your little ones.',
-          'content_type' => 'HTML',
-          'content' => 'Our [Program Name] provides a safe, nurturing, and educational environment tailored to children’s developmental needs. Activities include hands-on learning, creative play, and social engagement, guided by trained professionals.',
-          'button_text' => 'Learn More',
-          'button_link' => '#',
-        ]
-      ],
-      'Toddler Program' => [
-        [
-          'heading' => 'Program Name', // e.g., 'Infant Care'
-          'sub_heading' => 'Caring for your little ones.',
-          'content_type' => 'HTML',
-          'content' => 'Our [Program Name] provides a safe, nurturing, and educational environment tailored to children’s developmental needs. Activities include hands-on learning, creative play, and social engagement, guided by trained professionals.',
-          'button_text' => 'Learn More',
-          'button_link' => '#',
-        ]
-      ],
-      'Preschool Program' => [
-        [
-          'heading' => 'Program Name', // e.g., 'Infant Care'
-          'sub_heading' => 'Caring for your little ones.',
-          'content_type' => 'HTML',
-          'content' => 'Our [Program Name] provides a safe, nurturing, and educational environment tailored to children’s developmental needs. Activities include hands-on learning, creative play, and social engagement, guided by trained professionals.',
-          'button_text' => 'Learn More',
-          'button_link' => '#',
-        ]
-      ],
-      'After-School Program' => [
-        [
-          'heading' => 'Program Name', // e.g., 'Infant Care'
-          'sub_heading' => 'Caring for your little ones.',
-          'content_type' => 'HTML',
-          'content' => 'Our [Program Name] provides a safe, nurturing, and educational environment tailored to children’s developmental needs. Activities include hands-on learning, creative play, and social engagement, guided by trained professionals.',
-          'button_text' => 'Learn More',
-          'button_link' => '#',
-        ]
-      ],
-      'Summer Camps' => [
-        [
-          'heading' => 'Program Name', // e.g., 'Infant Care'
-          'sub_heading' => 'Caring for your little ones.',
-          'content_type' => 'HTML',
-          'content' => 'Our [Program Name] provides a safe, nurturing, and educational environment tailored to children’s developmental needs. Activities include hands-on learning, creative play, and social engagement, guided by trained professionals.',
-          'button_text' => 'Learn More',
-          'button_link' => '#',
-        ]
-      ],
       'Class Rutines' => [
         [
           'heading' => 'Daily Class Routines',
           'sub_heading' => 'A structured, joyful day.',
           'content_type' => 'HTML',
-          'content' => 'Our daily routines balance learning and play. Children enjoy structured lessons, creative activities, outdoor play, and rest periods to ensure they thrive academically and emotionally.',
+          'content' => '<section id="class-routines" class="py-12 bg-card">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-8">Daily Class Routines</h2>
+
+    <p class="mb-6">
+      At Dhaka Credit Child Care and Education Center, we follow a structured and balanced daily routine to ensure children enjoy a blend of learning, play, and rest. Our schedules are designed to promote holistic development—academically, socially, and emotionally.
+    </p>
+
+    <h3 class="text-xl font-semibold mb-3">Sample Daily Schedule</h3>
+    <table class="w-full border border-gray-300 text-left mb-6">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="px-4 py-2 border">Time</th>
+          <th class="px-4 py-2 border">Activity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="even:bg-card">
+          <td class="px-4 py-2 border">08:00 - 08:30</td>
+          <td class="px-4 py-2 border">Arrival & Morning Greetings</td>
+        </tr>
+        <tr class="even:bg-card">
+          <td class="px-4 py-2 border">08:30 - 09:30</td>
+          <td class="px-4 py-2 border">Learning Circle / Thematic Lessons</td>
+        </tr>
+        <tr class="even:bg-card">
+          <td class="px-4 py-2 border">09:30 - 10:00</td>
+          <td class="px-4 py-2 border">Snack Time / Social Interaction</td>
+        </tr>
+        <tr class="even:bg-card">
+          <td class="px-4 py-2 border">10:00 - 11:00</td>
+          <td class="px-4 py-2 border">Creative Activities (Art, Music, Movement)</td>
+        </tr>
+        <tr class="even:bg-card">
+          <td class="px-4 py-2 border">11:00 - 11:30</td>
+          <td class="px-4 py-2 border">Outdoor Play / Physical Activities</td>
+        </tr>
+        <tr class="even:bg-card">
+          <td class="px-4 py-2 border">11:30 - 12:00</td>
+          <td class="px-4 py-2 border">Storytelling / Language Development</td>
+        </tr>
+        <tr class="even:bg-card">
+          <td class="px-4 py-2 border">12:00 - 12:30</td>
+          <td class="px-4 py-2 border">Lunch & Hygiene Routine</td>
+        </tr>
+        <tr class="even:bg-card">
+          <td class="px-4 py-2 border">12:30 - 01:30</td>
+          <td class="px-4 py-2 border">Rest / Nap Time</td>
+        </tr>
+        <tr class="even:bg-card">
+          <td class="px-4 py-2 border">01:30 - 02:30</td>
+          <td class="px-4 py-2 border">Hands-On Learning / Cognitive Activities</td>
+        </tr>
+        <tr class="even:bg-card">
+          <td class="px-4 py-2 border">02:30 - 03:00</td>
+          <td class="px-4 py-2 border">Closing Circle / Reflection & Goodbye</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="mb-4">
+      Activities may vary depending on the age group and learning theme of the day. Our routines are designed to balance structured learning with free play, physical activity, creativity, and social interaction.
+    </p>
+
+    <p class="mb-4">
+      We ensure that every child experiences a joyful, safe, and engaging day that promotes curiosity, emotional growth, and cognitive development.
+    </p>
+  </div>
+</section>
+',
         ]
       ],
 
@@ -187,424 +195,319 @@ class CustomPageSeeder extends Seeder
       'Enrollment' => [
         [
           'content_type' => 'HTML',
-          'content' => '
-                    <div class="">
-  <div class="">
-    <h2 class="text-3xl font-semibold text-center">Registration &amp; Admission</h2>
-    <div class="pt-8 leading-7">
-      <p>
-        <i class="fa-solid fa-check-double mr-[7px]"></i>
-        In addition, copies of the following documents have to be submitted, and originals produced for verification:
-      </p>
+          'content' => '<section id="enrollment" class="py-12 bg-card">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-8">Registration & Admission</h2>
 
-      <ul class="mt-2 font-semibold md:list-decimal md:ml-6">
-        <li>Child birth certificate</li>
-        <li>Both parents’ identity cards or NID</li>
-      </ul>
+    <p class="mb-4">
+      To enroll your child at <strong>Dhaka Credit Child Care and Education Center</strong>, please submit the required documents and ensure originals are available for verification:
+    </p>
+    
+    <ul class="list-decimal list-inside mb-6 font-semibold">
+      <li>Child’s birth certificate</li>
+      <li>Both parents’ identity cards or NID</li>
+    </ul>
 
-      <p class="mt-4">
-        The child will be admitted immediately upon registration. A trial period of up to two weeks is allowed,
-        during which a child may be withdrawn and one-half of the monthly fees will be chargeable.
-        The deposit and the balance of the monthly fees will be refunded in full.
-        The registration fees are non-refundable.
-      </p>
+    <p class="mb-6">
+      Admission will be processed immediately upon registration. A trial period of up to two weeks is allowed, during which one-half of the monthly fees may be charged if the child is withdrawn. Registration fees are non-refundable.
+    </p>
 
-      <div class="mt-4">
-        <p class="font-semibold underline text-deepBlue">Download necessary forms below</p>
-
-        <a href="/assets/Enrollment Form-z6wwqMl1.pdf" download="Enrollment Form" target="_blank" rel="noreferrer">
-          <button class="bg-primary px-6 py-2 rounded-[3px] font-semibold shadow-md hover:shadow-lg hover:bg-buttonAccent cursor-pointer my-4">
-            <i class="fa-solid fa-file-arrow-down mr-[7px] text-[20px]"></i>
-            Enrollment Form
-          </button>
-        </a>
-
-        <a href="/assets/Authorization-cChuqm54.pdf" download="Authorization Form" target="_blank" rel="noreferrer">
-          <button class="bg-primary px-6 py-2 rounded-[3px] font-semibold shadow-md hover:shadow-lg hover:bg-buttonAccent cursor-pointer lg:ml-4">
-            <i class="fa-solid fa-file-arrow-down mr-[7px] text-[20px]"></i>
-            Authorization Form
-          </button>
-        </a>
-      </div>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+      <a href="/assets/Enrollment Form-z6wwqMl1.pdf" download="Enrollment Form" target="_blank" class="bg-primary text-white px-6 py-3 rounded shadow hover:bg-blue-700 transition">
+        <i class="fa-solid fa-file-arrow-down mr-2"></i>Enrollment Form
+      </a>
+      <a href="/assets/Authorization-cChuqm54.pdf" download="Authorization Form" target="_blank" class="bg-primary text-white px-6 py-3 rounded shadow hover:bg-blue-700 transition">
+        <i class="fa-solid fa-file-arrow-down mr-2"></i>Authorization Form
+      </a>
     </div>
 
-    <h2 class="mt-8 text-3xl font-semibold text-center">Termination of Service</h2>
+    <h3 class="text-2xl font-semibold mb-4">Termination of Service</h3>
+    <p class="mb-4">
+      The Centre reserves the right to terminate service to any child by giving parents one month’s written notice in the following cases:
+    </p>
 
-    <div class="pt-8 leading-7">
-      <p>
-        <i class="fa-solid fa-check-double mr-[7px]"></i>
-        The Centre reserves the right to terminate the service to any child by giving parents one month’s written notice, 
-        should any of the following occur:
-      </p>
-
-      <ul class="mt-2 font-semibold md:list-disc md:ml-6">
-        <li>Constant acts of violence (scratching, biting, fist fighting, kicking, etc.)</li>
-        <li>Habitual late payment or non-payment of school fees</li>
-        <li>Parents who do not abide by the Centre’s policies, rules, and regulations</li>
-        <li>Child’s inability to adjust to the Centre</li>
-      </ul>
-    </div>
-
+    <ul class="list-disc list-inside font-semibold">
+      <li>Constant acts of violence (scratching, biting, fist fighting, kicking, etc.)</li>
+      <li>Habitual late payment or non-payment of school fees</li>
+      <li>Non-compliance with Centre policies, rules, and regulations</li>
+      <li>Child’s inability to adjust to the Centre environment</li>
+    </ul>
   </div>
-</div>',
+</section>
+',
         ]
       ],
       'Curriculum' => [
         [
           'content_type' => 'HTML',
-          'content' => '
-                    <div class="">
-  <div class="">
+          'content' => '<section id="curriculum" class="py-12 bg-card">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-8">Our Curriculum</h2>
+    
+    <p class="mb-6">
+      At <strong>Dhaka Credit Child Care and Education Center</strong>, we follow an integrated, thematic curriculum designed to stimulate children’s curiosity, creativity, and love of learning. Our programs emphasize holistic growth, combining cognitive, social, emotional, and physical development.
+    </p>
 
-    <div>
-      <h2 class="text-3xl font-semibold text-center">Our Curriculum</h2>
-
-      <div class="mt-8 leading-8">
-        <p>
-          <span class="font-semibold">DC Child Care and Education Centre</span>
-          runs an integrated programme organized by “Themes” in which learning happens through interdisciplinary activities.
-          Integrated learning experiences help children make meaningful connections across learning areas and enable them
-          to understand how knowledge and skills are linked. Our teachers provide meaningful content and context for learning
-          based on the children’s culture, interests, and shared experiences.
-          <br>
-          The key knowledge, skills, and dispositions in our curriculum reflect a continuum of learning and development across
-          different age groups for each learning area.
-        </p>
-
-        <div class="flex mt-4">
-          <div class="mr-3">(a)</div>
-          <div>
-            <span class="font-semibold">LANGUAGE AND LITERACY (English and Bengali)</span>
-            <p class="mt-1">
-              Language and literacy are vital for children’s development in thinking and learning.
-              Children need to use language not only to express their needs, feelings, and thoughts but also to make sense of
-              what adults expect. Our teachers guide children to build vocabulary and engage in meaningful conversations.
-              They play a vital role in language development, offering practice through listening and conversation.
-            </p>
-            <ul class="ml-12 list-disc">
-              <li>Valuing children’s talk by taking time to listen and respond</li>
-              <li>Stimulating verbal interactions between children</li>
-              <li>Encouraging children to record their ideas and thoughts</li>
-            </ul>
-            <p class="mt-1">
-              Teachers develop language and literacy through rhymes, songs, language games, role-play, storytelling,
-              shared reading, alphabet activities, and writing exercises.
-            </p>
-          </div>
-        </div>
-
-        <div class="flex mt-4">
-          <div class="mr-3">(b)</div>
-          <div>
-            <span class="font-semibold">NUMERACY</span>
-            <p class="mt-1">
-              Numeracy development involves understanding numbers and applying them meaningfully in real life situations.
-              Using manipulatives, pictures, and symbols, children learn counting, sharing, and representing quantities.
-              Activities focus on hands-on experiences and using appropriate language like position words, number names, and shapes.
-            </p>
-            <p class="mt-1">
-              Numeracy experiences build on what children already know, following a progressive learning order that includes:
-            </p>
-            <ul class="ml-12 list-disc">
-              <li>Matching, sorting, and comparing</li>
-              <li>Ordering and patterning</li>
-              <li>Counting and number value</li>
-              <li>Shape and spatial awareness</li>
-              <li>Simple measurement</li>
-            </ul>
-            <p class="mt-1">
-              To become numerate, children engage in:
-            </p>
-            <ul class="ml-12 list-disc">
-              <li><strong>Problem-solving</strong> – exploring multiple ways to solve problems</li>
-              <li><strong>Communication</strong> – expressing ideas using words, pictures, and symbols</li>
-              <li><strong>Reasoning</strong> – explaining their thought process and proof</li>
-              <li><strong>Connection</strong> – discovering relationships within numeracy and other subjects</li>
-              <li><strong>Representation</strong> – using pictures, graphs, and symbols to present information</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="flex mt-4">
-          <div class="mr-3">(c)</div>
-          <div>
-            <span class="font-semibold">MOTOR SKILL</span>
-            <p class="mt-1">
-              Our motor skill programme includes gross motor skills, fine motor skills, physical fitness, health, and safety.
-              We plan regular and safe physical activities that enhance coordination, fitness, and self-help routines.
-              Group games teach cooperation, sharing, and turn-taking, while helping children develop awareness of safety.
-            </p>
-          </div>
-        </div>
-
-        <div class="flex mt-4">
-          <div class="mr-3">(d)</div>
-          <div>
-            <span class="font-semibold">AESTHETICS AND CREATIVE EXPRESSION</span>
-            <p class="mt-1">
-              <span class="font-semibold">DC Child Care and Education Centre</span> provides experiences in visual arts,
-              music, and movement, encouraging creativity and imagination. Involvement in the arts stimulates children’s
-              senses and enhances learning. These experiences help children:
-            </p>
-            <ul class="ml-12 list-disc">
-              <li>Express ideas and feelings about themselves and the world</li>
-              <li>Gain confidence in communicating and expressing themselves</li>
-              <li>Be resourceful and try new approaches</li>
-              <li>Develop critical thinking and express opinions</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="flex mt-4">
-          <div class="mr-3">(e)</div>
-          <div>
-            <span class="font-semibold">DISCOVERY OF THE WORLD</span>
-            <p class="mt-1">
-              This area helps children understand the world, laying foundations for science, history, and geography.
-              Learning happens through sensory exploration, investigations, and hands-on experiences.
-              <span class="font-semibold">DC Child Care and Education Centre</span> nurtures a sense of wonder and curiosity.
-            </p>
-            <ul class="ml-12 list-disc">
-              <li>Extend natural curiosity</li>
-              <li>Discover and experiment independently</li>
-              <li>Build on existing knowledge</li>
-              <li>Develop reasoning and explanation skills</li>
-              <li>Foster care and appreciation for the environment</li>
-            </ul>
-            <p class="mt-1">
-              Children explore through investigations, expert visits, and field trips using observation, comparison, classification,
-              recording, prediction, and reporting skills.
-            </p>
-          </div>
-        </div>
-
-        <div class="flex mt-4">
-          <div class="mr-3">(f)</div>
-          <div>
-            <span class="font-semibold">SOCIAL EMOTIONAL DEVELOPMENT</span>
-            <p class="mt-1">
-              We guide children toward self and social awareness through daily interactions and teachable moments that highlight
-              positive social behavior. 
-              <br>
-              <span class="font-semibold">DC Child Care and Education Centre</span> helps children:
-            </p>
-            <ul class="ml-12 list-disc">
-              <li>Develop self-awareness and self-management for personal well-being</li>
-              <li>Build social awareness and healthy relationships</li>
-              <li>Make responsible decisions and act on them</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="mt-4">
-          <p class="mt-1">
-            Our teachers develop children’s social and emotional competence through:
-          </p>
-          <ul class="ml-12 list-disc">
-            <li>Setting classroom rules and routines</li>
-            <li>Building strong and positive relationships with children</li>
-            <li>Encouraging honest and respectful emotional expression</li>
-            <li>Teaching moral lessons about right and wrong</li>
-            <li>Modeling positive behavior in speech and action</li>
-          </ul>
-        </div>
-
-      </div>
+    <!-- Language & Literacy -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Language & Literacy (English and Bengali)</h3>
+      <p class="mb-2">
+        Language and literacy are vital for children’s thinking and learning. Children learn to communicate, express their needs, and engage in meaningful conversations.
+      </p>
+      <ul class="list-disc ml-6">
+        <li>Encouraging storytelling, songs, rhymes, and role-play</li>
+        <li>Building vocabulary and conversational skills</li>
+        <li>Engaging in early reading and writing activities</li>
+      </ul>
     </div>
 
+    <!-- Numeracy -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Numeracy</h3>
+      <p class="mb-2">
+        Numeracy development involves understanding numbers and applying them in real-life situations. Hands-on activities help children grasp counting, patterns, shapes, and measurements.
+      </p>
+      <ul class="list-disc ml-6">
+        <li>Sorting, matching, and comparing objects</li>
+        <li>Recognizing numbers and patterns</li>
+        <li>Problem-solving and reasoning activities</li>
+      </ul>
+    </div>
+
+    <!-- Motor Skills -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Motor Skills</h3>
+      <p>
+        We develop both gross and fine motor skills through physical activities, exercises, and creative play. Children learn coordination, strength, and healthy habits while engaging in fun games and routines.
+      </p>
+    </div>
+
+    <!-- Creative Arts -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Aesthetics & Creative Expression</h3>
+      <p class="mb-2">
+        Visual arts, music, and movement activities nurture creativity, self-expression, and confidence.
+      </p>
+      <ul class="list-disc ml-6">
+        <li>Painting, drawing, and craft activities</li>
+        <li>Music, dance, and rhythm exercises</li>
+        <li>Role-play and imaginative storytelling</li>
+      </ul>
+    </div>
+
+    <!-- Discovery of the World -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Discovery of the World</h3>
+      <p class="mb-2">
+        Children explore the world around them through sensory activities, hands-on investigations, and outdoor learning.
+      </p>
+      <ul class="list-disc ml-6">
+        <li>Science, history, and geography experiences</li>
+        <li>Observation, exploration, and experimentation</li>
+        <li>Field trips and expert visits</li>
+      </ul>
+    </div>
+
+    <!-- Social & Emotional Development -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Social & Emotional Development</h3>
+      <p class="mb-2">
+        Children develop self-awareness, social skills, and emotional intelligence through guided interactions and daily routines.
+      </p>
+      <ul class="list-disc ml-6">
+        <li>Building relationships and empathy</li>
+        <li>Understanding rules and responsibilities</li>
+        <li>Problem-solving and conflict resolution</li>
+      </ul>
+    </div>
+
+    <p class="mt-6 text-center font-semibold">
+      Our curriculum is carefully designed to ensure every child thrives academically, socially, emotionally, and physically in a safe, nurturing environment.
+    </p>
   </div>
-</div>
-                    ',
+</section>
+',
         ]
       ],
       'Rules & Regulations' => [
         [
           'content_type' => 'HTML',
-          'content' => '
-                    <div class="">
-  <div class="">
-    <h1 class="text-3xl font-semibold text-center">Rules and Regulation</h1>
-    <div class="pt-8 leading-7">
-      <ul class="ml-6">
-        <li class="flex [&:not(:first-child)]:pt-[16px]">
-          <i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>
-          <span>Each child should put on a fresh set of uniform upon arrival at the Centre.</span>
-        </li>
-        <li class="flex [&:not(:first-child)]:pt-[16px]">
-          <i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>
-          <span>All belongings of the child should be clearly labelled. If your child is not toilet trained, please have him/her put on diapers/training pants and pack a spare or two in his/her bag.</span>
-        </li>
-        <li class="flex [&:not(:first-child)]:pt-[16px]">
-          <i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>
-          <span>Medication will only be administrated upon the submission of a properly completed Medicine Administration.</span>
-        </li>
-        <li class="flex [&:not(:first-child)]:pt-[16px]">
-          <i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>
-          <span>Parents and visitors are not permitted to enter the kitchen area and handle food or utensils used by the children in the Centre.</span>
-        </li>
-        <li class="flex [&:not(:first-child)]:pt-[16px]">
-          <i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>
-          <span>In order to protect the privacy of the children in the Centre, the children’s bathroom and toilets are strictly out of bounds to parents and visitors during bathing time.</span>
-        </li>
-        <li class="flex [&:not(:first-child)]:pt-[16px]">
-          <i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>
-          <span>Parents who wish to visit their children during school hours need to seek permission from the Centre Principal. Frequent or long visits causing disruption to routine will not be permitted.</span>
-        </li>
-        <li class="flex [&:not(:first-child)]:pt-[16px]">
-          <i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>
-          <span>Monthly fees should be paid in advance, no later than the 10th day of the month. A penalty of Tk. 100/= applies for late payment per occurrence.</span>
-        </li>
-        <li class="flex [&:not(:first-child)]:pt-[16px]">
-          <i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>
-          <span>Parents or an authorized person must sign in/out their child.</span>
-        </li>
-        <li class="flex [&:not(:first-child)]:pt-[16px]">
-          <i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>
-          <span>A late pick-up penalty of Tk. 50/= for every 5 minutes or part thereof beyond 7:00pm will be charged.</span>
-        </li>
-        <li class="flex [&:not(:first-child)]:pt-[16px]">
-          <i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>
-          <span>All field trip and excursion fees, except meals, shall be borne separately by the parents.</span>
-        </li>
-        <li class="flex [&:not(:first-child)]:pt-[16px]">
-          <i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>
-          <span>Parents must sign a consent form for each field trip or excursion.</span>
-        </li>
-        <li class="flex [&:not(:first-child)]:pt-[16px]">
-          <i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>
-          <span>The management reserves the right to amend any handbook rules or regulations with one month’s notice.</span>
-        </li>
-      </ul>
-    </div>
-    <div class="pt-8 leading-7">
-      <h1 class="text-2xl font-semibold text-center">DC CHILD CARE AND EDUCATION CENTRE APPROVED FORMAL UNIFORM</h1>
-      <p class="pt-4 leading-7">
-        To be worn as a complete uniform. No mix and match with the Standard Uniform and only as specified by DC Child Care and Education Centre.
-        Any alterations to the garments must not compromise style, design, or length.
-      </p>
-      <div class="pt-4 leading-7 text-center">
-        <table border="1" cellspacing="0" cellpadding="0" class="px-2 py-1 mx-auto border border-black">
-          <tr class="px-2 py-1 border border-black bg-primary">
-            <td width="157" valign="top"><p>&nbsp;</p></td>
-            <td width="534" valign="top" class="px-2 py-1 border border-black"><p>Boys</p></td>
-            <td width="547" valign="top" class="px-2 py-1 border border-black"><p>Girls</p></td>
-          </tr>
-          <tr class="px-2 py-1 border border-black bg-accent">
-            <td width="157" valign="top" class="px-2 py-1 border border-black"><p>Formal</p></td>
-            <td width="234" valign="top">
-              <p>Navy Blue shorts/trousers<br>Sky Blue shirt</p>
-              <p>Navy Blue Jumper<br>Plain socks (white)<br>Shoes (black)</p>
-            </td>
-            <td width="247" valign="top" class="px-2 py-1 border border-black">
-              <p>Navy Blue skirt<br>Sky Blue blouse</p>
-              <p>Navy Blue cardigan<br>Plain socks/tights (white)<br>Shoes (black)</p>
-            </td>
-          </tr>
-          <tr class="bg-secondary">
-            <td width="157" valign="top"><p>T-shirt</p></td>
-            <td width="234" valign="top" class="px-2 py-1 border border-black"><p>Black shorts/trousers<br>Orange T-shirt</p></td>
-            <td width="247" valign="top" class="px-2 py-1 border border-black"><p>Black shorts/trousers<br>Orange T-shirt</p></td>
-          </tr>
-        </table>
-      </div>
-      <h2 class="pt-8 text-2xl font-semibold">
-        <i class="mr-1 text-2xl fa-solid fa-circle-info"></i> General uniform information and rules of appearance:
-      </h2>
-      <ul class="pt-2 leading-7">
-        <li><i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>Pupils should be well presented at all times and show pride in their appearance.</li>
-        <li><i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>They should always come to school in the appropriate uniform, with shoes clean and polished.</li>
-        <li><i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>All clothing, shoes, and other items brought to school MUST be clearly labeled.</li>
-        <li><i class="fa-solid fa-angles-right mt-[5px] mr-[13px] text-[1.2rem]"></i>Each child must have a named water bottle to refill throughout the day and take home at the end of the day.</li>
-      </ul>
-    </div>
-    <div class="pt-8 leading-7">
-      <h2 class="text-2xl font-semibold">
-        <i class="mr-1 text-2xl fa-solid fa-circle-info"></i> Arrival and Pick-up
-      </h2>
-      <p class="mt-4">
-        All children should be sent to and picked up from the Centre by either the parents or an authorized adult who must sign in/out the child at the reception area and stay until a staff member takes charge.
-      </p>
-      <p class="mt-2">
-        Parents are encouraged to send children early to avoid missing lessons and activities. If the authorized person is unable to pick up the child, parents must inform the Centre and provide details of an alternative authorized person.
-      </p>
-    </div>
-    <div class="pt-8 leading-7">
-      <h2 class="text-2xl font-semibold">
-        <i class="mr-1 text-2xl fa-solid fa-circle-info"></i> Attendance and Absence
-      </h2>
-      <p class="mt-4">
-        A daily programme is displayed at the reception area for parent information. Regular attendance is necessary to fully benefit from the programme. Please inform the Centre by telephone if your child is absent, stating the reason.
-      </p>
-    </div>
+          'content' => '<section id="rules-regulations" class="py-12 bg-card">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-8">Rules & Regulations</h2>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">General Conduct</h3>
+    <ul class="list-disc list-inside mb-4">
+      <li>Each child should arrive in proper uniform, clean and presentable.</li>
+      <li>All personal belongings should be clearly labeled with the child’s name.</li>
+      <li>Children who are not toilet-trained must have diapers or training pants, along with spare items in their bag.</li>
+      <li>Parents and visitors are not allowed in the kitchen or food handling areas.</li>
+      <li>Children’s bathrooms are off-limits to parents and visitors during bathing times.</li>
+    </ul>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Attendance & Punctuality</h3>
+    <ul class="list-disc list-inside mb-4">
+      <li>Parents or authorized adults must sign children in and out at the reception area.</li>
+      <li>Late pickups will incur a penalty of Tk. 50 for every 5 minutes beyond the designated time.</li>
+      <li>Regular attendance is encouraged to ensure children benefit fully from the program.</li>
+    </ul>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Fees & Payments</h3>
+    <ul class="list-disc list-inside mb-4">
+      <li>Monthly fees must be paid in advance, no later than the 10th of each month.</li>
+      <li>A penalty of Tk. 100 applies for late payments.</li>
+      <li>Field trip or excursion fees, except meals, are to be borne separately by parents.</li>
+    </ul>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Health & Safety</h3>
+    <ul class="list-disc list-inside mb-4">
+      <li>Medication will only be administered upon submission of a properly completed Medicine Administration form.</li>
+      <li>Children should be sent to the center in good health. Please inform the staff if your child is unwell.</li>
+      <li>Emergency contact information must be kept up-to-date at all times.</li>
+    </ul>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Behavior & Discipline</h3>
+    <ul class="list-disc list-inside mb-4">
+      <li>Children are expected to follow classroom rules and respect staff and peers.</li>
+      <li>Constant acts of violence or disruptive behavior may result in termination of service with one month’s notice.</li>
+      <li>Parents are encouraged to collaborate with staff in addressing behavioral issues.</li>
+    </ul>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Uniform Guidelines</h3>
+    <p class="mb-4">
+      All children are required to wear the prescribed uniform. Uniforms must be clean, complete, and worn as specified by the center. Shoes should be clean and appropriate for indoor and outdoor activities.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Parental Responsibility</h3>
+    <ul class="list-disc list-inside mb-4">
+      <li>Parents must provide necessary documentation, including the child’s birth certificate and parental ID/NID during registration.</li>
+      <li>Parents should notify the center if an authorized adult other than themselves will pick up their child.</li>
+      <li>Frequent or extended visits that disrupt the daily routine are not allowed.</li>
+    </ul>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Policy Updates</h3>
+    <p>
+      The management reserves the right to update or modify any rules and regulations with prior notice. Parents will be informed of any changes in writing.
+    </p>
   </div>
-</div>
-                    ',
+</section>
+',
         ]
       ],
       'Health & Safety' => [
         [
           'content_type' => 'HTML',
-          'content' => '
-                    <div class="">
-  <div class="">
-    <div>
-      <h2 class="text-3xl font-semibold text-center">Our Environment</h2>
-      <p class="mt-4 leading-7">
-        We accommodate individual pace of learning and development through our thematic and integrated programme. 
-        We are committed to being a health-promoting school and provide a well-balanced nutritional programme, 
-        which lays the foundation for the healthy physical growth of children. 
-        We actively promote a healthy lifestyle and encourage children to adopt healthy habits and good hygiene practices. 
-        We strive to provide holistic education and care in a safe and respectful environment, empowering each child 
-        to become a curious learner and confident speaker, anchored in strong character to guide and prepare them to serve the community. 
-        Parent education seminars will also be conducted to inform parents on the latest developments in early childhood education and enhance their parenting skills.
+          'content' => '<section id="health-safety" class="py-12 bg-card">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-8">Health & Safety</h2>
+
+    <!-- Our Environment -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Our Environment</h3>
+      <p class="mb-2">
+        At <strong>Dhaka Credit Child Care and Education Center</strong>, we prioritize creating a safe, clean, and nurturing environment for every child. Our classrooms, play areas, and facilities are regularly sanitized and designed to promote exploration, learning, and well-being.
+      </p>
+      <p>
+        We actively encourage children to adopt healthy habits, maintain good hygiene, and engage in regular physical activity. Our environment supports both emotional and physical growth, ensuring children feel secure, happy, and confident.
       </p>
     </div>
-    <div class="mt-8">
-      <h2 class="text-3xl font-semibold text-center">Our Staff</h2>
-      <p class="mt-4 leading-7">
-        We believe that "when we stop learning, we stop teaching." Our teachers undergo extensive training to embody and deliver the curriculum, 
-        and undergo accreditation to ensure they are fully equipped to nurture our young champs. 
-        Our preschool teachers are trained to ensure your child is cared for by the most qualified and dedicated educators. 
-        Besides you and your family, our child educators spend the most time with your child during the day. 
-        You can rest assured that our educators are trained to use every opportunity for the healthy emotional development of children in their care. 
-        To help children develop the ability to regulate their emotions, our teachers are trained to pick up emotional cues and convert negative emotions into positive ones.
+
+    <!-- Our Staff -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Our Staff</h3>
+      <p class="mb-2">
+        Our trained and dedicated staff are committed to providing high-quality care and education. Teachers undergo continuous professional development and child safety training to ensure your child is in capable hands.
       </p>
+      <ul class="list-disc ml-6">
+        <li>Certified in early childhood education and first aid</li>
+        <li>Trained to recognize and manage emotional and physical needs</li>
+        <li>Regularly updated on best practices for child safety and development</li>
+      </ul>
     </div>
+
+    <!-- Health Policies -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Health Policies</h3>
+      <p class="mb-2">
+        The health and well-being of our children are paramount. Our policies ensure that children receive proper nutrition, care, and medical attention when needed.
+      </p>
+      <ul class="list-disc ml-6">
+        <li>Regular handwashing and hygiene routines</li>
+        <li>Safe handling and storage of food</li>
+        <li>Immediate attention to injuries and illnesses</li>
+        <li>Strict adherence to medication administration protocols</li>
+        <li>Emergency preparedness and fire safety procedures</li>
+      </ul>
+    </div>
+
+    <!-- Safety Measures -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Safety Measures</h3>
+      <p class="mb-2">
+        Safety is embedded in every aspect of our operations, ensuring children learn, play, and grow without risk.
+      </p>
+      <ul class="list-disc ml-6">
+        <li>Controlled access to the premises</li>
+        <li>Secure playgrounds and classroom areas</li>
+        <li>Regular safety drills and monitoring</li>
+        <li>Qualified staff to supervise all activities</li>
+      </ul>
+    </div>
+
+    <p class="mt-6 text-center font-semibold">
+      By combining a safe environment, skilled staff, and clear health policies, we provide children with the foundation to explore, learn, and grow with confidence.
+    </p>
   </div>
-</div>
-                    ',
+</section>
+',
         ]
       ],
-      'Calendar' => [],
       'Nutrition & Meals' => [
         [
           'content_type' => 'HTML',
-          'content' => '
-                    <div class="">
-  <div class="">
+          'content' => '<section id="nutrition-meals" class="py-12 bg-card">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-8">Nutrition & Meals</h2>
 
-    <h1 class="text-3xl font-semibold text-center">Nutrition</h1>
-
-    <div class="pt-8 leading-7">
-
-      <div class="pb-6 rounded-md">
-        <p class="leading-7">
-          The Centre provides a healthy and balanced diet (without pork or beef) for the nourishment of the children under its charge. 
-          A weekly menu is displayed at the reception area.
-        </p>
-        <p class="pt-4 leading-7">
-          Parents with children who have special dietary requirements are to indicate these in the Registration Form 
-          and highlight them during admission to the Supervisor.
-        </p>
-        <p class="pt-4 leading-7">
-          Children are discouraged from bringing other food or snacks, except on special occasions and subject to prior notification.
-        </p>
-      </div>
+    <!-- Healthy Meals -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Healthy & Balanced Meals</h3>
+      <p class="mb-2">
+        At <strong>Dhaka Credit Child Care and Education Center</strong>, we provide nutritious and balanced meals designed to support your child’s growth, energy, and overall well-being. Our weekly menu is carefully planned and displayed at the reception for parent reference.
+      </p>
+      <p>
+        Meals are free from pork and beef and include a variety of fresh fruits, vegetables, grains, and proteins to ensure that children receive wholesome nutrition throughout the day.
+      </p>
     </div>
 
+    <!-- Special Dietary Needs -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Special Dietary Needs</h3>
+      <p class="mb-2">
+        We understand that each child may have unique dietary requirements. Parents are requested to inform us of any allergies, intolerances, or preferences on the Registration Form and during admission.
+      </p>
+      <p>
+        Our staff ensures that children with special dietary needs receive meals that are safe, nutritious, and enjoyable.
+      </p>
+    </div>
+
+    <!-- Snack Policy -->
+    <div class="mb-8">
+      <h3 class="text-2xl font-semibold mb-2">Snack Policy</h3>
+      <p class="mb-2">
+        Children are encouraged to eat the meals provided by the center to maintain balanced nutrition. Outside food or snacks should only be brought on special occasions and with prior approval from the staff.
+      </p>
+      <p>
+        This helps us ensure that all children receive healthy, age-appropriate meals and maintain a consistent routine throughout the day.
+      </p>
+    </div>
+
+    <p class="mt-6 text-center font-semibold">
+      By providing healthy meals, accommodating special dietary needs, and promoting good eating habits, we help children grow strong, happy, and ready to explore their world.
+    </p>
   </div>
-</div>
-                    ',
+</section>
+',
         ]
       ],
       'FAQ' => [
@@ -630,7 +533,32 @@ class CustomPageSeeder extends Seeder
           'heading' => 'Page Title', // e.g., 'Privacy Policy'
           'sub_heading' => 'Important legal information.',
           'content_type' => 'HTML',
-          'content' => 'Please read this page carefully to understand our policies and your rights. Our goal is transparency and accountability in all aspects of our child care and education services.',
+          'content' => '<section id="disclaimer" class="py-12 bg-card">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-8">Disclaimer</h2>
+
+    <p class="mb-4">
+      The information provided on the <strong>Dhaka Credit Child Care and Education Center</strong> website is intended for general informational purposes only. While we strive to keep the content accurate and up-to-date, we make no guarantees regarding the completeness, reliability, or accuracy of the information presented.
+    </p>
+
+    <p class="mb-4">
+      Use of the website and its content is at your own risk. We are not responsible for any loss, damage, or inconvenience caused by reliance on the information contained on this site. Parents and guardians should independently verify details related to programs, services, schedules, fees, and policies before making decisions.
+    </p>
+
+    <p class="mb-4">
+      Links to third-party websites are provided for convenience only. We do not endorse, guarantee, or take responsibility for the content, products, services, or privacy practices of these external websites.
+    </p>
+
+    <p class="mb-4">
+      All content, images, logos, and materials on this website are the property of Dhaka Credit Child Care and Education Center or used with permission. Unauthorized use or reproduction of any material is strictly prohibited.
+    </p>
+
+    <p class="mt-6">
+      By using this website, you acknowledge and agree to this disclaimer. For any questions or concerns, please contact us directly for clarification.
+    </p>
+  </div>
+</section>
+',
         ]
       ],
       'Terms of Service' => [
@@ -638,7 +566,45 @@ class CustomPageSeeder extends Seeder
           'heading' => 'Page Title', // e.g., 'Privacy Policy'
           'sub_heading' => 'Important legal information.',
           'content_type' => 'HTML',
-          'content' => 'Please read this page carefully to understand our policies and your rights. Our goal is transparency and accountability in all aspects of our child care and education services.',
+          'content' => '<section id="terms-of-service" class="py-12 bg-card">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-8">Terms of Service</h2>
+
+    <p class="mb-4">
+      Welcome to the <strong>Dhaka Credit Child Care and Education Center</strong> website. By accessing or using this website, you agree to comply with and be bound by the following Terms of Service. If you do not agree with these terms, please refrain from using our website.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Use of Website</h3>
+    <p class="mb-4">
+      The website and its content are intended for informational purposes related to our child care and educational services. You may not use the website for unlawful purposes or in ways that could harm or interfere with the functioning of the site.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Intellectual Property</h3>
+    <p class="mb-4">
+      All content, including text, images, graphics, logos, and videos, are the property of Dhaka Credit Child Care and Education Center or used with permission. You may not copy, reproduce, distribute, or modify any content without our prior written consent.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Third-Party Links</h3>
+    <p class="mb-4">
+      Our website may contain links to third-party websites. These links are provided for convenience only. We do not control, endorse, or assume responsibility for the content, services, or privacy practices of third-party websites.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Limitation of Liability</h3>
+    <p class="mb-4">
+      While we strive to provide accurate and current information, Dhaka Credit Child Care and Education Center makes no warranties or guarantees regarding the website’s content. We shall not be liable for any damages, losses, or inconvenience resulting from the use of this website.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Changes to Terms</h3>
+    <p class="mb-4">
+      We reserve the right to update or modify these Terms of Service at any time without prior notice. Continued use of the website constitutes acceptance of the revised terms.
+    </p>
+
+    <p class="mt-6">
+      By using this website, you acknowledge that you have read, understood, and agree to these Terms of Service. For any questions, please contact us directly.
+    </p>
+  </div>
+</section>
+',
         ]
       ],
       'Privacy Policy' => [
@@ -646,7 +612,55 @@ class CustomPageSeeder extends Seeder
           'heading' => 'Page Title', // e.g., 'Privacy Policy'
           'sub_heading' => 'Important legal information.',
           'content_type' => 'HTML',
-          'content' => 'Please read this page carefully to understand our policies and your rights. Our goal is transparency and accountability in all aspects of our child care and education services.',
+          'content' => '<section id="privacy-policy" class="py-12 bg-card">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-center mb-8">Privacy Policy</h2>
+
+    <p class="mb-4">
+      At <strong>Dhaka Credit Child Care and Education Center</strong>, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect personal information when you visit our website or use our services.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Information We Collect</h3>
+    <p class="mb-4">
+      We may collect personal information, including but not limited to your name, email address, phone number, and details related to your child, when you submit forms, register for programs, or interact with our website.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Use of Information</h3>
+    <p class="mb-4">
+      The information we collect is used to provide and improve our services, communicate with parents and guardians, process registrations, and ensure the safety and well-being of children in our care. We do not sell or share personal information with third parties for marketing purposes.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Data Security</h3>
+    <p class="mb-4">
+      We implement reasonable administrative, technical, and physical measures to protect personal information from unauthorized access, disclosure, or misuse. While we take precautions, no data transmission over the internet can be guaranteed to be completely secure.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Cookies and Tracking</h3>
+    <p class="mb-4">
+      Our website may use cookies and similar tracking technologies to enhance user experience, analyze website traffic, and optimize content. You may choose to disable cookies in your browser, but some features of the website may not function properly.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Third-Party Services</h3>
+    <p class="mb-4">
+      We may use third-party services to assist with website functionality, analytics, or communication. These providers are bound by their own privacy policies, and we encourage users to review them.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Children’s Privacy</h3>
+    <p class="mb-4">
+      Protecting the privacy of children is a top priority. We only collect information about children with parental consent and use it solely for educational and care purposes.
+    </p>
+
+    <h3 class="text-xl font-semibold mt-6 mb-2">Changes to This Policy</h3>
+    <p class="mb-4">
+      We reserve the right to update or modify this Privacy Policy at any time. Updates will be posted on this page with the revision date. Continued use of our website or services constitutes acceptance of the updated policy.
+    </p>
+
+    <p class="mt-6">
+      If you have any questions or concerns about our privacy practices, please contact us directly.
+    </p>
+  </div>
+</section>
+',
         ]
       ],
     ];

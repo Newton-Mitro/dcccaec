@@ -4,20 +4,20 @@ import { Notice } from '../../types/notice';
 import PageBanner from './components/page-banner';
 
 interface SingleNoticePageProps {
-    announcement: Notice;
+    notice: Notice;
 }
 
-const SingleNoticePage: React.FC<SingleNoticePageProps> = ({ announcement }) => {
+const SingleNoticePage: React.FC<SingleNoticePageProps> = ({ notice }) => {
     const pageUrl = window.location.href;
     const imageUrl = '';
-    const metaTitle = announcement?.title || 'YourSite';
-    const metaDescription = announcement?.content || 'YourSite';
+    const metaTitle = notice?.title || 'YourSite';
+    const metaDescription = notice?.content || 'YourSite';
     const metaKeywords = 'YourSite';
-    console.log(announcement);
+    console.log(notice);
 
     return (
         <>
-            <Head title={announcement.title}>
+            <Head title={notice.title}>
                 {/* Basic SEO */}
                 <meta name="title" content={metaTitle} />
                 <meta name="description" content={metaDescription} />
@@ -26,7 +26,7 @@ const SingleNoticePage: React.FC<SingleNoticePageProps> = ({ announcement }) => 
 
                 {/* Open Graph (Facebook/LinkedIn) */}
                 <meta property="og:type" content="page" />
-                <meta property="og:title" content={announcement?.title} />
+                <meta property="og:title" content={notice?.title} />
                 <meta property="og:description" content={metaDescription} />
                 <meta property="og:image" content={imageUrl} />
                 <meta property="og:url" content={pageUrl} />
@@ -34,7 +34,7 @@ const SingleNoticePage: React.FC<SingleNoticePageProps> = ({ announcement }) => 
 
                 {/* Twitter Cards */}
                 <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content={announcement?.title} />
+                <meta name="twitter:title" content={notice?.title} />
                 <meta name="twitter:description" content={metaDescription} />
                 <meta name="twitter:image" content={imageUrl} />
 
@@ -44,21 +44,24 @@ const SingleNoticePage: React.FC<SingleNoticePageProps> = ({ announcement }) => 
             <PageLayout>
                 {/* Hero */}
                 <PageBanner
-                    title={announcement.title}
+                    title={notice.title}
                     subtitle=""
-                    breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Programs', href: '/programs' }, { label: announcement.title }]}
+                    breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Notices', href: '/notices' }, { label: notice.title }]}
                 />
                 <section className="bg-background py-16">
                     <div className="container mx-auto max-w-5xl px-4">
                         {/* Thumbnail */}
-                        {announcement.media && (
+                        {notice.media && (
                             <div className="mb-10 overflow-hidden rounded shadow">
-                                <img src={announcement.media.url} alt={announcement.title} className="w-full object-cover" />
+                                <img src={notice.media.url} alt={notice.title} className="w-full object-cover" />
                             </div>
                         )}
 
                         {/* Description */}
-                        <div className="prose text-foreground lg:prose-lg" dangerouslySetInnerHTML={{ __html: announcement.content ?? '' }} />
+                        <div
+                            className="prose prose-sm max-w-none dark:prose-invert [&_h1,h2,h3,h4,h5,h6]:text-foreground [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500"
+                            dangerouslySetInnerHTML={{ __html: notice.content ?? '' }}
+                        />
                     </div>
                 </section>
             </PageLayout>

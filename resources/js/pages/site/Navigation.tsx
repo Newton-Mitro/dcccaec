@@ -50,9 +50,17 @@ export default function Navigation() {
             subItems: [
                 { title: 'Enrollment', href: '/parents/enrollment', label: 'parents' },
                 { title: 'Curriculum', href: '/parents/curriculum', label: 'parents' },
-                { title: 'Calendar', href: '/parents/calendar', label: 'parents' },
+                { title: 'Class Rutines', href: '/parents/class-rutines', label: 'parents' },
                 { title: 'Health & Safety', href: '/parents/health-safety', label: 'parents' },
                 { title: 'Nutrition & Meals', href: '/parents/nutrition-meals', label: 'parents' },
+            ],
+        },
+        {
+            title: 'Calendar',
+            label: 'calendar',
+            subItems: [
+                { title: 'Events Calendar', href: '/calendar/events', label: 'calendar' },
+                { title: 'Holiday Calendar', href: '/calendar/holidays', label: 'calendar' },
             ],
         },
         { title: 'FAQs', href: '/faq', label: 'faq' },
@@ -63,12 +71,10 @@ export default function Navigation() {
             subItems: [],
         },
         {
-            title: 'News & Events',
-            label: 'news-events',
-            subItems: [
-                { title: 'Upcoming Events', href: '/news-events/events', label: 'news-events' },
-                { title: 'Announcements', href: '/news-events/announcements', label: 'news-events' },
-            ],
+            title: 'Notices',
+            href: '/notices',
+            label: 'notices',
+            subItems: [],
         },
         {
             title: 'Contact Us',
@@ -94,7 +100,7 @@ export default function Navigation() {
                 }`}
             >
                 <div
-                    className={`absolute inset-0 bg-[url(/images/bannerwave.svg)] ${scrolled ? 'opacity-30 dark:opacity-30' : 'opacity-60 dark:opacity-30'}`}
+                    className={`absolute inset-0 bg-[url(/images/bannerwave.svg)] ${scrolled ? 'opacity-50 dark:opacity-50' : 'opacity-60 dark:opacity-60'}`}
                 ></div>
                 <div className="z-30 container mx-auto flex justify-between rounded-2xl px-4 py-2">
                     {/* Logo */}

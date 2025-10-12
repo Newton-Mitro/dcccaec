@@ -2,43 +2,51 @@ import { Head } from '@inertiajs/react';
 import { addDays, addMonths, endOfMonth, format, startOfMonth, subMonths } from 'date-fns';
 import { useState } from 'react';
 import PageLayout from '../../layouts/page-layout';
-import { Event } from '../../types/event';
 import PageBanner from './components/page-banner';
 
-interface EventsPageProps {
-    events: Event[];
-}
+// 🇧🇩 Bangladesh Government Holidays
+const holidays = [
+    { date: '2025-02-21', title: 'International Mother Language Day', description: 'Commemorates the martyrs of the Bengali Language Movement.' },
+    {
+        date: '2025-03-17',
+        title: "Father of the Nation's Birthday",
+        description: 'Bangabandhu Sheikh Mujibur Rahman’s birthday — also National Children’s Day.',
+    },
+    { date: '2025-03-26', title: 'Independence Day', description: 'Celebrating Bangladesh’s independence from Pakistan in 1971.' },
+    { date: '2025-04-14', title: 'Pohela Boishakh', description: 'Traditional celebration of the Bengali New Year.' },
+    { date: '2025-05-01', title: 'International Workers’ Day', description: 'Honoring the labor movement and workers’ rights worldwide.' },
+    { date: '2025-08-15', title: 'National Mourning Day', description: 'Honoring the memory of Bangabandhu Sheikh Mujibur Rahman.' },
+    { date: '2025-12-16', title: 'Victory Day', description: 'Commemorating Bangladesh’s victory in the Liberation War of 1971.' },
+];
 
-const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
+const HolidayCalendarPage: React.FC = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
     const startMonth = startOfMonth(currentMonth);
     const endMonth = endOfMonth(startMonth);
 
-    // Generate days for the current month
+    // Generate all days in the month
     const daysInMonth: Date[] = [];
     for (let i = 0; i < endMonth.getDate(); i++) {
         daysInMonth.push(addDays(startMonth, i));
     }
 
-    // Group events by date
-    const eventsByDate: Record<string, Event[]> = {};
-    events.forEach((event) => {
-        const dateStr = format(new Date(event.start_date), 'yyyy-MM-dd');
-        if (!eventsByDate[dateStr]) eventsByDate[dateStr] = [];
-        eventsByDate[dateStr].push(event);
+    // Group holidays by date
+    const holidaysByDate: Record<string, typeof holidays> = {};
+    holidays.forEach((holiday) => {
+        if (!holidaysByDate[holiday.date]) holidaysByDate[holiday.date] = [];
+        holidaysByDate[holiday.date].push(holiday);
     });
 
-    // Navigation handlers
     const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
     const nextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
 
     return (
         <>
-            <Head title="Upcoming Events" />
+            <Head title="Holiday Calendar" />
             <PageLayout>
-                <PageBanner title="Upcoming Events" subtitle="Click on a date to view event details." />
+                <PageBanner title="Government Holidays" subtitle="Stay updated with all national and cultural holidays throughout the year." />
 
                 <div className="container-custom mx-auto my-16">
                     {/* Header with month navigation */}
@@ -70,22 +78,22 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
 
                         {daysInMonth.map((day) => {
                             const dateStr = format(day, 'yyyy-MM-dd');
-                            const dayEvents = eventsByDate[dateStr] || [];
+                            const dayHolidays = holidaysByDate[dateStr] || [];
 
                             return (
                                 <button
                                     key={dateStr}
-                                    onClick={() => dayEvents.length && setSelectedDate(dateStr)}
+                                    onClick={() => dayHolidays.length && setSelectedDate(dateStr)}
                                     className={`relative min-h-[80px] rounded-lg border p-1 transition-colors ${
-                                        dayEvents.length
+                                        dayHolidays.length
                                             ? 'cursor-pointer bg-accent/10 hover:bg-accent/20 dark:bg-accent/20 dark:hover:bg-accent/30'
                                             : 'cursor-default bg-card hover:bg-muted/50 dark:bg-card dark:hover:bg-muted/10'
                                     }`}
                                 >
                                     <span className="font-semibold text-foreground">{day.getDate()}</span>
-                                    {dayEvents.length > 0 && (
+                                    {dayHolidays.length > 0 && (
                                         <span className="absolute inset-x-1 bottom-1 text-xs text-primary dark:text-accent">
-                                            {dayEvents.length} event{dayEvents.length > 1 ? 's' : ''}
+                                            {dayHolidays.length} holiday{dayHolidays.length > 1 ? 's' : ''}
                                         </span>
                                     )}
                                 </button>
@@ -93,12 +101,12 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
                         })}
                     </div>
 
-                    {/* Modal for Event Details */}
+                    {/* Modal for Holiday Details */}
                     {selectedDate && (
                         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4">
                             <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-border bg-card p-6 shadow-xl transition dark:bg-card">
                                 <div className="mb-4 flex items-center justify-between border-b border-border pb-2">
-                                    <h3 className="text-xl font-semibold text-foreground">Events on {format(new Date(selectedDate), 'PPP')}</h3>
+                                    <h3 className="text-xl font-semibold text-foreground">Holidays on {format(new Date(selectedDate), 'PPP')}</h3>
                                     <button
                                         onClick={() => setSelectedDate(null)}
                                         className="rounded-full p-2 text-muted-foreground hover:bg-muted/30"
@@ -108,35 +116,14 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
                                 </div>
 
                                 <div className="space-y-4">
-                                    {eventsByDate[selectedDate]?.map((event) => (
+                                    {holidaysByDate[selectedDate]?.map((holiday, index) => (
                                         <div
-                                            key={event.id}
+                                            key={index}
                                             className="rounded-lg border border-border bg-background p-4 shadow-sm transition hover:shadow-md"
                                         >
-                                            <h4 className="mb-2 text-lg font-semibold text-primary">{event.title}</h4>
-
-                                            {event.media?.url && (
-                                                <img src={event.media.url} alt={event.title} className="mb-3 h-60 w-full rounded-md object-cover" />
-                                            )}
-
-                                            <p className="mb-2 text-sm text-muted-foreground">{event.description || 'No description available.'}</p>
-
-                                            <p className="text-sm text-muted-foreground">
-                                                🗓 {format(new Date(event.start_date), 'PPP')}
-                                                {event.end_date && ` - ${format(new Date(event.end_date), 'PPP')}`}
-                                            </p>
-
-                                            {event.location && <p className="text-sm text-muted-foreground">📍 {event.location}</p>}
-
-                                            <p
-                                                className={`text-sm font-medium ${
-                                                    event.status === 'Active'
-                                                        ? 'text-green-600 dark:text-green-400'
-                                                        : 'text-red-600 dark:text-red-400'
-                                                }`}
-                                            >
-                                                {event.status}
-                                            </p>
+                                            <h4 className="mb-2 text-lg font-semibold text-primary">{holiday.title}</h4>
+                                            <p className="text-sm text-muted-foreground">{holiday.description}</p>
+                                            <p className="mt-2 text-sm text-muted-foreground">📅 {format(new Date(holiday.date), 'PPP')}</p>
                                         </div>
                                     ))}
                                 </div>
@@ -149,4 +136,4 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
     );
 };
 
-export default EventsPage;
+export default HolidayCalendarPage;

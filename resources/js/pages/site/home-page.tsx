@@ -174,20 +174,21 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
 
                             <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                                 {teams.slice(0, 3).map((member, index) => (
-                                    <Link key={member.id} href={`/about-us/teams/${member.id}`}>
+                                    <div
+                                        key={member.id}
+                                        className={`group relative border-2 border-card/50 bg-card p-6 text-center shadow transition-transform duration-300 hover:-translate-y-2 ${
+                                            index % 2 === 0 ? 'rounded-tl-4xl rounded-br-4xl' : 'rounded-tr-4xl rounded-bl-4xl'
+                                        }`}
+                                    >
+                                        {/* Overlay */}
                                         <div
-                                            className={`group relative border-2 border-card/50 bg-card p-6 text-center shadow transition-transform duration-300 hover:-translate-y-2 ${
+                                            className={`absolute inset-0 -translate-x-1/4 bg-secondary/50 opacity-0 transition-transform duration-500 group-hover:translate-x-0 group-hover:opacity-100 ${
                                                 index % 2 === 0 ? 'rounded-tl-4xl rounded-br-4xl' : 'rounded-tr-4xl rounded-bl-4xl'
                                             }`}
-                                        >
-                                            {/* Overlay */}
-                                            <div
-                                                className={`absolute inset-0 -translate-x-1/4 bg-secondary/50 opacity-0 transition-transform duration-500 group-hover:translate-x-0 group-hover:opacity-100 ${
-                                                    index % 2 === 0 ? 'rounded-tl-4xl rounded-br-4xl' : 'rounded-tr-4xl rounded-bl-4xl'
-                                                }`}
-                                            ></div>
+                                        ></div>
 
-                                            {/* Image Container */}
+                                        {/* Image Container */}
+                                        <Link key={member.id} href={`/about-us/teams/${member.id}`}>
                                             <div className="relative mx-auto h-40 w-40 overflow-hidden rounded-full border-4 border-primary shadow-md transition-transform duration-500 group-hover:scale-105">
                                                 <img
                                                     src={member.media?.url || '/images/default-avatar.png'}
@@ -208,52 +209,52 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                                     </p>
                                                 )}
                                             </div>
+                                        </Link>
 
-                                            {/* Social Links */}
-                                            <div className="relative z-10 mt-6 flex justify-center gap-3">
-                                                {member.facebook_links && (
-                                                    <a
-                                                        href={member.facebook_links}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
-                                                    >
-                                                        <i className="fab fa-facebook-f"></i>
-                                                    </a>
-                                                )}
-                                                {member.linkedin_links && (
-                                                    <a
-                                                        href={member.linkedin_links}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
-                                                    >
-                                                        <i className="fab fa-linkedin-in"></i>
-                                                    </a>
-                                                )}
-                                                {member.twitter_links && (
-                                                    <a
-                                                        href={member.twitter_links}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
-                                                    >
-                                                        <i className="fab fa-twitter"></i>
-                                                    </a>
-                                                )}
-                                                {member.instagram_links && (
-                                                    <a
-                                                        href={member.instagram_links}
-                                                        target="_blank"
-                                                        rel="noopener noreferrer"
-                                                        className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
-                                                    >
-                                                        <i className="fab fa-instagram"></i>
-                                                    </a>
-                                                )}
-                                            </div>
+                                        {/* Social Links */}
+                                        <div className="relative z-10 mt-6 flex justify-center gap-3">
+                                            {member.facebook_links && (
+                                                <a
+                                                    href={member.facebook_links}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
+                                                >
+                                                    <i className="fab fa-facebook-f"></i>
+                                                </a>
+                                            )}
+                                            {member.linkedin_links && (
+                                                <a
+                                                    href={member.linkedin_links}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
+                                                >
+                                                    <i className="fab fa-linkedin-in"></i>
+                                                </a>
+                                            )}
+                                            {member.twitter_links && (
+                                                <a
+                                                    href={member.twitter_links}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
+                                                >
+                                                    <i className="fab fa-twitter"></i>
+                                                </a>
+                                            )}
+                                            {member.instagram_links && (
+                                                <a
+                                                    href={member.instagram_links}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
+                                                >
+                                                    <i className="fab fa-instagram"></i>
+                                                </a>
+                                            )}
                                         </div>
-                                    </Link>
+                                    </div>
                                 ))}
                             </div>
 
@@ -267,7 +268,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
 
                     {/* Testimonials Section */}
                     {testimonials.length > 0 && (
-                        <div className="space-y-10 py-16">
+                        <div className="space-y-10 pb-16">
                             <SectionHeader
                                 heading="Testimonials"
                                 sub_heading="See why families choose us for safe, nurturing, and quality child care."
@@ -288,7 +289,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                 }}
                                 className="py-8"
                             >
-                                {testimonials.map((testimonial, index) => (
+                                {testimonials.map((testimonial) => (
                                     <SwiperSlide key={testimonial.id}>
                                         <div
                                             className={`group relative mx-auto max-w-xl rounded-3xl bg-card p-10 shadow transition-transform duration-300 hover:shadow-lg`}

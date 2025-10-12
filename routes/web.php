@@ -47,11 +47,12 @@ Route::get('/galleries', [WebPageController::class, 'galleries'])->name('site.ga
 Route::get('/programs', [WebPageController::class, 'programs'])->name('site.programs');
 Route::get('/programs/{program}', [WebPageController::class, 'showProgram'])->name('site.programs.show');
 
-Route::get('/news-events/events', [WebPageController::class, 'events'])->name('site.events');
-Route::get('/news-events/events/{event}', [WebPageController::class, 'showEvent'])->name('site.events.show');
+Route::get('/calendar/events', [WebPageController::class, 'events'])->name('site.events');
+Route::get('/calendar/events/{event}', [WebPageController::class, 'showEvent'])->name('site.events.show');
+Route::get('/calendar/holidays', [WebPageController::class, 'holidays'])->name('site.holidays');
 
-Route::get('/news-events/announcements', [WebPageController::class, 'announcements'])->name('site.announcements');
-Route::get('/news-events/announcements/{announcement}', [WebPageController::class, 'showAnnouncement'])->name('site.announcements.show');
+Route::get('/notices', [WebPageController::class, 'notices'])->name('site.notices');
+Route::get('/notices/{notice}', [WebPageController::class, 'showNotice'])->name('site.notices.show');
 
 Route::get('/careers', [WebPageController::class, 'careers'])->name('site.careers');
 Route::get('/careers/{career}', [WebPageController::class, 'showJobCircular'])->name('site.careers.show');

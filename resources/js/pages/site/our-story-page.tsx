@@ -52,7 +52,7 @@ const OurStoryPage: React.FC<OurStoryPageProps> = ({ page }) => {
                             {page.sections
                                 .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0))
                                 .map((section, index) => (
-                                    <div key={section.id || index} className="mb-30 w-full lg:container">
+                                    <div key={section.id || index} className="">
                                         {/* Section Heading */}
 
                                         <ImageContentBlock

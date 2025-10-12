@@ -10,7 +10,7 @@ class HeroSliderSeeder extends Seeder
 {
     public function run(): void
     {
-        // Grab only media entries with "images" in their path
+        // Get only media IDs containing "images" in the path
         $allImages = Media::where('file_path', 'like', '%images%')->pluck('id');
 
         if ($allImages->isEmpty()) {
@@ -18,12 +18,13 @@ class HeroSliderSeeder extends Seeder
             return;
         }
 
-        // Create 6 sliders, each with a random image ID from the filtered set
+        // Create 6 sliders with a random media ID each
         HeroSlider::factory(6)->create([
             'media_id' => function () use ($allImages) {
                 return $allImages->random();
             },
-
         ]);
+
+        $this->command->info('✅ HeroSlider seeding completed!');
     }
 }

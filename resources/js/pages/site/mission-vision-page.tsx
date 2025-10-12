@@ -53,7 +53,7 @@ const MissionVisionPage: React.FC<MissionVisionPageProps> = ({ page }) => {
                             {page.sections
                                 .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0))
                                 .map((section, index) => (
-                                    <div key={section.id || index} className="mb-30 w-full space-y-10 lg:container">
+                                    <div key={section.id || index} className="space-y-10">
                                         {/* Section Heading */}
                                         <SectionHeader heading={section?.heading} sub_heading={section?.sub_heading} />
 
@@ -64,11 +64,6 @@ const MissionVisionPage: React.FC<MissionVisionPageProps> = ({ page }) => {
                                         {/* Gallery */}
                                         {section?.gallery && section?.gallery.length > 0 && (
                                             <>
-                                                {/* Section Heading */}
-                                                {/* <div className="mb-6 flex flex-col items-center justify-center text-center">
-                                                <h2 className="mb-1 text-2xl font-semibold">Gallery</h2>
-                                                <h3 className="mb-2 text-sm text-gray-500">Browse the gallery</h3>
-                                            </div> */}
                                                 <SectionGallery gallery={JSON.parse(section.gallery)} />
                                             </>
                                         )}

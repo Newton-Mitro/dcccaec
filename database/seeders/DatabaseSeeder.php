@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             NoticeSeeder::class,
             EventSeeder::class,
                 // PartnerSeeder::class,
-                // CareerSeeder::class,
+            CareerSeeder::class,
                 // ContactMessageSeeder::class,
             GallerySeeder::class,
             HeroSliderSeeder::class,
