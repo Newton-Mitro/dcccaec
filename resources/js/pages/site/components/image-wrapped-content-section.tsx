@@ -52,7 +52,7 @@ const ImageWrappedContentSection: React.FC<ImageWrappedContentSectionProps> = ({
 
     return (
         <>
-            <div className="mb-10">
+            <div className="">
                 {renderMedia()}
                 <div
                     dangerouslySetInnerHTML={{ __html: contentHtml }}

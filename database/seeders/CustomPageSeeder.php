@@ -118,7 +118,7 @@ class CustomPageSeeder extends Seeder
           'heading' => 'Daily Class Routines',
           'sub_heading' => 'A structured, joyful day.',
           'content_type' => 'HTML',
-          'content' => '<section id="class-routines" class="py-12 bg-card">
+          'content' => '<section id="class-routines" class="py-12 ">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold text-center mb-8">Daily Class Routines</h2>
 
@@ -135,43 +135,43 @@ class CustomPageSeeder extends Seeder
         </tr>
       </thead>
       <tbody>
-        <tr class="even:bg-card">
+        <tr class="even:">
           <td class="px-4 py-2 border">08:00 - 08:30</td>
           <td class="px-4 py-2 border">Arrival & Morning Greetings</td>
         </tr>
-        <tr class="even:bg-card">
+        <tr class="even:">
           <td class="px-4 py-2 border">08:30 - 09:30</td>
           <td class="px-4 py-2 border">Learning Circle / Thematic Lessons</td>
         </tr>
-        <tr class="even:bg-card">
+        <tr class="even:">
           <td class="px-4 py-2 border">09:30 - 10:00</td>
           <td class="px-4 py-2 border">Snack Time / Social Interaction</td>
         </tr>
-        <tr class="even:bg-card">
+        <tr class="even:">
           <td class="px-4 py-2 border">10:00 - 11:00</td>
           <td class="px-4 py-2 border">Creative Activities (Art, Music, Movement)</td>
         </tr>
-        <tr class="even:bg-card">
+        <tr class="even:">
           <td class="px-4 py-2 border">11:00 - 11:30</td>
           <td class="px-4 py-2 border">Outdoor Play / Physical Activities</td>
         </tr>
-        <tr class="even:bg-card">
+        <tr class="even:">
           <td class="px-4 py-2 border">11:30 - 12:00</td>
           <td class="px-4 py-2 border">Storytelling / Language Development</td>
         </tr>
-        <tr class="even:bg-card">
+        <tr class="even:">
           <td class="px-4 py-2 border">12:00 - 12:30</td>
           <td class="px-4 py-2 border">Lunch & Hygiene Routine</td>
         </tr>
-        <tr class="even:bg-card">
+        <tr class="even:">
           <td class="px-4 py-2 border">12:30 - 01:30</td>
           <td class="px-4 py-2 border">Rest / Nap Time</td>
         </tr>
-        <tr class="even:bg-card">
+        <tr class="even:">
           <td class="px-4 py-2 border">01:30 - 02:30</td>
           <td class="px-4 py-2 border">Hands-On Learning / Cognitive Activities</td>
         </tr>
-        <tr class="even:bg-card">
+        <tr class="even:">
           <td class="px-4 py-2 border">02:30 - 03:00</td>
           <td class="px-4 py-2 border">Closing Circle / Reflection & Goodbye</td>
         </tr>
@@ -195,7 +195,7 @@ class CustomPageSeeder extends Seeder
       'Enrollment' => [
         [
           'content_type' => 'HTML',
-          'content' => '<section id="enrollment" class="py-12 bg-card">
+          'content' => '<section id="enrollment" class="py-12 ">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold text-center mb-8">Registration & Admission</h2>
 
@@ -240,7 +240,7 @@ class CustomPageSeeder extends Seeder
       'Curriculum' => [
         [
           'content_type' => 'HTML',
-          'content' => '<section id="curriculum" class="py-12 bg-card">
+          'content' => '<section id="curriculum" class="py-12 ">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold text-center mb-8">Our Curriculum</h2>
     
@@ -332,7 +332,7 @@ class CustomPageSeeder extends Seeder
       'Rules & Regulations' => [
         [
           'content_type' => 'HTML',
-          'content' => '<section id="rules-regulations" class="py-12 bg-card">
+          'content' => '<section id="rules-regulations" class="py-12 ">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold text-center mb-8">Rules & Regulations</h2>
 
@@ -397,7 +397,7 @@ class CustomPageSeeder extends Seeder
       'Health & Safety' => [
         [
           'content_type' => 'HTML',
-          'content' => '<section id="health-safety" class="py-12 bg-card">
+          'content' => '<section id="health-safety" class="py-12 ">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold text-center mb-8">Health & Safety</h2>
 
@@ -465,7 +465,7 @@ class CustomPageSeeder extends Seeder
       'Nutrition & Meals' => [
         [
           'content_type' => 'HTML',
-          'content' => '<section id="nutrition-meals" class="py-12 bg-card">
+          'content' => '<section id="nutrition-meals" class="py-12 ">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold text-center mb-8">Nutrition & Meals</h2>
 
@@ -533,7 +533,7 @@ class CustomPageSeeder extends Seeder
           'heading' => 'Page Title', // e.g., 'Privacy Policy'
           'sub_heading' => 'Important legal information.',
           'content_type' => 'HTML',
-          'content' => '<section id="disclaimer" class="py-12 bg-card">
+          'content' => '<section id="disclaimer" class="py-12 ">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold text-center mb-8">Disclaimer</h2>
 
@@ -566,7 +566,7 @@ class CustomPageSeeder extends Seeder
           'heading' => 'Page Title', // e.g., 'Privacy Policy'
           'sub_heading' => 'Important legal information.',
           'content_type' => 'HTML',
-          'content' => '<section id="terms-of-service" class="py-12 bg-card">
+          'content' => '<section id="terms-of-service" class="py-12 ">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold text-center mb-8">Terms of Service</h2>
 
@@ -612,7 +612,7 @@ class CustomPageSeeder extends Seeder
           'heading' => 'Page Title', // e.g., 'Privacy Policy'
           'sub_heading' => 'Important legal information.',
           'content_type' => 'HTML',
-          'content' => '<section id="privacy-policy" class="py-12 bg-card">
+          'content' => '<section id="privacy-policy" class="py-12 ">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold text-center mb-8">Privacy Policy</h2>
 

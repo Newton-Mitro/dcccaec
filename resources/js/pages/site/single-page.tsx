@@ -50,49 +50,38 @@ const SinglePage: React.FC<SinglePageProps> = ({ page }) => {
 
                 <div className="container-custom mx-auto my-16 w-full space-y-14 p-6">
                     {page.sections.length > 0 ? (
-                        <div className="">
-                            {page.sections
-                                .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0))
-                                .map((section, index) => (
-                                    <div key={section.id || index} className="mb-30 w-full space-y-10 lg:container">
-                                        {/* Section Heading */}
-                                        <SectionHeader heading={section?.heading} sub_heading={section?.sub_heading} />
+                        page.sections
+                            .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0))
+                            .map((section) => (
+                                <div key={section.id}>
+                                    {/* Section Heading */}
+                                    <SectionHeader heading={section?.heading} sub_heading={section?.sub_heading} />
 
-                                        <ImageWrappedContentSection
-                                            mediaUrl={section.media?.url}
-                                            mimeType={section.media?.file_type}
-                                            contentHtml={section.content || ''}
-                                            shape="octagon-left"
-                                        />
+                                    <ImageWrappedContentSection
+                                        mediaUrl={section.media?.url}
+                                        mimeType={section.media?.file_type}
+                                        contentHtml={section.content || ''}
+                                        shape="octagon-left"
+                                    />
 
-                                        <div className="py-6">{section.json_array && <RenderSectionContent jsonItems={section.json_array} />}</div>
+                                    {section.json_array && <RenderSectionContent jsonItems={section.json_array} />}
 
-                                        {/* Gallery */}
-                                        {section?.gallery && section?.gallery.length > 0 && (
-                                            <>
-                                                {/* Section Heading */}
-                                                {/* <div className="mb-6 flex flex-col items-center justify-center text-center">
-                                                <h2 className="mb-1 text-2xl font-semibold">Gallery</h2>
-                                                <h3 className="mb-2 text-sm text-gray-500">Browse the gallery</h3>
-                                            </div> */}
-                                                <SectionGallery gallery={JSON.parse(section.gallery)} />
-                                            </>
-                                        )}
+                                    {/* Gallery */}
+                                    {section?.gallery && section?.gallery.length > 0 && <SectionGallery gallery={JSON.parse(section.gallery)} />}
 
-                                        {/* Button */}
-                                        {section.button_text && section.button_link && (
-                                            <div className="my-6 text-center">
-                                                <a
-                                                    href={section.button_link}
-                                                    className="inline-block rounded bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
-                                                >
-                                                    {section.button_text}
-                                                </a>
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                        </div>
+                                    {/* Button */}
+                                    {section.button_text && section.button_link && (
+                                        <div className="my-6 text-center">
+                                            <a
+                                                href={section.button_link}
+                                                className="inline-block rounded bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
+                                            >
+                                                {section.button_text}
+                                            </a>
+                                        </div>
+                                    )}
+                                </div>
+                            ))
                     ) : (
                         <p className="text-sm text-gray-500">No sections available for this page.</p>
                     )}
