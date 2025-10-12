@@ -23,13 +23,29 @@ interface EditProps {
 
 export default function Edit({ program, media }: EditProps) {
     const isEdit = !!program;
+
     const [form, setForm] = useState({
-        title: program?.title || '',
+        name: program?.name || '',
         slug: program?.slug || '',
         description: program?.description || '',
+        excerpt: program?.excerpt || '',
+        objectives: program?.objectives || '',
+        category_id: program?.category_id || 0,
+        is_active: program?.is_active ?? true,
+        featured: program?.featured ?? false,
         gallery: program?.gallery || [],
         media_id: program?.media_id ?? null,
-        status: program?.status || 'Active',
+
+        // Monthly fees
+        monthly_fee: program?.monthly_fee || ({} as Record<string, number>),
+
+        // Extra fees
+        admission_form_fee: program?.admission_form_fee || '',
+        admission_fee: program?.admission_fee || '',
+        yearly_charge: program?.yearly_charge || '',
+        uniform_fee: program?.uniform_fee || '',
+        books_stationary_fee: program?.books_stationary_fee || '',
+        khata_fee: program?.khata_fee || '',
     });
 
     const [selectedMedia, setSelectedMedia] = useState<Media | null>(program?.media ?? null);
@@ -59,16 +75,38 @@ export default function Edit({ program, media }: EditProps) {
             <Head title={isEdit ? 'Edit Program' : 'Create Program'} />
             <div className="h-[calc(100vh-100px)] space-y-8 overflow-auto p-6">
                 <HeadingSmall title={isEdit ? 'Edit Program' : 'Create Program'} description="Fill in the program details" />
+
                 <form onSubmit={submit} className="space-y-6 rounded-lg border bg-white p-6 md:w-4xl dark:bg-gray-900">
-                    {/* Title & Slug */}
+                    {/* Name & Slug */}
                     <div className="grid gap-4 md:grid-cols-2">
                         <div className="grid gap-2">
-                            <Label>Title</Label>
+                            <Label>Name</Label>
                             <Input
-                                value={form.title}
-                                onChange={(e) => setForm({ ...form, title: e.target.value, slug: e.target.value.toLowerCase().replace(/\s+/g, '-') })}
+                                value={form.name}
+                                onChange={(e) => setForm({ ...form, name: e.target.value, slug: e.target.value.toLowerCase().replace(/\s+/g, '-') })}
                             />
-                            <InputError message={errors.title} />
+                            <InputError message={errors.name} />
+                        </div>
+
+                        <div className="grid gap-2">
+                            <Label>Slug</Label>
+                            <Input value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
+                            <InputError message={errors.slug} />
+                        </div>
+                    </div>
+
+                    {/* Excerpt & Objectives */}
+                    <div className="grid gap-4 md:grid-cols-2">
+                        <div className="grid gap-2">
+                            <Label>Excerpt</Label>
+                            <Input value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} />
+                            <InputError message={errors.excerpt} />
+                        </div>
+
+                        <div className="grid gap-2">
+                            <Label>Objectives</Label>
+                            <Input value={form.objectives} onChange={(e) => setForm({ ...form, objectives: e.target.value })} />
+                            <InputError message={errors.objectives} />
                         </div>
                     </div>
 
@@ -83,6 +121,54 @@ export default function Edit({ program, media }: EditProps) {
                         <InputError message={errors.description} />
                     </div>
 
+                    {/* Monthly Fees */}
+                    <div className="grid gap-2">
+                        <Label>Monthly Fees (per level)</Label>
+                        <Input
+                            placeholder="Example: Playgroup:500,Nursery:600"
+                            value={Object.entries(form.monthly_fee)
+                                .map(([level, fee]) => `${level}:${fee}`)
+                                .join(',')}
+                            onChange={(e) => {
+                                const fees: Record<string, number> = {};
+                                e.target.value.split(',').forEach((pair) => {
+                                    const [level, fee] = pair.split(':');
+                                    if (level && fee) fees[level.trim()] = Number(fee.trim());
+                                });
+                                setForm({ ...form, monthly_fee: fees });
+                            }}
+                        />
+                        <InputError message={errors.monthly_fee} />
+                    </div>
+
+                    {/* Extra Fees */}
+                    <div className="grid gap-4 md:grid-cols-3">
+                        <div className="grid gap-2">
+                            <Label>Admission Form Fee</Label>
+                            <Input value={form.admission_form_fee} onChange={(e) => setForm({ ...form, admission_form_fee: e.target.value })} />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Admission Fee</Label>
+                            <Input value={form.admission_fee} onChange={(e) => setForm({ ...form, admission_fee: e.target.value })} />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Yearly Charge</Label>
+                            <Input value={form.yearly_charge} onChange={(e) => setForm({ ...form, yearly_charge: e.target.value })} />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Uniform Fee</Label>
+                            <Input value={form.uniform_fee} onChange={(e) => setForm({ ...form, uniform_fee: e.target.value })} />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Books & Stationary Fee</Label>
+                            <Input value={form.books_stationary_fee} onChange={(e) => setForm({ ...form, books_stationary_fee: e.target.value })} />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Khata Fee</Label>
+                            <Input value={form.khata_fee} onChange={(e) => setForm({ ...form, khata_fee: e.target.value })} />
+                        </div>
+                    </div>
+
                     {/* Gallery */}
                     <div className="grid gap-2">
                         <Label>Gallery URLs (comma separated)</Label>
@@ -90,7 +176,7 @@ export default function Edit({ program, media }: EditProps) {
                         <InputError message={errors.gallery} />
                     </div>
 
-                    {/* Media & Icon Media */}
+                    {/* Media */}
                     <div className="flex gap-4">
                         <MediaSelector
                             media={selectedMedia}
@@ -99,7 +185,6 @@ export default function Edit({ program, media }: EditProps) {
                                 setSelectedMedia(null);
                                 setForm({ ...form, media_id: null });
                             }}
-                            label="Image, Icon or Video"
                             error={errors.media_id}
                         />
                     </div>
@@ -119,7 +204,7 @@ export default function Edit({ program, media }: EditProps) {
                     </div>
                 </form>
 
-                {/* Media Modals */}
+                {/* Media Modal */}
                 <MediaBrowserModal
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}

@@ -29,7 +29,7 @@ class EventSeeder extends Seeder
             return;
         }
 
-        $eventCount = 9;
+        $eventCount = 2;
         for ($i = 0; $i < $eventCount; $i++) {
             Event::factory()->create(
                 [

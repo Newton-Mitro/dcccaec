@@ -1,15 +1,35 @@
+import { Category } from './category';
+import { Media } from './media';
 export interface Program {
     id: number;
-    title: string;
+    name: string;
     slug: string;
-    description?: string | null;
-    gallery?: string[];
-    icon_media_id?: number | null;
-    media_id?: number | null;
-    status?: string | null;
-    created_at: string;
-    updated_at: string;
+    category_id: number;
+    category?: Category;
+    description?: string; // HTML content
+    excerpt?: string;
+    objectives?: string;
+    age_min?: number;
+    age_max?: number;
 
-    media?: any; // relation for media
-    icon_media?: any; // relation for icon_media
+    // Monthly fees by level
+    monthly_fee?: Record<string, number>;
+
+    // Extra fees
+    admission_form_fee?: string; // e.g., "500"
+    admission_fee?: string; // e.g., "8000"
+    yearly_charge?: string; // e.g., "3000"
+    uniform_fee?: string; // e.g., "1400"
+    books_stationary_fee?: string; // e.g., "According to class"
+    khata_fee?: string; // e.g., "50"
+
+    media_id?: number | null;
+    media?: Media;
+    gallery?: string[]; // Array of image URLs
+
+    is_active: boolean;
+    featured: boolean;
+
+    created_at: string; // ISO date string
+    updated_at: string; // ISO date string
 }

@@ -15,6 +15,7 @@ return new class extends Migration {
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();
             $table->foreignId('media_id')->nullable()->constrained('media')->nullOnDelete();
+            $table->boolean('predefined')->default(false);
             $table->timestamps();
         });
     }

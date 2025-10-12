@@ -16,7 +16,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
                 {/* Hero */}
                 <PageBanner title="Upcoming Events" subtitle="Discover our events and explore the possibilities." />
 
-                <div className="container-custom mx-auto px-4 sm:px-6 md:px-6">
+                <div className="container-custom mx-auto my-16">
                     {/* Events Grid */}
                     {events.length > 0 ? (
                         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

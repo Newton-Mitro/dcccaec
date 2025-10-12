@@ -22,13 +22,25 @@ interface CreateProps {
 
 export default function Create({ media }: CreateProps) {
     const [form, setForm] = useState({
-        title: '',
+        name: '',
         slug: '',
         description: '',
+        excerpt: '',
+        objectives: '',
+        category_id: 0,
+        is_active: true,
+        featured: false,
         gallery: [] as string[],
         media_id: null as number | null,
-        category_id: 0,
-        status: '',
+
+        // Fees
+        monthly_fee: {} as Record<string, number>,
+        admission_form_fee: '',
+        admission_fee: '',
+        yearly_charge: '',
+        uniform_fee: '',
+        books_stationary_fee: '',
+        khata_fee: '',
     });
 
     const [selectedMedia, setSelectedMedia] = useState<Media | null>(null);
@@ -57,22 +69,42 @@ export default function Create({ media }: CreateProps) {
                 <HeadingSmall title="Create Program" description="Fill in the program details" />
 
                 <form onSubmit={submit} className="space-y-6 rounded-lg border bg-white p-6 md:w-4xl dark:bg-gray-900">
-                    {/* Title & Slug */}
+                    {/* Name & Slug */}
                     <div className="grid gap-4 md:grid-cols-2">
                         <div className="grid gap-2">
-                            <Label>Title</Label>
+                            <Label>Name</Label>
                             <Input
-                                value={form.title}
+                                value={form.name}
                                 onChange={(e) =>
                                     setForm({
                                         ...form,
-                                        title: e.target.value,
+                                        name: e.target.value,
                                         slug: e.target.value.toLowerCase().replace(/\s+/g, '-'),
                                     })
                                 }
                             />
-                            <InputError message={errors.title} />
+                            <InputError message={errors.name} />
                         </div>
+
+                        <div className="grid gap-2">
+                            <Label>Slug</Label>
+                            <Input value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
+                            <InputError message={errors.slug} />
+                        </div>
+                    </div>
+
+                    {/* Excerpt */}
+                    <div className="grid gap-2">
+                        <Label>Excerpt</Label>
+                        <Input value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} />
+                        <InputError message={errors.excerpt} />
+                    </div>
+
+                    {/* Objectives */}
+                    <div className="grid gap-2">
+                        <Label>Objectives</Label>
+                        <Input value={form.objectives} onChange={(e) => setForm({ ...form, objectives: e.target.value })} />
+                        <InputError message={errors.objectives} />
                     </div>
 
                     {/* Description */}
@@ -84,6 +116,54 @@ export default function Create({ media }: CreateProps) {
                             onChange={(_, editor) => setForm({ ...form, description: editor.getData() })}
                         />
                         <InputError message={errors.description} />
+                    </div>
+
+                    {/* Monthly Fees */}
+                    <div className="grid gap-2">
+                        <Label>Monthly Fees (per level)</Label>
+                        <Input
+                            placeholder="Example: Playgroup:500,Nursery:600"
+                            value={Object.entries(form.monthly_fee)
+                                .map(([level, fee]) => `${level}:${fee}`)
+                                .join(',')}
+                            onChange={(e) => {
+                                const fees: Record<string, number> = {};
+                                e.target.value.split(',').forEach((pair) => {
+                                    const [level, fee] = pair.split(':');
+                                    if (level && fee) fees[level.trim()] = Number(fee.trim());
+                                });
+                                setForm({ ...form, monthly_fee: fees });
+                            }}
+                        />
+                        <InputError message={errors.monthly_fee} />
+                    </div>
+
+                    {/* Extra Fees */}
+                    <div className="grid gap-4 md:grid-cols-3">
+                        <div className="grid gap-2">
+                            <Label>Admission Form Fee</Label>
+                            <Input value={form.admission_form_fee} onChange={(e) => setForm({ ...form, admission_form_fee: e.target.value })} />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Admission Fee</Label>
+                            <Input value={form.admission_fee} onChange={(e) => setForm({ ...form, admission_fee: e.target.value })} />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Yearly Charge</Label>
+                            <Input value={form.yearly_charge} onChange={(e) => setForm({ ...form, yearly_charge: e.target.value })} />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Uniform Fee</Label>
+                            <Input value={form.uniform_fee} onChange={(e) => setForm({ ...form, uniform_fee: e.target.value })} />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Books & Stationary Fee</Label>
+                            <Input value={form.books_stationary_fee} onChange={(e) => setForm({ ...form, books_stationary_fee: e.target.value })} />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Khata Fee</Label>
+                            <Input value={form.khata_fee} onChange={(e) => setForm({ ...form, khata_fee: e.target.value })} />
+                        </div>
                     </div>
 
                     {/* Gallery */}

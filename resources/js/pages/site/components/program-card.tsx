@@ -1,12 +1,12 @@
 import React from 'react';
 import { Program } from '../../../types/program';
 
-interface ServiceCardProps {
+interface ProgramCardProps {
     program: Program;
     index: number;
 }
 
-const ServiceCard: React.FC<ServiceCardProps> = ({ program, index }) => {
+const ProgramCard: React.FC<ProgramCardProps> = ({ program, index }) => {
     return (
         <div className="group flex cursor-pointer flex-col items-center md:relative md:flex-row">
             {index % 2 === 0 ? (
@@ -24,11 +24,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ program, index }) => {
                     />
                     <div className="flex min-h-62 w-full flex-col justify-center rounded-2xl border-1 border-border bg-card p-6 md:ml-72 md:pl-32">
                         <div className="">
-                            <h3 className="text-xl font-bold text-foreground">{program.title}</h3>
+                            <h3 className="text-xl font-bold text-foreground">{program.name}</h3>
                             <p className="text-sm font-semibold text-secondary">{program.category?.name}</p>
 
-                            <div className="prose prose-sm mt-3 text-muted-foreground [&_h1,h2,h3,h4,h5,h6]:text-foreground [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500">
-                                {program.description || 'No bio available.'}
+                            <p className="mb-4 text-gray-600">{program.excerpt}</p>
+                            <div className="text-sm text-gray-500">
+                                <span>
+                                    Age: {program.age_min}–{program.age_max} years
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -39,11 +42,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ program, index }) => {
                 >
                     <div className="flex min-h-62 w-full flex-col justify-center rounded-2xl border-1 border-border bg-card p-6 md:mr-72 md:pr-32">
                         <div className="flex flex-col items-end justify-center text-right">
-                            <h3 className="text-xl font-bold text-foreground">{program.title}</h3>
+                            <h3 className="text-xl font-bold text-foreground">{program.name}</h3>
                             <p className="text-sm font-semibold text-secondary">{program.category?.name}</p>
 
-                            <div className="prose prose-sm mt-3 text-muted-foreground [&_h1,h2,h3,h4,h5,h6]:text-foreground [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500">
-                                {program.description || 'No bio available.'}
+                            <p className="mb-4 text-gray-600">{program.excerpt}</p>
+                            <div className="text-sm text-gray-500">
+                                <span>
+                                    Age: {program.age_min}–{program.age_max} years
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -62,4 +68,4 @@ const ServiceCard: React.FC<ServiceCardProps> = ({ program, index }) => {
     );
 };
 
-export default ServiceCard;
+export default ProgramCard;

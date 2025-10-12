@@ -29,7 +29,7 @@ class NoticeSeeder extends Seeder
             return;
         }
 
-        $noticeCount = 9;
+        $noticeCount = 3;
         for ($i = 0; $i < $noticeCount; $i++) {
             Notice::factory()->create(
                 [

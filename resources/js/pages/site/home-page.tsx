@@ -81,24 +81,15 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                         {/* Right Content */}
                         <div className="w-full">
                             <div className="mb-2 flex flex-col">
-                                {about.sections[0]?.heading && (
-                                    <h2 className="mb-1 font-chewy text-3xl text-accent">{about.sections[0]?.heading || ''}</h2>
-                                )}
-                                {about.sections[0]?.sub_heading && (
-                                    <h3 className="mb-2 text-muted-foreground">{about.sections[0]?.sub_heading || ''}</h3>
-                                )}
-                                <div className="mx-auto h-1 w-16 bg-secondary md:mx-0"></div>
+                                {about.title && <h2 className="mb-1 font-chewy text-3xl text-accent">{about.title || ''}</h2>}
+
+                                {about.title && <div className="mx-auto h-1 w-16 bg-secondary md:mx-0"></div>}
                             </div>
-                            <div
-                                className="prose mb-6 max-w-none leading-relaxed text-muted-foreground"
-                                dangerouslySetInnerHTML={{
-                                    __html: about.sections[0]?.content || '',
-                                }}
-                            />
+                            <div className="mb-6 leading-relaxed text-muted-foreground">{about.meta_description || ''}</div>
 
                             {/* Button */}
                             <div className="mt-10">
-                                <Link href="/about">
+                                <Link href="/about-us/our-story">
                                     <button className="rounded bg-primary px-6 py-2 font-semibold text-white hover:bg-yellow-500">Contact Us</button>
                                 </Link>
                             </div>
@@ -114,51 +105,57 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                     {/* Services Section */}
                     {programs.length > 0 && (
                         <div className="space-y-10">
-                            <SectionHeader heading="Our Programs" sub_heading="We offer a wide range of programs to help you achieve your goals." />
+                            <SectionHeader
+                                heading="Our Programs"
+                                sub_heading="At Dhaka Credit Child Care & Education Center, we offer a range of child care programs designed to nurture growth, curiosity, and social development. Our early learning curriculum emphasizes play-based education, emotional intelligence, and safety."
+                            />
 
                             <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                                 {programs.map((program, index) => (
-                                    <div
-                                        key={program.id}
-                                        className={`group relative border-2 border-card/50 bg-card p-6 shadow transition-transform duration-300 hover:-translate-y-2 ${
-                                            index % 2 === 0 ? 'rounded-tl-4xl rounded-br-4xl' : 'rounded-tr-4xl rounded-bl-4xl'
-                                        }`}
-                                    >
-                                        {/* Overlay */}
+                                    <Link key={program.id} href={`/programs/${program.id}`}>
                                         <div
-                                            className={`absolute inset-0 -translate-x-1/4 bg-black/50 opacity-0 transition-transform duration-500 group-hover:translate-x-0 group-hover:opacity-100 ${
+                                            key={program.id}
+                                            className={`group relative border-2 border-card/50 bg-card p-6 shadow transition-transform duration-300 hover:-translate-y-2 ${
                                                 index % 2 === 0 ? 'rounded-tl-4xl rounded-br-4xl' : 'rounded-tr-4xl rounded-bl-4xl'
                                             }`}
-                                        ></div>
+                                        >
+                                            {/* Overlay */}
+                                            <div
+                                                className={`absolute inset-0 -translate-x-1/4 bg-primary/50 opacity-0 transition-transform duration-500 group-hover:translate-x-0 group-hover:opacity-100 ${
+                                                    index % 2 === 0 ? 'rounded-tl-4xl rounded-br-4xl' : 'rounded-tr-4xl rounded-bl-4xl'
+                                                }`}
+                                            ></div>
 
-                                        <div className="relative z-10 flex flex-col items-center">
-                                            {program.media?.url && (
-                                                <img
-                                                    src={program.media.url}
-                                                    alt={program.title}
-                                                    className="mx-auto h-16 w-16 rounded-full border-2 border-primary object-cover p-1"
-                                                />
-                                            )}
+                                            <div className="relative z-10 flex flex-col items-center">
+                                                {program.media?.url && (
+                                                    <img
+                                                        src={program.media.url}
+                                                        alt={program.name}
+                                                        className="mx-auto h-16 w-16 rounded-full border-2 border-primary object-cover p-1"
+                                                    />
+                                                )}
 
-                                            <h3 className="mt-4 text-center text-xl font-semibold">{program.title}</h3>
-                                            <p className="mt-2 text-center text-muted-foreground">{program.description}</p>
+                                                <h3 className="mt-4 text-center text-xl font-semibold">{program.name}</h3>
+                                                <h6 className="mt-2 text-center text-secondary">{program.category?.name}</h6>
+                                                <p className="mt-2 text-center text-muted-foreground">{program.excerpt}</p>
 
-                                            {/* Shaped Button */}
-                                            <button
-                                                className="mt-4 bg-accent px-6 py-1 text-sm font-semibold text-white shadow transition-all duration-300 hover:scale-105"
-                                                style={{
-                                                    clipPath: 'polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%)',
-                                                }}
-                                            >
-                                                Show Details
-                                            </button>
+                                                {/* Shaped Button */}
+                                                <button
+                                                    className="mt-4 bg-accent px-6 py-1 text-sm font-semibold text-white shadow transition-all duration-300 hover:scale-105"
+                                                    style={{
+                                                        clipPath: 'polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%)',
+                                                    }}
+                                                >
+                                                    Show Details
+                                                </button>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 ))}
                             </div>
 
                             <div className="mt-6 text-center">
-                                <Link href="/team">
+                                <Link href="/programs">
                                     <button className="rounded bg-primary px-6 py-2 font-semibold text-white hover:bg-yellow-500">
                                         All Programs
                                     </button>
@@ -176,82 +173,92 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                             />
 
                             <div className="grid gap-10 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-                                {teams.slice(0, 3).map((member) => (
-                                    <div
-                                        key={member.id}
-                                        className="group relative overflow-hidden rounded-3xl border-2 border-card/50 bg-card p-6 text-center shadow transition-all duration-300 hover:bg-card/50"
-                                    >
-                                        {/* Image Container */}
-                                        <div className="relative mx-auto h-40 w-40 overflow-hidden rounded-full border-4 border-primary shadow-md transition-transform duration-500 group-hover:scale-105">
-                                            <img
-                                                src={member.media?.url || '/images/default-avatar.png'}
-                                                alt={member.name}
-                                                className="h-full w-full object-cover"
-                                            />
-                                        </div>
+                                {teams.slice(0, 3).map((member, index) => (
+                                    <Link key={member.id} href={`/about-us/teams/${member.id}`}>
+                                        <div
+                                            className={`group relative border-2 border-card/50 bg-card p-6 text-center shadow transition-transform duration-300 hover:-translate-y-2 ${
+                                                index % 2 === 0 ? 'rounded-tl-4xl rounded-br-4xl' : 'rounded-tr-4xl rounded-bl-4xl'
+                                            }`}
+                                        >
+                                            {/* Overlay */}
+                                            <div
+                                                className={`absolute inset-0 -translate-x-1/4 bg-secondary/50 opacity-0 transition-transform duration-500 group-hover:translate-x-0 group-hover:opacity-100 ${
+                                                    index % 2 === 0 ? 'rounded-tl-4xl rounded-br-4xl' : 'rounded-tr-4xl rounded-bl-4xl'
+                                                }`}
+                                            ></div>
 
-                                        {/* Info */}
-                                        <div className="mt-6 space-y-2">
-                                            <h3 className="text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
-                                                {member.name}
-                                            </h3>
-                                            {member.designation && (
-                                                <p className="text-sm font-medium text-muted-foreground">
-                                                    {member.designation}
-                                                    {member.department ? `, ${member.department}` : ''}
-                                                </p>
-                                            )}
-                                        </div>
+                                            {/* Image Container */}
+                                            <div className="relative mx-auto h-40 w-40 overflow-hidden rounded-full border-4 border-primary shadow-md transition-transform duration-500 group-hover:scale-105">
+                                                <img
+                                                    src={member.media?.url || '/images/default-avatar.png'}
+                                                    alt={member.name}
+                                                    className="h-full w-full object-cover"
+                                                />
+                                            </div>
 
-                                        {/* Social Links */}
-                                        <div className="mt-6 flex justify-center gap-3">
-                                            {member.facebook_links && (
-                                                <a
-                                                    href={member.facebook_links}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
-                                                >
-                                                    <i className="fab fa-facebook-f"></i>
-                                                </a>
-                                            )}
-                                            {member.linkedin_links && (
-                                                <a
-                                                    href={member.linkedin_links}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
-                                                >
-                                                    <i className="fab fa-linkedin-in"></i>
-                                                </a>
-                                            )}
-                                            {member.twitter_links && (
-                                                <a
-                                                    href={member.twitter_links}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
-                                                >
-                                                    <i className="fab fa-twitter"></i>
-                                                </a>
-                                            )}
-                                            {member.instagram_links && (
-                                                <a
-                                                    href={member.instagram_links}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
-                                                >
-                                                    <i className="fab fa-instagram"></i>
-                                                </a>
-                                            )}
+                                            {/* Info */}
+                                            <div className="relative z-10 mt-6 space-y-2">
+                                                <h3 className="text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
+                                                    {member.name}
+                                                </h3>
+                                                {member.designation && (
+                                                    <p className="text-sm font-medium text-muted-foreground">
+                                                        {member.designation}
+                                                        {member.department ? `, ${member.department}` : ''}
+                                                    </p>
+                                                )}
+                                            </div>
+
+                                            {/* Social Links */}
+                                            <div className="relative z-10 mt-6 flex justify-center gap-3">
+                                                {member.facebook_links && (
+                                                    <a
+                                                        href={member.facebook_links}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
+                                                    >
+                                                        <i className="fab fa-facebook-f"></i>
+                                                    </a>
+                                                )}
+                                                {member.linkedin_links && (
+                                                    <a
+                                                        href={member.linkedin_links}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
+                                                    >
+                                                        <i className="fab fa-linkedin-in"></i>
+                                                    </a>
+                                                )}
+                                                {member.twitter_links && (
+                                                    <a
+                                                        href={member.twitter_links}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
+                                                    >
+                                                        <i className="fab fa-twitter"></i>
+                                                    </a>
+                                                )}
+                                                {member.instagram_links && (
+                                                    <a
+                                                        href={member.instagram_links}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
+                                                    >
+                                                        <i className="fab fa-instagram"></i>
+                                                    </a>
+                                                )}
+                                            </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 ))}
                             </div>
 
                             <div className="mt-10 text-center">
-                                <Link href="/team">
+                                <Link href="/about-us/teams">
                                     <button className="rounded bg-primary px-6 py-2 font-semibold text-white hover:bg-yellow-500">All Members</button>
                                 </Link>
                             </div>
@@ -272,7 +279,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                 loop
                                 pagination={{ clickable: true }}
                                 spaceBetween={30}
-                                slidesPerView={1} // default small screens
+                                slidesPerView={1}
                                 breakpoints={{
                                     640: { slidesPerView: 1 },
                                     768: { slidesPerView: 2 },
@@ -281,16 +288,23 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                 }}
                                 className="py-8"
                             >
-                                {testimonials.map((testimonial) => (
+                                {testimonials.map((testimonial, index) => (
                                     <SwiperSlide key={testimonial.id}>
-                                        <div className="relative mx-auto max-w-xl rounded-3xl bg-card p-10 shadow transition-shadow duration-300">
-                                            <p className="mb-6 text-muted-foreground italic">"{testimonial.message}"</p>
-                                            <div className="flex flex-col items-center">
+                                        <div
+                                            className={`group relative mx-auto max-w-xl rounded-3xl bg-card p-10 shadow transition-transform duration-300 hover:shadow-lg`}
+                                        >
+                                            {/* Overlay for subtle accent */}
+                                            <div
+                                                className={`absolute inset-0 -translate-x-1/4 rounded-3xl bg-accent/20 opacity-0 transition-transform duration-500 group-hover:translate-x-0 group-hover:opacity-100`}
+                                            ></div>
+
+                                            <div className="relative z-10 flex flex-col items-center">
+                                                <p className="mb-6 text-muted-foreground italic">"{testimonial.message}"</p>
                                                 {testimonial.media?.url && (
                                                     <img
                                                         src={testimonial.media.url}
                                                         alt={testimonial.author_name}
-                                                        className="mb-2 h-20 w-20 rounded-full border-2 border-primary object-cover"
+                                                        className="mb-2 h-20 w-20 rounded-full border-2 border-primary object-cover transition-transform duration-500 group-hover:scale-105"
                                                     />
                                                 )}
                                                 <p className="text-lg font-semibold">{testimonial.author_name}</p>

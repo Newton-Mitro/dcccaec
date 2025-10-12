@@ -13,18 +13,31 @@ class Program extends Model
 
     // Make sure all fillable fields are included
     protected $fillable = [
-        'title',
+        'name',
         'slug',
-        'description',
-        'gallery',
-        'media_id',
         'category_id',
-        'status',
+        'description',
+        'excerpt',
+        'objectives',
+        'age_min',
+        'age_max',
+        'admission_form_fee',
+        'admission_fee',
+        'yearly_charge',
+        'uniform_fee',
+        'books_stationary_fee',
+        'khata_fee',
+        'monthly_fee',
+        'media_id',
+        'is_active',
+        'featured',
     ];
 
     // Cast JSON fields correctly
     protected $casts = [
-        'gallery' => 'array',
+        'monthly_fee' => 'array', // JSON column
+        'is_active' => 'boolean',
+        'featured' => 'boolean',
     ];
 
     // Relations
@@ -35,8 +48,20 @@ class Program extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->belongsTo(Category::class);
     }
+
+    /**
+     * Generate a unique slug based on name.
+     */
+    public static function generateUniqueSlug(string $name): string
+    {
+        $slug = \Str::slug($name);
+        $count = static::where('slug', 'like', "$slug%")->count();
+
+        return $count ? "{$slug}-{$count}" : $slug;
+    }
+
 
     // Factory
     protected static function newFactory()

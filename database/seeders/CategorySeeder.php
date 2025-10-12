@@ -24,6 +24,16 @@ class CategorySeeder extends Seeder
             'Article' => ['Tech Insights', 'Business Strategy', 'Lifestyle'],
             'Event' => ['Conferences', 'Workshops', 'Meetups'],
             'Notice' => ['Announcements', 'Exams', 'General Notices'],
+            'Program' => [
+                'Early Learning & Development',
+                'Arts & Expression',
+                'STEM Education',
+                'Health & Wellness',
+                'Community & Enrichment',
+                'Seasonal Activities',
+                'Early Learning',
+                'Early Education',
+            ],
         ];
 
         // Preload all available image IDs
@@ -40,10 +50,12 @@ class CategorySeeder extends Seeder
                     'category_of' => $categoryOf,
                     'name' => $name,
                     'slug' => Str::slug($name . '-' . strtolower($categoryOf)),
-                    'description' => "{$name} main category",
+                    'description' => "<p>This is the <strong>{$name}</strong> category under {$categoryOf}.</p>",
                     'media_id' => $allImages->random(),
                 ]);
             }
         }
+
+        $this->command->info('✅ All categories seeded successfully.');
     }
 }

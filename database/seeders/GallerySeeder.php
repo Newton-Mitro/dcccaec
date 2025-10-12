@@ -20,7 +20,7 @@ class GallerySeeder extends Seeder
         }
 
         // Create 5 galleries with random cover images
-        $galleries = Gallery::factory(5)->create([
+        $galleries = Gallery::factory(3)->create([
             'media_id' => function () use ($allImages) {
                 return $allImages->random();
             },

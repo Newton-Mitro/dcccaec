@@ -21,6 +21,7 @@ class PageFactory extends Factory
             'meta_description' => $this->faker->paragraph(2),
             'meta_keywords' => $this->faker->words(4, true),
             'media_id' => null,
+            'predefined' => true,
         ];
     }
 }

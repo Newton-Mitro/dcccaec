@@ -11,6 +11,7 @@ export interface Page {
     meta_description?: string | null;
     meta_keywords?: string | null;
     sections: PageSection[];
+    predefined: boolean;
     created_at: string;
     updated_at: string;
 }

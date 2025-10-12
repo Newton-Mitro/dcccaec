@@ -39,29 +39,36 @@ class ProgramController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
         $data = $request->validate([
-            'title' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
+            'slug' => 'nullable|string|unique:programs,slug',
+            'category' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'gallery' => 'nullable|array',
+            'excerpt' => 'nullable|string',
+            'objectives' => 'nullable|string',
+            'age_min' => 'nullable|integer',
+            'age_max' => 'nullable|integer',
+            'admission_form_fee' => 'nullable|string',
+            'admission_fee' => 'nullable|string',
+            'yearly_charge' => 'nullable|string',
+            'uniform_fee' => 'nullable|string',
+            'books_stationary_fee' => 'nullable|string',
+            'khata_fee' => 'nullable|string',
+            'monthly_fee' => 'nullable|array',
             'media_id' => 'nullable|exists:media,id',
-            'category_id' => 'required|exists:categories,id',
+            'is_active' => 'boolean',
+            'featured' => 'boolean',
         ]);
 
-        // Get title from request
-        $title = $request->input('title');
+        // Generate slug if not provided
+        if (empty($data['slug']) && !empty($data['name'])) {
+            $data['slug'] = Program::generateUniqueSlug($data['name']);
+        }
 
-        // Generate slug (unique)
-        $data['slug'] = $request->input('slug') ?: Program::generateUniqueSlug($title);
+        $program = Program::create($data);
 
-        // Set default status
-        $data['status'] = 'Active';
-
-        Program::create($data);
-
-        return redirect()->route('programs.index')->with('success', 'Program created.');
+        return redirect()->route('programs.index')->with('success', 'Program created successfully.');
     }
-
 
     public function show(Program $program)
     {
@@ -87,23 +94,34 @@ class ProgramController extends Controller
     public function update(Request $request, Program $program)
     {
         $data = $request->validate([
-            'title' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'slug' => 'required|string|unique:programs,slug,' . $program->id,
+            'category' => 'nullable|string|max:255',
             'description' => 'nullable|string',
-            'gallery' => 'nullable|array',
+            'excerpt' => 'nullable|string',
+            'objectives' => 'nullable|string',
+            'age_min' => 'nullable|integer',
+            'age_max' => 'nullable|integer',
+            'admission_form_fee' => 'nullable|string',
+            'admission_fee' => 'nullable|string',
+            'yearly_charge' => 'nullable|string',
+            'uniform_fee' => 'nullable|string',
+            'books_stationary_fee' => 'nullable|string',
+            'khata_fee' => 'nullable|string',
+            'monthly_fee' => 'nullable|array',
             'media_id' => 'nullable|exists:media,id',
-            'category_id' => 'required|exists:categories,id',
-            'status' => 'required|in:Active,Inactive',
+            'is_active' => 'boolean',
+            'featured' => 'boolean',
         ]);
 
         $program->update($data);
 
-        return redirect()->route('programs.index')->with('success', 'Program updated.');
+        return redirect()->route('programs.index')->with('success', 'Program updated successfully.');
     }
 
     public function destroy(Program $program)
     {
         $program->delete();
-        return redirect()->route('programs.index')->with('success', 'Program deleted.');
+        return redirect()->route('programs.index')->with('success', 'Program deleted successfully.');
     }
 }

@@ -42,6 +42,7 @@ class CustomPageSeeder extends Seeder
 
       'Our Story' => [
         [
+          'excerpt' => 'At Dhaka Credit Child Care and Education Center, we nurture every child in a safe, inclusive, and inspiring environment. Recognizing each child’s uniqueness, we work closely with parents to create programs that spark curiosity, creativity, and meaningful social connections. Our mission is to provide a supportive space that promotes holistic growth, helping children thrive emotionally, socially, and academically, while prioritizing safety, health, and positivity.',
           'heading' => 'Our Story',
           'sub_heading' => 'How we started',
           'content_type' => 'HTML',
@@ -652,13 +653,14 @@ class CustomPageSeeder extends Seeder
 
     foreach ($pages as $title => $sections) {
       $slug = Str::slug($title);
+      $excerpt = isset($sections[0]['excerpt']) ? $sections[0]['excerpt'] : $this->faker->paragraph(2);
 
       $page = Page::firstOrCreate(
         ['slug' => $slug],
         [
           'title' => $title,
           'meta_title' => $title,
-          'meta_description' => "{$title} page description",
+          'meta_description' => $excerpt,
           'meta_keywords' => Str::lower(str_replace(' ', ',', $title)),
           'media_id' => $allImages->random()->id ?? null,
         ]

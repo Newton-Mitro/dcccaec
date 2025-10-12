@@ -19,7 +19,7 @@ class TestimonialSeeder extends Seeder
         }
 
         // Create 11 testimonials with random media IDs
-        Testimonial::factory(11)->create([
+        Testimonial::factory(4)->create([
             'media_id' => function () use ($allImages) {
                 return $allImages->random();
             },

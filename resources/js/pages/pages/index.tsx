@@ -1,6 +1,6 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Head, Link } from '@inertiajs/react';
-import { Eye, Pencil } from 'lucide-react';
+import { Eye, Pencil, Trash2 } from 'lucide-react';
 import React from 'react';
 import HeadingSmall from '../../components/heading-small';
 import AppLayout from '../../layouts/app-layout';
@@ -79,6 +79,19 @@ const Index: React.FC<PageProps> = ({ pages }) => {
                                                     </TooltipTrigger>
                                                     <TooltipContent>Edit</TooltipContent>
                                                 </Tooltip>
+                                                {page.predefined === false && (
+                                                    <Tooltip>
+                                                        <TooltipTrigger asChild>
+                                                            <Link
+                                                                href={route('pages.destroy', page.id)}
+                                                                className="text-orange-600 hover:text-orange-800 dark:text-orange-400 dark:hover:text-orange-300"
+                                                            >
+                                                                <Trash2 className="h-5 w-5" />
+                                                            </Link>
+                                                        </TooltipTrigger>
+                                                        <TooltipContent>Delete</TooltipContent>
+                                                    </Tooltip>
+                                                )}
                                             </div>
                                         </TooltipProvider>
                                     </td>

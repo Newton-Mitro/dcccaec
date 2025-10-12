@@ -29,7 +29,7 @@ class TeamSeeder extends Seeder
             return;
         }
 
-        $teamCount = 8;
+        $teamCount = 3;
         for ($i = 0; $i < $teamCount; $i++) {
             Team::factory()->create(
                 [

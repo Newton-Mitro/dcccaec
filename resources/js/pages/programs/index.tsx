@@ -9,14 +9,14 @@ import { BreadcrumbItem } from '../../types';
 import { PaginationLink } from '../../types/pagination_link';
 import { Program } from '../../types/program';
 
-interface ServiceProps {
+interface ProgramProps {
     programs: {
         data: Program[];
         links: PaginationLink[];
     };
 }
 
-const Index: React.FC<ServiceProps> = ({ programs }) => {
+const Index: React.FC<ProgramProps> = ({ programs }) => {
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Dashboard', href: '/dashboard' },
         { title: 'Programs', href: route('programs.index') },
@@ -56,17 +56,19 @@ const Index: React.FC<ServiceProps> = ({ programs }) => {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Programs" />
-            <div className="p-6">
-                <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row">
+            <div className="space-y-6 p-6">
+                {/* Header */}
+                <div className="flex flex-col items-start justify-between gap-2 sm:flex-row">
                     <HeadingSmall title="Programs" description="Manage your programs" />
                     <Link
                         href={route('programs.create')}
-                        className="inline-block rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700"
+                        className="inline-block rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-blue-700"
                     >
                         Create Program
                     </Link>
                 </div>
 
+                {/* Table */}
                 <div className="h-[calc(100vh-250px)] overflow-auto rounded border border-gray-200 dark:border-gray-700">
                     <table className="w-full border-collapse">
                         <thead className="sticky top-0 hidden bg-gray-50 md:table-header-group dark:bg-gray-800">
@@ -86,13 +88,13 @@ const Index: React.FC<ServiceProps> = ({ programs }) => {
                                     {/* Title */}
                                     <td className="px-2 py-1">
                                         <label className="font-semibold text-gray-700 md:hidden dark:text-gray-300">Title</label>
-                                        <p className="text-gray-900 dark:text-gray-100">{program.title}</p>
+                                        <p className="text-gray-900 dark:text-gray-100">{program.name}</p>
                                     </td>
 
                                     {/* Status */}
                                     <td className="px-2 py-1">
                                         <label className="font-semibold text-gray-700 md:hidden dark:text-gray-300">Status</label>
-                                        <p className="text-gray-900 dark:text-gray-100">{program.status}</p>
+                                        <p className="text-gray-900 dark:text-gray-100">{program.is_active ? 'Active' : 'Inactive'}</p>
                                     </td>
 
                                     {/* Actions */}

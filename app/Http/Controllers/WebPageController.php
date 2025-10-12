@@ -24,7 +24,7 @@ class WebPageController extends Controller
             ->orderBy('sort_order')
             ->get();
         $teams = Team::where('status', 'Active')->with('media')->orderBy('sort_order')->take(5)->get();
-        $programs = Program::where('status', 'Active')->with(['media'])->orderBy('sort_order')->take(3)->get();
+        $programs = Program::where('is_active', true)->with(['media', 'category'])->orderBy('sort_order')->take(3)->get();
         $testimonials = Testimonial::where('status', 'Active')->with('media')->orderBy('sort_order')->take(5)->get();
         $awards = Award::where('status', 'Active')->with('media')->orderBy('sort_order')->take(5)->get();
         $notices = Notice::where('status', 'Active')->orderBy('sort_order')->take(5)->get();

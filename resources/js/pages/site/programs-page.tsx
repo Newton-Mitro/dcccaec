@@ -2,7 +2,7 @@ import { Head, Link } from '@inertiajs/react';
 import PageLayout from '../../layouts/page-layout';
 import { Program } from '../../types/program';
 import PageBanner from './components/page-banner';
-import ServiceCard from './components/service-card';
+import ProgramCard from './components/program-card';
 
 interface ServicePageProps {
     programs: Program[];
@@ -22,7 +22,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ programs }) => {
                         <div className="mt-12 flex flex-col md:gap-36">
                             {programs.map((program, index) => (
                                 <Link key={program.id} href={route('site.programs.show', program.id)} className="">
-                                    <ServiceCard key={program.id} program={program} index={index} />
+                                    <ProgramCard key={program.id} program={program} index={index} />
                                 </Link>
                             ))}
                         </div>

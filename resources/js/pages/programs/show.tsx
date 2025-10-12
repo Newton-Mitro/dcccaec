@@ -10,25 +10,24 @@ interface Props {
 }
 
 export default function Show({ program }: Props) {
-    console.log(program);
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Dashboard', href: '/dashboard' },
         { title: 'Programs', href: route('programs.index') },
-        { title: program.title, href: '' },
+        { title: program.name, href: '' },
     ];
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title={program.title} />
+            <Head title={program.name} />
             <div className="container-custom w-full space-y-6 p-6">
-                <HeadingSmall title={program.title} description={program.slug} />
+                <HeadingSmall title={program.name} description={program.slug} />
 
                 {/* Top section: main image + summary info */}
                 <div className="space-y-4">
                     {program.media && (
                         <img
                             src={program.media.url}
-                            alt={program.title}
+                            alt={program.name}
                             style={{
                                 clipPath: 'polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%)',
                             }}
@@ -38,24 +37,56 @@ export default function Show({ program }: Props) {
 
                     <div className="text-gray-700 dark:text-gray-300">
                         <div className="mb-1 text-sm text-gray-500 dark:text-gray-400">Status</div>
-                        <div className="">
-                            <Badge variant={program.status === 'Active' ? 'default' : 'secondary'} className="mb-3 rounded-xl">
-                                {program.status}
-                            </Badge>
-                        </div>
+                        <Badge variant={program.is_active ? 'default' : 'secondary'} className="mb-3 rounded-xl">
+                            {program.is_active ? 'Active' : 'Inactive'}
+                        </Badge>
+
+                        <div className="mb-1 text-sm text-gray-500 dark:text-gray-400">Featured</div>
+                        <Badge variant={program.featured ? 'default' : 'secondary'} className="mb-3 rounded-xl">
+                            {program.featured ? 'Yes' : 'No'}
+                        </Badge>
                     </div>
 
+                    {/* Excerpt and Objectives */}
+                    {program.excerpt && <p className="text-gray-600 dark:text-gray-400">{program.excerpt}</p>}
+                    {program.objectives && <p className="text-gray-600 dark:text-gray-400">Objectives: {program.objectives}</p>}
+
+                    {/* Description */}
                     <div
                         className="prose prose-sm max-w-none text-muted-foreground [&_h1,h2,h3,h4,h5,h6]:text-foreground [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500"
                         dangerouslySetInnerHTML={{ __html: program.description || '-' }}
                     />
+
+                    {/* Monthly Fees */}
+                    {program.monthly_fee && Object.keys(program.monthly_fee).length > 0 && (
+                        <div className="mt-4">
+                            <h3 className="mb-2 font-semibold">Monthly Fees</h3>
+                            <ul className="list-disc pl-6">
+                                {Object.entries(program.monthly_fee).map(([level, fee]) => (
+                                    <li key={level}>
+                                        {level}: ${fee}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+
+                    {/* Extra Fees */}
+                    <div className="mt-4 space-y-1">
+                        {program.admission_form_fee && <p>Admission Form Fee: {program.admission_form_fee}</p>}
+                        {program.admission_fee && <p>Admission Fee: {program.admission_fee}</p>}
+                        {program.yearly_charge && <p>Yearly Charge: {program.yearly_charge}</p>}
+                        {program.uniform_fee && <p>Uniform Fee: {program.uniform_fee}</p>}
+                        {program.books_stationary_fee && <p>Books & Stationary Fee: {program.books_stationary_fee}</p>}
+                        {program.khata_fee && <p>Khata Fee: {program.khata_fee}</p>}
+                    </div>
                 </div>
 
                 {/* Icon Media */}
-                {program.icon_media && (
+                {program.media && (
                     <div className="mt-4">
-                        <h3 className="mb-2 font-semibold">Icon</h3>
-                        <img src={program.icon_media.url} alt="Icon" className="h-24 w-24 rounded object-cover" />
+                        <h3 className="mb-2 font-semibold">Icon / Main Image</h3>
+                        <img src={program.media.url} alt="Icon" className="h-24 w-24 rounded object-cover" />
                     </div>
                 )}
 
