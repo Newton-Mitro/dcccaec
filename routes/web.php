@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HolidayController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\LeaderController;
 use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebPageController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
@@ -26,10 +28,14 @@ use App\Http\Controllers\ContactMessageController;
 
 
 Route::get('/', [WebPageController::class, 'home'])->name('site.home');
-Route::get('/parents/{slug}', [WebPageController::class, 'page'])->name('site.single-page');
+
+Route::get('/parents/curriculum', [WebPageController::class, 'curriculumPage'])->name('site.curriculum');
+Route::get('/parents/enrollment', [WebPageController::class, 'enrollmentPage'])->name('site.enrollment');
+Route::get('/parents/class-rutines', [WebPageController::class, 'classRoutinesPage'])->name('site.class-routines');
+Route::get('/parents/health-safety', [WebPageController::class, 'healthAndSefetyPage'])->name('site.health-and-safety');
+Route::get('/parents/nutrition-meals', [WebPageController::class, 'nutritionAndMealsPage'])->name('site.nutrition-and-meals');
+
 Route::get('/about-us', [WebPageController::class, 'about'])->name('site.about');
-Route::get('/contact-us', [WebPageController::class, 'contact'])->name('site.contact');
-Route::post('/contact', [WebPageController::class, 'sendMessage'])->name('site.send-message');
 Route::get('/about-us/teams', [WebPageController::class, 'teams'])->name('site.teams');
 Route::get('/about-us/principal-message', [WebPageController::class, 'principalMessage'])->name('site.principal-message');
 Route::get('/about-us/president-message', [WebPageController::class, 'presidentMessage'])->name('site.president-message');
@@ -37,6 +43,9 @@ Route::get('/about-us/teams/{team}', [WebPageController::class, 'showTeam'])->na
 Route::get('/about-us/our-story', [WebPageController::class, 'ourStory'])->name('site.our-story');
 Route::get('/about-us/mission-vision', [WebPageController::class, 'missionVision'])->name('site.mission-vision');
 Route::get('/about-us/our-philosophy', [WebPageController::class, 'ourPhilosophy'])->name('site.our-philosophy');
+
+Route::get('/contact-us', [WebPageController::class, 'contact'])->name('site.contact');
+Route::post('/contact', [WebPageController::class, 'sendMessage'])->name('site.send-message');
 Route::get('/faq', [WebPageController::class, 'faq'])->name('site.faq');
 Route::get('/disclaimer', [WebPageController::class, 'disclaimer'])->name('site.disclaimer');
 Route::get('/privacy-policy', [WebPageController::class, 'privacyPolicy'])->name('site.privacy-policy');
@@ -87,6 +96,6 @@ Route::prefix('admin')
         Route::resource('visitors', VisitorController::class);
         Route::resource('careers', CareerController::class);
         Route::resource('job-applications', JobApplicationController::class);
-        // Users
-        // Route::resource('users', UserController::class);
+        Route::resource('holidays', HolidayController::class);
+        Route::resource('users', UserController::class);
     });

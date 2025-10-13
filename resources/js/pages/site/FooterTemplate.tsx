@@ -87,16 +87,16 @@ function FooterTemplate() {
                     <div className="flex flex-col items-center space-y-4 text-center md:items-start md:text-left">
                         <h2 className="mb-2 text-lg font-semibold text-foreground">Follow Us</h2>
                         <div className="flex gap-4 text-xl">
-                            <a href="#" className="transition-colors hover:text-accent-foreground">
+                            <a href={settings.facebook || '#'} target="_blank" className="transition-colors hover:text-accent-foreground">
                                 <i className="fa-brands fa-facebook-f"></i>
                             </a>
-                            <a href="#" className="transition-colors hover:text-accent-foreground">
+                            <a href={settings.twitter || '#'} target="_blank" className="transition-colors hover:text-accent-foreground">
                                 <i className="fa-brands fa-twitter"></i>
                             </a>
-                            <a href="#" className="transition-colors hover:text-accent-foreground">
+                            <a href={settings.instagram || '#'} target="_blank" className="transition-colors hover:text-accent-foreground">
                                 <i className="fa-brands fa-instagram"></i>
                             </a>
-                            <a href="#" className="transition-colors hover:text-accent-foreground">
+                            <a href={settings.youtube || '#'} target="_blank" className="transition-colors hover:text-accent-foreground">
                                 <i className="fa-brands fa-youtube"></i>
                             </a>
                         </div>

@@ -188,8 +188,6 @@ const Index: React.FC<PageProps> = ({ mediaItems, filters }) => {
                             { value: 'videos', label: 'Videos' },
                             { value: 'audio', label: 'Audio' },
                             { value: 'pdf', label: 'PDFs' },
-                            { value: 'docs', label: 'Word/Excel/PowerPoint' },
-                            { value: 'archives', label: 'Archives' },
                         ]}
                     />
                 </div>

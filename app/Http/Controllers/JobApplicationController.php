@@ -51,9 +51,6 @@ class JobApplicationController extends Controller
             ->with('success', 'Application deleted.');
     }
 
-    /**
-     * Update the status of a job application.
-     */
     public function updateStatus(Request $request, JobApplication $jobApplication)
     {
         $data = $request->validate([

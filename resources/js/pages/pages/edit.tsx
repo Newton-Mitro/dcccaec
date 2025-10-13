@@ -317,6 +317,11 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
                                     <Label>Content</Label>
                                     <CKEditor
                                         editor={ClassicEditor as any}
+                                        config={
+                                            {
+                                                contentClass: 'prose dark:prose-invert max-w-full',
+                                            } as any
+                                        }
                                         data={section.content || ''}
                                         onChange={(_, editor) => updateSectionField(index, 'content', editor.getData())}
                                     />
@@ -353,7 +358,13 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
                         </div>
                     </div>
 
-                    <MediaBrowserModal isOpen={mediaModalOpen} onClose={() => setMediaModalOpen(false)} media={media} onSelect={handleMediaSelect} />
+                    <MediaBrowserModal
+                        actionType="edit"
+                        isOpen={mediaModalOpen}
+                        onClose={() => setMediaModalOpen(false)}
+                        media={media}
+                        onSelect={handleMediaSelect}
+                    />
                 </form>
             </div>
         </AppLayout>

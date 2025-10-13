@@ -52,10 +52,7 @@ export default function Show({ program }: Props) {
                     {program.objectives && <p className="text-gray-600 dark:text-gray-400">Objectives: {program.objectives}</p>}
 
                     {/* Description */}
-                    <div
-                        className="prose prose-sm max-w-none text-muted-foreground [&_h1,h2,h3,h4,h5,h6]:text-foreground [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500"
-                        dangerouslySetInnerHTML={{ __html: program.description || '-' }}
-                    />
+                    <div className="prose max-w-full dark:prose-invert" dangerouslySetInnerHTML={{ __html: program.description || '-' }} />
 
                     {/* Monthly Fees */}
                     {program.monthly_fee && Object.keys(program.monthly_fee).length > 0 && (

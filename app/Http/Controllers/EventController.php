@@ -25,9 +25,26 @@ class EventController extends Controller
 
     public function create(Request $request)
     {
-        $perPage = $request->input('perPage', 10);
-
-        $media = Media::latest()->paginate($perPage)->withQueryString();
+        $perPage = $request->input('perPage', 20);
+        $type = $request->input('type', 'all');
+        $query = Media::query();
+        if ($type !== 'all') {
+            switch ($type) {
+                case 'images':
+                    $query->where('file_type', 'like', 'image/%');
+                    break;
+                case 'videos':
+                    $query->where('file_type', 'like', 'video/%');
+                    break;
+                case 'audio':
+                    $query->where('file_type', 'like', 'audio/%');
+                    break;
+                case 'pdf':
+                    $query->where('file_type', 'application/pdf');
+                    break;
+            }
+        }
+        $media = $query->latest()->paginate($perPage)->withQueryString();
 
         return Inertia::render('events/create', [
             'media' => $media,
@@ -61,9 +78,26 @@ class EventController extends Controller
 
     public function edit(Event $event, Request $request)
     {
-        $perPage = $request->input('perPage', 10);
-
-        $media = Media::latest()->paginate($perPage)->withQueryString();
+        $perPage = $request->input('perPage', 20);
+        $type = $request->input('type', 'all');
+        $query = Media::query();
+        if ($type !== 'all') {
+            switch ($type) {
+                case 'images':
+                    $query->where('file_type', 'like', 'image/%');
+                    break;
+                case 'videos':
+                    $query->where('file_type', 'like', 'video/%');
+                    break;
+                case 'audio':
+                    $query->where('file_type', 'like', 'audio/%');
+                    break;
+                case 'pdf':
+                    $query->where('file_type', 'application/pdf');
+                    break;
+            }
+        }
+        $media = $query->latest()->paginate($perPage)->withQueryString();
 
         return Inertia::render('events/edit', [
             'event' => $event->load('media'),

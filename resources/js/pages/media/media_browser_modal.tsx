@@ -7,13 +7,14 @@ import { Media } from '../../types/media';
 import { PaginatedData } from '../../types/paginated_meta';
 
 interface MediaBrowserModalProps {
+    actionType: 'create' | 'edit';
     isOpen: boolean;
     onClose: () => void;
     media: PaginatedData<Media>;
     onSelect: (media: Media) => void;
 }
 
-const MediaBrowserModal: React.FC<MediaBrowserModalProps> = ({ isOpen, onClose, media, onSelect }) => {
+const MediaBrowserModal: React.FC<MediaBrowserModalProps> = ({ actionType, isOpen, onClose, media, onSelect }) => {
     const [filter, setFilter] = useState<string>('all');
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [uploading, setUploading] = useState(false);
@@ -119,7 +120,7 @@ const MediaBrowserModal: React.FC<MediaBrowserModalProps> = ({ isOpen, onClose, 
                         value={filter}
                         onChange={(e) => {
                             setFilter(e.target.value);
-                            router.get(`/admin/pages/1/edit?type=${e.target.value}`, {}, { preserveScroll: true, preserveState: true });
+                            router.get(`${actionType}`, { type: e.target.value }, { preserveScroll: true, preserveState: true });
                         }}
                         className="w-64 rounded border px-2 text-sm dark:bg-gray-800 dark:text-gray-100"
                         options={[
@@ -128,8 +129,6 @@ const MediaBrowserModal: React.FC<MediaBrowserModalProps> = ({ isOpen, onClose, 
                             { value: 'videos', label: 'Videos' },
                             { value: 'audio', label: 'Audio' },
                             { value: 'pdf', label: 'PDFs' },
-                            { value: 'docs', label: 'Word/Excel/PowerPoint' },
-                            { value: 'archives', label: 'Archives' },
                         ]}
                     />
                 </div>
@@ -178,6 +177,8 @@ const MediaBrowserModal: React.FC<MediaBrowserModalProps> = ({ isOpen, onClose, 
                                     : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'
                             } disabled:opacity-50`}
                             onClick={() => {
+                                if (!link.url) return;
+                                console.log(link);
                                 if (link.url) router.get(link.url, {}, { preserveScroll: true, preserveState: true });
                             }}
                             dangerouslySetInnerHTML={{ __html: link.label }}

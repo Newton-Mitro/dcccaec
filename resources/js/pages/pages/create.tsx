@@ -109,10 +109,10 @@ const Create: React.FC<CreateProps> = ({ media }) => {
                 button_text: '',
                 button_link: '',
                 content: '',
-                gallery: [],
+                gallery: '',
                 media_id: null,
                 media: null,
-                content_type: 'custom_html',
+                content_type: 'HTML',
                 sort_order: prev.length + 1,
             },
         ]);
@@ -316,6 +316,11 @@ const Create: React.FC<CreateProps> = ({ media }) => {
                                     <Label>Content</Label>
                                     <CKEditor
                                         editor={ClassicEditor as any}
+                                        config={
+                                            {
+                                                contentClass: 'prose dark:prose-invert max-w-full',
+                                            } as any
+                                        }
                                         data={section.content || ''}
                                         onChange={(_, editor) => updateSectionField(index, 'content', editor.getData())}
                                     />
@@ -353,7 +358,13 @@ const Create: React.FC<CreateProps> = ({ media }) => {
                     </div>
                 </form>
 
-                <MediaBrowserModal isOpen={mediaModalOpen} onClose={() => setMediaModalOpen(false)} media={media} onSelect={handleMediaSelect} />
+                <MediaBrowserModal
+                    actionType="create"
+                    isOpen={mediaModalOpen}
+                    onClose={() => setMediaModalOpen(false)}
+                    media={media}
+                    onSelect={handleMediaSelect}
+                />
             </div>
         </AppLayout>
     );

@@ -72,13 +72,13 @@ export default function Show({ team }: ShowProps) {
                     {/* Right: Bio & Message */}
                     <div className="flex-1 space-y-4 text-gray-700 dark:text-gray-300">
                         {team.bio && (
-                            <div className="prose rounded-lg bg-gray-50 p-4 shadow-sm dark:bg-gray-800 dark:prose-invert">
+                            <div className="prose max-w-full dark:prose-invert">
                                 <strong>Bio:</strong>
                                 <div dangerouslySetInnerHTML={{ __html: team.bio }} />
                             </div>
                         )}
                         {team.message && (
-                            <div className="prose rounded-lg bg-gray-50 p-4 shadow-sm dark:bg-gray-800 dark:prose-invert">
+                            <div className="prose max-w-full dark:prose-invert">
                                 <strong>Message:</strong>
                                 <div dangerouslySetInnerHTML={{ __html: team.message }} />
                             </div>

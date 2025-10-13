@@ -83,6 +83,11 @@ export default function Create({ media }: CreateProps) {
                         <Label>Message</Label>
                         <CKEditor
                             editor={ClassicEditor as any}
+                            config={
+                                {
+                                    contentClass: 'prose dark:prose-invert max-w-full',
+                                } as any
+                            }
                             data={form.message}
                             onChange={(_, editor) => setForm({ ...form, message: editor.getData() })}
                         />
@@ -147,6 +152,7 @@ export default function Create({ media }: CreateProps) {
 
                 {/* Media Modal */}
                 <MediaBrowserModal
+                    actionType="create"
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
                     media={media}

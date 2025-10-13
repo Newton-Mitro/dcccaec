@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Core\Utils\SlugHelper;
 use App\Http\Requests\StorePageRequest;
-use App\Http\Requests\UpdatePageRequest;
 use App\Infrastructure\Models\Page;
 use App\Infrastructure\Models\Media;
 use App\Infrastructure\Models\PageSection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Http\RedirectResponse;
@@ -28,8 +25,26 @@ class PageController extends Controller
 
     public function create(Request $request): Response
     {
-        $perPage = $request->input('perPage', 10);
-        $media = Media::latest()->paginate($perPage)->withQueryString();
+        $perPage = $request->input('perPage', 20);
+        $type = $request->input('type', 'all');
+        $query = Media::query();
+        if ($type !== 'all') {
+            switch ($type) {
+                case 'images':
+                    $query->where('file_type', 'like', 'image/%');
+                    break;
+                case 'videos':
+                    $query->where('file_type', 'like', 'video/%');
+                    break;
+                case 'audio':
+                    $query->where('file_type', 'like', 'audio/%');
+                    break;
+                case 'pdf':
+                    $query->where('file_type', 'application/pdf');
+                    break;
+            }
+        }
+        $media = $query->latest()->paginate($perPage)->withQueryString();
 
         return Inertia::render('pages/create', [
             'media' => $media
@@ -75,44 +90,26 @@ class PageController extends Controller
 
     public function edit(Page $page, Request $request): Response
     {
-        $perPage = $request->input('perPage', 10);
-        $filter = $request->input('type', 'all');
-
-        $mediaQuery = Media::latest();
-
-        switch ($filter) {
-            case 'images':
-                $mediaQuery->where('file_type', 'like', 'image/%');
-                break;
-            case 'videos':
-                $mediaQuery->where('file_type', 'like', 'video/%');
-                break;
-            case 'audio':
-                $mediaQuery->where('file_type', 'like', 'audio/%');
-                break;
-            case 'pdf':
-                $mediaQuery->where('file_type', 'application/pdf');
-                break;
-            case 'docs':
-                $mediaQuery->where(function ($q) {
-                    $q->where('file_type', 'like', '%word%')
-                        ->orWhere('file_type', 'like', '%excel%')
-                        ->orWhere('file_type', 'like', '%presentation%')
-                        ->orWhere('file_type', 'like', '%powerpoint%');
-                });
-                break;
-            case 'archives':
-                $mediaQuery->where(function ($q) {
-                    $q->where('file_type', 'like', '%zip%')
-                        ->orWhere('file_type', 'like', '%rar%')
-                        ->orWhere('file_type', 'like', '%tar%')
-                        ->orWhere('file_type', 'like', '%gzip%')
-                        ->orWhere('file_type', 'like', '%7z%');
-                });
-                break;
+        $perPage = $request->input('perPage', 20);
+        $type = $request->input('type', 'all');
+        $query = Media::query();
+        if ($type !== 'all') {
+            switch ($type) {
+                case 'images':
+                    $query->where('file_type', 'like', 'image/%');
+                    break;
+                case 'videos':
+                    $query->where('file_type', 'like', 'video/%');
+                    break;
+                case 'audio':
+                    $query->where('file_type', 'like', 'audio/%');
+                    break;
+                case 'pdf':
+                    $query->where('file_type', 'application/pdf');
+                    break;
+            }
         }
-
-        $media = $mediaQuery->paginate($perPage)->withQueryString();
+        $media = $query->latest()->paginate($perPage)->withQueryString();
 
         $sections = PageSection::with('media')
             ->where('page_id', $page->id)
@@ -124,7 +121,7 @@ class PageController extends Controller
             'sections' => $sections,
             'media' => $media,
             'filters' => [
-                'type' => $filter,
+                'type' => $type,
                 'perPage' => $perPage,
             ],
         ]);

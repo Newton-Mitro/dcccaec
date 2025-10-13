@@ -84,6 +84,11 @@ export default function Edit({ testimonial, media }: EditProps) {
                         <Label>Message</Label>
                         <CKEditor
                             editor={ClassicEditor as any}
+                            config={
+                                {
+                                    contentClass: 'prose dark:prose-invert max-w-full',
+                                } as any
+                            }
                             data={form.message}
                             onChange={(_, editor) => setForm({ ...form, message: editor.getData() })}
                         />
@@ -136,6 +141,7 @@ export default function Edit({ testimonial, media }: EditProps) {
 
                 {/* Media Modal */}
                 <MediaBrowserModal
+                    actionType="edit"
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
                     media={media}

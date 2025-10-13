@@ -143,6 +143,7 @@ export default function Create({ media, categories }: CreateProps) {
                 </form>
 
                 <MediaBrowserModal
+                    actionType="create"
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
                     media={media}

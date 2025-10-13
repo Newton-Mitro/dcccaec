@@ -1,6 +1,7 @@
+import { usePage } from '@inertiajs/react';
 import { ArrowUp } from 'lucide-react';
 import { type ReactNode, useEffect, useState } from 'react';
-import { FaFacebookF, FaTwitter, FaWhatsapp, FaYoutube } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import FooterTemplate from '../pages/site/FooterTemplate';
 import Navigation from '../pages/site/Navigation';
 
@@ -11,6 +12,7 @@ interface PageLayoutProps {
 export default function PageLayout({ children, ...props }: PageLayoutProps) {
     const [showButton, setShowButton] = useState(false);
     const [showModal, setShowModal] = useState(false);
+    const { settings } = usePage().props as any;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -46,10 +48,10 @@ export default function PageLayout({ children, ...props }: PageLayoutProps) {
             {/* Fixed Social Icons */}
             <div className="fixed top-1/2 right-4 z-40 -translate-y-1/2 space-y-4">
                 {[
-                    { href: 'https://facebook.com', icon: <FaFacebookF />, label: 'Facebook', color: 'text-blue-500' },
-                    { href: 'https://twitter.com', icon: <FaTwitter />, label: 'Twitter', color: 'text-sky-400' },
-                    { href: 'https://wa.me', icon: <FaWhatsapp />, label: 'WhatsApp', color: 'text-green-500' },
-                    { href: 'https://youtube.com', icon: <FaYoutube />, label: 'YouTube', color: 'text-red-500' },
+                    { href: settings.facebook || '#', icon: <FaFacebookF />, label: 'Facebook', color: 'text-blue-500' },
+                    { href: settings.twitter || '#', icon: <FaTwitter />, label: 'Twitter', color: 'text-sky-400' },
+                    { href: settings.instagram || '#', icon: <FaInstagram />, label: 'WhatsApp', color: 'text-green-500' },
+                    { href: settings.youtube || '#', icon: <FaYoutube />, label: 'YouTube', color: 'text-red-500' },
                 ].map((item, idx) => (
                     <a
                         key={idx}
@@ -94,16 +96,31 @@ export default function PageLayout({ children, ...props }: PageLayoutProps) {
 
             {/* Simple Modal */}
             {showModal && (
-                <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60">
-                    <div className="relative w-[50%] rounded-lg p-6 text-center">
-                        <img src="/images/bird.gif" alt="bird" className="absolute top-0 right-[40%] w-40 -translate-y-16" />
-                        <div>
-                            <button onClick={() => setShowModal(false)} className="absolute top-10 right-10">
-                                <i className="fa-solid fa-xmark text-3xl transition-all duration-300 hover:text-accent"></i>
-                            </button>
-                        </div>
-                        <div className="rounded-2xl bg-card p-6">
-                            <img src="./images/ads.jpg" alt="Logo" className="w-full rounded" />
+                <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+                    <div className="relative w-[90%] max-w-xl rounded-3xl bg-card/50 p-8">
+                        {/* Decorative GIF */}
+
+                        {/* Close Button */}
+                        <button
+                            onClick={() => setShowModal(false)}
+                            className="absolute top-4 right-4 text-gray-500 transition-colors hover:text-accent"
+                        >
+                            <i className="fa-solid fa-xmark text-2xl"></i>
+                        </button>
+
+                        {/* Content */}
+                        <div className="my-12 flex flex-col items-center space-y-4 text-center">
+                            <img src="/images/bird.gif" alt="bird" className="w-40" />
+                            <h2 className="text-3xl font-bold text-foreground">Admissions Going On!</h2>
+                            <p className="text-sm text-muted-foreground">
+                                Don’t miss the chance to join our upcoming session. Apply now to secure your spot.
+                            </p>
+                            <a
+                                href="/parents/enrollment"
+                                className="hover:bg-accent-dark inline-block rounded-full bg-accent px-6 py-3 font-semibold text-white shadow-lg transition-all hover:scale-105"
+                            >
+                                View Details
+                            </a>
                         </div>
                     </div>
                 </div>

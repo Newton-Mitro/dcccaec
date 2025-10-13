@@ -89,6 +89,7 @@ export default function Edit({ partner, media }: EditProps) {
 
                 {/* Media Modal */}
                 <MediaBrowserModal
+                    actionType="edit"
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
                     media={media}

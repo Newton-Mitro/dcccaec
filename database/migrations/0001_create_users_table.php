@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('headline')->nullable(); // short about
             $table->text('bio')->nullable();
             $table->json('settings')->nullable();
-            $table->enum('role', ['CUSTOMER', 'STUDENT', 'INSTRUCTOR', 'DOCTOR', 'ADMIN'])->default('CUSTOMER');
+            $table->enum('role', ['VISITOR', 'EDITOR', 'ADMIN'])->default('VISITOR');
             $table->rememberToken();
             $table->timestamps();
         });

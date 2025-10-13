@@ -27,10 +27,7 @@ const ImageContentBlock: React.FC<ImageContentBlockProps> = ({ heading, sub_head
                     {sub_heading && <h3 className="mb-2 text-muted-foreground">{sub_heading}</h3>}
                     {heading && <div className="mx-auto mb-8 h-1 w-16 bg-secondary md:mx-0"></div>}
                 </div>
-                <div
-                    className="prose prose-sm max-w-none text-muted-foreground [&_h1,h2,h3,h4,h5,h6]:text-foreground [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500"
-                    dangerouslySetInnerHTML={{ __html: content || '' }}
-                />
+                <div className="prose max-w-full dark:prose-invert" dangerouslySetInnerHTML={{ __html: content || '' }} />
             </div>
         </div>
     );

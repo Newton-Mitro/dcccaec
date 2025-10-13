@@ -40,7 +40,7 @@ const NoticesPage: React.FC<NoticesPageProps> = ({ notices }) => {
                                                     <h3 className="mb-2 text-xl font-bold text-card-foreground">{notice.title}</h3>
                                                     {notice.content && (
                                                         <div
-                                                            className="prose prose-sm max-w-none dark:prose-invert [&_h1,h2,h3,h4,h5,h6]:text-foreground [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500"
+                                                            className="prose max-w-full dark:prose-invert"
                                                             dangerouslySetInnerHTML={{ __html: notice.content ?? '' }}
                                                         />
                                                     )}

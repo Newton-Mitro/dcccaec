@@ -1,11 +1,10 @@
 import { Head } from '@inertiajs/react';
 import PageLayout from '../../layouts/page-layout';
 import { Page } from '../../types/page';
-import ImageWrappedContentSection from './components/image-wrapped-content-section';
+import ImageContentBlock from './components/image-content-block';
 import PageBanner from './components/page-banner';
 import RenderSectionContent from './components/render-section-content';
 import SectionGallery from './components/section-gallery';
-import SectionHeader from './components/section-header';
 
 interface AboutPageProps {
     page: Page;
@@ -46,8 +45,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ page }) => {
             </Head>
             <PageLayout>
                 {/* Hero */}
-                <PageBanner title={page?.title} />
-
+                <PageBanner title={page.title} subtitle="How We Started and Our Mission to Help You" />
                 <div className="container-custom mx-auto my-16 w-full space-y-14 p-6">
                     {page.sections.length > 0 ? (
                         <div className="">
@@ -56,13 +54,13 @@ const AboutPage: React.FC<AboutPageProps> = ({ page }) => {
                                 .map((section, index) => (
                                     <div key={section.id || index} className="">
                                         {/* Section Heading */}
-                                        <SectionHeader heading={section?.heading} sub_heading={section?.sub_heading} />
 
-                                        <ImageWrappedContentSection
-                                            mediaUrl={section.media?.url}
-                                            mimeType={section.media?.file_type}
-                                            contentHtml={section.content || ''}
-                                            shape="octagon-left"
+                                        <ImageContentBlock
+                                            heading={section?.heading}
+                                            sub_heading={section?.sub_heading}
+                                            imageUrl={section?.media?.url}
+                                            content={section?.content}
+                                            reverse={index % 2 === 1}
                                         />
 
                                         <div className="py-6">{section.json_array && <RenderSectionContent jsonItems={section.json_array} />}</div>
@@ -70,11 +68,6 @@ const AboutPage: React.FC<AboutPageProps> = ({ page }) => {
                                         {/* Gallery */}
                                         {section?.gallery && section?.gallery.length > 0 && (
                                             <>
-                                                {/* Section Heading */}
-                                                {/* <div className="mb-6 flex flex-col items-center justify-center text-center">
-                                                <h2 className="mb-1 text-2xl font-semibold">Gallery</h2>
-                                                <h3 className="mb-2 text-sm text-gray-500">Browse the gallery</h3>
-                                            </div> */}
                                                 <SectionGallery gallery={JSON.parse(section.gallery)} />
                                             </>
                                         )}

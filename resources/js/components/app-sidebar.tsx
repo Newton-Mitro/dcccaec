@@ -8,18 +8,20 @@ import {
     BadgeCheckIcon,
     BellDotIcon,
     CalendarClockIcon,
-    ContactRoundIcon,
+    DramaIcon,
     Globe2,
     ImagePlusIcon,
     LayoutGrid,
     MailQuestion,
     NotebookIcon,
+    Paperclip,
     PickaxeIcon,
     TagsIcon,
+    TreePalm,
     TrophyIcon,
     UploadIcon,
     UserRoundCheckIcon,
-    ViewIcon,
+    Users2,
 } from 'lucide-react';
 import AppLogo from './app-logo';
 
@@ -65,9 +67,14 @@ const mainNavItems: NavItem[] = [
         icon: CalendarClockIcon,
     },
     {
+        title: 'Holidays',
+        href: '/admin/holidays',
+        icon: TreePalm,
+    },
+    {
         title: 'Teams',
         href: '/admin/teams',
-        icon: ContactRoundIcon,
+        icon: DramaIcon,
     },
     {
         title: 'Galleries',
@@ -92,12 +99,17 @@ const mainNavItems: NavItem[] = [
     {
         title: 'Job Applications',
         href: '/admin/job-applications',
-        icon: ViewIcon,
+        icon: Paperclip,
     },
     {
         title: 'Contact Messages',
         href: '/admin/contact-messages',
         icon: MailQuestion,
+    },
+    {
+        title: 'Users',
+        href: '/admin/users',
+        icon: Users2,
     },
 ];
 

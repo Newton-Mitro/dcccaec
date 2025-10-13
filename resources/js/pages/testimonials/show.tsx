@@ -42,10 +42,7 @@ const Show: React.FC<ShowProps> = ({ testimonial }) => {
                 )}
 
                 {/* Message */}
-                <div
-                    className="prose prose-sm mt-2 max-w-none dark:prose-invert [&_h1,h2,h3,h4,h5,h6]:text-foreground [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500"
-                    dangerouslySetInnerHTML={{ __html: testimonial.message }}
-                />
+                <div className="prose max-w-full dark:prose-invert" dangerouslySetInnerHTML={{ __html: testimonial.message }} />
 
                 {/* Rating */}
                 {testimonial.rating !== null && (

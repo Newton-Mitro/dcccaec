@@ -25,8 +25,26 @@ class GalleryController extends Controller
 
     public function create(Request $request): Response
     {
-        $perPage = $request->input('perPage', 10);
-        $media = Media::latest()->paginate($perPage)->withQueryString();
+        $perPage = $request->input('perPage', 20);
+        $type = $request->input('type', 'all');
+        $query = Media::query();
+        if ($type !== 'all') {
+            switch ($type) {
+                case 'images':
+                    $query->where('file_type', 'like', 'image/%');
+                    break;
+                case 'videos':
+                    $query->where('file_type', 'like', 'video/%');
+                    break;
+                case 'audio':
+                    $query->where('file_type', 'like', 'audio/%');
+                    break;
+                case 'pdf':
+                    $query->where('file_type', 'application/pdf');
+                    break;
+            }
+        }
+        $media = $query->latest()->paginate($perPage)->withQueryString();
 
         return Inertia::render('galleries/create', [
             'media' => $media
@@ -66,11 +84,27 @@ class GalleryController extends Controller
 
     public function edit(Gallery $gallery, Request $request): Response
     {
-        $perPage = $request->input('perPage', 10);
-        $media = Media::latest()->paginate($perPage)->withQueryString();
-
+        $perPage = $request->input('perPage', 20);
+        $type = $request->input('type', 'all');
+        $query = Media::query();
+        if ($type !== 'all') {
+            switch ($type) {
+                case 'images':
+                    $query->where('file_type', 'like', 'image/%');
+                    break;
+                case 'videos':
+                    $query->where('file_type', 'like', 'video/%');
+                    break;
+                case 'audio':
+                    $query->where('file_type', 'like', 'audio/%');
+                    break;
+                case 'pdf':
+                    $query->where('file_type', 'application/pdf');
+                    break;
+            }
+        }
+        $media = $query->latest()->paginate($perPage)->withQueryString();
         $gallery->load('media', 'mediaItems.media');
-
 
         return Inertia::render('galleries/edit', [
             'gallery' => $gallery,

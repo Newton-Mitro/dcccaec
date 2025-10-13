@@ -236,8 +236,15 @@ const Edit: React.FC<EditProps> = ({ media, gallery }) => {
                 </form>
 
                 {/* Media Modals */}
-                <MediaBrowserModal isOpen={mediaModalOpen} onClose={() => setMediaModalOpen(false)} media={media} onSelect={handleMainMediaSelect} />
                 <MediaBrowserModal
+                    actionType="edit"
+                    isOpen={mediaModalOpen}
+                    onClose={() => setMediaModalOpen(false)}
+                    media={media}
+                    onSelect={handleMainMediaSelect}
+                />
+                <MediaBrowserModal
+                    actionType="edit"
                     isOpen={galleryMediaModalOpen}
                     onClose={() => setGalleryMediaModalOpen(false)}
                     media={media}

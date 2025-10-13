@@ -54,10 +54,7 @@ const ImageWrappedContentSection: React.FC<ImageWrappedContentSectionProps> = ({
         <>
             <div className="">
                 {renderMedia()}
-                <div
-                    dangerouslySetInnerHTML={{ __html: contentHtml }}
-                    className="prose prose-sm max-w-none text-muted-foreground [&_h1,h2,h3,h4,h5,h6]:text-foreground [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500"
-                />
+                <div dangerouslySetInnerHTML={{ __html: contentHtml }} className="prose max-w-full dark:prose-invert" />
             </div>
             <div className="clear-both"></div>
         </>

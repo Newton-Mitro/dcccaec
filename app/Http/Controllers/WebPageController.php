@@ -8,6 +8,7 @@ use App\Infrastructure\Models\ContactMessage;
 use App\Infrastructure\Models\Event;
 use App\Infrastructure\Models\Gallery;
 use App\Infrastructure\Models\HeroSlider;
+use App\Infrastructure\Models\Holiday;
 use App\Infrastructure\Models\Notice;
 use App\Infrastructure\Models\Page;
 use App\Infrastructure\Models\Program;
@@ -45,13 +46,57 @@ class WebPageController extends Controller
         ]);
     }
 
-    public function page($slug)
+    public function enrollmentPage()
     {
         $page = Page::with(['sections.media'])
-            ->where('slug', $slug)
+            ->where('slug', 'enrollment')
             ->first();
 
-        return Inertia::render('site/single-page', [
+        return Inertia::render('site/enrollment-page', [
+            'page' => $page
+        ]);
+    }
+
+    public function curriculumPage()
+    {
+        $page = Page::with(['sections.media'])
+            ->where('slug', 'curriculum')
+            ->first();
+
+        return Inertia::render('site/curriculum-page', [
+            'page' => $page
+        ]);
+    }
+
+    public function classRoutinesPage()
+    {
+        $page = Page::with(['sections.media'])
+            ->where('slug', 'class-rutines')
+            ->first();
+
+        return Inertia::render('site/class-routines-page', [
+            'page' => $page
+        ]);
+    }
+
+    public function healthAndSefetyPage()
+    {
+        $page = Page::with(['sections.media'])
+            ->where('slug', 'health-safety')
+            ->first();
+
+        return Inertia::render('site/health-safety-page', [
+            'page' => $page
+        ]);
+    }
+
+    public function nutritionAndMealsPage()
+    {
+        $page = Page::with(['sections.media'])
+            ->where('slug', 'nutrition-meals')
+            ->first();
+
+        return Inertia::render('site/nutrition-meals-page', [
             'page' => $page
         ]);
     }
@@ -281,14 +326,13 @@ class WebPageController extends Controller
 
     public function holidays(Request $request)
     {
-        $perPage = $request->input('perPage', 8);
-        $holidays = Event::with('media')
-            ->latest()
-            ->get();
+        $holidays = Holiday::orderBy('date', 'asc')->get();
+
         return Inertia::render('site/holiday-calendar-page', [
-            'holidays' => [],
+            'holidays' => $holidays,
         ]);
     }
+
 
     public function showEvent(Event $event, Request $request)
     {

@@ -106,6 +106,11 @@ export default function Edit({ notice, categories, media }: EditProps) {
                         <Label>Content</Label>
                         <CKEditor
                             editor={ClassicEditor as any}
+                            config={
+                                {
+                                    contentClass: 'prose dark:prose-invert max-w-full',
+                                } as any
+                            }
                             data={form.content}
                             onChange={(_, editor) => setForm({ ...form, content: editor.getData() })}
                         />
@@ -143,6 +148,7 @@ export default function Edit({ notice, categories, media }: EditProps) {
 
                 {/* Media Modal */}
                 <MediaBrowserModal
+                    actionType="edit"
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
                     media={media}

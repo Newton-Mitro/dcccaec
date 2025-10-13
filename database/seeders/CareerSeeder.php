@@ -26,12 +26,12 @@ class CareerSeeder extends Seeder
         }
 
         // Create 5 careers
-        Career::factory(5)->create([
+        Career::factory(2)->create([
             'created_by' => $allUsers->random()->id,
             'updated_by' => $allUsers->random()->id,
         ])->each(function ($career) use ($allUsers, $allMedia) {
 
-            $applicationsCount = rand(3, 7);
+            $applicationsCount = rand(1, 2);
             for ($i = 0; $i < $applicationsCount; $i++) {
                 JobApplication::factory()->create([
                     'career_id' => $career->id,

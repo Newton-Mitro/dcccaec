@@ -19,9 +19,7 @@ class MediaController extends Controller
     {
         $perPage = $request->input('perPage', 20);
         $type = $request->input('type', 'all');
-
         $query = Media::query();
-
         if ($type !== 'all') {
             switch ($type) {
                 case 'images':
@@ -36,26 +34,8 @@ class MediaController extends Controller
                 case 'pdf':
                     $query->where('file_type', 'application/pdf');
                     break;
-                case 'docs':
-                    $query->whereIn('file_type', [
-                        'application/msword',
-                        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                        'application/vnd.ms-excel',
-                        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-                        'application/vnd.ms-powerpoint',
-                        'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-                    ]);
-                    break;
-                case 'archives':
-                    $query->whereIn('file_type', [
-                        'application/zip',
-                        'application/x-rar-compressed',
-                        'application/x-7z-compressed',
-                    ]);
-                    break;
             }
         }
-
         $mediaItems = $query->latest()->paginate($perPage)->withQueryString();
 
         return Inertia::render('media/index', [

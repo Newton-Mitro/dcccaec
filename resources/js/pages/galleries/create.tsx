@@ -219,8 +219,15 @@ const Create: React.FC<CreateProps> = ({ media }) => {
                 </form>
 
                 {/* Media Modals */}
-                <MediaBrowserModal isOpen={mediaModalOpen} onClose={() => setMediaModalOpen(false)} media={media} onSelect={handleMainMediaSelect} />
                 <MediaBrowserModal
+                    actionType="create"
+                    isOpen={mediaModalOpen}
+                    onClose={() => setMediaModalOpen(false)}
+                    media={media}
+                    onSelect={handleMainMediaSelect}
+                />
+                <MediaBrowserModal
+                    actionType="create"
                     isOpen={galleryMediaModalOpen}
                     onClose={() => setGalleryMediaModalOpen(false)}
                     media={media}

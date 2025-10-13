@@ -157,6 +157,11 @@ export default function Edit({ career }: EditProps) {
                         <Label>Description</Label>
                         <CKEditor
                             editor={ClassicEditor as any}
+                            config={
+                                {
+                                    contentClass: 'prose dark:prose-invert max-w-full',
+                                } as any
+                            }
                             data={form.description}
                             onChange={(_, editor) => setForm({ ...form, description: editor.getData() })}
                         />
@@ -166,6 +171,11 @@ export default function Edit({ career }: EditProps) {
                         <Label>Requirements</Label>
                         <CKEditor
                             editor={ClassicEditor as any}
+                            config={
+                                {
+                                    contentClass: 'prose dark:prose-invert max-w-full',
+                                } as any
+                            }
                             data={form.requirements}
                             onChange={(_, editor) => setForm({ ...form, requirements: editor.getData() })}
                         />
@@ -175,6 +185,11 @@ export default function Edit({ career }: EditProps) {
                         <Label>Responsibilities</Label>
                         <CKEditor
                             editor={ClassicEditor as any}
+                            config={
+                                {
+                                    contentClass: 'prose dark:prose-invert max-w-full',
+                                } as any
+                            }
                             data={form.responsibilities}
                             onChange={(_, editor) => setForm({ ...form, responsibilities: editor.getData() })}
                         />

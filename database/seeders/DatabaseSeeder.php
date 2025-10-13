@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
                 // ContactMessageSeeder::class,
             GallerySeeder::class,
             HeroSliderSeeder::class,
+            HolidaySeeder::class,
         ]);
     }
 }

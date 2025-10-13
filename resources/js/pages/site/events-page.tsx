@@ -15,10 +15,17 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
 
     const startMonth = startOfMonth(currentMonth);
     const endMonth = endOfMonth(startMonth);
+    const totalDays = endMonth.getDate();
 
-    // Generate days for the current month
+    // Blank cells before the first day of the month
+    const blanks: number[] = [];
+    for (let i = 0; i < startMonth.getDay(); i++) {
+        blanks.push(i);
+    }
+
+    // All days in the month
     const daysInMonth: Date[] = [];
-    for (let i = 0; i < endMonth.getDate(); i++) {
+    for (let i = 0; i < totalDays; i++) {
         daysInMonth.push(addDays(startMonth, i));
     }
 
@@ -30,7 +37,6 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
         eventsByDate[dateStr].push(event);
     });
 
-    // Navigation handlers
     const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
     const nextMonth = () => setCurrentMonth(addMonths(currentMonth, 1));
 
@@ -41,7 +47,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
                 <PageBanner title="Upcoming Events" subtitle="Click on a date to view event details." />
 
                 <div className="container-custom mx-auto my-16">
-                    {/* Header with month navigation */}
+                    {/* Month navigation */}
                     <div className="mb-6 flex items-center justify-between text-center">
                         <button
                             onClick={prevMonth}
@@ -49,9 +55,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
                         >
                             ← Previous
                         </button>
-
                         <h2 className="font-chewy text-3xl text-foreground">{format(currentMonth, 'MMMM yyyy')}</h2>
-
                         <button
                             onClick={nextMonth}
                             className="rounded-lg bg-muted px-3 py-1 text-sm font-medium text-foreground hover:bg-muted/70 dark:hover:bg-muted/50"
@@ -62,15 +66,28 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
 
                     {/* Calendar Grid */}
                     <div className="grid grid-cols-7 gap-2 text-center">
-                        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((d) => (
-                            <div key={d} className="font-semibold text-muted-foreground dark:text-muted-foreground">
-                                {d}
+                        {/* Weekday headers */}
+                        {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day, index) => (
+                            <div
+                                key={day}
+                                className={`font-semibold ${
+                                    index === 5 || index === 6 ? 'text-red-600 dark:text-red-400' : 'text-muted-foreground dark:text-muted-foreground'
+                                }`}
+                            >
+                                {day}
                             </div>
                         ))}
 
+                        {/* Blank cells */}
+                        {blanks.map((_, idx) => (
+                            <div key={`blank-${idx}`} className="min-h-[80px] border bg-card dark:bg-gray-900"></div>
+                        ))}
+
+                        {/* Days */}
                         {daysInMonth.map((day) => {
                             const dateStr = format(day, 'yyyy-MM-dd');
                             const dayEvents = eventsByDate[dateStr] || [];
+                            const isWeekend = day.getDay() === 5 || day.getDay() === 6; // Friday & Saturday
 
                             return (
                                 <button
@@ -80,9 +97,11 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
                                         dayEvents.length
                                             ? 'cursor-pointer bg-accent/10 hover:bg-accent/20 dark:bg-accent/20 dark:hover:bg-accent/30'
                                             : 'cursor-default bg-card hover:bg-muted/50 dark:bg-card dark:hover:bg-muted/10'
-                                    }`}
+                                    } ${isWeekend ? 'bg-red-100 dark:bg-red-800' : ''}`}
                                 >
-                                    <span className="font-semibold text-foreground">{day.getDate()}</span>
+                                    <span className={`font-semibold ${isWeekend ? 'text-red-600 dark:text-red-400' : 'text-foreground'}`}>
+                                        {day.getDate()}
+                                    </span>
                                     {dayEvents.length > 0 && (
                                         <span className="absolute inset-x-1 bottom-1 text-xs text-primary dark:text-accent">
                                             {dayEvents.length} event{dayEvents.length > 1 ? 's' : ''}
@@ -93,7 +112,7 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
                         })}
                     </div>
 
-                    {/* Modal for Event Details */}
+                    {/* Modal for event details */}
                     {selectedDate && (
                         <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4">
                             <div className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-border bg-card p-6 shadow-xl transition dark:bg-card">
@@ -114,20 +133,15 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
                                             className="rounded-lg border border-border bg-background p-4 shadow-sm transition hover:shadow-md"
                                         >
                                             <h4 className="mb-2 text-lg font-semibold text-primary">{event.title}</h4>
-
                                             {event.media?.url && (
                                                 <img src={event.media.url} alt={event.title} className="mb-3 h-60 w-full rounded-md object-cover" />
                                             )}
-
                                             <p className="mb-2 text-sm text-muted-foreground">{event.description || 'No description available.'}</p>
-
                                             <p className="text-sm text-muted-foreground">
                                                 🗓 {format(new Date(event.start_date), 'PPP')}
                                                 {event.end_date && ` - ${format(new Date(event.end_date), 'PPP')}`}
                                             </p>
-
                                             {event.location && <p className="text-sm text-muted-foreground">📍 {event.location}</p>}
-
                                             <p
                                                 className={`text-sm font-medium ${
                                                     event.status === 'Active'

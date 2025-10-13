@@ -90,7 +90,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                             {/* Button */}
                             <div className="mt-10">
                                 <Link href="/about-us/our-story">
-                                    <button className="rounded bg-primary px-6 py-2 font-semibold text-white hover:bg-yellow-500">Contact Us</button>
+                                    <button className="rounded bg-primary px-6 py-2 font-semibold text-white hover:bg-yellow-500">Read More</button>
                                 </Link>
                             </div>
                         </div>

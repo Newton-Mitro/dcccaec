@@ -38,8 +38,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ slides, interval = 5 }) => {
                 {/* Content */}
                 <div className="mx-auto mt-16 flex w-6xl flex-col items-center md:flex-row">
                     <div className="md:container-custom z-10 w-full px-6 py-10 text-left md:px-28">
-                        <h1 className="text-4xl font-semibold text-gray-200 md:text-5xl">
-                            <span className="text-2xl md:text-7xl">{currentSlide?.title}</span>
+                        <h1 className="text-4xl text-gray-200 md:text-5xl">
+                            <span className="font-chewy text-2xl md:text-7xl">{currentSlide?.title}</span>
                         </h1>
                         <p className="mt-6 text-sm leading-relaxed text-gray-400 md:text-lg">{currentSlide?.subtitle}</p>
                         {currentSlide?.button_text && (

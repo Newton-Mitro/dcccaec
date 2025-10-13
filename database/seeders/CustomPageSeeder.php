@@ -118,9 +118,9 @@ class CustomPageSeeder extends Seeder
           'heading' => 'Daily Class Routines',
           'sub_heading' => 'A structured, joyful day.',
           'content_type' => 'HTML',
-          'content' => '<section id="class-routines" class="py-12 ">
+          'content' => '<section id="class-routines" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-center mb-8">Daily Class Routines</h2>
+    <h2 class="text-3xl font-bold mb-8">Daily Class Routines</h2>
 
     <p class="mb-6">
       At Dhaka Credit Child Care and Education Center, we follow a structured and balanced daily routine to ensure children enjoy a blend of learning, play, and rest. Our schedules are designed to promote holistic development—academically, socially, and emotionally.
@@ -195,9 +195,9 @@ class CustomPageSeeder extends Seeder
       'Enrollment' => [
         [
           'content_type' => 'HTML',
-          'content' => '<section id="enrollment" class="py-12 ">
+          'content' => '<section id="enrollment" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-center mb-8">Registration & Admission</h2>
+    <h2 class="text-3xl font-bold mb-8">Registration & Admission</h2>
 
     <p class="mb-4">
       To enroll your child at <strong>Dhaka Credit Child Care and Education Center</strong>, please submit the required documents and ensure originals are available for verification:
@@ -240,9 +240,9 @@ class CustomPageSeeder extends Seeder
       'Curriculum' => [
         [
           'content_type' => 'HTML',
-          'content' => '<section id="curriculum" class="py-12 ">
+          'content' => '<section id="curriculum" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-center mb-8">Our Curriculum</h2>
+    <h2 class="text-3xl font-bold mb-8">Our Curriculum</h2>
     
     <p class="mb-6">
       At <strong>Dhaka Credit Child Care and Education Center</strong>, we follow an integrated, thematic curriculum designed to stimulate children’s curiosity, creativity, and love of learning. Our programs emphasize holistic growth, combining cognitive, social, emotional, and physical development.
@@ -332,9 +332,9 @@ class CustomPageSeeder extends Seeder
       'Rules & Regulations' => [
         [
           'content_type' => 'HTML',
-          'content' => '<section id="rules-regulations" class="py-12 ">
+          'content' => '<section id="rules-regulations" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-center mb-8">Rules & Regulations</h2>
+    <h2 class="text-3xl font-bold mb-8">Rules & Regulations</h2>
 
     <h3 class="text-xl font-semibold mt-6 mb-2">General Conduct</h3>
     <ul class="list-disc list-inside mb-4">
@@ -397,9 +397,9 @@ class CustomPageSeeder extends Seeder
       'Health & Safety' => [
         [
           'content_type' => 'HTML',
-          'content' => '<section id="health-safety" class="py-12 ">
+          'content' => '<section id="health-safety" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-center mb-8">Health & Safety</h2>
+    <h2 class="text-3xl font-bold mb-8">Health & Safety</h2>
 
     <!-- Our Environment -->
     <div class="mb-8">
@@ -465,9 +465,9 @@ class CustomPageSeeder extends Seeder
       'Nutrition & Meals' => [
         [
           'content_type' => 'HTML',
-          'content' => '<section id="nutrition-meals" class="py-12 ">
+          'content' => '<section id="nutrition-meals" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-center mb-8">Nutrition & Meals</h2>
+    <h2 class="text-3xl font-bold mb-8">Nutrition & Meals</h2>
 
     <!-- Healthy Meals -->
     <div class="mb-8">
@@ -533,9 +533,9 @@ class CustomPageSeeder extends Seeder
           'heading' => 'Page Title', // e.g., 'Privacy Policy'
           'sub_heading' => 'Important legal information.',
           'content_type' => 'HTML',
-          'content' => '<section id="disclaimer" class="py-12 ">
+          'content' => '<section id="disclaimer" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-center mb-8">Disclaimer</h2>
+    <h2 class="text-3xl font-bold mb-8">Disclaimer</h2>
 
     <p class="mb-4">
       The information provided on the <strong>Dhaka Credit Child Care and Education Center</strong> website is intended for general informational purposes only. While we strive to keep the content accurate and up-to-date, we make no guarantees regarding the completeness, reliability, or accuracy of the information presented.
@@ -566,9 +566,9 @@ class CustomPageSeeder extends Seeder
           'heading' => 'Page Title', // e.g., 'Privacy Policy'
           'sub_heading' => 'Important legal information.',
           'content_type' => 'HTML',
-          'content' => '<section id="terms-of-service" class="py-12 ">
+          'content' => '<section id="terms-of-service" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-center mb-8">Terms of Service</h2>
+    <h2 class="text-3xl font-bold mb-8">Terms of Service</h2>
 
     <p class="mb-4">
       Welcome to the <strong>Dhaka Credit Child Care and Education Center</strong> website. By accessing or using this website, you agree to comply with and be bound by the following Terms of Service. If you do not agree with these terms, please refrain from using our website.
@@ -612,9 +612,9 @@ class CustomPageSeeder extends Seeder
           'heading' => 'Page Title', // e.g., 'Privacy Policy'
           'sub_heading' => 'Important legal information.',
           'content_type' => 'HTML',
-          'content' => '<section id="privacy-policy" class="py-12 ">
+          'content' => '<section id="privacy-policy" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-3xl font-bold text-center mb-8">Privacy Policy</h2>
+    <h2 class="text-3xl font-bold mb-8">Privacy Policy</h2>
 
     <p class="mb-4">
       At <strong>Dhaka Credit Child Care and Education Center</strong>, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect personal information when you visit our website or use our services.

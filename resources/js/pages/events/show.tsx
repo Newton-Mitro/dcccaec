@@ -51,10 +51,7 @@ export default function Show({ event }: ShowProps) {
                 )}
 
                 {/* Description */}
-                <div
-                    className="prose prose-sm max-w-none dark:prose-invert [&_h1,h2,h3,h4,h5,h6]:text-foreground [&_table]:border [&_table]:border-gray-500 [&_td]:border [&_td]:border-gray-500 [&_th]:border [&_th]:border-gray-500"
-                    dangerouslySetInnerHTML={{ __html: event.description || '' }}
-                />
+                <div className="prose max-w-full dark:prose-invert" dangerouslySetInnerHTML={{ __html: event.description || '' }} />
 
                 {/* Footer info */}
                 <div className="mt-4 text-sm text-gray-500">

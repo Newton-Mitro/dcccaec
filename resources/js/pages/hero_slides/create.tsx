@@ -140,6 +140,7 @@ export default function Create({ media }: CreateProps) {
 
             {/* Media Modal */}
             <MediaBrowserModal
+                actionType="create"
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 media={media}

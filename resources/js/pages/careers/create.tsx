@@ -224,6 +224,11 @@ export default function Create() {
                         <CKEditor
                             editor={ClassicEditor as any}
                             data={form.description}
+                            config={
+                                {
+                                    contentClass: 'prose dark:prose-invert max-w-full',
+                                } as any
+                            }
                             onChange={(_, editor) => setForm({ ...form, description: editor.getData() })}
                         />
                         <InputError message={errors.description} />
@@ -233,6 +238,11 @@ export default function Create() {
                         <Label>Requirements</Label>
                         <CKEditor
                             editor={ClassicEditor as any}
+                            config={
+                                {
+                                    contentClass: 'prose dark:prose-invert max-w-full',
+                                } as any
+                            }
                             data={form.requirements}
                             onChange={(_, editor) => setForm({ ...form, requirements: editor.getData() })}
                         />
@@ -243,6 +253,11 @@ export default function Create() {
                         <Label>Responsibilities</Label>
                         <CKEditor
                             editor={ClassicEditor as any}
+                            config={
+                                {
+                                    contentClass: 'prose dark:prose-invert max-w-full',
+                                } as any
+                            }
                             data={form.responsibilities}
                             onChange={(_, editor) => setForm({ ...form, responsibilities: editor.getData() })}
                         />
