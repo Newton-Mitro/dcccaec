@@ -11,6 +11,7 @@ use App\Infrastructure\Models\HeroSlider;
 use App\Infrastructure\Models\Holiday;
 use App\Infrastructure\Models\Notice;
 use App\Infrastructure\Models\Page;
+use App\Infrastructure\Models\Partner;
 use App\Infrastructure\Models\Program;
 use App\Infrastructure\Models\Team;
 use App\Infrastructure\Models\Testimonial;
@@ -28,6 +29,10 @@ class WebPageController extends Controller
         $programs = Program::where('is_active', true)->with(['media', 'category'])->orderBy('sort_order')->take(3)->get();
         $testimonials = Testimonial::where('status', 'Active')->with('media')->orderBy('sort_order')->take(5)->get();
         $awards = Award::where('status', 'Active')->with('media')->orderBy('sort_order')->take(5)->get();
+        $partners = Partner::with('media')
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
         $notices = Notice::where('status', 'Active')->orderBy('sort_order')->take(5)->get();
         $events = Event::where('status', 'Active')->orderBy('sort_order')->take(5)->get();
         $about = Page::with(['sections.media', 'media'])
@@ -43,6 +48,7 @@ class WebPageController extends Controller
             'awards' => $awards,
             'notices' => $notices,
             'events' => $events,
+            'partners' => $partners
         ]);
     }
 

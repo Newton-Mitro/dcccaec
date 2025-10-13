@@ -57,7 +57,6 @@ class PartnerController extends Controller
             'name' => 'required|string|max:255',
             'media_id' => 'nullable|exists:media,id',
             'website' => 'nullable|url|max:255',
-            'status' => 'required|in:Active,Inactive',
         ]);
 
         Partner::create($data);
@@ -107,7 +106,6 @@ class PartnerController extends Controller
             'name' => 'required|string|max:255',
             'media_id' => 'nullable|exists:media,id',
             'website' => 'nullable|url|max:255',
-            'status' => 'required|in:Active,Inactive',
         ]);
 
         $partner->update($data);

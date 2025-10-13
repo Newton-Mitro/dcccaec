@@ -34,7 +34,8 @@ class TeamSeeder extends Seeder
             Team::factory()->create(
                 [
                     'category_id' => $teamCategoryIds->random(),
-                    'media_id' => $allImages->random()->id
+                    'media_id' => $allImages->random()->id,
+                    'status' => 'Active'
                 ]
             );
         }

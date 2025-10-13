@@ -10,7 +10,9 @@ import {
     CalendarClockIcon,
     DramaIcon,
     Globe2,
+    Handshake,
     ImagePlusIcon,
+    Layers,
     LayoutGrid,
     MailQuestion,
     NotebookIcon,
@@ -40,6 +42,11 @@ const mainNavItems: NavItem[] = [
         title: 'Media',
         href: '/admin/media',
         icon: UploadIcon,
+    },
+    {
+        title: 'Hero Slides',
+        href: '/admin/hero-sliders',
+        icon: Layers,
     },
     {
         title: 'Pages',
@@ -85,6 +92,11 @@ const mainNavItems: NavItem[] = [
         title: 'Awards',
         href: '/admin/awards',
         icon: TrophyIcon,
+    },
+    {
+        title: 'Partners',
+        href: '/admin/partners',
+        icon: Handshake,
     },
     {
         title: 'Testimonials',

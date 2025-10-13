@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Infrastructure\Models\Media;
 use App\Infrastructure\Models\Partner;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

@@ -13,6 +13,7 @@ import { Event } from '../../types/event';
 import { HeroSlide } from '../../types/hero_slide';
 import { Notice } from '../../types/notice';
 import { Page } from '../../types/page';
+import { Partner } from '../../types/partner';
 import { Program } from '../../types/program';
 import { Team } from '../../types/team';
 import { Testimonial } from '../../types/testimonial';
@@ -28,16 +29,17 @@ interface HomePageProps {
     awards: Award[];
     notices: Notice[];
     events: Event[];
+    partners: Partner[];
 }
 
-const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams, testimonials, awards }) => {
+const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams, testimonials, awards, partners }) => {
     const pageUrl = typeof window !== 'undefined' ? window.location.href : '';
     const imageUrl = ''; // Replace with default OG image if needed
     const metaTitle = 'Home Page';
     const metaDescription = 'YourSite';
     const metaKeywords = 'YourSite';
 
-    console.log(about);
+    console.log(awards);
 
     return (
         <>
@@ -103,7 +105,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
 
                 <div className="mx-auto flex w-full max-w-7xl flex-col gap-12 px-6 py-16">
                     {/* Services Section */}
-                    {programs.length > 0 && (
+                    {programs?.length > 0 && (
                         <div className="space-y-10">
                             <SectionHeader
                                 heading="Our Programs"
@@ -165,7 +167,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                     )}
 
                     {/* Team Section */}
-                    {teams.length > 0 && (
+                    {teams?.length > 0 && (
                         <section className="space-y-12 py-16">
                             <SectionHeader
                                 heading="Meet Our Team"
@@ -267,7 +269,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                     )}
 
                     {/* Testimonials Section */}
-                    {testimonials.length > 0 && (
+                    {testimonials?.length > 0 && (
                         <div className="space-y-10 pb-16">
                             <SectionHeader
                                 heading="Testimonials"
@@ -324,9 +326,9 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                     )}
 
                     {/* Awards Section */}
-                    {awards.length > 0 && (
+                    {/* {awards?.length > 0 && (
                         <div className="space-y-10">
-                            <SectionHeader heading="Awards & Recognition" sub_heading="We have won various awards and recognition" />
+                            <SectionHeader heading="Awards & Recognition" sub_heading="Celebrating milestones of excellence and recognition" />
                             <div className="flex flex-wrap items-center justify-center gap-6">
                                 {awards.slice(0, 4).map((award) => (
                                     <div key={award.id} className="rounded p-6 text-center transition">
@@ -337,6 +339,27 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                         />
                                         <h3 className="text-lg font-semibold">{award.title}</h3>
                                         <p className="mt-1 text-gray-500">{award.year}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )} */}
+
+                    {/* Partners Section */}
+                    {partners?.length > 0 && (
+                        <div className="space-y-10">
+                            <SectionHeader heading="Our Partners" sub_heading="Together, we innovate, collaborate, and drive change." />
+                            <div className="flex flex-wrap items-center justify-center gap-6">
+                                {partners.slice(0, 4).map((partner) => (
+                                    <div key={partner.id} className="rounded p-6 text-center transition">
+                                        <img
+                                            src={partner.media?.url || '/images/default-award.png'}
+                                            alt={partner.name}
+                                            className="mx-auto h-24 w-24 object-contain"
+                                        />
+                                        <Link href={partner.website || '#'}>
+                                            <h3 className="text-lg font-semibold">{partner.name}</h3>
+                                        </Link>
                                     </div>
                                 ))}
                             </div>

@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             AwardSeeder::class,
             NoticeSeeder::class,
             EventSeeder::class,
-                // PartnerSeeder::class,
+            PartnerSeeder::class,
             CareerSeeder::class,
                 // ContactMessageSeeder::class,
             GallerySeeder::class,
