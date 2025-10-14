@@ -22,20 +22,20 @@ class WebPageController extends Controller
 {
     public function home()
     {
-        $heroSlides = HeroSlider::where('status', 'Active')->with('media')
+        $heroSlides = HeroSlider::where('status', 'Active')->with('featuredImage')
             ->orderBy('sort_order')
             ->get();
-        $teams = Team::where('status', 'Active')->with('media')->orderBy('sort_order')->take(5)->get();
-        $programs = Program::where('is_active', true)->with(['media', 'category'])->orderBy('sort_order')->take(3)->get();
-        $testimonials = Testimonial::where('status', 'Active')->with('media')->orderBy('sort_order')->take(5)->get();
+        $teams = Team::where('status', 'Active')->with('photo')->orderBy('sort_order')->take(5)->get();
+        $programs = Program::where('is_active', true)->with(['featuredImage', 'galleries', 'category'])->orderBy('sort_order')->take(3)->get();
+        $testimonials = Testimonial::where('status', 'Active')->with('clientImage')->orderBy('sort_order')->take(5)->get();
         $awards = Award::where('status', 'Active')->with('media')->orderBy('sort_order')->take(5)->get();
-        $partners = Partner::with('media')
+        $partners = Partner::with('logo')
             ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
         $notices = Notice::where('status', 'Active')->orderBy('sort_order')->take(5)->get();
         $events = Event::where('status', 'Active')->orderBy('sort_order')->take(5)->get();
-        $about = Page::with(['sections.media', 'media'])
+        $about = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'our-story')
             ->first();
 
@@ -54,7 +54,7 @@ class WebPageController extends Controller
 
     public function enrollmentPage()
     {
-        $page = Page::with(['sections.media'])
+        $page = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'enrollment')
             ->first();
 
@@ -65,7 +65,7 @@ class WebPageController extends Controller
 
     public function curriculumPage()
     {
-        $page = Page::with(['sections.media'])
+        $page = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'curriculum')
             ->first();
 
@@ -76,7 +76,7 @@ class WebPageController extends Controller
 
     public function classRoutinesPage()
     {
-        $page = Page::with(['sections.media'])
+        $page = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'class-rutines')
             ->first();
 
@@ -87,7 +87,7 @@ class WebPageController extends Controller
 
     public function healthAndSefetyPage()
     {
-        $page = Page::with(['sections.media'])
+        $page = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'health-safety')
             ->first();
 
@@ -98,7 +98,7 @@ class WebPageController extends Controller
 
     public function nutritionAndMealsPage()
     {
-        $page = Page::with(['sections.media'])
+        $page = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'nutrition-meals')
             ->first();
 
@@ -109,7 +109,7 @@ class WebPageController extends Controller
 
     public function presidentMessage()
     {
-        $page = Page::with(['sections.media'])
+        $page = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'president-message')
             ->first();
 
@@ -120,7 +120,7 @@ class WebPageController extends Controller
 
     public function principalMessage()
     {
-        $page = Page::with(['sections.media'])
+        $page = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'principal-message')
             ->first();
 
@@ -131,7 +131,7 @@ class WebPageController extends Controller
 
     public function ourStory()
     {
-        $page = Page::with(['sections.media'])
+        $page = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'our-story')
             ->first();
 
@@ -142,7 +142,7 @@ class WebPageController extends Controller
 
     public function missionVision()
     {
-        $page = Page::with(['sections.media'])
+        $page = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'mission-vision')
             ->first();
 
@@ -153,7 +153,7 @@ class WebPageController extends Controller
 
     public function ourPhilosophy()
     {
-        $page = Page::with(['sections.media'])
+        $page = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'our-philosophy')
             ->first();
 
@@ -164,18 +164,18 @@ class WebPageController extends Controller
 
     public function faq()
     {
-        $aboutPage = Page::with(['sections.media'])
+        $page = Page::with(['featuredImage'])
             ->where('slug', 'faq')
             ->first();
 
         return Inertia::render('site/faq-page', [
-            'page' => $aboutPage
+            'page' => $page
         ]);
     }
 
     public function termsOfService()
     {
-        $aboutPage = Page::with(['sections.media'])
+        $aboutPage = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'terms-of-service')
             ->first();
 
@@ -186,7 +186,7 @@ class WebPageController extends Controller
 
     public function privacyPolicy()
     {
-        $aboutPage = Page::with(['sections.media'])
+        $aboutPage = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'privacy-policy')
             ->first();
 
@@ -197,7 +197,7 @@ class WebPageController extends Controller
 
     public function disclaimer()
     {
-        $aboutPage = Page::with(['sections.media'])
+        $aboutPage = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'disclaimer')
             ->first();
 
@@ -229,7 +229,7 @@ class WebPageController extends Controller
     public function teams(Request $request)
     {
         $perPage = $request->input('perPage', 8);
-        $teams = Team::with('media', 'category')
+        $teams = Team::with('photo', 'category')
             ->latest()
             ->get();
         return Inertia::render('site/our-teams-page', [
@@ -240,7 +240,7 @@ class WebPageController extends Controller
     public function showTeam(Team $team, Request $request)
     {
         // Load relationships on the existing $team instance
-        $team->load('media', 'category');
+        $team->load('photo', 'category');
 
         return Inertia::render('site/single-team-page', [
             'team' => $team,
@@ -251,7 +251,7 @@ class WebPageController extends Controller
     public function programs(Request $request)
     {
         $perPage = $request->input('perPage', 8);
-        $programs = Program::with('media', 'category')
+        $programs = Program::with('featuredImage', 'gallery', 'category')
             ->latest()
             ->get();
         return Inertia::render('site/programs-page', [
@@ -262,7 +262,7 @@ class WebPageController extends Controller
     public function showProgram(Program $program, Request $request)
     {
         // Load relationships on the existing $team instance
-        $program->load('media', 'category');
+        $program->load('featuredImage', 'gallery', 'category');
 
         return Inertia::render('site/single-program-page', [
             'program' => $program,
@@ -301,7 +301,7 @@ class WebPageController extends Controller
     public function notices(Request $request)
     {
         $perPage = $request->input('perPage', 8);
-        $notices = Notice::with('media', 'category')
+        $notices = Notice::with('attachment', 'category')
             ->latest()
             ->get();
         return Inertia::render('site/notices-page', [
@@ -312,7 +312,7 @@ class WebPageController extends Controller
     public function showNotice(Notice $notice, Request $request)
     {
         // Load relationships on the existing $team instance
-        $notice->load('media');
+        $notice->load('attachment', 'category');
 
         return Inertia::render('site/single-notice-page', [
             'notice' => $notice,
@@ -353,7 +353,7 @@ class WebPageController extends Controller
     public function galleries(Request $request)
     {
         $perPage = $request->input('perPage', 8);
-        $galleries = Gallery::with('media', 'mediaItems.media')
+        $galleries = Gallery::with('featuredImage', 'items.media')
             ->latest()
             ->get();
         return Inertia::render('site/galleries-page', [

@@ -71,10 +71,14 @@ const Index: React.FC<PageProps> = ({ sliders }) => {
                                 className="relative rounded border border-gray-200 bg-white p-2 hover:border-blue-500 dark:border-gray-700 dark:bg-neutral-900 dark:hover:border-blue-400"
                             >
                                 <div className="cursor-pointer" onClick={() => router.visit(route('hero-sliders.show', slide.id))}>
-                                    <img src={slide.media?.url} alt={slide.media?.alt_text || 'media'} className="h-32 w-full rounded object-cover" />
+                                    <img
+                                        src={slide.featured_image?.url}
+                                        alt={slide.featured_image?.alt_text || 'media'}
+                                        className="h-32 w-full rounded object-cover"
+                                    />
                                     <p className="mt-2 truncate text-center text-xs text-gray-900 sm:text-sm dark:text-gray-100">{`ID #${slide.id}`}</p>
                                     <p className="mt-1 truncate text-center text-xs text-gray-700 sm:text-sm dark:text-gray-300">
-                                        {slide.media?.file_type}
+                                        {slide.featured_image?.file_type}
                                     </p>
                                 </div>
 

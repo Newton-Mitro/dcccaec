@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use App\Infrastructure\Models\Gallery;
-use App\Infrastructure\Models\GalleryMedia;
 use App\Infrastructure\Models\Media;
+use App\Infrastructure\Models\ResourceMedia;
 use Illuminate\Database\Seeder;
 
 class GallerySeeder extends Seeder
@@ -19,7 +19,7 @@ class GallerySeeder extends Seeder
             return;
         }
 
-        // Create 5 galleries with random cover images
+        // Create 3 galleries with random cover images
         $galleries = Gallery::factory(3)->create([
             'media_id' => function () use ($allImages) {
                 return $allImages->random();
@@ -30,10 +30,13 @@ class GallerySeeder extends Seeder
             // Randomly pick 3–6 images for each gallery
             $mediaIds = $allImages->random(rand(3, 6));
 
-            foreach ($mediaIds as $mediaId) {
-                GalleryMedia::factory()->create([
-                    'gallery_id' => $gallery->id,
+            foreach ($mediaIds as $index => $mediaId) {
+                // Use polymorphic fields
+                ResourceMedia::factory()->create([
+                    'resource_id' => $gallery->id,
+                    'resource_type' => Gallery::class,
                     'media_id' => $mediaId,
+                    'sort_order' => $index, // optional: sequential sort
                 ]);
             }
         }

@@ -27,18 +27,20 @@ interface EditProps {
 
 export default function Edit({ notice, categories, media }: EditProps) {
     const [form, setForm] = useState({
+        id: notice.id,
         title: notice.title,
         slug: notice.slug,
-        content: notice.content || '',
-        publish_date: notice.publish_date, // read-only
-        expiry_date: notice.expiry_date || '',
-        category_id: notice.category_id || (categories[0]?.id ?? 0),
+        content: notice.content,
+        publish_date: notice.publish_date,
+        expiry_date: notice.expiry_date,
+        category_id: notice.category_id,
         status: notice.status,
-        media_id: notice.media_id ?? null,
-        media: notice.media ?? null,
+        media_id: notice.media_id,
+        created_at: notice.created_at,
+        updated_at: notice.updated_at,
     });
 
-    const [selectedMedia, setSelectedMedia] = useState<Media | null>(notice.media ?? null);
+    const [selectedMedia, setSelectedMedia] = useState<Media | null>(notice.attachment ?? null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [errors, setErrors] = useState<any>({});
     const [recentlySuccessful, setRecentlySuccessful] = useState(false);
@@ -78,7 +80,7 @@ export default function Edit({ notice, categories, media }: EditProps) {
                         <div className="grid gap-2">
                             <Label>Category</Label>
                             <Select
-                                value={form.category_id.toString()}
+                                value={form.category_id?.toString()}
                                 onChange={(e) => setForm({ ...form, category_id: Number(e.target.value) })}
                                 options={categories.map((cat) => ({
                                     value: cat.id.toString(),
@@ -94,7 +96,7 @@ export default function Edit({ notice, categories, media }: EditProps) {
                         <AppDatePicker label="Publish Date" value={form.publish_date} disabled small />
                         <AppDatePicker
                             label="Expiry Date"
-                            value={form.expiry_date?.split('T')[0]}
+                            value={form?.expiry_date?.split('T')[0] || ''}
                             onChange={(val) => setForm({ ...form, expiry_date: val })}
                             error={errors.expiry_date}
                             small
@@ -111,7 +113,7 @@ export default function Edit({ notice, categories, media }: EditProps) {
                                     contentClass: 'prose dark:prose-invert max-w-full',
                                 } as any
                             }
-                            data={form.content}
+                            data={form.content || ''}
                             onChange={(_, editor) => setForm({ ...form, content: editor.getData() })}
                         />
                         <InputError message={errors.content} />

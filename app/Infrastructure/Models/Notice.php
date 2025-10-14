@@ -26,9 +26,9 @@ class Notice extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function media()
+    public function attachment()
     {
-        return $this->belongsTo(Media::class);
+        return $this->belongsTo(Media::class, 'media_id');
     }
 
     protected static function newFactory()

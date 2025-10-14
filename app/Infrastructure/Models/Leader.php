@@ -28,9 +28,9 @@ class Leader extends Model
     ];
 
     // Relationships
-    public function media()
+    public function photo()
     {
-        return $this->belongsTo(Media::class);
+        return $this->belongsTo(Media::class, 'media_id');
     }
 
     public function category()

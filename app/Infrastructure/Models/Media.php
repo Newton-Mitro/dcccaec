@@ -15,7 +15,7 @@ class Media extends Model
 
     public function sections()
     {
-        return $this->morphedByMany(PageSection::class, 'mediaable');
+        return $this->morphedByMany(ResourceMedia::class, 'mediaable');
     }
 
     protected $appends = ['url'];

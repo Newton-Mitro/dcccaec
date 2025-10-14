@@ -5,7 +5,7 @@ import IconCardItem from '../../components/service-card-border-icon';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
 import { Page } from '../../types/page';
-import { PageSection } from '../../types/page_section';
+import { PageSection } from '../../types/page_media';
 import ImageCardItem from '../site/components/image-card-item';
 import ImageIconItem from '../site/components/image-icon-item';
 import ImageWrappedContentSection from '../site/components/image-wrapped-content-section';

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePageRequest;
 use App\Infrastructure\Models\Page;
 use App\Infrastructure\Models\Media;
-use App\Infrastructure\Models\PageSection;
+use App\Infrastructure\Models\ResourceMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -16,60 +16,41 @@ class PageController extends Controller
 {
     public function index(): Response
     {
-        $pages = Page::latest()->paginate(perPage: 15);
+        $pages = Page::with('featuredImage')->latest()->paginate(15);
 
         return Inertia::render('pages/index', [
-            'pages' => $pages
+            'pages' => $pages,
         ]);
     }
 
     public function create(Request $request): Response
     {
-        $perPage = $request->input('perPage', 20);
-        $type = $request->input('type', 'all');
-        $query = Media::query();
-        if ($type !== 'all') {
-            switch ($type) {
-                case 'images':
-                    $query->where('file_type', 'like', 'image/%');
-                    break;
-                case 'videos':
-                    $query->where('file_type', 'like', 'video/%');
-                    break;
-                case 'audio':
-                    $query->where('file_type', 'like', 'audio/%');
-                    break;
-                case 'pdf':
-                    $query->where('file_type', 'application/pdf');
-                    break;
-            }
-        }
-        $media = $query->latest()->paginate($perPage)->withQueryString();
+        $media = $this->filterMedia($request);
 
         return Inertia::render('pages/create', [
             'media' => $media
         ]);
     }
 
-    public function store(StorePageRequest $request)
+    public function store(StorePageRequest $request): RedirectResponse
     {
         DB::transaction(function () use ($request) {
-            $title = $request->input('title');
-
-            $slug = $request->input('slug')
-                ?: Page::generateUniqueSlug($title);
-
             $page = Page::create([
-                'title' => $title,
-                'slug' => $slug,
+                'title' => $request->input('title'),
+                'slug' => $request->input('slug') ?: Page::generateUniqueSlug($request->input('title')),
                 'meta_title' => $request->input('meta_title'),
                 'meta_description' => $request->input('meta_description'),
-                'parent_id' => $request->input('parent_id'),
+                'meta_keywords' => $request->input('meta_keywords'),
+                'content' => $request->input('content'),
+                'excerpt' => $request->input('excerpt'),
+                'json_array' => $request->input('json_array'),
+                'button_text' => $request->input('button_text'),
+                'button_link' => $request->input('button_link'),
+                'media_id' => $request->input('media_id'),
+                'predefined' => $request->boolean('predefined', false),
             ]);
 
-            foreach ($request->input('sections', []) as $section) {
-                $page->sections()->create($section);
-            }
+            $this->syncGallery($page, $request->input('gallery', []));
         });
 
         return redirect()->route('pages.index')->with('success', 'Page created successfully.');
@@ -77,84 +58,49 @@ class PageController extends Controller
 
     public function show(Page $page): Response
     {
-        $sections = PageSection::with('media')
-            ->where('page_id', $page->id)
-            ->orderBy('sort_order', 'asc')
-            ->get();
+        $page->load(['featuredImage', 'gallery.media']);
 
         return Inertia::render('pages/show', [
             'page' => $page,
-            'sections' => $sections,
+            'gallery' => $page->gallery,
         ]);
     }
 
     public function edit(Page $page, Request $request): Response
     {
-        $perPage = $request->input('perPage', 20);
-        $type = $request->input('type', 'all');
-        $query = Media::query();
-        if ($type !== 'all') {
-            switch ($type) {
-                case 'images':
-                    $query->where('file_type', 'like', 'image/%');
-                    break;
-                case 'videos':
-                    $query->where('file_type', 'like', 'video/%');
-                    break;
-                case 'audio':
-                    $query->where('file_type', 'like', 'audio/%');
-                    break;
-                case 'pdf':
-                    $query->where('file_type', 'application/pdf');
-                    break;
-            }
-        }
-        $media = $query->latest()->paginate($perPage)->withQueryString();
-
-        $sections = PageSection::with('media')
-            ->where('page_id', $page->id)
-            ->orderBy('sort_order', 'asc')
-            ->get();
+        $media = $this->filterMedia($request);
+        $page->load(['featuredImage', 'gallery.media']);
 
         return Inertia::render('pages/edit', [
             'page' => $page,
-            'sections' => $sections,
+            'gallery' => $page->gallery,
             'media' => $media,
             'filters' => [
-                'type' => $type,
-                'perPage' => $perPage,
+                'type' => $request->input('type', 'all'),
+                'perPage' => $request->input('perPage', 20),
             ],
         ]);
     }
 
-    public function update(StorePageRequest $request, Page $page)
+    public function update(StorePageRequest $request, Page $page): RedirectResponse
     {
         DB::transaction(function () use ($request, $page) {
-            $page->update($request->only([
-                'title',
-                'slug',
-                'meta_title',
-                'meta_description',
-                'parent_id'
-            ]));
+            $page->update([
+                'title' => $request->input('title'),
+                'slug' => $request->input('slug') ?: Page::generateUniqueSlug($request->input('title')),
+                'meta_title' => $request->input('meta_title'),
+                'meta_description' => $request->input('meta_description'),
+                'meta_keywords' => $request->input('meta_keywords'),
+                'content' => $request->input('content'),
+                'excerpt' => $request->input('excerpt'),
+                'json_array' => $request->input('json_array'),
+                'button_text' => $request->input('button_text'),
+                'button_link' => $request->input('button_link'),
+                'media_id' => $request->input('media_id'),
+                'predefined' => $request->boolean('predefined', false),
+            ]);
 
-            $existingIds = $page->sections()->pluck('id')->toArray();
-            $incomingIds = collect($request->sections ?? [])->pluck('id')->filter()->toArray();
-
-            // Delete removed sections
-            $toDelete = array_diff($existingIds, $incomingIds);
-            if (!empty($toDelete)) {
-                PageSection::whereIn('id', $toDelete)->delete();
-            }
-
-            // Upsert sections
-            foreach ($request->sections ?? [] as $section) {
-                if (isset($section['id'])) {
-                    PageSection::where('id', $section['id'])->update($section);
-                } else {
-                    $page->sections()->create($section);
-                }
-            }
+            $this->syncGallery($page, $request->input('gallery', []));
         });
 
         return redirect()->route('pages.index')->with('success', 'Page updated successfully.');
@@ -164,7 +110,59 @@ class PageController extends Controller
     {
         $page->delete();
 
-        return redirect()->route('pages.index')
-            ->with('success', 'Page deleted successfully.');
+        return redirect()->route('pages.index')->with('success', 'Page deleted successfully.');
+    }
+
+    /**
+     * Filter media based on type and paginate.
+     */
+    private function filterMedia(Request $request)
+    {
+        $type = $request->input('type', 'all');
+        $perPage = $request->input('perPage', 20);
+
+        $query = Media::query();
+
+        match ($type) {
+            'images' => $query->where('file_type', 'like', 'image/%'),
+            'videos' => $query->where('file_type', 'like', 'video/%'),
+            'audio' => $query->where('file_type', 'like', 'audio/%'),
+            'pdf' => $query->where('file_type', 'application/pdf'),
+            default => null,
+        };
+
+        return $query->latest()->paginate($perPage)->withQueryString();
+    }
+
+    /**
+     * Sync gallery items (ResourceMedia) for a page.
+     */
+    private function syncGallery(Page $page, array $galleryItems): void
+    {
+        $existingIds = $page->gallery()->pluck('id')->toArray();
+        $incomingIds = collect($galleryItems)->pluck('id')->filter()->toArray();
+
+        // Delete removed items
+        $toDelete = array_diff($existingIds, $incomingIds);
+        if (!empty($toDelete)) {
+            ResourceMedia::whereIn('id', $toDelete)->delete();
+        }
+
+        // Create or update gallery items
+        foreach ($galleryItems as $item) {
+            if (isset($item['id'])) {
+                ResourceMedia::where('id', $item['id'])->update([
+                    'media_id' => $item['media_id'],
+                    'caption' => $item['caption'] ?? null,
+                    'description' => $item['description'] ?? null,
+                ]);
+            } else {
+                $page->gallery()->create([
+                    'media_id' => $item['media_id'],
+                    'caption' => $item['caption'] ?? null,
+                    'description' => $item['description'] ?? null,
+                ]);
+            }
+        }
     }
 }

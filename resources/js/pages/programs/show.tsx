@@ -10,6 +10,7 @@ interface Props {
 }
 
 export default function Show({ program }: Props) {
+    console.log(program);
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Dashboard', href: '/dashboard' },
         { title: 'Programs', href: route('programs.index') },
@@ -24,9 +25,9 @@ export default function Show({ program }: Props) {
 
                 {/* Top section: main image + summary info */}
                 <div className="space-y-4">
-                    {program.media && (
+                    {program.featured_image && (
                         <img
-                            src={program.media.url}
+                            src={program.featured_image.url}
                             alt={program.name}
                             style={{
                                 clipPath: 'polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%)',
@@ -79,23 +80,15 @@ export default function Show({ program }: Props) {
                     </div>
                 </div>
 
-                {/* Icon Media */}
-                {program.media && (
-                    <div className="mt-4">
-                        <h3 className="mb-2 font-semibold">Icon / Main Image</h3>
-                        <img src={program.media.url} alt="Icon" className="h-24 w-24 rounded object-cover" />
-                    </div>
-                )}
-
                 {/* Gallery */}
                 {program.gallery && program.gallery.length > 0 && (
                     <div className="clear-both">
                         <h3 className="my-6 font-semibold">Gallery</h3>
                         <div className="flex flex-wrap gap-2">
-                            {program.gallery.map((url, idx) => (
+                            {program.gallery.map((attachment, idx) => (
                                 <img
                                     key={idx}
-                                    src={url}
+                                    src={attachment?.media?.url || ''}
                                     alt={`Gallery ${idx}`}
                                     className="h-40 w-40 rounded object-cover"
                                     style={{

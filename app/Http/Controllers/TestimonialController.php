@@ -13,7 +13,7 @@ class TestimonialController extends Controller
     {
         $perPage = $request->input('perPage', 20);
 
-        $testimonials = Testimonial::with('media')
+        $testimonials = Testimonial::with('clientImage')
             ->latest()
             ->paginate($perPage)
             ->withQueryString();
@@ -71,7 +71,7 @@ class TestimonialController extends Controller
     public function show(Testimonial $testimonial)
     {
         return Inertia::render('testimonials/show', [
-            'testimonial' => $testimonial->load('media'),
+            'testimonial' => $testimonial->load('clientImage'),
         ]);
     }
 
@@ -99,7 +99,7 @@ class TestimonialController extends Controller
         $media = $query->latest()->paginate($perPage)->withQueryString();
 
         return Inertia::render('testimonials/edit', [
-            'testimonial' => $testimonial->load('media'),
+            'testimonial' => $testimonial->load('clientImage'),
             'media' => $media,
         ]);
     }

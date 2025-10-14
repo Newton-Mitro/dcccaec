@@ -23,9 +23,9 @@ export default function Show({ award }: Props) {
                 <HeadingSmall title={award.title} description={`Year: ${award.year}`} />
 
                 {/* Media */}
-                {award.media?.url && (
+                {award.featured_image?.url && (
                     <div className="my-4">
-                        <img src={award.media.url} alt={award.title} className="max-h-96 rounded object-cover shadow-md" />
+                        <img src={award.featured_image.url} alt={award.title} className="max-h-96 rounded object-cover shadow-md" />
                     </div>
                 )}
 

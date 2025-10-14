@@ -12,14 +12,14 @@ class Gallery extends Model
 
     protected $fillable = ['title', 'description', 'media_id'];
 
-    public function media()
+    public function featuredImage()
     {
-        return $this->belongsTo(Media::class);
+        return $this->belongsTo(Media::class, 'media_id');
     }
 
-    public function mediaItems()
+    public function items()
     {
-        return $this->hasMany(GalleryMedia::class);
+        return $this->morphMany(ResourceMedia::class, 'resource');
     }
 
 

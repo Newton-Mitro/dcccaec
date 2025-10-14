@@ -31,7 +31,7 @@ export default function Edit({ heroSlide, media }: EditProps) {
     });
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedMedia, setSelectedMedia] = useState<Media | null>(heroSlide.media || null);
+    const [selectedMedia, setSelectedMedia] = useState<Media | null>(heroSlide.featured_image || null);
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();

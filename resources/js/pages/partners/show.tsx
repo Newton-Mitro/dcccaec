@@ -15,7 +15,7 @@ export default function Show({ partner }: ShowProps) {
         { title: partner.name, href: '' },
     ];
 
-    const isImage = partner.media?.url && !partner.media.url.toLowerCase().endsWith('.pdf');
+    const isImage = partner.logo?.url && !partner.logo.url.toLowerCase().endsWith('.pdf');
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -32,11 +32,11 @@ export default function Show({ partner }: ShowProps) {
                     </p>
                 )}
 
-                {partner.media &&
+                {partner.logo &&
                     (isImage ? (
-                        <img src={partner.media.url} alt={partner.name} className="h-32 w-32 rounded-full object-cover" />
+                        <img src={partner.logo.url} alt={partner.name} className="h-32 w-32 rounded-full object-cover" />
                     ) : (
-                        <a href={partner.media.url} target="_blank" className="text-blue-600 hover:underline">
+                        <a href={partner.logo.url} target="_blank" className="text-blue-600 hover:underline">
                             View File
                         </a>
                     ))}

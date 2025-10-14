@@ -44,10 +44,12 @@ const Show: React.FC<ShowProps> = ({ gallery }) => {
                     <HeadingSmall title={gallery.title} description={gallery.description} />
 
                     {/* Main Media */}
-                    {gallery.media && (
+                    {gallery.items && (
                         <div className="my-6">
                             <h2 className="mb-2 text-lg font-semibold">Gallery Cover</h2>
-                            <div className="rounded-md">{renderMedia(gallery.media.url, gallery.media.alt_text || gallery.title)}</div>
+                            <div className="rounded-md">
+                                {renderMedia(gallery?.featured_image?.url || '', gallery?.featured_image?.alt_text || gallery.title)}
+                            </div>
                         </div>
                     )}
 
@@ -55,8 +57,8 @@ const Show: React.FC<ShowProps> = ({ gallery }) => {
                     <div className="space-y-4">
                         <h2 className="text-lg font-semibold">Gallery Images</h2>
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                            {gallery.media_items?.length ? (
-                                gallery.media_items.map((item, index) => (
+                            {gallery.items?.length ? (
+                                gallery.items.map((item, index) => (
                                     <div key={index} className="rounded-md border p-2">
                                         {item.media ? (
                                             renderMedia(item.media.url, item.media.alt_text || item.caption || `Media ${index + 1}`)

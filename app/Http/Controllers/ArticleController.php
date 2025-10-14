@@ -15,7 +15,7 @@ class ArticleController extends Controller
     {
         $perPage = $request->input('perPage', 20);
 
-        $articles = Article::with(['media', 'category', 'user'])
+        $articles = Article::with(['media', 'category', 'user', 'featuredImage'])
             ->latest()
             ->paginate($perPage)
             ->withQueryString();
@@ -85,7 +85,7 @@ class ArticleController extends Controller
     public function show(Article $article)
     {
         return Inertia::render('articles/show', [
-            'article' => $article->load(['media', 'category', 'user']),
+            'article' => $article->load(['media', 'category', 'user', 'featuredImage']),
         ]);
     }
 
@@ -114,7 +114,7 @@ class ArticleController extends Controller
         $categories = Category::where('category_of', 'Article')->get();
 
         return Inertia::render('articles/edit', [
-            'article' => $article->load(['media', 'category']),
+            'article' => $article->load(['media', 'category', 'featuredImage']),
             'media' => $media,
             'categories' => $categories,
         ]);

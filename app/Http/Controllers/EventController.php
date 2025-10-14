@@ -13,7 +13,7 @@ class EventController extends Controller
     {
         $perPage = $request->input('perPage', 20);
 
-        $events = Event::with('media')
+        $events = Event::with('gallery', 'featuredImage')
             ->latest()
             ->paginate($perPage)
             ->withQueryString();
@@ -72,7 +72,7 @@ class EventController extends Controller
     public function show(Event $event)
     {
         return Inertia::render('events/show', [
-            'event' => $event->load('media'),
+            'event' => $event->load('gallery', 'featuredImage'),
         ]);
     }
 
@@ -100,7 +100,7 @@ class EventController extends Controller
         $media = $query->latest()->paginate($perPage)->withQueryString();
 
         return Inertia::render('events/edit', [
-            'event' => $event->load('media'),
+            'event' => $event->load('gallery', 'featuredImage'),
             'media' => $media,
         ]);
     }

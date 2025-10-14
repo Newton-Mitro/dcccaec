@@ -13,7 +13,7 @@ class TeamController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->input('perPage', 20);
-        $teams = Team::with('media', 'category')
+        $teams = Team::with('photo', 'category')
             ->latest()
             ->paginate($perPage)
             ->withQueryString();
@@ -89,7 +89,7 @@ class TeamController extends Controller
     public function show(Team $team)
     {
         return Inertia::render('teams/show', [
-            'team' => $team->load('media', 'category'),
+            'team' => $team->load('photo', 'category'),
         ]);
     }
 
@@ -118,7 +118,7 @@ class TeamController extends Controller
         $categories = Category::where('category_of', 'Team')->get();
 
         return Inertia::render('teams/edit', [
-            'team' => $team->load('media'),
+            'team' => $team->load('photo'),
             'categories' => $categories,
             'media' => $media,
         ]);

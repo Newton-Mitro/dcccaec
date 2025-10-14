@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateGalleryRequest;
 use App\Infrastructure\Models\Gallery;
 use App\Infrastructure\Models\GalleryMedia;
 use App\Infrastructure\Models\Media;
+use App\Infrastructure\Models\ResourceMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -17,7 +18,7 @@ class GalleryController extends Controller
 {
     public function index(): Response
     {
-        $galleries = Gallery::with('media')->latest()->paginate(20);
+        $galleries = Gallery::with('items', 'featuredImage')->latest()->paginate(20);
         return Inertia::render('galleries/index', [
             'galleries' => $galleries,
         ]);
@@ -75,7 +76,7 @@ class GalleryController extends Controller
 
     public function show(Gallery $gallery): Response
     {
-        $gallery->load('media', 'mediaItems.media');
+        $gallery->load('featuredImage', 'items.media');
 
         return Inertia::render('galleries/show', [
             'gallery' => $gallery
@@ -104,7 +105,7 @@ class GalleryController extends Controller
             }
         }
         $media = $query->latest()->paginate($perPage)->withQueryString();
-        $gallery->load('media', 'mediaItems.media');
+        $gallery->load('featuredImage', 'items.media');
 
         return Inertia::render('galleries/edit', [
             'gallery' => $gallery,
@@ -126,7 +127,7 @@ class GalleryController extends Controller
             // Delete removed items
             $toDelete = array_diff($existingIds, $incomingIds);
             if (!empty($toDelete)) {
-                GalleryMedia::whereIn('id', $toDelete)->delete();
+                ResourceMedia::whereIn('id', $toDelete)->delete();
             }
 
             // Upsert items
@@ -134,7 +135,7 @@ class GalleryController extends Controller
                 $data = collect($item)->only(['id', 'media_id', 'caption', 'description'])->toArray();
 
                 if (isset($item['id'])) {
-                    GalleryMedia::where('id', $item['id'])->update($data);
+                    ResourceMedia::where('id', $item['id'])->update($data);
                 } else {
                     $gallery->mediaItems()->create($data);
                 }

@@ -33,7 +33,6 @@ export default function Edit({ program, media }: EditProps) {
         category_id: program?.category_id || 0,
         is_active: program?.is_active ?? true,
         featured: program?.featured ?? false,
-        gallery: program?.gallery || [],
         media_id: program?.media_id ?? null,
 
         // Monthly fees
@@ -48,7 +47,7 @@ export default function Edit({ program, media }: EditProps) {
         khata_fee: program?.khata_fee || '',
     });
 
-    const [selectedMedia, setSelectedMedia] = useState<Media | null>(program?.media ?? null);
+    const [selectedMedia, setSelectedMedia] = useState<Media | null>(program?.featured_image ?? null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [errors, setErrors] = useState<any>({});
     const [recentlySuccessful, setRecentlySuccessful] = useState(false);
@@ -172,13 +171,6 @@ export default function Edit({ program, media }: EditProps) {
                             <Label>Khata Fee</Label>
                             <Input value={form.khata_fee} onChange={(e) => setForm({ ...form, khata_fee: e.target.value })} />
                         </div>
-                    </div>
-
-                    {/* Gallery */}
-                    <div className="grid gap-2">
-                        <Label>Gallery URLs (comma separated)</Label>
-                        <Input value={form.gallery.join(',')} onChange={(e) => setForm({ ...form, gallery: e.target.value.split(',') })} />
-                        <InputError message={errors.gallery} />
                     </div>
 
                     {/* Media */}

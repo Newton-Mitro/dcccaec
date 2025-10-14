@@ -17,7 +17,7 @@ class StoreHeroSliderRequest extends FormRequest
             'title' => ['nullable', 'string', 'max:255'],
             'subtitle' => ['nullable', 'string', 'max:255'],
             'button_text' => ['nullable', 'string', 'max:100'],
-            'button_link' => ['nullable', 'url'],
+            'button_link' => ['nullable', 'string', 'max:255'],
             'media_id' => ['required', 'exists:media,id'],
             'sort_order' => ['nullable', 'integer'],
         ];

@@ -34,7 +34,7 @@ export default function Edit({ event, media }: EditProps) {
         status: event.status || 'Active',
     });
 
-    const [selectedMedia, setSelectedMedia] = useState<Media | null>(event.media ?? null);
+    const [selectedMedia, setSelectedMedia] = useState<Media | null>(event.featured_image ?? null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [errors, setErrors] = useState<any>({});
     const [recentlySuccessful, setRecentlySuccessful] = useState(false);

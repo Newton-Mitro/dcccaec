@@ -17,7 +17,7 @@ import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
 import { Media } from '../../types/media';
 import { Page } from '../../types/page';
-import { PageSection } from '../../types/page_section';
+import { PageSection } from '../../types/page_media';
 import { PaginatedData } from '../../types/paginated_meta';
 import MediaBrowserModal from '../media/media_browser_modal';
 
@@ -31,6 +31,7 @@ interface PageForm {
     title: string;
     meta_title?: string | null;
     meta_description?: string | null;
+    meta_keywords?: string | null;
 }
 
 const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
@@ -38,6 +39,7 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
         title: page.title || '',
         meta_title: page.meta_title || '',
         meta_description: page.meta_description || '',
+        meta_keywords: page.meta_keywords || '',
     });
 
     const [pageSections, setPageSections] = useState<PageSection[]>(sections || []);
@@ -59,9 +61,10 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
                     sub_heading: s.sub_heading || '',
                     button_text: s.button_text || '',
                     button_link: s.button_link || '',
+                    content_type: s.content_type || 'HTML',
                     content: s.content || '',
-                    json_array: s.json_array || '',
-                    gallery: s.gallery || '',
+                    json_array: s.json_array ? (typeof s.json_array === 'string' ? s.json_array : JSON.stringify(s.json_array)) : null,
+                    gallery: s.gallery ? (typeof s.gallery === 'string' ? s.gallery : JSON.stringify(s.gallery)) : null,
                     media_id: s.media_id || null,
                     sort_order: s.sort_order ?? idx + 1,
                 })),
@@ -69,35 +72,46 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
             {
                 preserveScroll: true,
                 preserveState: true,
-                onSuccess: () => {
-                    toast.success('Page updated successfully.');
-                },
+                onSuccess: () => toast.success('Page updated successfully.'),
                 onError: (err) => {
-                    const newErrors: any = {};
-
-                    // Page-level errors
-                    if (err.title) newErrors.title = err.title;
-                    if (err.meta_title) newErrors.meta_title = err.meta_title;
-                    if (err.meta_description) newErrors.meta_description = err.meta_description;
-
-                    // Section-level errors
-                    if (err.sections) {
-                        newErrors.sections = {};
-                        Object.keys(err.sections).forEach((key) => {
-                            const idxMatch = key.match(/^sections\.(\d+)\.(.+)$/);
-                            if (idxMatch) {
-                                const idx = parseInt(idxMatch[1], 10);
-                                const field = idxMatch[2];
-                                if (!newErrors.sections[idx]) newErrors.sections[idx] = {};
-                                newErrors.sections[idx][field] = err.sections[key];
-                            }
-                        });
-                    }
-
-                    setErrors(newErrors);
+                    console.log(err);
+                    setErrors(formatErrors(err));
                 },
             },
         );
+    };
+
+    const safeJsonParse = (value: string) => {
+        try {
+            return value ? JSON.parse(value) : [];
+        } catch {
+            return [];
+        }
+    };
+
+    const formatErrors = (err: any) => {
+        const newErrors: any = {};
+        if (err.title) newErrors.title = err.title;
+        if (err.meta_title) newErrors.meta_title = err.meta_title;
+        if (err.meta_description) newErrors.meta_description = err.meta_description;
+        if (err.meta_keywords) newErrors.meta_keywords = err.meta_keywords;
+
+        if (err.sections) {
+            newErrors.sections = {};
+            Object.keys(err.sections).forEach((key) => {
+                const match = key.match(/^sections\.(\d+)\.(.+)$/);
+                if (match) {
+                    const idx = parseInt(match[1]);
+                    const field = match[2];
+                    newErrors.sections[idx] = {
+                        ...(newErrors.sections[idx] || {}),
+                        [field]: err.sections[key],
+                    };
+                }
+            });
+        }
+
+        return newErrors;
     };
 
     // --- Section Handlers ---
@@ -110,11 +124,13 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
                 sub_heading: '',
                 button_text: '',
                 button_link: '',
+                content_type: 'HTML',
                 content: '',
-                gallery: '',
+                excerpt: '',
+                json_array: [],
+                gallery: [],
                 media_id: null,
                 media: null,
-                content_type: 'custom_html',
                 sort_order: prev.length + 1,
             },
         ]);
@@ -134,7 +150,6 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
 
     const removeSection = (index: number) => {
         const isDark = document.documentElement.classList.contains('dark');
-
         Swal.fire({
             title: 'Are you sure?',
             text: 'This section will be removed.',
@@ -145,13 +160,9 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
             background: isDark ? '#1f2937' : '#fff',
             color: isDark ? '#f9fafb' : '#111827',
             confirmButtonText: 'Yes, remove it!',
-        }).then((result) => {
-            if (result.isConfirmed) {
-                setPageSections((prev) => {
-                    const updated = [...prev];
-                    updated.splice(index, 1);
-                    return updated;
-                });
+        }).then((res) => {
+            if (res.isConfirmed) {
+                setPageSections((prev) => prev.filter((_, i) => i !== index));
             }
         });
     };
@@ -175,62 +186,48 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Dashboard', href: '/dashboard' },
         { title: 'Pages', href: '/admin/pages' },
-        { title: `Edit Page`, href: '' },
+        { title: 'Edit Page', href: '' },
     ];
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Edit Page" />
             <div className="container-custom h-[calc(100vh-100px)] space-y-8 overflow-auto p-6">
-                <HeadingSmall title="Edit Page" description="Edit page title, meta title, and meta description" />
-                <form onSubmit={handlePageSubmit} className="">
-                    {/* Page Metadata */}
+                <HeadingSmall title="Edit Page" description="Update page metadata and sections" />
+
+                <form onSubmit={handlePageSubmit}>
+                    {/* --- Page Info --- */}
                     <div className="space-y-6 rounded-lg border bg-white p-6 dark:bg-gray-900">
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                             <div className="flex flex-col gap-2">
-                                <Label htmlFor="title">Title</Label>
-                                <Input
-                                    id="title"
-                                    type="text"
-                                    value={pageForm.title}
-                                    onChange={(e) => setPageForm({ ...pageForm, title: e.target.value })}
-                                    placeholder="Page title"
-                                />
+                                <Label>Title</Label>
+                                <Input value={pageForm.title} onChange={(e) => setPageForm({ ...pageForm, title: e.target.value })} />
                                 <InputError message={errors.title} />
                             </div>
-
                             <div className="flex flex-col gap-2">
-                                <Label htmlFor="meta_title">Meta Title</Label>
-                                <Input
-                                    id="meta_title"
-                                    type="text"
-                                    value={pageForm.meta_title || ''}
-                                    onChange={(e) => setPageForm({ ...pageForm, meta_title: e.target.value })}
-                                    placeholder="Meta title"
-                                />
+                                <Label>Meta Title</Label>
+                                <Input value={pageForm.meta_title || ''} onChange={(e) => setPageForm({ ...pageForm, meta_title: e.target.value })} />
                                 <InputError message={errors.meta_title} />
                             </div>
-
                             <div className="flex flex-col gap-2 md:col-span-3">
-                                <Label htmlFor="meta_description">Meta Description</Label>
+                                <Label>Meta Description</Label>
                                 <Textarea
-                                    id="meta_description"
+                                    rows={3}
                                     value={pageForm.meta_description || ''}
                                     onChange={(e) => setPageForm({ ...pageForm, meta_description: e.target.value })}
-                                    rows={3}
                                 />
                                 <InputError message={errors.meta_description} />
                             </div>
                         </div>
                     </div>
 
-                    {/* Page Sections */}
+                    {/* --- Sections --- */}
                     <div className="mt-6 space-y-6">
-                        <HeadingSmall title="Page Sections" description="Add or remove page sections" />
+                        <HeadingSmall title="Page Sections" description="Manage content sections" />
                         {pageSections.map((section, index) => (
                             <div key={index} className="space-y-6 rounded-lg border bg-white p-6 dark:bg-gray-900">
                                 <div className="flex items-center justify-between">
-                                    <HeadingSmall title={`Section ${index + 1}`} description="Edit section details" />
+                                    <HeadingSmall title={`Section ${index + 1}`} description="Edit section content" />
                                     <Tooltip>
                                         <TooltipTrigger asChild>
                                             <Button
@@ -247,108 +244,91 @@ const Edit: React.FC<EditProps> = ({ page, sections, media }) => {
                                 </div>
 
                                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                                    <div className="flex flex-col gap-2">
+                                    <div>
                                         <Label>Heading</Label>
-                                        <Input
-                                            type="text"
-                                            value={section.heading || ''}
-                                            onChange={(e) => updateSectionField(index, 'heading', e.target.value)}
-                                            placeholder="Heading"
-                                        />
-                                        <InputError message={errors.sections?.[index]?.heading} />
+                                        <Input value={section.heading || ''} onChange={(e) => updateSectionField(index, 'heading', e.target.value)} />
                                     </div>
-                                    <div className="flex flex-col gap-2">
+                                    <div>
                                         <Label>Sub Heading</Label>
                                         <Input
-                                            type="text"
                                             value={section.sub_heading || ''}
                                             onChange={(e) => updateSectionField(index, 'sub_heading', e.target.value)}
-                                            placeholder="Sub Heading"
                                         />
-                                        <InputError message={errors.sections?.[index]?.sub_heading} />
                                     </div>
-                                    <div className="flex flex-col gap-2">
-                                        <Label>Button Text</Label>
-                                        <Input
-                                            type="text"
-                                            value={section.button_text || ''}
-                                            onChange={(e) => updateSectionField(index, 'button_text', e.target.value)}
-                                            placeholder="Button Text"
-                                        />
-                                        <InputError message={errors.sections?.[index]?.button_text} />
+                                    <div>
+                                        <Label>Content Type</Label>
+                                        <select
+                                            className="rounded-md border p-2 dark:bg-gray-800"
+                                            value={section.content_type || 'HTML'}
+                                            onChange={(e) => updateSectionField(index, 'content_type', e.target.value)}
+                                        >
+                                            <option value="HTML">HTML</option>
+                                            <option value="TEXT">TEXT</option>
+                                        </select>
                                     </div>
-                                    <div className="flex flex-col gap-2">
-                                        <Label>Button Link</Label>
-                                        <Input
-                                            type="text"
-                                            value={section.button_link || ''}
-                                            onChange={(e) => updateSectionField(index, 'button_link', e.target.value)}
-                                            placeholder="Button Link"
-                                        />
-                                        <InputError message={errors.sections?.[index]?.button_link} />
-                                    </div>
-                                </div>
-
-                                <div className="mt-2 grid grid-cols-1 gap-4 md:grid-cols-2">
-                                    <div className="flex flex-col gap-2">
+                                    <div>
                                         <Label>Sort Order</Label>
                                         <Input
                                             type="number"
                                             value={section.sort_order || 0}
-                                            onChange={(e) => updateSectionField(index, 'sort_order', parseInt(e.target.value, 10))}
+                                            onChange={(e) => updateSectionField(index, 'sort_order', parseInt(e.target.value))}
                                         />
-                                        <InputError message={errors.sections?.[index]?.sort_order} />
                                     </div>
                                 </div>
 
-                                <div className="mt-2">
-                                    <Label>Json Array</Label>
+                                {/* Content Editor */}
+                                {section.content_type === 'HTML' ? (
+                                    <div className="mt-2">
+                                        <Label>HTML Content</Label>
+                                        <CKEditor
+                                            editor={ClassicEditor as any}
+                                            data={section.content || ''}
+                                            onChange={(_, editor) => updateSectionField(index, 'content', editor.getData())}
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="mt-2">
+                                        <Label>Text Content</Label>
+                                        <Textarea
+                                            rows={5}
+                                            value={section.content || ''}
+                                            onChange={(e) => updateSectionField(index, 'content', e.target.value)}
+                                        />
+                                    </div>
+                                )}
+
+                                <div>
+                                    <Label>JSON Array (optional)</Label>
                                     <Textarea
                                         rows={5}
-                                        value={section.json_array || ''}
-                                        onChange={(e) => updateSectionField(index, 'json_array', e.target.value)}
-                                        placeholder='[{"title":"", "subtitle":"", "image":"", "icon":"", "question":"", "answer":""}]'
-                                    />
-
-                                    <InputError message={errors.sections?.[index]?.json_array} />
-                                </div>
-
-                                <div className="mt-2">
-                                    <Label>Content</Label>
-                                    <CKEditor
-                                        editor={ClassicEditor as any}
-                                        config={
-                                            {
-                                                contentClass: 'prose dark:prose-invert max-w-full',
-                                            } as any
+                                        value={
+                                            typeof section.json_array === 'string'
+                                                ? section.json_array
+                                                : JSON.stringify(section.json_array || [], null, 2)
                                         }
-                                        data={section.content || ''}
-                                        onChange={(_, editor) => updateSectionField(index, 'content', editor.getData())}
+                                        onChange={(e) => updateSectionField(index, 'json_array', e.target.value)}
                                     />
-
-                                    <InputError message={errors.sections?.[index]?.content} />
                                 </div>
 
-                                <div className="flex flex-col gap-2">
-                                    <Label>Gallery URLs</Label>
-                                    <Input
-                                        type="text"
-                                        value={section.gallery || ''}
+                                <div>
+                                    <Label>Gallery (optional)</Label>
+                                    <Textarea
+                                        rows={3}
+                                        value={typeof section.gallery === 'string' ? section.gallery : JSON.stringify(section.gallery || [], null, 2)}
                                         onChange={(e) => updateSectionField(index, 'gallery', e.target.value)}
                                     />
-                                    <InputError message={errors.sections?.[index]?.gallery} />
                                 </div>
 
-                                <div className="mt-2 flex flex-col">
+                                <div>
                                     <MediaSelector
                                         media={section.media}
                                         onSelect={() => openMediaModal(index)}
                                         onRemove={() => updateSectionField(index, { media: null, media_id: null })}
                                     />
-                                    <InputError message={errors.sections?.[index]?.media_id} />
                                 </div>
                             </div>
                         ))}
+
                         <Button type="button" onClick={addSection} variant="outline" className="flex items-center gap-2">
                             <PlusCircleIcon className="h-5 w-5" /> Add Section
                         </Button>

@@ -68,22 +68,26 @@ const Index: React.FC<IndexProps> = ({ galleries }) => {
 
                 <div className="h-[calc(100vh-320px)] space-y-8 overflow-auto">
                     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-                        {galleries.data.map((slide) => (
+                        {galleries.data.map((gallery) => (
                             <div
-                                key={slide.id}
+                                key={gallery.id}
                                 className="relative rounded border border-gray-200 bg-white p-2 hover:border-blue-500 dark:border-gray-700 dark:bg-neutral-900 dark:hover:border-blue-400"
                             >
-                                <div className="cursor-pointer" onClick={() => router.visit(route('galleries.show', slide.id))}>
-                                    <img src={slide.media?.url} alt={slide.media?.alt_text || 'media'} className="h-32 w-full rounded object-cover" />
+                                <div className="cursor-pointer" onClick={() => router.visit(route('galleries.show', gallery.id))}>
+                                    <img
+                                        src={gallery.featured_image?.url}
+                                        alt={gallery.featured_image?.alt_text || 'media'}
+                                        className="h-32 w-full rounded object-cover"
+                                    />
                                     <p className="mt-1 truncate text-center text-xs text-gray-700 sm:text-sm dark:text-gray-300">Associate With</p>
-                                    <p className="mt-2 truncate text-center text-xs text-gray-900 sm:text-sm dark:text-gray-100">{slide.title}</p>
+                                    <p className="mt-2 truncate text-center text-xs text-gray-900 sm:text-sm dark:text-gray-100">{gallery.title}</p>
                                 </div>
 
                                 {/* View, Edit, Delete Buttons */}
                                 <div className="absolute top-2 right-2 flex gap-1">
                                     {/* View Button */}
                                     <button
-                                        onClick={() => router.visit(route('galleries.show', slide.id))}
+                                        onClick={() => router.visit(route('galleries.show', gallery.id))}
                                         className="rounded bg-blue-600 p-1 shadow hover:bg-blue-500 dark:bg-blue-700 dark:hover:bg-blue-600"
                                     >
                                         <span className="sr-only">View</span>
@@ -92,7 +96,7 @@ const Index: React.FC<IndexProps> = ({ galleries }) => {
 
                                     {/* Edit Button */}
                                     <button
-                                        onClick={() => router.visit(route('galleries.edit', slide.id))}
+                                        onClick={() => router.visit(route('galleries.edit', gallery.id))}
                                         className="rounded bg-green-600 p-1 shadow hover:bg-green-500 dark:bg-green-700 dark:hover:bg-green-600"
                                     >
                                         <span className="sr-only">Edit</span>
@@ -101,7 +105,7 @@ const Index: React.FC<IndexProps> = ({ galleries }) => {
 
                                     {/* Delete Button */}
                                     <button
-                                        onClick={() => deleteGallery(slide.id)}
+                                        onClick={() => deleteGallery(gallery.id)}
                                         className="rounded bg-red-600 p-1 shadow hover:bg-red-500 dark:bg-red-700 dark:hover:bg-red-600"
                                     >
                                         <span className="sr-only">Delete</span>

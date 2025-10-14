@@ -13,7 +13,7 @@ class PartnerController extends Controller
     {
         $perPage = $request->input('perPage', 20);
 
-        $partners = Partner::with('media')
+        $partners = Partner::with('logo')
             ->latest()
             ->paginate($perPage)
             ->withQueryString();
@@ -67,7 +67,7 @@ class PartnerController extends Controller
     public function show(Partner $partner)
     {
         return Inertia::render('partners/show', [
-            'partner' => $partner->load('media'),
+            'partner' => $partner->load('logo'),
         ]);
     }
 
@@ -95,7 +95,7 @@ class PartnerController extends Controller
         $media = $query->latest()->paginate($perPage)->withQueryString();
 
         return Inertia::render('partners/edit', [
-            'partner' => $partner->load('media'),
+            'partner' => $partner->load('logo'),
             'media' => $media,
         ]);
     }

@@ -6,26 +6,32 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class StorePageRequest extends FormRequest
 {
-    public function rules()
+    public function authorize(): bool
+    {
+        return true; // Adjust as needed for your auth policy
+    }
+
+    public function rules(): array
     {
         return [
-            'title' => 'required|string|max:255',
-            'meta_title' => 'nullable|string|max:255',
-            'meta_description' => 'nullable|string',
-            'parent_id' => 'nullable|exists:pages,id',
+            'title' => ['required', 'string', 'max:255'],
+            'slug' => ['nullable', 'string', 'max:255', 'unique:pages,slug,' . $this->route('page')],
+            'meta_title' => ['nullable', 'string', 'max:255'],
+            'meta_description' => ['nullable', 'string'],
+            'meta_keywords' => ['nullable', 'string'],
+            'content' => ['nullable', 'string'],
+            'excerpt' => ['nullable', 'string'],
+            'json_array' => ['nullable', 'json'],
+            'button_text' => ['nullable', 'string', 'max:255'],
+            'button_link' => ['nullable', 'string', 'max:255'],
+            'media_id' => ['nullable', 'exists:media,id'],
+            'predefined' => ['boolean'],
 
-            'sections' => 'array',
-            'sections.*.id' => 'nullable|exists:page_sections,id',
-            'sections.*.heading' => 'nullable|string|max:255',
-            'sections.*.sub_heading' => 'nullable|string|max:255',
-            'sections.*.button_text' => 'nullable|string|max:255',
-            'sections.*.button_link' => 'nullable|string|max:255',
-            'sections.*.content' => 'nullable|string',
-            'sections.*.gallery' => 'nullable|string',
-            'sections.*.media_id' => 'nullable|exists:media,id',
-            'sections.*.content_type' => 'in:json_array,custom_html',
-            'sections.*.sort_order' => 'integer',
+            // Related media gallery
+            'gallery' => ['array'],
+            'gallery.*.media_id' => ['required', 'exists:media,id'],
+            'gallery.*.caption' => ['nullable', 'string', 'max:255'],
+            'gallery.*.description' => ['nullable', 'string'],
         ];
     }
 }
-

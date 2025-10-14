@@ -14,7 +14,7 @@ class ProgramController extends Controller
     {
         $perPage = $request->input('perPage', 20);
 
-        $programs = Program::with(['media', 'category'])
+        $programs = Program::with(['featuredImage', 'gallery.media', 'category'])
             ->latest()
             ->paginate($perPage)
             ->withQueryString();
@@ -90,7 +90,7 @@ class ProgramController extends Controller
     public function show(Program $program)
     {
         return Inertia::render('programs/show', [
-            'program' => $program->load(['media', 'category']),
+            'program' => $program->load(['featuredImage', 'gallery.media', 'category']),
         ]);
     }
 
@@ -119,7 +119,7 @@ class ProgramController extends Controller
         $categories = Category::where('category_of', 'Program')->get();
 
         return Inertia::render('programs/edit', [
-            'program' => $program->load(['media']),
+            'program' => $program->load(['featuredImage', 'gallery.media', 'category']),
             'media' => $media,
             'categories' => $categories,
         ]);

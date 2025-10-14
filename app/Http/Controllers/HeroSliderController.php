@@ -15,7 +15,7 @@ class HeroSliderController extends Controller
 {
     public function index(): Response
     {
-        $sliders = HeroSlider::with('media')->orderBy('sort_order', 'asc')->paginate(10);
+        $sliders = HeroSlider::with('featuredImage')->orderBy('sort_order', 'asc')->paginate(10);
 
         return Inertia::render('hero_slides/index', [
             'sliders' => $sliders,
@@ -63,7 +63,7 @@ class HeroSliderController extends Controller
     public function show(HeroSlider $hero_slider): Response
     {
         return Inertia::render('hero_slides/show', [
-            'heroSlide' => $hero_slider->load('media'),
+            'heroSlide' => $hero_slider->load('featuredImage'),
         ]);
     }
 
@@ -91,10 +91,11 @@ class HeroSliderController extends Controller
         $media = $query->latest()->paginate($perPage)->withQueryString();
 
         return Inertia::render('hero_slides/edit', [
-            'heroSlide' => $hero_slider->load('media'),
+            'heroSlide' => $hero_slider->load('featuredImage'),
             'media' => $media
         ]);
     }
+
 
     public function update(UpdateHeroSliderRequest $request, HeroSlider $hero_slider): RedirectResponse
     {

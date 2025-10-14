@@ -1,6 +1,6 @@
 import { Media } from './media';
 
-export interface GalleryMediaItem {
+export interface ResourceMedia {
     id?: number;
     gallery_id?: number;
     media_id: number | null;
@@ -20,6 +20,6 @@ export interface Gallery {
     created_at: string;
     updated_at: string;
 
-    media?: Media; // optional relation
-    media_items?: GalleryMediaItem[]; // optional related media entries
+    featured_image?: Media; // optional relation
+    items: ResourceMedia[]; // optional related media entries
 }

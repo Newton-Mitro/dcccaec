@@ -1,11 +1,13 @@
 import { X } from 'lucide-react';
 import React, { useState } from 'react';
+import { ResourceMedia } from '../../../types/gallery';
 
 interface SectionGalleryProps {
-    gallery: string[];
+    gallery: ResourceMedia[];
 }
 
 const SectionGallery: React.FC<SectionGalleryProps> = ({ gallery }) => {
+    console.log('Gallery', gallery);
     const [currentIndex, setCurrentIndex] = useState<number | null>(null);
 
     const isImage = (url: string) => /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(url);
@@ -38,13 +40,13 @@ const SectionGallery: React.FC<SectionGalleryProps> = ({ gallery }) => {
                                 }}
                             >
                                 {/* Image */}
-                                {isImage(attachment) ? (
+                                {isImage(attachment.media?.url || '') ? (
                                     <img
-                                        src={attachment}
+                                        src={attachment.media?.url || ''}
                                         className="absolute inset-0 h-full w-full bg-card object-cover transition-transform duration-700 group-hover:scale-105"
                                     />
-                                ) : isVideo(attachment) ? (
-                                    <video src={attachment} className="h-full w-full object-cover" muted playsInline />
+                                ) : isVideo(attachment.media?.url || '') ? (
+                                    <video src={attachment.media?.url || ''} className="h-full w-full object-cover" muted playsInline />
                                 ) : (
                                     <div className="flex h-full w-full items-center justify-center bg-card text-xs text-card-foreground">File</div>
                                 )}
@@ -95,11 +97,15 @@ const SectionGallery: React.FC<SectionGalleryProps> = ({ gallery }) => {
                         </button>
 
                         {/* Media Preview */}
-                        {isImage(gallery[currentIndex]) ? (
-                            <img src={gallery[currentIndex]} alt={`preview-${currentIndex}`} className="max-h-[80vh] w-full object-contain" />
-                        ) : isVideo(gallery[currentIndex]) ? (
+                        {isImage(gallery[currentIndex].media?.url || '') ? (
+                            <img
+                                src={gallery[currentIndex].media?.url || ''}
+                                alt={`preview-${currentIndex}`}
+                                className="max-h-[80vh] w-full object-contain"
+                            />
+                        ) : isVideo(gallery[currentIndex].media?.url || '') ? (
                             <video controls className="max-h-[80vh] w-full">
-                                <source src={gallery[currentIndex]} />
+                                <source src={gallery[currentIndex].media?.url || ''} />
                                 Your browser does not support the video tag.
                             </video>
                         ) : (

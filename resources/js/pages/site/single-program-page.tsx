@@ -26,7 +26,7 @@ const SingleProgramPage: React.FC<SingleProgramPageProps> = ({ program }) => {
                 <meta property="og:type" content="website" />
                 <meta property="og:title" content={program.name} />
                 <meta property="og:description" content={metaDescription} />
-                <meta property="og:image" content={program.media?.url ?? ''} />
+                <meta property="og:image" content={program.featured_image?.url ?? ''} />
                 <meta property="og:url" content={pageUrl} />
                 <meta property="og:site_name" content="YourSite" />
 
@@ -34,7 +34,7 @@ const SingleProgramPage: React.FC<SingleProgramPageProps> = ({ program }) => {
                 <meta name="twitter:card" content="summary_large_image" />
                 <meta name="twitter:title" content={program.name} />
                 <meta name="twitter:description" content={metaDescription} />
-                <meta name="twitter:image" content={program.media?.url ?? ''} />
+                <meta name="twitter:image" content={program.featured_image?.url ?? ''} />
 
                 {/* Canonical */}
                 <link rel="canonical" href={pageUrl} />
@@ -52,9 +52,9 @@ const SingleProgramPage: React.FC<SingleProgramPageProps> = ({ program }) => {
                 <section className="bg-background py-16">
                     <div className="container mx-auto max-w-6xl space-y-12 px-4">
                         {/* Program Thumbnail */}
-                        {program.media && (
+                        {program.featured_image && (
                             <div className="overflow-hidden rounded-3xl shadow-lg transition-transform duration-300 hover:scale-105">
-                                <img src={program.media.url} alt={program.name} className="h-[450px] w-full object-cover" />
+                                <img src={program.featured_image.url} alt={program.name} className="h-[450px] w-full object-cover" />
                             </div>
                         )}
 

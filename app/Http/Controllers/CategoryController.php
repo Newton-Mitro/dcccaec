@@ -11,12 +11,10 @@ class CategoryController extends Controller
 {
     public function index(Request $request)
     {
-        $categoryOf = $request->input('category_of'); // e.g., Product, Article, etc.
+        $categoryOf = $request->input('category_of');
 
-        $categories = Category::with('media', 'parent')
-            ->when($categoryOf, function ($query, $categoryOf) {
-                $query->where('category_of', $categoryOf);
-            })
+        $categories = Category::with('featuredImage', 'parent')
+            ->when($categoryOf, fn($query) => $query->where('category_of', $categoryOf))
             ->paginate(15)
             ->withQueryString();
 
@@ -31,29 +29,20 @@ class CategoryController extends Controller
     {
         $perPage = $request->input('perPage', 20);
         $type = $request->input('type', 'all');
+
         $query = Media::query();
         if ($type !== 'all') {
-            switch ($type) {
-                case 'images':
-                    $query->where('file_type', 'like', 'image/%');
-                    break;
-                case 'videos':
-                    $query->where('file_type', 'like', 'video/%');
-                    break;
-                case 'audio':
-                    $query->where('file_type', 'like', 'audio/%');
-                    break;
-                case 'pdf':
-                    $query->where('file_type', 'application/pdf');
-                    break;
-            }
+            match ($type) {
+                'images' => $query->where('file_type', 'like', 'image/%'),
+                'videos' => $query->where('file_type', 'like', 'video/%'),
+                'audio' => $query->where('file_type', 'like', 'audio/%'),
+                'pdf' => $query->where('file_type', 'application/pdf'),
+            };
         }
+
         $media = $query->latest()->paginate($perPage)->withQueryString();
 
-        $parents = Category::all();
-
         return Inertia::render('categories/create', [
-            'categories' => $parents,
             'media' => $media,
         ]);
     }
@@ -61,12 +50,15 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'category_of' => 'required|in:Team,Leader,Student,Teacher,Doctor,Service,Product,Project,Event,Notice,Article',
+            'category_of' => 'required|in:' . implode(',', Category::types()),
             'name' => 'required|string|max:255',
             'slug' => 'required|string|unique:categories,slug',
             'description' => 'nullable|string',
             'media_id' => 'nullable|exists:media,id',
-            'parent_id' => 'nullable|exists:categories,id',
+            'media' => 'nullable|array', // polymorphic media
+            'media.*.id' => 'required|exists:media,id',
+            'media.*.caption' => 'nullable|string',
+            'media.*.description' => 'nullable|string',
         ]);
 
         Category::create($data);
@@ -77,7 +69,7 @@ class CategoryController extends Controller
     public function show(Category $category)
     {
         return Inertia::render('categories/show', [
-            'category' => $category->load('media', 'parent')
+            'category' => $category->load('featuredImage', 'parent')
         ]);
     }
 
@@ -85,29 +77,22 @@ class CategoryController extends Controller
     {
         $perPage = $request->input('perPage', 20);
         $type = $request->input('type', 'all');
+
         $query = Media::query();
         if ($type !== 'all') {
-            switch ($type) {
-                case 'images':
-                    $query->where('file_type', 'like', 'image/%');
-                    break;
-                case 'videos':
-                    $query->where('file_type', 'like', 'video/%');
-                    break;
-                case 'audio':
-                    $query->where('file_type', 'like', 'audio/%');
-                    break;
-                case 'pdf':
-                    $query->where('file_type', 'application/pdf');
-                    break;
-            }
+            match ($type) {
+                'images' => $query->where('file_type', 'like', 'image/%'),
+                'videos' => $query->where('file_type', 'like', 'video/%'),
+                'audio' => $query->where('file_type', 'like', 'audio/%'),
+                'pdf' => $query->where('file_type', 'application/pdf'),
+            };
         }
-        $media = $query->latest()->paginate($perPage)->withQueryString();
 
+        $media = $query->latest()->paginate($perPage)->withQueryString();
         $parents = Category::all();
 
         return Inertia::render('categories/edit', [
-            'category' => $category->load('media'),
+            'category' => $category->load('featuredImage'),
             'categories' => $parents,
             'media' => $media,
         ]);
@@ -116,12 +101,15 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $data = $request->validate([
-            'category_of' => 'required|in:Team,Leader,Student,Teacher,Doctor,Service,Product,Project,Event,Notice,Article',
+            'category_of' => 'required|in:' . implode(',', Category::types()),
             'name' => 'required|string|max:255',
             'slug' => 'required|string|unique:categories,slug,' . $category->id,
             'description' => 'nullable|string',
             'media_id' => 'nullable|exists:media,id',
-            'parent_id' => 'nullable|exists:categories,id',
+            'media' => 'nullable|array',
+            'media.*.id' => 'required|exists:media,id',
+            'media.*.caption' => 'nullable|string',
+            'media.*.description' => 'nullable|string',
         ]);
 
         $category->update($data);
@@ -132,7 +120,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
+
         return redirect()->route('categories.index')->with('success', 'Category deleted.');
     }
 }
-

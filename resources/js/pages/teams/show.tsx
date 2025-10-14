@@ -38,7 +38,7 @@ export default function Show({ team }: ShowProps) {
                         {/* Centered Info Card */}
                         <div className="mx-auto w-full max-w-md space-y-4 rounded-lg bg-gray-50 p-6 dark:bg-gray-800">
                             {/* Profile Image */}
-                            {team.media && <img src={team.media.url} alt={team.name} className="mx-auto mb-4 h-48 w-48 rounded-full object-cover" />}
+                            {team.photo && <img src={team.photo.url} alt={team.name} className="mx-auto mb-4 h-48 w-48 rounded-full object-cover" />}
 
                             {/* Info Fields */}
                             <div className="text-center text-gray-700 dark:text-gray-200">

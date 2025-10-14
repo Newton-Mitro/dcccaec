@@ -26,7 +26,7 @@ export default function Edit({ partner, media }: EditProps) {
         status: partner.status,
     });
 
-    const [selectedMedia, setSelectedMedia] = useState<Media | null>(partner.media || null);
+    const [selectedMedia, setSelectedMedia] = useState<Media | null>(partner.logo || null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [errors, setErrors] = useState<any>({});
     const [recentlySuccessful, setRecentlySuccessful] = useState(false);

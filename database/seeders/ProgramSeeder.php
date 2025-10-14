@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Infrastructure\Models\Media;
 use App\Infrastructure\Models\Category;
+use App\Infrastructure\Models\Program;
+use App\Infrastructure\Models\ResourceMedia;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -318,7 +320,28 @@ class ProgramSeeder extends Seeder
             $program['updated_at'] = now();
         }
 
+        // Insert all programs
         DB::table('programs')->insert($programs);
+
+        // Fetch the inserted programs to attach related media
+        $insertedPrograms = Program::all();
+
+        foreach ($insertedPrograms as $program) {
+            $mediaItems = $allImages->random(rand(3, 6)); // random 3–6 related images
+
+            foreach ($mediaItems as $media) {
+                ResourceMedia::create([
+                    'resource_id' => $program->id,
+                    'resource_type' => Program::class,
+                    'media_id' => $media->id,
+                    'caption' => fake()->sentence(),
+                    'description' => fake()->paragraph(),
+                    'sort_order' => rand(0, 10),
+                ]);
+            }
+        }
+
+
 
         $this->command->info("✅ All programs seeded with HTML-rich descriptions, fees, and media.");
     }

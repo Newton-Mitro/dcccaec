@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Infrastructure\Models\Page;
-use App\Infrastructure\Models\PageSection;
+use App\Infrastructure\Models\ResourceMedia;
 use App\Infrastructure\Models\Media;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -25,43 +25,34 @@ class CustomPageSeeder extends Seeder
     $pages = [
       'Mission & Vision' => [
         [
-          'content_type' => 'HTML',
           'content' => '
-                <div class="">
-                    <div class="">
-                        <h2 class="">Our Vision</h2>
-                        <p class="mt-4">Our Vision is a second home for our children, where their growing needs are fulfilled in a safe, healthy, positive and creative environment and where their childhood will remain the happiest days of their lives.</p>
-                    </div>
-                    <div class="">
-                        <h2 class="">Our Mission</h2>
-                        <p class="mt-4">The Mission is to provide a creative environment conducive for the optimal growth and holistic development of children.</p>
-                    </div>
-                </div>'
+                        <div>
+                            <h2>Our Vision</h2>
+                            <p>Our Vision is a second home for our children, where their growing needs are fulfilled in a safe, healthy, positive and creative environment and where their childhood will remain the happiest days of their lives.</p>
+                            <h2>Our Mission</h2>
+                            <p>The Mission is to provide a creative environment conducive for the optimal growth and holistic development of children.</p>
+                        </div>'
         ]
       ],
 
       'Our Story' => [
         [
-          'excerpt' => 'At Dhaka Credit Child Care and Education Center, we nurture every child in a safe, inclusive, and inspiring environment. Recognizing each child’s uniqueness, we work closely with parents to create programs that spark curiosity, creativity, and meaningful social connections. Our mission is to provide a supportive space that promotes holistic growth, helping children thrive emotionally, socially, and academically, while prioritizing safety, health, and positivity.',
+          'excerpt' => 'At Dhaka Credit Child Care and Education Center, we nurture every child in a safe, inclusive, and inspiring environment...',
           'heading' => 'Our Story',
           'sub_heading' => 'How we started',
-          'content_type' => 'HTML',
           'content' => '
-                <section>
-                    <div class="">
-                        <p class="mb-4">At <strong>Dhaka Credit Child Care and Education Center</strong>, we are dedicated to fostering a nurturing and inclusive environment where every child feels secure, respected, and inspired to explore their full potential.</p>
-                        <p class="mb-4">We recognize that each child is unique, and we collaborate closely with parents to tailor our programs to support curiosity, creativity, and meaningful social connections.</p>
-                        <p class="">Our mission is to provide a creative environment conducive to the optimal growth and holistic development of children. We prioritize safety, health, and positivity, ensuring that our space is a place where children can thrive emotionally, socially, and academically.</p>
-                    </div>
-                </section>'
+                        <section>
+                            <p>At <strong>Dhaka Credit Child Care and Education Center</strong>, we are dedicated to fostering a nurturing and inclusive environment where every child feels secure, respected, and inspired to explore their full potential.</p>
+                            <p>We recognize that each child is unique, and we collaborate closely with parents to tailor our programs to support curiosity, creativity, and meaningful social connections.</p>
+                            <p>Our mission is to provide a creative environment conducive to the optimal growth and holistic development of children. We prioritize safety, health, and positivity, ensuring that our space is a place where children can thrive emotionally, socially, and academically.</p>
+                        </section>'
         ]
       ],
 
       'Our Philosophy' => [
         [
-          'content_type' => 'HTML',
           'content' => '
-                <div class="">
+                        <div class="">
                     <div class="">
                         <h2 class="text-3xl font-semibold">Our Philosophy</h2>
                         <p class="mt-4">
@@ -76,9 +67,8 @@ class CustomPageSeeder extends Seeder
         [
           'heading' => 'Message from the President',
           'sub_heading' => 'A word from our leadership.',
-          'content_type' => 'HTML',
           'content' => '
-                <section class="president-message">
+                        <section class="president-message">
   <p>The Dhaka Credit Child Care and Education Centre (DCCCEC) is a place of comfort, safety, and growth for our beloved children. It is a long-cherished dream of The Christian Cooperative Credit Union Ltd., Dhaka, which proudly introduced the first-ever international-standard child care and education service in Bangladesh.</p>
   <p>Established in 2016, DCCCEC was founded to support working parents—especially new mothers—by providing a nurturing environment where children receive motherly care and high-quality early education. Our facilities were built under the supervision of a child care specialist from Singapore, ensuring international standards in both care and learning.</p>
   <p>Despite notable progress in early education across Bangladesh, working parents still face challenges finding reliable child care institutions. Dhaka Credit remains committed to expanding this essential service and making it accessible where it is most needed.</p>
@@ -96,9 +86,8 @@ class CustomPageSeeder extends Seeder
         [
           'heading' => 'Principal’s Speech',
           'sub_heading' => 'Meet our principal.',
-          'content_type' => 'HTML',
           'content' => '
-                <section class="principal-speech">
+                        <section class="principal-speech">
   <p><em>“Children are like wet cement; whatever falls on them makes an impression.” — Haim Ginott</em></p>
   <p>Welcome to the DC Child Care and Education Centre! Early learning and child care build the foundation for a child’s educational and social development in a safe and nurturing environment—while supporting parents in their daily lives.</p>
   <p>As Principal, I am honoured to lead this centre where every day is a chance to learn, explore, and grow. For over two years, DC Child Care has been dedicated to providing high-quality care and education for children in a joyful, caring atmosphere.</p>
@@ -113,11 +102,11 @@ class CustomPageSeeder extends Seeder
 </section>'
         ]
       ],
+
       'Class Rutines' => [
         [
           'heading' => 'Daily Class Routines',
           'sub_heading' => 'A structured, joyful day.',
-          'content_type' => 'HTML',
           'content' => '<section id="class-routines" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Daily Class Routines</h2>
@@ -186,15 +175,14 @@ class CustomPageSeeder extends Seeder
       We ensure that every child experiences a joyful, safe, and engaging day that promotes curiosity, emotional growth, and cognitive development.
     </p>
   </div>
-</section>
-',
+</section>'
         ]
       ],
 
       // Parent Resources
       'Enrollment' => [
         [
-          'content_type' => 'HTML',
+          'heading' => 'Registration & Admission',
           'content' => '<section id="enrollment" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Registration & Admission</h2>
@@ -233,13 +221,13 @@ class CustomPageSeeder extends Seeder
       <li>Child’s inability to adjust to the Centre environment</li>
     </ul>
   </div>
-</section>
-',
+</section>'
         ]
       ],
+
       'Curriculum' => [
         [
-          'content_type' => 'HTML',
+          'heading' => 'Our Curriculum',
           'content' => '<section id="curriculum" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Our Curriculum</h2>
@@ -325,13 +313,13 @@ class CustomPageSeeder extends Seeder
       Our curriculum is carefully designed to ensure every child thrives academically, socially, emotionally, and physically in a safe, nurturing environment.
     </p>
   </div>
-</section>
-',
+</section>'
         ]
       ],
+
       'Rules & Regulations' => [
         [
-          'content_type' => 'HTML',
+          'heading' => 'Rules & Regulations',
           'content' => '<section id="rules-regulations" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Rules & Regulations</h2>
@@ -390,13 +378,13 @@ class CustomPageSeeder extends Seeder
       The management reserves the right to update or modify any rules and regulations with prior notice. Parents will be informed of any changes in writing.
     </p>
   </div>
-</section>
-',
+</section>'
         ]
       ],
+
       'Health & Safety' => [
         [
-          'content_type' => 'HTML',
+          'heading' => 'Health & Safety',
           'content' => '<section id="health-safety" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Health & Safety</h2>
@@ -458,13 +446,13 @@ class CustomPageSeeder extends Seeder
       By combining a safe environment, skilled staff, and clear health policies, we provide children with the foundation to explore, learn, and grow with confidence.
     </p>
   </div>
-</section>
-',
+</section>'
         ]
       ],
+
       'Nutrition & Meals' => [
         [
-          'content_type' => 'HTML',
+          'heading' => 'Nutrition & Meals',
           'content' => '<section id="nutrition-meals" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Nutrition & Meals</h2>
@@ -506,15 +494,14 @@ class CustomPageSeeder extends Seeder
       By providing healthy meals, accommodating special dietary needs, and promoting good eating habits, we help children grow strong, happy, and ready to explore their world.
     </p>
   </div>
-</section>
-',
+</section>'
         ]
       ],
+
       'FAQ' => [
         [
           'heading' => 'Frequently Asked Questions',
           'sub_heading' => 'Find your answers here',
-          'content_type' => 'HTML',
           'content' => '',
           'json_array' => [
             ['question' => 'What are your school hours?', 'answer' => 'We operate from 8:00 AM to 3:00 PM.'],
@@ -530,9 +517,8 @@ class CustomPageSeeder extends Seeder
       // Legal
       'Disclaimer' => [
         [
-          'heading' => 'Page Title', // e.g., 'Privacy Policy'
+          'heading' => 'Disclaimer',
           'sub_heading' => 'Important legal information.',
-          'content_type' => 'HTML',
           'content' => '<section id="disclaimer" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Disclaimer</h2>
@@ -557,15 +543,14 @@ class CustomPageSeeder extends Seeder
       By using this website, you acknowledge and agree to this disclaimer. For any questions or concerns, please contact us directly for clarification.
     </p>
   </div>
-</section>
-',
+</section>'
         ]
       ],
+
       'Terms of Service' => [
         [
-          'heading' => 'Page Title', // e.g., 'Privacy Policy'
+          'heading' => 'Terms of Service',
           'sub_heading' => 'Important legal information.',
-          'content_type' => 'HTML',
           'content' => '<section id="terms-of-service" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Terms of Service</h2>
@@ -603,15 +588,14 @@ class CustomPageSeeder extends Seeder
       By using this website, you acknowledge that you have read, understood, and agree to these Terms of Service. For any questions, please contact us directly.
     </p>
   </div>
-</section>
-',
+</section>'
         ]
       ],
+
       'Privacy Policy' => [
         [
-          'heading' => 'Page Title', // e.g., 'Privacy Policy'
+          'heading' => 'Privacy Policy',
           'sub_heading' => 'Important legal information.',
-          'content_type' => 'HTML',
           'content' => '<section id="privacy-policy" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Privacy Policy</h2>
@@ -659,43 +643,43 @@ class CustomPageSeeder extends Seeder
       If you have any questions or concerns about our privacy practices, please contact us directly.
     </p>
   </div>
-</section>
-',
+</section>'
         ]
       ],
     ];
 
     foreach ($pages as $title => $sections) {
       $slug = Str::slug($title);
-      $excerpt = isset($sections[0]['excerpt']) ? $sections[0]['excerpt'] : $this->faker->paragraph(2);
+      $excerpt = $sections[0]['excerpt'] ?? $this->faker->paragraph(2);
 
       $page = Page::firstOrCreate(
         ['slug' => $slug],
         [
           'title' => $title,
+          'subtitle' => $sections[0]['sub_heading'] ?? null,
           'meta_title' => $title,
           'meta_description' => $excerpt,
           'meta_keywords' => Str::lower(str_replace(' ', ',', $title)),
-          'media_id' => $allImages->random()->id ?? null,
+          'content' => $sections[0]['content'] ?? null,
+          'excerpt' => $excerpt,
+          'json_array' => $sections[0]['json_array'] ?? null,
+          'media_id' => $allImages->isNotEmpty() ? $allImages->random()->id : null,
+          'predefined' => true,
+          'button_text' => $sections[0]['button_text'] ?? null,
+          'button_link' => $sections[0]['button_link'] ?? null,
         ]
       );
 
       foreach ($sections as $index => $section) {
-        PageSection::updateOrCreate(
+        ResourceMedia::updateOrCreate(
           [
-            'page_id' => $page->id,
-            'sort_order' => $index + 1,
+            'resource_id' => $page->id,
+            'resource_type' => Page::class,
           ],
           [
-            'heading' => $section['heading'] ?? null,
-            'sub_heading' => $section['sub_heading'] ?? null,
-            'content_type' => $section['content_type'] ?? 'TEXT',
-            'content' => $section['content'] ?? $this->faker->paragraph(3),
-            'json_array' => json_encode($section['json_array'] ?? []),
-            'gallery' => json_encode($section['gallery'] ?? []),
-            'button_text' => $section['button_text'] ?? null,
-            'button_link' => $section['button_link'] ?? null,
-            'media_id' => $allImages->random()->id ?? null,
+            'caption' => $section['heading'] ?? null,
+            'description' => $section['sub_heading'] ?? null,
+            'media_id' => $allImages->isNotEmpty() ? $allImages->random()->id : null,
           ]
         );
       }

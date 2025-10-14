@@ -17,12 +17,9 @@ class Partner extends Model
         'status',
     ];
 
-    /**
-     * Relationship to Media
-     */
-    public function media()
+    public function logo()
     {
-        return $this->belongsTo(Media::class);
+        return $this->belongsTo(Media::class, 'media_id');
     }
 
     protected static function newFactory()

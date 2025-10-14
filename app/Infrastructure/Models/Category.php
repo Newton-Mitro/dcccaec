@@ -19,11 +19,6 @@ class Category extends Model
         'parent_id',
     ];
 
-    public function projects()
-    {
-        return $this->hasMany(Project::class, 'category_id');
-    }
-
     public static function generateUniqueSlug(string $name): string
     {
         $slug = \Illuminate\Support\Str::slug($name);
@@ -32,7 +27,7 @@ class Category extends Model
         return $count ? "{$slug}-{$count}" : $slug;
     }
 
-    public function media()
+    public function featuredImage()
     {
         return $this->belongsTo(Media::class, 'media_id');
     }

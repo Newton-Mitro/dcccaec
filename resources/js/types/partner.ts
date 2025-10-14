@@ -1,3 +1,5 @@
+import { Media } from './media';
+
 export interface Partner {
     id: number;
     name: string;
@@ -7,5 +9,5 @@ export interface Partner {
     created_at: string;
     updated_at: string;
 
-    media?: any;
+    logo?: Media;
 }

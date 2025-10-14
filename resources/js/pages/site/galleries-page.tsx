@@ -2,7 +2,7 @@ import { Head } from '@inertiajs/react';
 import { X } from 'lucide-react';
 import { useState } from 'react';
 import PageLayout from '../../layouts/page-layout';
-import { Gallery, GalleryMediaItem } from '../../types/gallery';
+import { Gallery, ResourceMedia } from '../../types/gallery';
 import PageBanner from './components/page-banner';
 
 interface GalleriesPageProps {
@@ -12,7 +12,7 @@ interface GalleriesPageProps {
 const GalleriesPage: React.FC<GalleriesPageProps> = ({ galleries }) => {
     console.log('GALLERIES', galleries);
     const [currentIndex, setCurrentIndex] = useState<number | null>(null);
-    const [currentGallery, setCurrentGallery] = useState<GalleryMediaItem[]>([]);
+    const [currentGallery, setCurrentGallery] = useState<ResourceMedia[]>([]);
 
     const isImage = (url: string) => /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(url);
     const isVideo = (url: string) => /\.(mp4|webm|ogg)$/i.test(url);
@@ -46,12 +46,12 @@ const GalleriesPage: React.FC<GalleriesPageProps> = ({ galleries }) => {
                                     className="group relative h-80 w-80 rotate-45 transform overflow-hidden transition-all duration-500 hover:cursor-pointer"
                                     onClick={() => {
                                         setCurrentIndex(0);
-                                        setCurrentGallery(gallery.media_items!);
+                                        setCurrentGallery(gallery.items!);
                                     }}
                                 >
                                     {/* Image */}
                                     <img
-                                        src={gallery?.media?.url || 'https://via.placeholder.com/300'}
+                                        src={gallery?.featured_image?.url || 'https://via.placeholder.com/300'}
                                         className="absolute top-0 left-0 h-full w-full -rotate-45 object-cover transition-transform duration-700 group-hover:scale-105"
                                     />
 
@@ -74,7 +74,7 @@ const GalleriesPage: React.FC<GalleriesPageProps> = ({ galleries }) => {
                 {/* Modal */}
                 {currentIndex !== null && (
                     <div
-                        className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4"
+                        className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/80 p-4"
                         onClick={() => setCurrentIndex(null)} // Close on outside click
                     >
                         <div

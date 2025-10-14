@@ -31,19 +31,19 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function featuredImage()
+    {
+        return $this->belongsTo(Media::class, 'media_id');
+    }
+
     public function media()
     {
-        return $this->belongsTo(Media::class);
+        return $this->morphMany(ResourceMedia::class, 'resource');
     }
 
     public function category()
     {
         return $this->belongsTo(Category::class);
-    }
-
-    public function tags()
-    {
-        return $this->belongsToMany(Tag::class, 'article_tags');
     }
 
     public static function generateUniqueSlug(string $title): string

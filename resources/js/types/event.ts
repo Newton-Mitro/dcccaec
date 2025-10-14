@@ -1,11 +1,12 @@
+import { ResourceMedia } from './gallery';
 import { Media } from './media';
 
 export interface Event {
     id: number;
     title: string;
     slug: string;
-    description?: string;
-    location?: string;
+    description?: string | null;
+    location?: string | null;
     start_date: string;
     end_date?: string | null;
     media_id?: number | null;
@@ -13,5 +14,6 @@ export interface Event {
     created_at: string;
     updated_at: string;
 
-    media?: Media | null;
+    featured_image?: Media | null;
+    gallery: ResourceMedia[];
 }

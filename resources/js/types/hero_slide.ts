@@ -7,7 +7,7 @@ export interface HeroSlide {
     button_text?: string | null;
     button_link?: string | null;
     media_id: number;
-    media?: Media | null;
+    featured_image?: Media | null;
     sort_order: number;
     status: 'Active' | 'Inactive';
     created_at: string;

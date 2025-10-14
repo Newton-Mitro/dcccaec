@@ -1,6 +1,6 @@
 import { Transition } from '@headlessui/react';
 import { Head, router } from '@inertiajs/react';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import HeadingSmall from '../../components/heading-small';
 import InputError from '../../components/input-error';
 import { MediaSelector } from '../../components/media-selector';
@@ -11,17 +11,15 @@ import { Select } from '../../components/ui/select';
 import { Textarea } from '../../components/ui/text-area';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
-import { Category } from '../../types/category';
 import { Media } from '../../types/media';
 import { PaginatedData } from '../../types/paginated_meta';
 import MediaBrowserModal from '../media/media_browser_modal';
 
 interface CreateProps {
     media: PaginatedData<Media>;
-    categories: Category[]; // all categories for parent dropdown
 }
 
-export default function Create({ media, categories }: CreateProps) {
+export default function Create({ media }: CreateProps) {
     const [form, setForm] = useState({
         name: '',
         slug: '',
@@ -30,22 +28,10 @@ export default function Create({ media, categories }: CreateProps) {
         description: '',
     });
 
-    const [parentCategories, setParentCategories] = useState<Category[]>([]);
-
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedMedia, setSelectedMedia] = useState<Media | null>(null);
     const [errors, setErrors] = useState<any>({});
     const [recentlySuccessful, setRecentlySuccessful] = useState(false);
-
-    // Update parent categories whenever category_of changes
-    useEffect(() => {
-        if (form.category_of) {
-            setParentCategories(categories.filter((cat) => cat.category_of === form.category_of));
-        } else {
-            setParentCategories([]);
-        }
-        setForm((prev) => ({ ...prev, parent_id: null }));
-    }, [form.category_of, categories]);
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -93,14 +79,10 @@ export default function Create({ media, categories }: CreateProps) {
                                 options={[
                                     { value: 'Leader', label: 'Leader' },
                                     { value: 'Team', label: 'Team' },
-                                    { value: 'Student', label: 'Student' },
-                                    { value: 'Service', label: 'Service' },
-                                    { value: 'Product', label: 'Product' },
-                                    { value: 'Project', label: 'Project' },
+                                    { value: 'Program', label: 'Program' },
                                     { value: 'Event', label: 'Event' },
                                     { value: 'Notice', label: 'Notice' },
                                     { value: 'Article', label: 'Article' },
-                                    { value: 'Course', label: 'Course' },
                                 ]}
                             />
                             <InputError message={errors.category_of} />

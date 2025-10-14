@@ -40,10 +40,14 @@ class Program extends Model
         'featured' => 'boolean',
     ];
 
-    // Relations
-    public function media()
+    public function featuredImage()
     {
-        return $this->belongsTo(Media::class);
+        return $this->belongsTo(Media::class, 'media_id');
+    }
+
+    public function gallery()
+    {
+        return $this->morphMany(ResourceMedia::class, 'resource');
     }
 
     public function category()
@@ -51,9 +55,6 @@ class Program extends Model
         return $this->belongsTo(Category::class);
     }
 
-    /**
-     * Generate a unique slug based on name.
-     */
     public static function generateUniqueSlug(string $name): string
     {
         $slug = \Str::slug($name);
@@ -62,8 +63,6 @@ class Program extends Model
         return $count ? "{$slug}-{$count}" : $slug;
     }
 
-
-    // Factory
     protected static function newFactory()
     {
         return ProgramFactory::new();

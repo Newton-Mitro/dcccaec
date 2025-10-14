@@ -32,7 +32,7 @@ export default function Edit({ testimonial, media }: EditProps) {
         status: testimonial.status || 'Active',
     });
 
-    const [selectedMedia, setSelectedMedia] = useState<Media | null>(testimonial.media ?? null);
+    const [selectedMedia, setSelectedMedia] = useState<Media | null>(testimonial.client_image ?? null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [errors, setErrors] = useState<any>({});
     const [recentlySuccessful, setRecentlySuccessful] = useState(false);

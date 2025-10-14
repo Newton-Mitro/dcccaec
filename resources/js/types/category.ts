@@ -12,6 +12,6 @@ export interface Category {
     updated_at: string;
 
     // Relationships
-    media?: Media | null;
+    featured_image?: Media | null;
     parent?: Category | null;
 }

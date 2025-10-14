@@ -17,7 +17,7 @@ class UpdateHeroSliderRequest extends FormRequest
             'title' => ['sometimes', 'nullable', 'string', 'max:255'],
             'subtitle' => ['sometimes', 'nullable', 'string', 'max:255'],
             'button_text' => ['sometimes', 'nullable', 'string', 'max:100'],
-            'button_link' => ['sometimes', 'nullable', 'url'],
+            'button_link' => ['sometimes', 'nullable', 'string', 'max:255'],
             'media_id' => ['sometimes', 'required', 'exists:media,id'],
             'sort_order' => ['sometimes', 'integer'],
         ];

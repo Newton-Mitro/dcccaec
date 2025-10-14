@@ -12,9 +12,9 @@ class Testimonial extends Model
 
     protected $fillable = ['name', 'designation', 'message', 'media_id'];
 
-    public function media()
+    public function clientImage()
     {
-        return $this->belongsTo(Media::class);
+        return $this->belongsTo(Media::class, 'media_id');
     }
 
     protected static function newFactory()

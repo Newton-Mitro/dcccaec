@@ -14,7 +14,7 @@ class NoticeController extends Controller
     {
         $perPage = $request->input('perPage', 20);
 
-        $notices = Notice::with(['media', 'category'])
+        $notices = Notice::with(['attachment', 'category'])
             ->latest()
             ->paginate($perPage)
             ->withQueryString();
@@ -80,7 +80,7 @@ class NoticeController extends Controller
     public function show(Notice $notice)
     {
         return Inertia::render('notices/show', [
-            'notice' => $notice->load(['media', 'category']),
+            'notice' => $notice->load(['attachment', 'category']),
         ]);
     }
 
@@ -109,7 +109,7 @@ class NoticeController extends Controller
         $categories = Category::where('category_of', 'Notice')->get();
 
         return Inertia::render('notices/edit', [
-            'notice' => $notice->load(['media']),
+            'notice' => $notice->load(['attachment', 'category']),
             'media' => $media,
             'categories' => $categories,
         ]);

@@ -35,9 +35,9 @@ const Show: React.FC<ShowProps> = ({ testimonial }) => {
                 </div>
 
                 {/* Media */}
-                {testimonial.media?.url && (
+                {testimonial.client_image?.url && (
                     <div className="my-4">
-                        <img src={testimonial.media.url} alt={testimonial.author_name} className="max-h-64 rounded object-cover" />
+                        <img src={testimonial.client_image.url} alt={testimonial.author_name} className="max-h-64 rounded object-cover" />
                     </div>
                 )}
 

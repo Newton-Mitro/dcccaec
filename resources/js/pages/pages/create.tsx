@@ -16,7 +16,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '../../components/ui/too
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
 import { Media } from '../../types/media';
-import { PageSection } from '../../types/page_section';
+import { PageSection } from '../../types/page_media';
 import { PaginatedData } from '../../types/paginated_meta';
 import MediaBrowserModal from '../media/media_browser_modal';
 

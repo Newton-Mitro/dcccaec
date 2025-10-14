@@ -26,7 +26,7 @@ const TeamCardItem: React.FC<TeamCardItemProps> = ({ member, index }) => {
                     className={`group clear-both flex w-full ${index % 2 !== 0 ? 'flex-col-reverse' : 'flex-col'} items-center group-hover:cursor-pointer md:relative md:flex-row`}
                 >
                     <img
-                        src={member?.media?.url ?? 'https://t3.ftcdn.net/jpg/01/06/12/68/360_F_106126874_6Yl8PyFmYgoOAx7DYoH6zs5a3MoFvQHr.jpg'}
+                        src={member?.photo?.url ?? 'https://t3.ftcdn.net/jpg/01/06/12/68/360_F_106126874_6Yl8PyFmYgoOAx7DYoH6zs5a3MoFvQHr.jpg'}
                         alt="Custom Shape"
                         style={{
                             clipPath: 'polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%)',
@@ -100,7 +100,7 @@ const TeamCardItem: React.FC<TeamCardItemProps> = ({ member, index }) => {
                         </div>
                     </div>
                     <img
-                        src={member?.media?.url}
+                        src={member?.photo?.url}
                         alt="Custom Shape"
                         style={{
                             clipPath: 'polygon(30% 0%,70% 0%,100% 30%,100% 70%,70% 100%,30% 100%,0% 70%,0% 30%)',

@@ -46,7 +46,7 @@ export default function Edit({ team, categories, media }: EditProps) {
         status: team.status,
     });
 
-    const [selectedMedia, setSelectedMedia] = useState<Media | null>(team.media ?? null);
+    const [selectedMedia, setSelectedMedia] = useState<Media | null>(team.photo ?? null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [errors, setErrors] = useState<any>({});
     const [recentlySuccessful, setRecentlySuccessful] = useState(false);

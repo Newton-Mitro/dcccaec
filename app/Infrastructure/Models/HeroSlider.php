@@ -12,9 +12,9 @@ class HeroSlider extends Model
 
     protected $fillable = ['title', 'subtitle', 'button_text', 'button_link', 'media_id', 'sort_order'];
 
-    public function media()
+    public function featuredImage()
     {
-        return $this->belongsTo(Media::class);
+        return $this->belongsTo(Media::class, 'media_id');
     }
 
     protected static function newFactory()

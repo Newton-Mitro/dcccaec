@@ -1,4 +1,5 @@
 import { Category } from './category';
+import { ResourceMedia } from './gallery';
 import { Media } from './media';
 export interface Program {
     id: number;
@@ -24,8 +25,8 @@ export interface Program {
     khata_fee?: string; // e.g., "50"
 
     media_id?: number | null;
-    media?: Media;
-    gallery?: string[]; // Array of image URLs
+    featured_image?: Media;
+    gallery?: ResourceMedia[]; // Array of image URLs
 
     is_active: boolean;
     featured: boolean;

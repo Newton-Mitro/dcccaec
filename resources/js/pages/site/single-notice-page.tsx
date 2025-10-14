@@ -51,9 +51,9 @@ const SingleNoticePage: React.FC<SingleNoticePageProps> = ({ notice }) => {
                 <section className="bg-background py-16">
                     <div className="container mx-auto max-w-5xl px-4">
                         {/* Thumbnail */}
-                        {notice.media && (
+                        {notice.attachment && (
                             <div className="mb-10 overflow-hidden rounded shadow">
-                                <img src={notice.media.url} alt={notice.title} className="w-full object-cover" />
+                                <img src={notice.attachment.url} alt={notice.title} className="w-full object-cover" />
                             </div>
                         )}
 

@@ -16,7 +16,7 @@ export default function Show({ notice }: ShowProps) {
         { title: notice.title, href: '' },
     ];
 
-    const isPdf = notice.media?.url?.toLowerCase().endsWith('.pdf');
+    const isPdf = notice.attachment?.url?.toLowerCase().endsWith('.pdf');
 
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
@@ -39,16 +39,16 @@ export default function Show({ notice }: ShowProps) {
                 </div>
 
                 {/* Media */}
-                {notice.media && (
+                {notice.attachment && (
                     <div className="my-4">
                         {isPdf ? (
                             <div className="rounded border bg-gray-50 p-2 dark:bg-gray-800">
-                                <a href={notice.media.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
+                                <a href={notice.attachment.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
                                     View PDF
                                 </a>
                             </div>
                         ) : (
-                            <img src={notice.media.url} alt={notice.title} className="max-h-96 w-full rounded object-cover shadow-md" />
+                            <img src={notice.attachment.url} alt={notice.title} className="max-h-96 w-full rounded object-cover shadow-md" />
                         )}
                     </div>
                 )}

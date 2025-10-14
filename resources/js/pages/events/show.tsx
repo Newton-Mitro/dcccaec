@@ -36,9 +36,9 @@ export default function Show({ event }: ShowProps) {
                 </div>
 
                 {/* Media */}
-                {event.media && (
+                {event.featured_image && (
                     <div className="my-4">
-                        <img src={event.media.url} alt={event.title} className="max-h-96 w-full rounded object-cover shadow-md" />
+                        <img src={event.featured_image.url} alt={event.title} className="max-h-96 w-full rounded object-cover shadow-md" />
                     </div>
                 )}
 

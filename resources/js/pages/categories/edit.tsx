@@ -30,7 +30,7 @@ export default function Edit({ category, media }: EditProps) {
         description: category.description ?? '',
     });
 
-    const [selectedMedia, setSelectedMedia] = useState<Media | null>(category.media ?? null);
+    const [selectedMedia, setSelectedMedia] = useState<Media | null>(category.featured_image ?? null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [errors, setErrors] = useState<any>({});
     const [recentlySuccessful, setRecentlySuccessful] = useState(false);
@@ -89,14 +89,10 @@ export default function Edit({ category, media }: EditProps) {
                                 options={[
                                     { value: 'Leader', label: 'Leader' },
                                     { value: 'Team', label: 'Team' },
-                                    { value: 'Student', label: 'Student' },
-                                    { value: 'Service', label: 'Service' },
-                                    { value: 'Product', label: 'Product' },
-                                    { value: 'Project', label: 'Project' },
+                                    { value: 'Program', label: 'Program' },
                                     { value: 'Event', label: 'Event' },
                                     { value: 'Notice', label: 'Notice' },
                                     { value: 'Article', label: 'Article' },
-                                    { value: 'Course', label: 'Course' },
                                 ]}
                             />
                             <InputError message={errors.category_of} />

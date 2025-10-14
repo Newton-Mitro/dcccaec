@@ -13,7 +13,7 @@ import { Label } from '../../components/ui/label';
 import { Textarea } from '../../components/ui/text-area';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
-import { Gallery, GalleryMediaItem } from '../../types/gallery';
+import { Gallery, ResourceMedia } from '../../types/gallery';
 import { Media } from '../../types/media';
 import { PaginatedData } from '../../types/paginated_meta';
 import MediaBrowserModal from '../media/media_browser_modal';
@@ -23,11 +23,19 @@ interface EditProps {
     gallery: Gallery;
 }
 
+interface GalleryMediaForm {
+    id?: number;
+    media_id: number | null;
+    caption?: string;
+    description?: string;
+    media?: Media | null;
+}
+
 interface GalleryForm {
     title: string;
     description?: string;
     media_id: number | null;
-    media_items: GalleryMediaItem[];
+    media_items: GalleryMediaForm[];
 }
 
 const Edit: React.FC<EditProps> = ({ media, gallery }) => {
@@ -52,7 +60,7 @@ const Edit: React.FC<EditProps> = ({ media, gallery }) => {
             description: gallery.description,
             media_id: gallery.media_id,
             media_items:
-                gallery.media_items?.map((item) => ({
+                gallery.items?.map((item) => ({
                     id: item.id,
                     gallery_id: item.gallery_id,
                     media: item.media || null,
@@ -62,8 +70,8 @@ const Edit: React.FC<EditProps> = ({ media, gallery }) => {
                 })) || [],
         });
 
-        if (gallery.media) {
-            setSelectedMainMedia(gallery.media);
+        if (gallery.featured_image) {
+            setSelectedMainMedia(gallery.featured_image);
         }
     }, [gallery]);
 
@@ -86,7 +94,7 @@ const Edit: React.FC<EditProps> = ({ media, gallery }) => {
         }));
     };
 
-    const updateGalleryMedia = (index: number, keyOrFields: keyof GalleryMediaItem | Record<string, any>, value?: any) => {
+    const updateGalleryMedia = (index: number, keyOrFields: keyof ResourceMedia | Record<string, any>, value?: any) => {
         setForm((prev) => {
             const updated = [...prev.media_items];
             if (typeof keyOrFields === 'string') {

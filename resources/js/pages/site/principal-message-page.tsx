@@ -4,7 +4,6 @@ import { Page } from '../../types/page';
 import ImageContentBlock from './components/image-content-block';
 import PageBanner from './components/page-banner';
 import RenderSectionContent from './components/render-section-content';
-import SectionGallery from './components/section-gallery';
 
 interface AboutPageProps {
     page: Page;
@@ -47,48 +46,18 @@ const AboutPage: React.FC<AboutPageProps> = ({ page }) => {
                 {/* Hero */}
                 <PageBanner title={page.title} subtitle="How We Started and Our Mission to Help You" />
                 <div className="container-custom mx-auto my-16 w-full space-y-14 p-6">
-                    {page.sections.length > 0 ? (
-                        <div className="">
-                            {page.sections
-                                .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0))
-                                .map((section, index) => (
-                                    <div key={section.id || index} className="">
-                                        {/* Section Heading */}
+                    <div className="">
+                        {/* Section Heading */}
 
-                                        <ImageContentBlock
-                                            heading={section?.heading}
-                                            sub_heading={section?.sub_heading}
-                                            imageUrl={section?.media?.url}
-                                            content={section?.content}
-                                            reverse={index % 2 === 1}
-                                        />
+                        <ImageContentBlock
+                            heading={page?.title}
+                            sub_heading={page?.subtitle}
+                            imageUrl={page?.featured_image?.url}
+                            content={page?.content}
+                        />
 
-                                        <div className="py-6">{section.json_array && <RenderSectionContent jsonItems={section.json_array} />}</div>
-
-                                        {/* Gallery */}
-                                        {section?.gallery && section?.gallery.length > 0 && (
-                                            <>
-                                                <SectionGallery gallery={JSON.parse(section.gallery)} />
-                                            </>
-                                        )}
-
-                                        {/* Button */}
-                                        {section.button_text && section.button_link && (
-                                            <div className="my-6 text-center">
-                                                <a
-                                                    href={section.button_link}
-                                                    className="inline-block rounded bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
-                                                >
-                                                    {section.button_text}
-                                                </a>
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                        </div>
-                    ) : (
-                        <p className="text-sm text-gray-500">No sections available for this page.</p>
-                    )}
+                        <div className="py-6">{page.json_array && <RenderSectionContent jsonItems={page.json_array} />}</div>
+                    </div>
                 </div>
             </PageLayout>
         </>

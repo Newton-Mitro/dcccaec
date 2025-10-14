@@ -15,7 +15,9 @@ class AwardController extends Controller
 {
     public function index(): Response
     {
-        $awards = Award::with('media')->orderByDesc('year')->paginate(10);
+        $awards = Award::with('featuredImage', 'gallery')
+            ->orderByDesc('year')
+            ->paginate(10);
 
         return Inertia::render('award/index', [
             'awards' => $awards
@@ -27,22 +29,16 @@ class AwardController extends Controller
         $perPage = $request->input('perPage', 20);
         $type = $request->input('type', 'all');
         $query = Media::query();
+
         if ($type !== 'all') {
-            switch ($type) {
-                case 'images':
-                    $query->where('file_type', 'like', 'image/%');
-                    break;
-                case 'videos':
-                    $query->where('file_type', 'like', 'video/%');
-                    break;
-                case 'audio':
-                    $query->where('file_type', 'like', 'audio/%');
-                    break;
-                case 'pdf':
-                    $query->where('file_type', 'application/pdf');
-                    break;
-            }
+            match ($type) {
+                'images' => $query->where('file_type', 'like', 'image/%'),
+                'videos' => $query->where('file_type', 'like', 'video/%'),
+                'audio' => $query->where('file_type', 'like', 'audio/%'),
+                'pdf' => $query->where('file_type', 'application/pdf'),
+            };
         }
+
         $media = $query->latest()->paginate($perPage)->withQueryString();
 
         return Inertia::render('award/create', [
@@ -53,7 +49,21 @@ class AwardController extends Controller
     public function store(StoreAwardRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        Award::create($data);
+
+        // Create Award
+        $award = Award::create($data);
+
+        // Attach resource media if provided
+        if (!empty($data['media'])) {
+            foreach ($data['media'] as $mediaItem) {
+                $award->media()->create([
+                    'media_id' => $mediaItem['id'],
+                    'caption' => $mediaItem['caption'] ?? null,
+                    'description' => $mediaItem['description'] ?? null,
+                    'sort_order' => $mediaItem['sort_order'] ?? 0,
+                ]);
+            }
+        }
 
         return redirect()->route('awards.index')
             ->with('success', 'Award created successfully.');
@@ -62,7 +72,7 @@ class AwardController extends Controller
     public function show(Award $award): Response
     {
         return Inertia::render('award/show', [
-            'award' => $award->load('media')
+            'award' => $award->load('featuredImage', 'gallery')
         ]);
     }
 
@@ -71,26 +81,20 @@ class AwardController extends Controller
         $perPage = $request->input('perPage', 20);
         $type = $request->input('type', 'all');
         $query = Media::query();
+
         if ($type !== 'all') {
-            switch ($type) {
-                case 'images':
-                    $query->where('file_type', 'like', 'image/%');
-                    break;
-                case 'videos':
-                    $query->where('file_type', 'like', 'video/%');
-                    break;
-                case 'audio':
-                    $query->where('file_type', 'like', 'audio/%');
-                    break;
-                case 'pdf':
-                    $query->where('file_type', 'application/pdf');
-                    break;
-            }
+            match ($type) {
+                'images' => $query->where('file_type', 'like', 'image/%'),
+                'videos' => $query->where('file_type', 'like', 'video/%'),
+                'audio' => $query->where('file_type', 'like', 'audio/%'),
+                'pdf' => $query->where('file_type', 'application/pdf'),
+            };
         }
+
         $media = $query->latest()->paginate($perPage)->withQueryString();
 
         return Inertia::render('award/edit', [
-            'award' => $award->load('media'),
+            'award' => $award->load('featuredImage', 'gallery'),
             'media' => $media
         ]);
     }
@@ -98,7 +102,43 @@ class AwardController extends Controller
     public function update(UpdateAwardRequest $request, Award $award): RedirectResponse
     {
         $data = $request->validated();
+
+        // Update Award
         $award->update($data);
+
+        // Sync resource media
+        if (isset($data['media'])) {
+            $existingIds = $award->media()->pluck('id')->toArray();
+            $incomingIds = collect($data['media'])->pluck('id')->filter()->toArray();
+
+            // Delete removed media
+            $toDelete = array_diff($existingIds, $incomingIds);
+            if (!empty($toDelete)) {
+                $award->media()->whereIn('id', $toDelete)->delete();
+            }
+
+            // Upsert media
+            foreach ($data['media'] as $mediaItem) {
+                if (isset($mediaItem['id'])) {
+                    $award->media()->updateOrCreate(
+                        ['id' => $mediaItem['id']],
+                        [
+                            'media_id' => $mediaItem['media_id'],
+                            'caption' => $mediaItem['caption'] ?? null,
+                            'description' => $mediaItem['description'] ?? null,
+                            'sort_order' => $mediaItem['sort_order'] ?? 0,
+                        ]
+                    );
+                } else {
+                    $award->media()->create([
+                        'media_id' => $mediaItem['media_id'],
+                        'caption' => $mediaItem['caption'] ?? null,
+                        'description' => $mediaItem['description'] ?? null,
+                        'sort_order' => $mediaItem['sort_order'] ?? 0,
+                    ]);
+                }
+            }
+        }
 
         return redirect()->route('awards.index')
             ->with('success', 'Award updated successfully.');

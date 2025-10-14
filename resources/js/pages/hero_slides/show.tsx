@@ -22,8 +22,12 @@ export default function Show({ heroSlide }: Props) {
             <Head title={`Hero Slide: ${heroSlide.title}`} />
             <section className="container-custom relative m-6 h-[70vh] w-full overflow-hidden">
                 {/* Background Image */}
-                {heroSlide.media?.url && (
-                    <img src={heroSlide.media.url} alt={heroSlide.title || 'Hero Slide'} className="absolute inset-0 h-full w-full object-cover" />
+                {heroSlide.featured_image?.url && (
+                    <img
+                        src={heroSlide.featured_image.url}
+                        alt={heroSlide.title || 'Hero Slide'}
+                        className="absolute inset-0 h-full w-full object-cover"
+                    />
                 )}
 
                 {/* Overlay */}

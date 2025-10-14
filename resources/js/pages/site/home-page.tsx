@@ -39,7 +39,11 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
     const metaDescription = 'YourSite';
     const metaKeywords = 'YourSite';
 
-    console.log(awards);
+    console.log('Award', awards);
+    console.log('Partners', partners);
+    console.log('Teams', teams);
+    console.log('Testimonials', testimonials);
+    console.log('Programs', programs);
 
     return (
         <>
@@ -77,7 +81,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                         {/* Left Image (or illustration) */}
                         <div className="relative w-full">
                             <div className="absolute -top-6 -left-6 h-40 w-40 rounded-full bg-primary/20 blur-3xl" />
-                            <img src={about?.media?.url || ''} alt="About Us" className="relative z-10 w-full rounded object-cover shadow" />
+                            <img src={about?.featured_image?.url || ''} alt="About Us" className="relative z-10 w-full rounded object-cover shadow" />
                         </div>
 
                         {/* Right Content */}
@@ -129,9 +133,9 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                             ></div>
 
                                             <div className="relative z-10 flex flex-col items-center">
-                                                {program.media?.url && (
+                                                {program.featured_image?.url && (
                                                     <img
-                                                        src={program.media.url}
+                                                        src={program.featured_image.url}
                                                         alt={program.name}
                                                         className="mx-auto h-16 w-16 rounded-full border-2 border-primary object-cover p-1"
                                                     />
@@ -193,7 +197,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                         <Link key={member.id} href={`/about-us/teams/${member.id}`}>
                                             <div className="relative mx-auto h-40 w-40 overflow-hidden rounded-full border-4 border-primary shadow-md transition-transform duration-500 group-hover:scale-105">
                                                 <img
-                                                    src={member.media?.url || '/images/default-avatar.png'}
+                                                    src={member.photo?.url || '/images/default-avatar.png'}
                                                     alt={member.name}
                                                     className="h-full w-full object-cover"
                                                 />
@@ -303,9 +307,9 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
 
                                             <div className="relative z-10 flex flex-col items-center">
                                                 <p className="mb-6 text-muted-foreground italic">"{testimonial.message}"</p>
-                                                {testimonial.media?.url && (
+                                                {testimonial.client_image?.url && (
                                                     <img
-                                                        src={testimonial.media.url}
+                                                        src={testimonial.client_image.url}
                                                         alt={testimonial.author_name}
                                                         className="mb-2 h-20 w-20 rounded-full border-2 border-primary object-cover transition-transform duration-500 group-hover:scale-105"
                                                     />
@@ -353,7 +357,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                 {partners.slice(0, 4).map((partner) => (
                                     <div key={partner.id} className="rounded p-6 text-center transition">
                                         <img
-                                            src={partner.media?.url || '/images/default-award.png'}
+                                            src={partner.logo?.url || '/images/default-award.png'}
                                             alt={partner.name}
                                             className="mx-auto h-24 w-24 object-contain"
                                         />

@@ -1,13 +1,15 @@
+import { ResourceMedia } from './gallery';
 import { Media } from './media';
 
 export interface Award {
     id: number;
     title: string;
     year: number;
-    media_id?: number;
-    description: string;
+    media_id?: number | null;
+    description?: string | null;
     created_at: string;
     updated_at: string;
 
-    media?: Media | null;
+    featured_image?: Media | null;
+    gallery: ResourceMedia[];
 }

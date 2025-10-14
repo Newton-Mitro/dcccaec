@@ -9,6 +9,7 @@ interface FaqPageProps {
 }
 
 const FaqPage: React.FC<FaqPageProps> = ({ page }) => {
+    console.log(page);
     const pageUrl = window.location.href;
     const imageUrl = '';
     const metaTitle = page?.meta_title || 'YourSite';
@@ -25,9 +26,9 @@ const FaqPage: React.FC<FaqPageProps> = ({ page }) => {
         }));
     };
 
-    const renderSectionContent = (sectionId: number, jsonItems: string) => {
+    const renderSectionContent = (sectionId: number, jsonItems: any[]) => {
         try {
-            const items = jsonItems ? JSON.parse(jsonItems) : [];
+            const items = jsonItems;
 
             return (
                 <div className="space-y-4">
@@ -73,25 +74,17 @@ const FaqPage: React.FC<FaqPageProps> = ({ page }) => {
                 <PageBanner title={page?.title} subtitle="We’ve got answers for you!" />
 
                 <div className="container-custom mx-auto my-16 w-full space-y-14 p-6">
-                    {page.sections.length > 0 ? (
-                        page.sections
-                            .sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0))
-                            .map((section) => (
-                                <div key={section.id} className="w-full space-y-6">
-                                    {section.heading && (
-                                        <div className="mb-6 text-center">
-                                            <h2 className="mb-1 font-chewy text-3xl text-accent">{section.heading}</h2>
-                                            {section.sub_heading && <h3 className="text-sm text-muted-foreground">{section.sub_heading}</h3>}
-                                            <div className="mx-auto mt-2 h-1 w-16 bg-secondary"></div>
-                                        </div>
-                                    )}
+                    <div className="w-full space-y-6">
+                        {page.title && (
+                            <div className="mb-6 text-center">
+                                <h2 className="mb-1 font-chewy text-3xl text-accent">{page.title}</h2>
+                                {page.subtitle && <h3 className="text-sm text-muted-foreground">{page.subtitle}</h3>}
+                                <div className="mx-auto mt-2 h-1 w-16 bg-secondary"></div>
+                            </div>
+                        )}
 
-                                    {section.json_array && renderSectionContent(section.id!, section.json_array)}
-                                </div>
-                            ))
-                    ) : (
-                        <p className="text-sm text-gray-500">No FAQ available.</p>
-                    )}
+                        {page?.json_array && renderSectionContent(page.id!, page.json_array)}
+                    </div>
                 </div>
             </PageLayout>
         </>

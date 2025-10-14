@@ -9,7 +9,7 @@ export interface Team {
     message?: string | null;
     department?: string | null;
     media_id?: number | null;
-    media?: Media | null;
+    photo?: Media | null;
     category_id: number;
     category?: Category | null;
     facebook_links?: string | null;

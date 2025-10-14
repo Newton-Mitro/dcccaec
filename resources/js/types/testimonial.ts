@@ -1,3 +1,5 @@
+import { Media } from './media';
+
 export interface Testimonial {
     id: number;
     author_name: string;
@@ -11,5 +13,5 @@ export interface Testimonial {
     updated_at: string;
 
     // relations
-    media?: any;
+    client_image?: Media;
 }

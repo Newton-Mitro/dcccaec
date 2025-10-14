@@ -196,6 +196,10 @@
         font-weight: 600;
     }
 
+    .ck-content a {
+        color: var(--color-accent);
+    }
+
     .ck-content p {
         color: var(--color-muted-foreground);
     }
