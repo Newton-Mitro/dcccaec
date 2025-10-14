@@ -26,9 +26,9 @@ class WebPageController extends Controller
             ->orderBy('sort_order')
             ->get();
         $teams = Team::where('status', 'Active')->with('photo')->orderBy('sort_order')->take(5)->get();
-        $programs = Program::where('is_active', true)->with(['featuredImage', 'galleries', 'category'])->orderBy('sort_order')->take(3)->get();
+        $programs = Program::where('is_active', true)->with(['featuredImage', 'gallery', 'category'])->orderBy('sort_order')->take(3)->get();
         $testimonials = Testimonial::where('status', 'Active')->with('clientImage')->orderBy('sort_order')->take(5)->get();
-        $awards = Award::where('status', 'Active')->with('media')->orderBy('sort_order')->take(5)->get();
+        $awards = Award::where('status', 'Active')->with('featuredImage')->orderBy('sort_order')->take(5)->get();
         $partners = Partner::with('logo')
             ->orderBy('created_at', 'desc')
             ->limit(5)
@@ -322,7 +322,7 @@ class WebPageController extends Controller
     public function events(Request $request)
     {
         $perPage = $request->input('perPage', 8);
-        $events = Event::with('media')
+        $events = Event::with('featuredImage', 'gallery')
             ->latest()
             ->get();
         return Inertia::render('site/events-page', [
