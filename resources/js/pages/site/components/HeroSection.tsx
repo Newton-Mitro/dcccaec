@@ -52,7 +52,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ slides, interval = 5 }) => {
                             </div>
                         )}
                     </div>
-                    <img src="/images/bear.gif" alt="Hero Image" className="z-20 h-44 w-44 md:h-96 md:w-96" />
+                    <img
+                        src="/images/bear.gif"
+                        alt="Hero Image"
+                        className="z-20 h-44 w-44 rounded-full border-10 border-secondary bg-foreground shadow-2xl md:h-96 md:w-96"
+                    />
                 </div>
             </div>
         </section>
