@@ -211,6 +211,7 @@ class WebPageController extends Controller
         return Inertia::render('site/contact-page');
     }
 
+
     public function sendMessage(Request $request)
     {
         $validated = $request->validate([
@@ -223,8 +224,9 @@ class WebPageController extends Controller
 
         ContactMessage::create($validated);
 
-        return back()->with('success', 'Your message has been sent successfully!');
+        return Inertia::location(route('site.contact'));
     }
+
 
     public function teams(Request $request)
     {

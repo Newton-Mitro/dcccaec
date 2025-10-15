@@ -3,6 +3,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Transition } from '@headlessui/react';
 import { Head, router } from '@inertiajs/react';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import HeadingSmall from '../../components/heading-small';
 import InputError from '../../components/input-error';
 import { MediaSelector } from '../../components/media-selector';
@@ -42,8 +43,14 @@ export default function Edit({ event, media }: EditProps) {
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
         router.put(route('events.update', event.id), form, {
-            onError: (err) => setErrors(err),
-            onSuccess: () => setRecentlySuccessful(true),
+            onError: (err) => {
+                setErrors(err);
+                toast.error('Error updating event. Please try again.');
+            },
+            onSuccess: () => {
+                setRecentlySuccessful(true);
+                toast.success('Event updated successfully.');
+            },
         });
     };
 

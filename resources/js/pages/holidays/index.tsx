@@ -2,6 +2,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Head, Link, router } from '@inertiajs/react';
 import { Eye, Pencil, Trash2 } from 'lucide-react';
 import React from 'react';
+import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import HeadingSmall from '../../components/heading-small';
 import AppLayout from '../../layouts/app-layout';
@@ -40,13 +41,7 @@ const Index: React.FC<HolidayProps> = ({ holidays }) => {
                     preserveScroll: true,
                     preserveState: true,
                     onSuccess: () => {
-                        Swal.fire({
-                            title: 'Deleted!',
-                            text: 'Holiday has been deleted.',
-                            icon: 'success',
-                            background: isDark ? '#1f2937' : '#fff',
-                            color: isDark ? '#f9fafb' : '#111827',
-                        });
+                        toast.success('Holiday deleted successfully!');
                     },
                 });
             }
@@ -73,7 +68,6 @@ const Index: React.FC<HolidayProps> = ({ holidays }) => {
                             <tr>
                                 <th className="border-b border-gray-200 p-2 text-left dark:border-gray-700">Date</th>
                                 <th className="border-b border-gray-200 p-2 text-left dark:border-gray-700">Title</th>
-                                <th className="border-b border-gray-200 p-2 text-left dark:border-gray-700">Description</th>
                                 <th className="border-b border-gray-200 p-2 text-left dark:border-gray-700">Actions</th>
                             </tr>
                         </thead>
@@ -92,11 +86,6 @@ const Index: React.FC<HolidayProps> = ({ holidays }) => {
                                     <td className="px-2 py-1">
                                         <label className="font-semibold text-gray-700 md:hidden dark:text-gray-300">Title</label>
                                         <p className="text-gray-900 dark:text-gray-100">{holiday.title}</p>
-                                    </td>
-
-                                    <td className="px-2 py-1">
-                                        <label className="font-semibold text-gray-700 md:hidden dark:text-gray-300">Description</label>
-                                        <p className="text-gray-900 dark:text-gray-100">{holiday.description}</p>
                                     </td>
 
                                     <td className="px-2 py-1">

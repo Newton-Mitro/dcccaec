@@ -1,5 +1,6 @@
 import { Head, router } from '@inertiajs/react';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import HeadingSmall from '../../components/heading-small';
 import InputError from '../../components/input-error';
 import { MediaSelector } from '../../components/media-selector';
@@ -32,8 +33,14 @@ export default function Create({ media }: CreateProps) {
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
         router.post(route('partners.store'), form, {
-            onError: (err) => setErrors(err),
-            onSuccess: () => setRecentlySuccessful(true),
+            onError: (err) => {
+                setErrors(err);
+                toast.error('Error creating partner. Please try again.');
+            },
+            onSuccess: () => {
+                setRecentlySuccessful(true);
+                toast.success('Partner created successfully.');
+            },
         });
     };
 

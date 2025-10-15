@@ -143,7 +143,10 @@ const HolidayCalendarPage: React.FC<HolidayCalendarPageProps> = ({ holidays }) =
                                             className="rounded-lg border border-border bg-background p-4 shadow-sm transition hover:shadow-md"
                                         >
                                             <h4 className="mb-2 text-lg font-semibold text-primary">{holiday.title}</h4>
-                                            <p className="text-sm text-muted-foreground">{holiday.description}</p>
+                                            <div
+                                                className="prose max-w-full dark:prose-invert"
+                                                dangerouslySetInnerHTML={{ __html: holiday.description || '' }}
+                                            />
                                             <p className="mt-2 text-sm text-muted-foreground">📅 {format(new Date(holiday.date), 'PPP')}</p>
                                         </div>
                                     ))}

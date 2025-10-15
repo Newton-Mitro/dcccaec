@@ -8,7 +8,7 @@ import PageLayout from '../../layouts/page-layout';
 import PageBanner from './components/page-banner';
 
 const ContactPage = () => {
-    const { settings, flash } = usePage().props as any;
+    const { settings } = usePage().props as any;
 
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
@@ -22,9 +22,10 @@ const ContactPage = () => {
         e.preventDefault();
 
         post(route('site.send-message'), {
+            preserveScroll: true,
             onSuccess: () => {
                 toast.success('Message sent successfully!');
-                reset();
+                reset(); // clears all fields
             },
             onError: () => {
                 toast.error('Please fix the errors and try again.');
@@ -93,7 +94,7 @@ const ContactPage = () => {
                                     <label className="mb-1 block text-sm font-medium">Subject</label>
                                     <Input
                                         type="text"
-                                        value={data.email}
+                                        value={data.subject}
                                         onChange={(e) => setData('subject', e.target.value)}
                                         placeholder="Subject of your message"
                                     />

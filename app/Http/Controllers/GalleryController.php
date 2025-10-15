@@ -63,7 +63,7 @@ class GalleryController extends Controller
             ]);
 
             foreach ($request->input('media_items', []) as $item) {
-                $gallery->mediaItems()->create([
+                $gallery->items()->create([
                     'media_id' => $item['media_id'],
                     'caption' => $item['caption'] ?? null,
                     'description' => $item['description'] ?? null,
@@ -121,7 +121,7 @@ class GalleryController extends Controller
         DB::transaction(function () use ($request, $gallery) {
             $gallery->update($request->only(['title', 'description', 'media_id']));
 
-            $existingIds = $gallery->mediaItems()->pluck('id')->toArray();
+            $existingIds = $gallery->items()->pluck('id')->toArray();
             $incomingIds = collect($request->input('media_items', []))->pluck('id')->filter()->toArray();
 
             // Delete removed items
@@ -137,7 +137,7 @@ class GalleryController extends Controller
                 if (isset($item['id'])) {
                     ResourceMedia::where('id', $item['id'])->update($data);
                 } else {
-                    $gallery->mediaItems()->create($data);
+                    $gallery->items()->create($data);
                 }
             }
         });

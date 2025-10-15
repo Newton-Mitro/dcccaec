@@ -2,6 +2,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Head, Link, router } from '@inertiajs/react';
 import { Eye, Pencil, Trash2 } from 'lucide-react';
 import React from 'react';
+import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import HeadingSmall from '../../components/heading-small';
 import AppLayout from '../../layouts/app-layout';
@@ -40,13 +41,7 @@ const Index: React.FC<NoticeProps> = ({ notices }) => {
                     preserveScroll: true,
                     preserveState: true,
                     onSuccess: () => {
-                        Swal.fire({
-                            title: 'Deleted!',
-                            text: 'Notice has been deleted.',
-                            icon: 'success',
-                            background: isDark ? '#1f2937' : '#fff',
-                            color: isDark ? '#f9fafb' : '#111827',
-                        });
+                        toast.success('Notice deleted successfully!');
                     },
                 });
             }

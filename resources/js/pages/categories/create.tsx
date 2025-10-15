@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react';
 import { Head, router } from '@inertiajs/react';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import HeadingSmall from '../../components/heading-small';
 import InputError from '../../components/input-error';
 import { MediaSelector } from '../../components/media-selector';
@@ -30,14 +31,21 @@ export default function Create({ media }: CreateProps) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedMedia, setSelectedMedia] = useState<Media | null>(null);
-    const [errors, setErrors] = useState<any>({});
     const [recentlySuccessful, setRecentlySuccessful] = useState(false);
+    const [errors, setErrors] = useState<any>({});
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
         router.post(route('categories.store'), form, {
-            onError: (err) => setErrors(err),
-            onSuccess: () => setRecentlySuccessful(true),
+            preserveScroll: true,
+            onSuccess: () => {
+                setRecentlySuccessful(true);
+                toast.success('Category updated successfully!');
+            },
+            onError: (err) => {
+                setErrors(err);
+                toast.error('Error updating category. Please try again.');
+            },
         });
     };
 

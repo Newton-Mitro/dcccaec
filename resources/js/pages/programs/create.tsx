@@ -14,6 +14,7 @@ import { PaginatedData } from '../../types/paginated_meta';
 
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
+import toast from 'react-hot-toast';
 import MediaBrowserModal from '../media/media_browser_modal';
 
 interface CreateProps {
@@ -51,8 +52,14 @@ export default function Create({ media }: CreateProps) {
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
         router.post(route('programs.store'), form, {
-            onError: (err) => setErrors(err),
-            onSuccess: () => setRecentlySuccessful(true),
+            onError: (err) => {
+                setErrors(err);
+                toast.error('Error creating program. Please try again.');
+            },
+            onSuccess: () => {
+                setRecentlySuccessful(true);
+                toast.success('Program created successfully.');
+            },
         });
     };
 

@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react';
 import { Head, useForm } from '@inertiajs/react';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import HeadingSmall from '../../components/heading-small';
 import InputError from '../../components/input-error';
 import { MediaSelector } from '../../components/media-selector';
@@ -21,6 +22,7 @@ interface EditProps {
 }
 
 export default function Edit({ heroSlide, media }: EditProps) {
+    const notify = () => toast.success('Hero slide has been updated.');
     const { data, setData, put, processing, errors, recentlySuccessful } = useForm({
         title: heroSlide.title || '',
         subtitle: heroSlide.subtitle || '',
@@ -35,7 +37,13 @@ export default function Edit({ heroSlide, media }: EditProps) {
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        put(route('hero-sliders.update', heroSlide.id));
+        put(route('hero-sliders.update', heroSlide.id), {
+            preserveScroll: true,
+            onSuccess: () => {
+                notify();
+            },
+            onError: (errors) => console.error(errors),
+        });
     };
 
     // Breadcrumbs

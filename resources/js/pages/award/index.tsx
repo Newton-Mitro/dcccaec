@@ -1,6 +1,7 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Head, Link, router } from '@inertiajs/react';
 import { Eye, Pencil, Trash2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import HeadingSmall from '../../components/heading-small';
 import AppLayout from '../../layouts/app-layout';
@@ -35,6 +36,7 @@ export default function Index({ awards }: AwardProps) {
             confirmButtonText: 'Yes, delete it!',
         }).then((result) => {
             if (result.isConfirmed) {
+                toast.success('Award deleted successfully!');
                 router.delete(route('awards.destroy', id), {
                     preserveScroll: true,
                     preserveState: true,

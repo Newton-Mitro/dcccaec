@@ -133,10 +133,17 @@ const EventsPage: React.FC<EventsPageProps> = ({ events }) => {
                                             className="rounded-lg border border-border bg-background p-4 shadow-sm transition hover:shadow-md"
                                         >
                                             <h4 className="mb-2 text-lg font-semibold text-primary">{event.title}</h4>
-                                            {event.media?.url && (
-                                                <img src={event.media.url} alt={event.title} className="mb-3 h-60 w-full rounded-md object-cover" />
+                                            {event.featured_image?.url && (
+                                                <img
+                                                    src={event.featured_image.url}
+                                                    alt={event.title}
+                                                    className="mb-3 h-60 w-full rounded-md object-cover"
+                                                />
                                             )}
-                                            <p className="mb-2 text-sm text-muted-foreground">{event.description || 'No description available.'}</p>
+                                            <div
+                                                className="prose max-w-full dark:prose-invert"
+                                                dangerouslySetInnerHTML={{ __html: event.description || '' }}
+                                            />
                                             <p className="text-sm text-muted-foreground">
                                                 🗓 {format(new Date(event.start_date), 'PPP')}
                                                 {event.end_date && ` - ${format(new Date(event.end_date), 'PPP')}`}

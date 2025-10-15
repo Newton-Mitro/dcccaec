@@ -1,6 +1,7 @@
 import { Head, Link, router } from '@inertiajs/react';
 import { EyeIcon, PencilIcon, Trash2Icon } from 'lucide-react';
 import React from 'react';
+import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import HeadingSmall from '../../components/heading-small';
 import AppLayout from '../../layouts/app-layout';
@@ -16,6 +17,7 @@ interface PageProps extends SharedData {
 }
 
 const Index: React.FC<PageProps> = ({ sliders }) => {
+    const notify = () => toast.success('Hero slide has been deleted.');
     const deleteSlide = (id: number) => {
         const isDark = document.documentElement.classList.contains('dark');
         Swal.fire({
@@ -34,13 +36,7 @@ const Index: React.FC<PageProps> = ({ sliders }) => {
                     preserveScroll: true,
                     preserveState: true,
                     onSuccess: () => {
-                        Swal.fire({
-                            title: 'Deleted!',
-                            text: 'Hero slide has been deleted.',
-                            icon: 'success',
-                            background: isDark ? '#1f2937' : '#fff',
-                            color: isDark ? '#f9fafb' : '#111827',
-                        });
+                        notify();
                     },
                     onError: (errors) => console.error(errors),
                 });
@@ -60,10 +56,16 @@ const Index: React.FC<PageProps> = ({ sliders }) => {
                 {/* Heading */}
                 <div className="mb-4 flex flex-col items-start justify-between gap-2 sm:flex-row">
                     <HeadingSmall title="Hero Slides" description="Manage hero slides" />
+                    <Link
+                        href={route('hero-sliders.create')}
+                        className="inline-block rounded-md bg-blue-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-blue-700"
+                    >
+                        Create Slide
+                    </Link>
                 </div>
 
                 {/* Media Table */}
-                <div className="h-[calc(100vh-320px)] space-y-8 overflow-auto">
+                <div className="h-[calc(100vh-270px)] space-y-8 overflow-auto">
                     <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
                         {sliders.data.map((slide) => (
                             <div

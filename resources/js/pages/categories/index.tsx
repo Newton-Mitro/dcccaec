@@ -1,6 +1,7 @@
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { Head, Link, router } from '@inertiajs/react';
 import { Eye, Pencil, Trash2 } from 'lucide-react';
+import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import HeadingSmall from '../../components/heading-small';
 import { Select } from '../../components/ui/select';
@@ -42,13 +43,7 @@ export default function Index({ categories, categoryOf, categoryList }: Props) {
                     preserveScroll: true,
                     preserveState: true,
                     onSuccess: () => {
-                        Swal.fire({
-                            title: 'Deleted!',
-                            text: 'Category has been deleted.',
-                            icon: 'success',
-                            background: isDark ? '#1f2937' : '#fff',
-                            color: isDark ? '#f9fafb' : '#111827',
-                        });
+                        toast.success('Category deleted successfully!');
                     },
                 });
             }

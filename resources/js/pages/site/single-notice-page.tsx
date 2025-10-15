@@ -50,10 +50,22 @@ const SingleNoticePage: React.FC<SingleNoticePageProps> = ({ notice }) => {
                 />
                 <section className="bg-background py-16">
                     <div className="container mx-auto max-w-5xl px-4">
-                        {/* Thumbnail */}
+                        {/* Attachment Preview */}
                         {notice.attachment && (
                             <div className="mb-10 overflow-hidden rounded shadow">
-                                <img src={notice.attachment.url} alt={notice.title} className="w-full object-cover" />
+                                {notice.attachment.file_type.startsWith('image/') ? (
+                                    <img src={notice.attachment.url} alt={notice.title} className="w-full object-cover" />
+                                ) : notice.attachment.file_type.startsWith('application/pdf') ? (
+                                    <iframe src={notice.attachment.url} title={notice.title} className="h-[700px] w-full rounded border" />
+                                ) : (
+                                    <p className="p-6 text-center text-gray-600 dark:text-gray-300">
+                                        This file type is not previewable.{' '}
+                                        <a href={notice.attachment.url} target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                                            Download instead
+                                        </a>
+                                        .
+                                    </p>
+                                )}
                             </div>
                         )}
 

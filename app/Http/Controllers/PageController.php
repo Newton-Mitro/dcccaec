@@ -84,6 +84,7 @@ class PageController extends Controller
 
     public function update(StorePageRequest $request, Page $page): RedirectResponse
     {
+        // dd($request->all());
         DB::transaction(function () use ($request, $page) {
             $page->update([
                 'title' => $request->input('title'),
@@ -100,7 +101,14 @@ class PageController extends Controller
                 'predefined' => $request->boolean('predefined', false),
             ]);
 
-            $this->syncGallery($page, $request->input('gallery', []));
+            foreach ($request->input('gallery_ids', []) as $item) {
+                $page->gallery()->create([
+                    'media_id' => $item,
+                    'caption' => 'page gallery',
+                    'description' => 'page gallery',
+                ]);
+            }
+
         });
 
         return redirect()->route('pages.index')->with('success', 'Page updated successfully.');

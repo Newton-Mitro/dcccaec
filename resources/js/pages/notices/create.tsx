@@ -16,6 +16,7 @@ import { BreadcrumbItem } from '../../types';
 import { Media } from '../../types/media';
 import { PaginatedData } from '../../types/paginated_meta';
 
+import toast from 'react-hot-toast';
 import { Category } from '../../types/category';
 import MediaBrowserModal from '../media/media_browser_modal';
 
@@ -46,8 +47,14 @@ export default function Create({ categories, media }: CreateProps) {
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
         router.post(route('notices.store'), form, {
-            onError: (err) => setErrors(err),
-            onSuccess: () => setRecentlySuccessful(true),
+            onError: (err) => {
+                setErrors(err);
+                toast.error('Error creating notice. Please try again.');
+            },
+            onSuccess: () => {
+                setRecentlySuccessful(true);
+                toast.success('Notice created successfully.');
+            },
         });
     };
 

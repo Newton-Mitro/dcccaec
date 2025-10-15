@@ -26,7 +26,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ slides, interval = 5 }) => {
             <div
                 className="relative flex min-h-screen items-center justify-between transition-all duration-1000"
                 style={{
-                    backgroundImage: `url(${currentSlide?.media?.url || '/images/hero_5.jpg'})`,
+                    backgroundImage: `url(${currentSlide?.featured_image?.url || '/images/hero_5.jpg'})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',

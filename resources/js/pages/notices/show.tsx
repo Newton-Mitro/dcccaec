@@ -16,8 +16,6 @@ export default function Show({ notice }: ShowProps) {
         { title: notice.title, href: '' },
     ];
 
-    const isPdf = notice.attachment?.url?.toLowerCase().endsWith('.pdf');
-
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title={notice.title} />
@@ -40,15 +38,19 @@ export default function Show({ notice }: ShowProps) {
 
                 {/* Media */}
                 {notice.attachment && (
-                    <div className="my-4">
-                        {isPdf ? (
-                            <div className="rounded border bg-gray-50 p-2 dark:bg-gray-800">
-                                <a href={notice.attachment.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                                    View PDF
-                                </a>
-                            </div>
+                    <div className="mb-10 overflow-hidden rounded shadow">
+                        {notice.attachment.file_type.startsWith('image/') ? (
+                            <img src={notice.attachment.url} alt={notice.title} className="w-full object-cover" />
+                        ) : notice.attachment.file_type.startsWith('application/pdf') ? (
+                            <iframe src={notice.attachment.url} title={notice.title} className="h-[700px] w-full rounded border" />
                         ) : (
-                            <img src={notice.attachment.url} alt={notice.title} className="max-h-96 w-full rounded object-cover shadow-md" />
+                            <p className="p-6 text-center text-gray-600 dark:text-gray-300">
+                                This file type is not previewable.{' '}
+                                <a href={notice.attachment.url} target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                                    Download instead
+                                </a>
+                                .
+                            </p>
                         )}
                     </div>
                 )}

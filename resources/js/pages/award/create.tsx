@@ -14,6 +14,7 @@ import { PaginatedData } from '../../types/paginated_meta';
 
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
+import toast from 'react-hot-toast';
 import MediaBrowserModal from '../media/media_browser_modal';
 
 interface CreateProps {
@@ -36,8 +37,14 @@ export default function AwardsCreate({ media }: CreateProps) {
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
         router.post(route('awards.store'), form, {
-            onError: (err) => setErrors(err),
-            onSuccess: () => setRecentlySuccessful(true),
+            onError: (err) => {
+                setErrors(err);
+                toast.error('Error creating award. Please try again.');
+            },
+            onSuccess: () => {
+                setRecentlySuccessful(true);
+                toast.success('Award created successfully.');
+            },
         });
     };
 

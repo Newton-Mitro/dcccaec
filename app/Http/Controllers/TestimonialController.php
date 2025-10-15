@@ -53,6 +53,7 @@ class TestimonialController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $data = $request->validate([
             'author_name' => 'required|string|max:255',
             'author_designation' => 'nullable|string|max:255',

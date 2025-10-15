@@ -10,7 +10,21 @@ class Testimonial extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'designation', 'message', 'media_id'];
+    protected $fillable = [
+        'author_name',
+        'author_designation',
+        'company',
+        'message',
+        'media_id',
+        'rating',
+        'sort_order',
+        'status',
+    ];
+
+    protected $casts = [
+        'rating' => 'integer',
+        'sort_order' => 'integer',
+    ];
 
     public function clientImage()
     {

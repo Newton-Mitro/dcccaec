@@ -1,6 +1,7 @@
 import { Transition } from '@headlessui/react';
 import { Head, useForm } from '@inertiajs/react';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import HeadingSmall from '../../components/heading-small';
 import InputError from '../../components/input-error';
 import { MediaSelector } from '../../components/media-selector';
@@ -19,6 +20,7 @@ interface CreateProps {
 }
 
 export default function Create({ media }: CreateProps) {
+    const notify = () => toast.success('Hero slide has been created.');
     const { data, setData, post, processing, errors, recentlySuccessful } = useForm({
         title: '',
         subtitle: '',
@@ -33,7 +35,13 @@ export default function Create({ media }: CreateProps) {
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
-        post(route('hero-sliders.store'));
+        post(route('hero-sliders.store'), {
+            preserveScroll: true,
+            onSuccess: () => {
+                notify();
+            },
+            onError: (errors) => console.error(errors),
+        });
     };
 
     // Breadcrumbs

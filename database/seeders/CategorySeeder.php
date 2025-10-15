@@ -50,7 +50,7 @@ class CategorySeeder extends Seeder
                     'category_of' => $categoryOf,
                     'name' => $name,
                     'slug' => Str::slug($name . '-' . strtolower($categoryOf)),
-                    'description' => "<p>This is the <strong>{$name}</strong> category under {$categoryOf}.</p>",
+                    'description' => "This is the {$name} category under {$categoryOf}.",
                     'media_id' => $allImages->random(),
                 ]);
             }
