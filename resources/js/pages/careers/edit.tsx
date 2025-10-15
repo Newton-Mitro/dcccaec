@@ -5,6 +5,7 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Transition } from '@headlessui/react';
 import { Head, router } from '@inertiajs/react';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import HeadingSmall from '../../components/heading-small';
 import InputError from '../../components/input-error';
 import AppDatePicker from '../../components/ui/app_date_picker';
@@ -48,8 +49,14 @@ export default function Edit({ career }: EditProps) {
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
         router.put(route('careers.update', career.id), form, {
-            onError: (err) => setErrors(err),
-            onSuccess: () => setRecentlySuccessful(true),
+            onError: (err) => {
+                setErrors(err);
+                toast.error('Error updating career. Please try again.');
+            },
+            onSuccess: () => {
+                setRecentlySuccessful(true);
+                toast.success('Career updated successfully.');
+            },
         });
     };
 

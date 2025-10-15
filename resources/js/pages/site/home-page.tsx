@@ -205,7 +205,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
 
                                             {/* Info */}
                                             <div className="relative z-10 mt-6 space-y-2">
-                                                <h3 className="text-xl font-semibold text-foreground transition-colors group-hover:text-primary">
+                                                <h3 className="text-xl font-semibold text-foreground transition-colors group-hover:text-accent">
                                                     {member.name}
                                                 </h3>
                                                 {member.designation && (
@@ -224,7 +224,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                                     href={member.facebook_links}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
+                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition group-hover:bg-primary group-hover:text-secondary-foreground hover:bg-accent hover:text-accent-foreground"
                                                 >
                                                     <i className="fab fa-facebook-f"></i>
                                                 </a>
@@ -234,7 +234,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                                     href={member.linkedin_links}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
+                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition group-hover:bg-primary group-hover:text-secondary-foreground hover:bg-accent hover:text-accent-foreground"
                                                 >
                                                     <i className="fab fa-linkedin-in"></i>
                                                 </a>
@@ -244,7 +244,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                                     href={member.twitter_links}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
+                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition group-hover:bg-primary group-hover:text-secondary-foreground hover:bg-accent hover:text-accent-foreground"
                                                 >
                                                     <i className="fab fa-twitter"></i>
                                                 </a>
@@ -254,7 +254,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                                     href={member.instagram_links}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
-                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition hover:bg-primary hover:text-white"
+                                                    className="h-10 w-10 rounded-full bg-secondary/10 p-2 text-secondary transition group-hover:bg-primary group-hover:text-secondary-foreground hover:bg-accent hover:text-accent-foreground"
                                                 >
                                                     <i className="fab fa-instagram"></i>
                                                 </a>

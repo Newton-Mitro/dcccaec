@@ -2,6 +2,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 import { Head, Link, router } from '@inertiajs/react';
 import { Eye, Trash2 } from 'lucide-react';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 import Swal from 'sweetalert2';
 import HeadingSmall from '../../components/heading-small';
 import { Select } from '../../components/ui/select';
@@ -46,13 +47,7 @@ const Index: React.FC<IndexProps> = ({ applications, careers, selectedCareer }) 
                     preserveScroll: true,
                     preserveState: true,
                     onSuccess: () => {
-                        Swal.fire({
-                            title: 'Deleted!',
-                            text: 'Application has been deleted.',
-                            icon: 'success',
-                            background: isDark ? '#1f2937' : '#fff',
-                            color: isDark ? '#f9fafb' : '#111827',
-                        });
+                        toast.success('Application deleted successfully!');
                     },
                 });
             }

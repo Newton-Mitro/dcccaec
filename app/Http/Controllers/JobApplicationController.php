@@ -47,7 +47,7 @@ class JobApplicationController extends Controller
     {
         $jobApplication->delete();
 
-        return redirect()->route('job_applications.index')
+        return redirect()->route('job-applications.index')
             ->with('success', 'Application deleted.');
     }
 

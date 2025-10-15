@@ -45,7 +45,7 @@ const FaqPage: React.FC<FaqPageProps> = ({ page }) => {
                                     <span>{item.question}</span>
                                     <span className="ml-2 text-lg">{isOpen ? '−' : '+'}</span>
                                 </button>
-                                {isOpen && <div className="px-4 py-3 text-gray-600">{item.answer}</div>}
+                                {isOpen && <div className="px-4 py-3 text-muted-foreground">{item.answer}</div>}
                             </div>
                         );
                     })}
