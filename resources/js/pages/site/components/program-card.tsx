@@ -30,8 +30,8 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ program, index }) => {
                             <h3 className="text-xl font-bold text-foreground">{program.name}</h3>
                             <p className="text-sm font-semibold text-secondary">{program.category?.name}</p>
 
-                            <p className="mb-4 text-gray-600">{program.excerpt}</p>
-                            <div className="text-sm text-gray-500">
+                            <p className="mb-4 text-muted-foreground">{program.excerpt}</p>
+                            <div className="text-sm text-accent">
                                 <span>
                                     Age: {program.age_min}–{program.age_max} years
                                 </span>
@@ -48,8 +48,8 @@ const ProgramCard: React.FC<ProgramCardProps> = ({ program, index }) => {
                             <h3 className="text-xl font-bold text-foreground">{program.name}</h3>
                             <p className="text-sm font-semibold text-secondary">{program.category?.name}</p>
 
-                            <p className="mb-4 text-gray-600">{program.excerpt}</p>
-                            <div className="text-sm text-gray-500">
+                            <p className="mb-4 text-muted-foreground">{program.excerpt}</p>
+                            <div className="text-sm text-accent">
                                 <span>
                                     Age: {program.age_min}–{program.age_max} years
                                 </span>

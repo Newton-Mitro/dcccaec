@@ -40,27 +40,27 @@ const ContactPage = () => {
                 <PageBanner title="Contact Us" subtitle="Got an idea or a question? We’d love to hear from you." />
 
                 <section className="container-custom mx-auto px-6 py-16">
-                    <div className="grid gap-12 md:grid-cols-2">
+                    <div className="grid items-center gap-12 md:grid-cols-2">
                         {/* Info */}
                         <div>
                             <h2 className="mb-6 text-2xl font-semibold">Get in Touch</h2>
                             <div className="space-y-6">
                                 <div className="flex items-start gap-4">
-                                    <MapPin className="h-6 w-6 text-primary" />
+                                    <MapPin className="h-6 w-6 text-accent" />
                                     <div>
                                         <h3 className="font-semibold">Office</h3>
                                         <p>{settings.contact_address || 'Dhaka, Bangladesh'}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <Phone className="h-6 w-6 text-primary" />
+                                    <Phone className="h-6 w-6 text-accent" />
                                     <div>
                                         <h3 className="font-semibold">Phone</h3>
                                         <p>{settings.contact_phone || '123-456-7890'}</p>
                                     </div>
                                 </div>
                                 <div className="flex items-start gap-4">
-                                    <Mail className="h-6 w-6 text-primary" />
+                                    <Mail className="h-6 w-6 text-accent" />
                                     <div>
                                         <h3 className="font-semibold">Email</h3>
                                         <p>{settings.contact_email || 'hello@example.com'}</p>
@@ -118,7 +118,7 @@ const ContactPage = () => {
                             </form>
                         </div>
                     </div>
-                    <div className="mt-6 w-full overflow-hidden rounded-xl border">
+                    <div className="mt-10 w-full overflow-hidden rounded-xl border">
                         {/* Render Google Map Embed */}
                         <div className="h-[450px] w-full" dangerouslySetInnerHTML={{ __html: settings.contact_map_embed || '' }} />
                     </div>
