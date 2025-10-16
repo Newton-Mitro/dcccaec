@@ -1,4 +1,4 @@
-import { usePage } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import { ArrowUp } from 'lucide-react';
 import { type ReactNode, useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
@@ -13,7 +13,7 @@ interface PageLayoutProps {
 export default function PageLayout({ children, ...props }: PageLayoutProps) {
     const [showButton, setShowButton] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const { settings } = usePage().props as any;
+    const { settings, ads } = usePage().props as any;
 
     useEffect(() => {
         const handleScroll = () => {
@@ -96,33 +96,43 @@ export default function PageLayout({ children, ...props }: PageLayoutProps) {
             <FooterTemplate />
 
             {/* Simple Modal */}
-            {showModal && (
-                <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-sm">
-                    <div className="relative w-[90%] max-w-xl rounded-3xl bg-card/50 p-8">
-                        {/* Decorative GIF */}
+            {showModal && ads?.featured_image && (
+                <div className="animate-fadeIn fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-md">
+                    {/* Ad Card */}
+                    <div className="relative w-[90%] max-w-lg overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-background/80 to-card/70 shadow-2xl backdrop-blur-sm">
+                        {/* Image with Centered Text */}
+                        {ads?.featured_image?.url && (
+                            <div className="relative overflow-hidden rounded-2xl">
+                                <img
+                                    src={ads.featured_image.url}
+                                    alt={ads.title || 'Ad Image'}
+                                    className="w-full object-cover transition-transform duration-500 hover:scale-105"
+                                />
+                                <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 px-6 text-center">
+                                    {ads?.subtitle && <h2 className="text-3xl font-bold text-white drop-shadow-md">{ads.subtitle}</h2>}
+                                    {ads?.excerpt && <p className="mt-2 max-w-md text-sm text-gray-200">{ads.excerpt}</p>}
+                                    {/* CTA Button */}
+                                    {ads?.button_link && ads?.button_text && (
+                                        <div className="mt-4 text-center">
+                                            <Link
+                                                href={ads.button_link}
+                                                className="inline-block rounded-full bg-accent px-8 py-3 font-semibold text-white shadow-md transition-all hover:scale-105 hover:bg-accent/90 active:scale-95"
+                                            >
+                                                {ads.button_text}
+                                            </Link>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        )}
 
                         {/* Close Button */}
                         <button
                             onClick={() => setShowModal(false)}
-                            className="absolute top-4 right-4 text-gray-500 transition-colors hover:text-accent"
+                            className="absolute top-4 right-4 text-gray-400 transition-all hover:rotate-90 hover:text-accent"
                         >
                             <i className="fa-solid fa-xmark text-2xl"></i>
                         </button>
-
-                        {/* Content */}
-                        <div className="my-12 flex flex-col items-center space-y-4 text-center">
-                            <img src="/images/bird.gif" alt="bird" className="w-40" />
-                            <h2 className="text-3xl font-bold text-foreground">Admissions Going On!</h2>
-                            <p className="text-sm text-muted-foreground">
-                                Don’t miss the chance to join our upcoming session. Apply now to secure your spot.
-                            </p>
-                            <a
-                                href="/parents/enrollment"
-                                className="hover:bg-accent-dark inline-block rounded-full bg-accent px-6 py-3 font-semibold text-white shadow-lg transition-all hover:scale-105"
-                            >
-                                View Details
-                            </a>
-                        </div>
                     </div>
                 </div>
             )}

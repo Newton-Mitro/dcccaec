@@ -12,7 +12,6 @@ interface CurriculumPageProps {
 }
 
 const CurriculumPage: React.FC<CurriculumPageProps> = ({ page }) => {
-    console.log(page);
     const pageUrl = window.location.href;
     const imageUrl = '';
     const metaTitle = page?.meta_title || 'YourSite';

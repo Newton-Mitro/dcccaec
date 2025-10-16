@@ -13,7 +13,6 @@ const SingleNoticePage: React.FC<SingleNoticePageProps> = ({ notice }) => {
     const metaTitle = notice?.title || 'YourSite';
     const metaDescription = notice?.content || 'YourSite';
     const metaKeywords = 'YourSite';
-    console.log(notice);
 
     return (
         <>

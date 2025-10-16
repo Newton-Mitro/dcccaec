@@ -88,7 +88,7 @@ const SingleProgramPage: React.FC<SingleProgramPageProps> = ({ program }) => {
                                 {program.category && (
                                     <div className="mb-4 text-sm text-muted-foreground">
                                         <span className="font-semibold">Category:</span>{' '}
-                                        <span className="font-medium text-primary">{program.category.name}</span>
+                                        <span className="font-medium text-secondary">{program.category.name}</span>
                                     </div>
                                 )}
 

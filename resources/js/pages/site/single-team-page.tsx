@@ -9,7 +9,6 @@ interface ViewTeamPageProps {
 }
 
 const ViewTeamPage: React.FC<ViewTeamPageProps> = ({ team }) => {
-    console.log('TEAM', team);
     const socials = [
         { icon: <FaFacebookF />, link: team.facebook_links },
         { icon: <FaTwitter />, link: team.twitter_links },

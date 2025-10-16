@@ -41,8 +41,6 @@ const Edit: React.FC<EditProps> = ({ page, media }) => {
         predefined: page.predefined ?? false,
     });
 
-    console.log(formData);
-
     const [selectedMedia, setSelectedMedia] = useState<Media | null>(page.featured_image || null);
     const [galleryItems, setGalleryItems] = useState<ResourceMedia[]>(page.gallery || []);
     const [errors, setErrors] = useState<any>({});
@@ -55,7 +53,6 @@ const Edit: React.FC<EditProps> = ({ page, media }) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(formData);
         router.put(`/admin/pages/${page.id}`, formData, {
             preserveScroll: true,
             onSuccess: () => toast.success('Page updated successfully!'),

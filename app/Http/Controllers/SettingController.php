@@ -4,79 +4,76 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSettingRequest;
 use App\Http\Requests\UpdateSettingRequest;
+use App\Infrastructure\Models\Media;
 use App\Infrastructure\Models\Setting;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class SettingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): View
+    public function company(Request $request): Response
     {
-        $settings = Setting::latest()->paginate(20);
-        return view('settings.index', compact('settings'));
+        $settings = Setting::pluck('value', 'key')->toArray();
+        $perPage = $request->input('perPage', 20);
+        $type = $request->input('type', 'all');
+        $query = Media::query();
+        if ($type !== 'all') {
+            switch ($type) {
+                case 'images':
+                    $query->where('file_type', 'like', 'image/%');
+                    break;
+                case 'videos':
+                    $query->where('file_type', 'like', 'video/%');
+                    break;
+                case 'audio':
+                    $query->where('file_type', 'like', 'audio/%');
+                    break;
+                case 'pdf':
+                    $query->where('file_type', 'application/pdf');
+                    break;
+            }
+        }
+        $media = $query->latest()->paginate($perPage)->withQueryString();
+
+        return Inertia::render('settings/company', [
+            'settings' => $settings,
+            'media' => $media
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(): View
+    public function updateCompany(Request $request)
     {
-        return view('settings.create');
+        $validated = $request->validate([
+            'site_name' => 'required|string|max:255',
+            'site_email' => 'required|email|max:255',
+            'contact_phone' => 'nullable|string|max:255',
+            'contact_address' => 'nullable|string|max:255',
+            'site_logo' => 'nullable|url',
+            'maintenance_mode' => 'sometimes|boolean',
+            'facebook' => 'nullable|string|max:255',
+            'twitter' => 'nullable|string|max:255',
+            'instagram' => 'nullable|string|max:255',
+            'linkedin' => 'nullable|string|max:255',
+            'youtube' => 'nullable|string|max:255',
+            'contact_email' => 'nullable|email|max:255',
+        ]);
+
+        // Convert maintenance_mode to 1/0
+        if (isset($validated['maintenance_mode'])) {
+            $validated['maintenance_mode'] = $validated['maintenance_mode'] ? '1' : '0';
+        }
+
+        foreach ($validated as $key => $value) {
+            Setting::updateOrCreate(
+                ['key' => $key],
+                ['value' => $value]
+            );
+        }
+
+        return back()->with('success', 'Company settings updated successfully.');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreSettingRequest $request): RedirectResponse
-    {
-        $data = $request->validated();
 
-        Setting::create($data);
-
-        return redirect()->route('settings.index')
-            ->with('success', 'Setting created successfully.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Setting $setting): View
-    {
-        return view('settings.show', compact('setting'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Setting $setting): View
-    {
-        return view('settings.edit', compact('setting'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateSettingRequest $request, Setting $setting): RedirectResponse
-    {
-        $data = $request->validated();
-
-        $setting->update($data);
-
-        return redirect()->route('settings.index')
-            ->with('success', 'Setting updated successfully.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Setting $setting): RedirectResponse
-    {
-        $setting->delete();
-
-        return redirect()->route('settings.index')
-            ->with('success', 'Setting deleted successfully.');
-    }
 }

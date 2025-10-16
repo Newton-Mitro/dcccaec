@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use Faker\Factory as Faker;
 
-class CustomPageSeeder extends Seeder
+class PageSeeder extends Seeder
 {
   private $faker;
 
@@ -23,35 +23,32 @@ class CustomPageSeeder extends Seeder
     $allImages = Media::where('file_path', 'like', '%images%')->get();
 
     $pages = [
-      'Mission & Vision' => [
-        [
-          'content' => '
+      [
+        'title' => 'Mission & Vision',
+        'subtitle' => 'What we believe',
+        'content' => '
                         <div>
                             <h2>Our Vision</h2>
                             <p>Our Vision is a second home for our children, where their growing needs are fulfilled in a safe, healthy, positive and creative environment and where their childhood will remain the happiest days of their lives.</p>
                             <h2>Our Mission</h2>
                             <p>The Mission is to provide a creative environment conducive for the optimal growth and holistic development of children.</p>
                         </div>'
-        ]
       ],
-
-      'Our Story' => [
-        [
-          'excerpt' => 'At Dhaka Credit Child Care and Education Center, we nurture every child in a safe, inclusive, and inspiring environment...',
-          'heading' => 'Our Story',
-          'sub_heading' => 'How we started',
-          'content' => '
+      [
+        'title' => 'Our Story',
+        'subtitle' => 'How we started',
+        'excerpt' => 'At Dhaka Credit Child Care and Education Center, we nurture every child in a safe, inclusive, and inspiring environment...',
+        'content' => '
                         <section>
                             <p>At <strong>Dhaka Credit Child Care and Education Center</strong>, we are dedicated to fostering a nurturing and inclusive environment where every child feels secure, respected, and inspired to explore their full potential.</p>
                             <p>We recognize that each child is unique, and we collaborate closely with parents to tailor our programs to support curiosity, creativity, and meaningful social connections.</p>
                             <p>Our mission is to provide a creative environment conducive to the optimal growth and holistic development of children. We prioritize safety, health, and positivity, ensuring that our space is a place where children can thrive emotionally, socially, and academically.</p>
                         </section>'
-        ]
       ],
-
-      'Our Philosophy' => [
-        [
-          'content' => '
+      [
+        'title' => 'Our Philosophy',
+        'subtitle' => 'What we believe',
+        'content' => '
                         <div class="">
                     <div class="">
                         <h2 class="text-3xl font-semibold">Our Philosophy</h2>
@@ -60,14 +57,11 @@ class CustomPageSeeder extends Seeder
                         </p>
                     </div>
                 </div>'
-        ]
       ],
-
-      'President Message' => [
-        [
-          'heading' => 'Message from the President',
-          'sub_heading' => 'A word from our leadership.',
-          'content' => '
+      [
+        'title' => 'President Message',
+        'subtitle' => 'A word from our leadership.',
+        'content' => '
                         <section class="president-message">
   <p>The Dhaka Credit Child Care and Education Centre (DCCCEC) is a place of comfort, safety, and growth for our beloved children. It is a long-cherished dream of The Christian Cooperative Credit Union Ltd., Dhaka, which proudly introduced the first-ever international-standard child care and education service in Bangladesh.</p>
   <p>Established in 2016, DCCCEC was founded to support working parents—especially new mothers—by providing a nurturing environment where children receive motherly care and high-quality early education. Our facilities were built under the supervision of a child care specialist from Singapore, ensuring international standards in both care and learning.</p>
@@ -79,14 +73,11 @@ class CustomPageSeeder extends Seeder
   <span>President</span><br>
   <span>The Christian Co-operative Credit Union Ltd., Dhaka</span></p>
 </section>'
-        ]
       ],
-
-      'Principal Message' => [
-        [
-          'heading' => 'Principal’s Speech',
-          'sub_heading' => 'Meet our principal.',
-          'content' => '
+      [
+        'title' => 'Principal Message',
+        'subtitle' => 'Meet our principal.',
+        'content' => '
                         <section class="principal-speech">
   <p><em>“Children are like wet cement; whatever falls on them makes an impression.” — Haim Ginott</em></p>
   <p>Welcome to the DC Child Care and Education Centre! Early learning and child care build the foundation for a child’s educational and social development in a safe and nurturing environment—while supporting parents in their daily lives.</p>
@@ -100,14 +91,11 @@ class CustomPageSeeder extends Seeder
   <strong>Dalia M. Rodrigues</strong><br>
   <span>Principal</span></p>
 </section>'
-        ]
       ],
-
-      'Class Rutines' => [
-        [
-          'heading' => 'Daily Class Routines',
-          'sub_heading' => 'A structured, joyful day.',
-          'content' => '<section id="class-routines" class="">
+      [
+        'title' => 'Class Rutines',
+        'subtitle' => 'A structured, joyful day.',
+        'content' => '<section id="class-routines" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Daily Class Routines</h2>
 
@@ -176,14 +164,11 @@ class CustomPageSeeder extends Seeder
     </p>
   </div>
 </section>'
-        ]
       ],
-
-      // Parent Resources
-      'Enrollment' => [
-        [
-          'heading' => 'Registration & Admission',
-          'content' => '<section id="enrollment" class="">
+      [
+        'title' => 'Enrollment',
+        'subtitle' => 'Registration & Admission',
+        'content' => '<section id="enrollment" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Registration & Admission</h2>
 
@@ -222,13 +207,11 @@ class CustomPageSeeder extends Seeder
     </ul>
   </div>
 </section>'
-        ]
       ],
-
-      'Curriculum' => [
-        [
-          'heading' => 'Our Curriculum',
-          'content' => '<section id="curriculum" class="">
+      [
+        'title' => 'Curriculum',
+        'subtitle' => 'Our Curriculum',
+        'content' => '<section id="curriculum" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Our Curriculum</h2>
     
@@ -314,13 +297,10 @@ class CustomPageSeeder extends Seeder
     </p>
   </div>
 </section>'
-        ]
       ],
-
-      'Rules & Regulations' => [
-        [
-          'heading' => 'Rules & Regulations',
-          'content' => '<section id="rules-regulations" class="">
+      [
+        'title' => 'Rules & Regulations',
+        'content' => '<section id="rules-regulations" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Rules & Regulations</h2>
 
@@ -379,13 +359,12 @@ class CustomPageSeeder extends Seeder
     </p>
   </div>
 </section>'
-        ]
       ],
-
-      'Health & Safety' => [
-        [
-          'heading' => 'Health & Safety',
-          'content' => '<section id="health-safety" class="">
+      [
+        'title' => 'Health & Safety',
+        'slug' => 'health-safety',
+        'subtitle' => 'What we believe',
+        'content' => '<section id="health-safety" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Health & Safety</h2>
 
@@ -447,13 +426,11 @@ class CustomPageSeeder extends Seeder
     </p>
   </div>
 </section>'
-        ]
       ],
-
-      'Nutrition & Meals' => [
-        [
-          'heading' => 'Nutrition & Meals',
-          'content' => '<section id="nutrition-meals" class="">
+      [
+        'title' => 'Nutrition & Meals',
+        'subtitle' => 'What we believe',
+        'content' => '<section id="nutrition-meals" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Nutrition & Meals</h2>
 
@@ -495,31 +472,24 @@ class CustomPageSeeder extends Seeder
     </p>
   </div>
 </section>'
+      ],
+      [
+        'title' => 'FAQ',
+        'subtitle' => 'Frequently Asked Questions',
+        'content' => '',
+        'json_array' => [
+          ['question' => 'What are your school hours?', 'answer' => 'We operate from 8:00 AM to 3:00 PM.'],
+          ['question' => 'Do you offer transportation?', 'answer' => 'Yes, bus services are available.'],
+          ['question' => 'What are the school fees?', 'answer' => 'The school fees depend on the program you choose.'],
+          ['question' => 'What are the school policies?', 'answer' => 'Please refer to our website for the latest school policies.'],
+          ['question' => 'Do you offer scholarships?', 'answer' => 'Yes, we offer scholarships to eligible students.'],
+          ['question' => 'What are the school policies?', 'answer' => 'Please refer to our website for the latest school policies.'],
         ]
       ],
-
-      'FAQ' => [
-        [
-          'heading' => 'Frequently Asked Questions',
-          'sub_heading' => 'Find your answers here',
-          'content' => '',
-          'json_array' => [
-            ['question' => 'What are your school hours?', 'answer' => 'We operate from 8:00 AM to 3:00 PM.'],
-            ['question' => 'Do you offer transportation?', 'answer' => 'Yes, bus services are available.'],
-            ['question' => 'What are the school fees?', 'answer' => 'The school fees depend on the program you choose.'],
-            ['question' => 'What are the school policies?', 'answer' => 'Please refer to our website for the latest school policies.'],
-            ['question' => 'Do you offer scholarships?', 'answer' => 'Yes, we offer scholarships to eligible students.'],
-            ['question' => 'What are the school policies?', 'answer' => 'Please refer to our website for the latest school policies.'],
-          ]
-        ]
-      ],
-
-      // Legal
-      'Disclaimer' => [
-        [
-          'heading' => 'Disclaimer',
-          'sub_heading' => 'Important legal information.',
-          'content' => '<section id="disclaimer" class="">
+      [
+        'title' => 'Disclaimer',
+        'subtitle' => 'Important legal information.',
+        'content' => '<section id="disclaimer" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Disclaimer</h2>
 
@@ -544,14 +514,11 @@ class CustomPageSeeder extends Seeder
     </p>
   </div>
 </section>'
-        ]
       ],
-
-      'Terms of Service' => [
-        [
-          'heading' => 'Terms of Service',
-          'sub_heading' => 'Important legal information.',
-          'content' => '<section id="terms-of-service" class="">
+      [
+        'title' => 'Terms of Service',
+        'subtitle' => 'Important legal information.',
+        'content' => '<section id="terms-of-service" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Terms of Service</h2>
 
@@ -589,14 +556,11 @@ class CustomPageSeeder extends Seeder
     </p>
   </div>
 </section>'
-        ]
       ],
-
-      'Privacy Policy' => [
-        [
-          'heading' => 'Privacy Policy',
-          'sub_heading' => 'Important legal information.',
-          'content' => '<section id="privacy-policy" class="">
+      [
+        'title' => 'Privacy Policy',
+        'subtitle' => 'Important legal information.',
+        'content' => '<section id="privacy-policy" class="">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold mb-8">Privacy Policy</h2>
 
@@ -644,45 +608,48 @@ class CustomPageSeeder extends Seeder
     </p>
   </div>
 </section>'
-        ]
       ],
+      [
+        'title' => 'Ads',
+        'subtitle' => 'Admission Going on',
+        'content' => '<section id="disclaimer" class=""></section>'
+      ]
     ];
 
-    foreach ($pages as $title => $sections) {
-      $slug = Str::slug($title);
-      $excerpt = $sections[0]['excerpt'] ?? $this->faker->paragraph(2);
+    foreach ($pages as $pageData) {
+      $slug = Str::slug($pageData['title']);
+      $excerpt = $pageData['excerpt'] ?? $this->faker->paragraph(2);
 
       $page = Page::firstOrCreate(
         ['slug' => $slug],
         [
-          'title' => $title,
-          'subtitle' => $sections[0]['sub_heading'] ?? null,
-          'meta_title' => $title,
+          'title' => $pageData['title'],
+          'subtitle' => $pageData['subtitle'] ?? null,
+          'meta_title' => $pageData['title'],
           'meta_description' => $excerpt,
-          'meta_keywords' => Str::lower(str_replace(' ', ',', $title)),
-          'content' => $sections[0]['content'] ?? null,
+          'meta_keywords' => Str::lower(str_replace(' ', ',', $pageData['title'])),
+          'content' => $pageData['content'] ?? null,
           'excerpt' => $excerpt,
-          'json_array' => $sections[0]['json_array'] ?? null,
+          'json_array' => $pageData['json_array'] ?? null,
           'media_id' => $allImages->isNotEmpty() ? $allImages->random()->id : null,
           'predefined' => true,
-          'button_text' => $sections[0]['button_text'] ?? null,
-          'button_link' => $sections[0]['button_link'] ?? null,
+          'button_text' => $pageData['button_text'] ?? null,
+          'button_link' => $pageData['button_link'] ?? null,
         ]
       );
 
-      foreach ($sections as $index => $section) {
-        ResourceMedia::updateOrCreate(
-          [
-            'resource_id' => $page->id,
-            'resource_type' => Page::class,
-          ],
-          [
-            'caption' => $section['heading'] ?? null,
-            'description' => $section['sub_heading'] ?? null,
-            'media_id' => $allImages->isNotEmpty() ? $allImages->random()->id : null,
-          ]
-        );
-      }
+      // Create a single ResourceMedia for each page if needed
+      ResourceMedia::updateOrCreate(
+        [
+          'resource_id' => $page->id,
+          'resource_type' => Page::class,
+        ],
+        [
+          'caption' => $pageData['title'] ?? null,
+          'description' => $pageData['subtitle'] ?? null,
+          'media_id' => $allImages->isNotEmpty() ? $allImages->random()->id : null,
+        ]
+      );
     }
   }
 }

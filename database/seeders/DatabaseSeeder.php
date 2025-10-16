@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             DocumentMediaSeeder::class,
             CategorySeeder::class,
                 // PageSeeder::class,
-            CustomPageSeeder::class,
+            PageSeeder::class,
             ProgramSeeder::class,
             TeamSeeder::class,
             TestimonialSeeder::class,

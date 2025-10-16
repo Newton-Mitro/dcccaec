@@ -15,8 +15,6 @@ class SettingSeeder extends Seeder
             ['key' => 'site_email', 'value' => 'info@example.com'],
             ['key' => 'site_logo', 'value' => '/logo.png'],
             ['key' => 'site_favicon', 'value' => '/favicon.ico'],
-            ['key' => 'default_language', 'value' => 'en'],
-            ['key' => 'timezone', 'value' => 'UTC'],
             ['key' => 'maintenance_mode', 'value' => '0'],
 
             // SEO

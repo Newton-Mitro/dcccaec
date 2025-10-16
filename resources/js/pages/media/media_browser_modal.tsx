@@ -7,7 +7,7 @@ import { Media } from '../../types/media';
 import { PaginatedData } from '../../types/paginated_meta';
 
 interface MediaBrowserModalProps {
-    actionType: 'create' | 'edit';
+    actionType: 'create' | 'edit' | 'company' | 'select';
     isOpen: boolean;
     onClose: () => void;
     media: PaginatedData<Media>;
@@ -178,7 +178,6 @@ const MediaBrowserModal: React.FC<MediaBrowserModalProps> = ({ actionType, isOpe
                             } disabled:opacity-50`}
                             onClick={() => {
                                 if (!link.url) return;
-                                console.log(link);
                                 if (link.url) router.get(link.url, {}, { preserveScroll: true, preserveState: true });
                             }}
                             dangerouslySetInnerHTML={{ __html: link.label }}

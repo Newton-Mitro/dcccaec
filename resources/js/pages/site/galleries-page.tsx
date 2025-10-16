@@ -10,7 +10,6 @@ interface GalleriesPageProps {
 }
 
 const GalleriesPage: React.FC<GalleriesPageProps> = ({ galleries }) => {
-    console.log('GALLERIES', galleries);
     const [currentIndex, setCurrentIndex] = useState<number | null>(null);
     const [currentGallery, setCurrentGallery] = useState<ResourceMedia[]>([]);
 

@@ -4,7 +4,6 @@ import ImageIconItem from './image-icon-item';
 import QuestionAnswerItem from './question-answer-item';
 
 function RenderSectionContent({ jsonItems }) {
-    console.log(jsonItems);
     try {
         const items = jsonItems ? JSON.parse(jsonItems) : [];
         return (

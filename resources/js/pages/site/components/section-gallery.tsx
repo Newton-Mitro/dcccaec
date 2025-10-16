@@ -7,7 +7,6 @@ interface SectionGalleryProps {
 }
 
 const SectionGallery: React.FC<SectionGalleryProps> = ({ gallery }) => {
-    console.log('Gallery', gallery);
     const [currentIndex, setCurrentIndex] = useState<number | null>(null);
 
     const isImage = (url: string) => /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(url);

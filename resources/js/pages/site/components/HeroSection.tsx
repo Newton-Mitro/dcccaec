@@ -38,10 +38,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ slides, interval = 5 }) => {
                 {/* Content */}
                 <div className="mx-auto mt-16 flex w-6xl flex-col items-center md:flex-row">
                     <div className="md:container-custom z-10 w-full px-6 py-10 text-left md:px-28">
-                        <h1 className="text-4xl text-gray-200 md:text-5xl">
-                            <span className="font-chewy text-2xl md:text-7xl">{currentSlide?.title}</span>
+                        <h1 className="text-4xl md:text-5xl">
+                            <span className="font-chewy text-2xl text-white md:text-7xl">{currentSlide?.title}</span>
                         </h1>
-                        <p className="mt-6 text-sm leading-relaxed text-gray-400 md:text-lg">{currentSlide?.subtitle}</p>
+                        <p className="mt-6 text-sm leading-relaxed text-gray-300 md:text-lg">{currentSlide?.subtitle}</p>
                         {currentSlide?.button_text && (
                             <div className="mt-16">
                                 <Link href={currentSlide.button_link || '#'}>
@@ -55,7 +55,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ slides, interval = 5 }) => {
                     <img
                         src="/images/bear.gif"
                         alt="Hero Image"
-                        className="z-20 h-44 w-44 rounded-full border-10 border-secondary bg-foreground shadow-2xl md:h-96 md:w-96"
+                        className="z-20 h-44 w-44 rounded-full border-10 border-secondary bg-card shadow-2xl md:h-96 md:w-96"
                     />
                 </div>
             </div>

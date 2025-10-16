@@ -13,7 +13,6 @@ const SingleEventPage: React.FC<SingleEventPageProps> = ({ event }) => {
     const metaTitle = event?.title || 'YourSite';
     const metaDescription = event?.description || 'YourSite';
     const metaKeywords = 'YourSite';
-    console.log(event);
 
     return (
         <>
@@ -51,9 +50,9 @@ const SingleEventPage: React.FC<SingleEventPageProps> = ({ event }) => {
                 <section className="bg-background py-16">
                     <div className="container mx-auto max-w-5xl px-4">
                         {/* Thumbnail */}
-                        {event.media && (
+                        {event.featured_image && (
                             <div className="mb-10 overflow-hidden rounded-2xl shadow-md">
-                                <img src={event.media.url} alt={event.title} className="h-[400px] w-full object-cover" />
+                                <img src={event.featured_image.url} alt={event.title} className="h-[400px] w-full object-cover" />
                             </div>
                         )}
 

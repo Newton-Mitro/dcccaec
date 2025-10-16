@@ -12,7 +12,6 @@ interface EnrollmentPageProps {
 }
 
 const EnrollmentPage: React.FC<EnrollmentPageProps> = ({ page }) => {
-    console.log(page);
     const pageUrl = window.location.href;
     const imageUrl = '';
     const metaTitle = page?.meta_title || 'YourSite';

@@ -25,7 +25,21 @@ const MediaSelector: React.FC<MediaSelectorProps> = ({ media, onSelect, onRemove
             );
         }
 
-        const [mainType] = media.file_type.split('/');
+        // Defensive fallback
+        const fileType = media.file_type || '';
+        const [mainType] = fileType.split('/');
+
+        // Default placeholder if no type is found
+        if (!fileType) {
+            return (
+                <div className="flex w-48 flex-col items-center justify-center rounded border bg-gray-50 dark:bg-gray-800">
+                    <p className="text-xs text-gray-400">Unknown file type</p>
+                    <a href={media.url} target="_blank" rel="noopener noreferrer" className="mt-1 text-xs text-blue-600 underline dark:text-blue-400">
+                        View File
+                    </a>
+                </div>
+            );
+        }
 
         if (mainType === 'image') {
             return <img src={media.url} alt={media.alt_text || 'Selected image'} className="w-48 rounded object-cover" />;
@@ -34,7 +48,7 @@ const MediaSelector: React.FC<MediaSelectorProps> = ({ media, onSelect, onRemove
         if (mainType === 'video') {
             return (
                 <video controls className="w-48 rounded bg-black object-cover">
-                    <source src={media.url} type={media.file_type} />
+                    <source src={media.url} type={fileType} />
                     Your browser does not support the video tag.
                 </video>
             );
@@ -44,7 +58,7 @@ const MediaSelector: React.FC<MediaSelectorProps> = ({ media, onSelect, onRemove
             return (
                 <div className="flex w-48 items-center justify-center rounded bg-gray-100 dark:bg-gray-700">
                     <audio controls className="w-full">
-                        <source src={media.url} type={media.file_type} />
+                        <source src={media.url} type={fileType} />
                         Your browser does not support the audio element.
                     </audio>
                 </div>
@@ -53,7 +67,7 @@ const MediaSelector: React.FC<MediaSelectorProps> = ({ media, onSelect, onRemove
 
         return (
             <div className="flex w-48 flex-col items-center justify-center rounded border bg-gray-50 dark:bg-gray-800">
-                <span className="text-sm text-gray-500 dark:text-gray-300">{media.file_type}</span>
+                <span className="text-sm text-gray-500 dark:text-gray-300">{fileType}</span>
                 <a
                     href={media.url}
                     target="_blank"
@@ -73,7 +87,6 @@ const MediaSelector: React.FC<MediaSelectorProps> = ({ media, onSelect, onRemove
 
             <div className="flex gap-2">
                 <TooltipProvider>
-                    {/* Browse Media Icon Button */}
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Button
@@ -88,7 +101,6 @@ const MediaSelector: React.FC<MediaSelectorProps> = ({ media, onSelect, onRemove
                         <TooltipContent>Browse Media</TooltipContent>
                     </Tooltip>
 
-                    {/* Remove Media Icon Button */}
                     {media && onRemove && (
                         <Tooltip>
                             <TooltipTrigger asChild>

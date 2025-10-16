@@ -10,7 +10,6 @@ interface Props {
 }
 
 export default function Show({ program }: Props) {
-    console.log(program);
     const breadcrumbs: BreadcrumbItem[] = [
         { title: 'Dashboard', href: '/dashboard' },
         { title: 'Programs', href: route('programs.index') },

@@ -6,6 +6,7 @@ export default function Navigation() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
     const [scrolled, setScrolled] = useState(false);
+    const { settings } = usePage().props as any;
 
     const toggleDropdown = (menu: string) => {
         setActiveDropdown((prev) => (prev === menu ? null : menu));
@@ -108,7 +109,7 @@ export default function Navigation() {
                         <div className="flex items-center justify-center rounded-full bg-white p-1 transition-all duration-300 md:mr-4">
                             <Link href="/" data-discover="true">
                                 <img
-                                    src="/logo.png"
+                                    src={settings.site_logo || '/logo.png'}
                                     alt="DC Child Care and Education Centre Logo"
                                     className={`transition-all duration-300 ${scrolled ? 'w-6 md:w-12' : 'w-8 md:w-16'}`}
                                 />
@@ -175,11 +176,29 @@ export default function Navigation() {
 
             {/* Mobile Sidebar */}
             <div
-                className={`fixed top-0 right-0 h-screen w-[80%] transform overflow-auto bg-background transition-transform duration-500 ease-in-out ${
+                className={`fixed top-0 right-0 z-[999999] h-screen w-[100%] transform overflow-auto bg-background transition-transform duration-500 ease-in-out ${
                     mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
                 }`}
             >
-                <div className="mt-20 px-6">
+                <div className="mt-6 px-6">
+                    <div className="flex items-center justify-between border-b border-border pb-4">
+                        <div className="flex items-center justify-center rounded-full bg-white p-1 transition-all duration-300 md:mr-4">
+                            <Link href="/" data-discover="true">
+                                <img
+                                    src={settings.site_logo || '/logo.png'}
+                                    alt="DC Child Care and Education Centre Logo"
+                                    className={`w-6 transition-all duration-300`}
+                                />
+                            </Link>
+                        </div>
+                        <div className="md:hidden">
+                            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="px-4">
+                                <svg stroke="currentColor" fill="none" strokeWidth={0} viewBox="0 0 24 24" height="25" width="25">
+                                    <path d="M4 6H20M4 18H20M11 12H19" stroke="currentColor" strokeWidth={2} />
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
                     <ul>
                         {menuItems.map((menu) => (
                             <li key={menu.title} className="w-full">

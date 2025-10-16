@@ -9,7 +9,6 @@ interface FaqPageProps {
 }
 
 const FaqPage: React.FC<FaqPageProps> = ({ page }) => {
-    console.log(page);
     const pageUrl = window.location.href;
     const imageUrl = '';
     const metaTitle = page?.meta_title || 'YourSite';

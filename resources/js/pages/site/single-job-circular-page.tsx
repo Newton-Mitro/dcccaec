@@ -8,7 +8,6 @@ interface ViewJobCircularPageProps {
 }
 
 const ViewJobCircularPage: React.FC<ViewJobCircularPageProps> = ({ job }) => {
-    console.log('JOB', job);
     return (
         <>
             <Head title="Careers" />

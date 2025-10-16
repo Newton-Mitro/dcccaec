@@ -39,12 +39,6 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
     const metaDescription = 'YourSite';
     const metaKeywords = 'YourSite';
 
-    console.log('Award', awards);
-    console.log('Partners', partners);
-    console.log('Teams', teams);
-    console.log('Testimonials', testimonials);
-    console.log('Programs', programs);
-
     return (
         <>
             <Head title={'Home'}>
@@ -121,7 +115,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                     <Link key={program.id} href={`/programs/${program.id}`}>
                                         <div
                                             key={program.id}
-                                            className={`group relative border-2 border-card/50 bg-card p-6 shadow transition-transform duration-300 hover:-translate-y-2 ${
+                                            className={`group relative border-2 border-accent/50 bg-card p-6 shadow transition-transform duration-300 hover:-translate-y-2 ${
                                                 index % 2 === 0 ? 'rounded-tl-4xl rounded-br-4xl' : 'rounded-tr-4xl rounded-bl-4xl'
                                             }`}
                                         >
@@ -137,7 +131,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                                     <img
                                                         src={program.featured_image.url}
                                                         alt={program.name}
-                                                        className="mx-auto h-16 w-16 rounded-full border-2 border-primary object-cover p-1"
+                                                        className="mx-auto h-36 w-36 rounded-full border-2 border-primary object-cover p-1"
                                                     />
                                                 )}
 
@@ -182,7 +176,7 @@ const HomePage: React.FC<HomePageProps> = ({ heroSlides, about, programs, teams,
                                 {teams.slice(0, 3).map((member, index) => (
                                     <div
                                         key={member.id}
-                                        className={`group relative border-2 border-card/50 bg-card p-6 text-center shadow transition-transform duration-300 hover:-translate-y-2 ${
+                                        className={`group relative border-2 border-secondary/50 bg-card p-6 text-center shadow transition-transform duration-300 hover:-translate-y-2 ${
                                             index % 2 === 0 ? 'rounded-tl-4xl rounded-br-4xl' : 'rounded-tr-4xl rounded-bl-4xl'
                                         }`}
                                     >
