@@ -20,8 +20,6 @@ return new class extends Migration {
             $table->string('linkedin_links')->nullable();
             $table->string('instagram_links')->nullable();
             $table->string('youtube_links')->nullable();
-            $table->string('whatsapp_links')->nullable();
-            $table->string('github_links')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();

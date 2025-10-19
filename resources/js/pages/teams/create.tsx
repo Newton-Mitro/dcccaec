@@ -186,8 +186,6 @@ export default function Create({ categories, media }: CreateProps) {
                             { key: 'linkedin_links', label: 'LinkedIn', placeholder: 'https://linkedin.com/in/username' },
                             { key: 'instagram_links', label: 'Instagram', placeholder: 'https://instagram.com/username' },
                             { key: 'youtube_links', label: 'YouTube', placeholder: 'https://youtube.com/channel/...' },
-                            { key: 'whatsapp_links', label: 'WhatsApp', placeholder: 'https://wa.me/1234567890' },
-                            { key: 'github_links', label: 'GitHub', placeholder: 'https://github.com/username' },
                         ].map((social) => (
                             <div className="flex flex-col gap-2" key={social.key}>
                                 <Label>{social.label}</Label>

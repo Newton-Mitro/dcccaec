@@ -33,7 +33,7 @@ const NoticesPage: React.FC<NoticesPageProps> = ({ notices }) => {
 
                                                 {/* Notice Card */}
                                                 <div
-                                                    className={`w-full max-w-md rounded-3xl border bg-card p-6 shadow-xl transition-transform duration-500 hover:-translate-y-2 hover:scale-[1.02] ${
+                                                    className={`w-full max-w-md rounded-3xl border bg-card p-6 shadow transition-transform duration-500 hover:-translate-y-2 hover:scale-[1.02] ${
                                                         isLeft ? 'pr-10 text-right md:mr-auto' : 'pl-10 text-left md:ml-auto'
                                                     }`}
                                                 >

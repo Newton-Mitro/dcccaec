@@ -1,6 +1,6 @@
 import { Link } from '@inertiajs/react';
 import React from 'react';
-import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn, FaTwitter, FaWhatsapp, FaYoutube } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaLinkedinIn, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { Team } from '../../../types/team';
 
 interface TeamCardItemProps {
@@ -15,8 +15,6 @@ const TeamCardItem: React.FC<TeamCardItemProps> = ({ member, index }) => {
         { icon: <FaLinkedinIn />, link: member.linkedin_links },
         { icon: <FaInstagram />, link: member.instagram_links },
         { icon: <FaYoutube />, link: member.youtube_links },
-        { icon: <FaWhatsapp />, link: member.whatsapp_links },
-        { icon: <FaGithub />, link: member.github_links },
     ].filter((s) => s.link);
 
     return (

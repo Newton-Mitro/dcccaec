@@ -26,8 +26,6 @@ class TeamFactory extends Factory
             'linkedin_links' => 'https://linkedin.com/in/' . $this->faker->userName(),
             'instagram_links' => 'https://instagram.com/' . $this->faker->userName(),
             'youtube_links' => 'https://youtube.com/' . $this->faker->userName(),
-            'whatsapp_links' => 'https://wa.me/' . $this->faker->phoneNumber(),
-            'github_links' => 'https://github.com/' . $this->faker->userName(),
 
             'email' => $this->faker->safeEmail(),
             'phone' => $this->faker->phoneNumber(),
