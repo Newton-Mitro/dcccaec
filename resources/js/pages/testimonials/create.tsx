@@ -76,33 +76,12 @@ export default function Create({ media }: CreateProps) {
                             <Input value={form.author_designation} onChange={(e) => setForm({ ...form, author_designation: e.target.value })} />
                             <InputError message={errors.author_designation} />
                         </div>
-                    </div>
-
-                    {/* Company */}
-                    <div className="grid gap-2 md:w-1/2">
-                        <Label>Company</Label>
-                        <Input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} />
-                        <InputError message={errors.company} />
-                    </div>
-
-                    {/* Message */}
-                    <div className="grid gap-2">
-                        <Label>Message</Label>
-                        <CKEditor
-                            editor={ClassicEditor as any}
-                            config={
-                                {
-                                    contentClass: 'prose dark:prose-invert max-w-full',
-                                } as any
-                            }
-                            data={form.message}
-                            onChange={(_, editor) => setForm({ ...form, message: editor.getData() })}
-                        />
-                        <InputError message={errors.message} />
-                    </div>
-
-                    {/* Rating & Status */}
-                    <div className="grid gap-4 md:grid-cols-2">
+                        {/* Company */}
+                        <div className="grid gap-2">
+                            <Label>Company</Label>
+                            <Input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} />
+                            <InputError message={errors.company} />
+                        </div>
                         <div className="grid gap-2">
                             <Label>Rating (1–5)</Label>
                             <Input
@@ -126,6 +105,22 @@ export default function Create({ media }: CreateProps) {
                             />
                             <InputError message={errors.status} />
                         </div>
+                    </div>
+
+                    {/* Message */}
+                    <div className="grid gap-2">
+                        <Label>Message</Label>
+                        <CKEditor
+                            editor={ClassicEditor as any}
+                            config={
+                                {
+                                    contentClass: 'prose dark:prose-invert max-w-full',
+                                } as any
+                            }
+                            data={form.message}
+                            onChange={(_, editor) => setForm({ ...form, message: editor.getData() })}
+                        />
+                        <InputError message={errors.message} />
                     </div>
 
                     {/* Media */}

@@ -59,18 +59,20 @@ export default function Edit({ partner, media }: EditProps) {
                 <HeadingSmall title={`Edit ${partner.name}`} description="Update partner details" />
 
                 <form onSubmit={submit} className="space-y-6 rounded-lg border bg-white p-6 md:w-4xl dark:bg-gray-900">
-                    {/* Name */}
-                    <div className="grid gap-2">
-                        <Label>Name</Label>
-                        <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-                        <InputError message={errors.name} />
-                    </div>
+                    <div className="grid gap-6 md:grid-cols-2">
+                        {/* Name */}
+                        <div className="grid gap-2">
+                            <Label>Name</Label>
+                            <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+                            <InputError message={errors.name} />
+                        </div>
 
-                    {/* Website */}
-                    <div className="grid gap-2">
-                        <Label>Website</Label>
-                        <Input value={form.website} onChange={(e) => setForm({ ...form, website: e.target.value })} />
-                        <InputError message={errors.website} />
+                        {/* Website */}
+                        <div className="grid gap-2">
+                            <Label>Website</Label>
+                            <Input value={form.website} onChange={(e) => setForm({ ...form, website: e.target.value })} />
+                            <InputError message={errors.website} />
+                        </div>
                     </div>
 
                     {/* Media */}

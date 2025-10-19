@@ -10,8 +10,8 @@ interface SingleProgramPageProps {
 const SingleProgramPage: React.FC<SingleProgramPageProps> = ({ program }) => {
     const pageUrl = window.location.href;
     const metaTitle = program?.name || 'YourSite';
-    const metaDescription = program?.description?.replace(/<[^>]+>/g, '').slice(0, 160) || 'YourSite';
-    const metaKeywords = 'YourSite';
+    const metaDescription = program?.excerpt?.replace(/<[^>]+>/g, '').slice(0, 160) || program?.description?.replace(/<[^>]+>/g, '').slice(0, 160);
+    const metaKeywords = program?.name || 'YourSite';
 
     return (
         <>
@@ -78,7 +78,7 @@ const SingleProgramPage: React.FC<SingleProgramPageProps> = ({ program }) => {
                                         <ul className="mt-2 ml-4 list-disc">
                                             {Object.entries(program.monthly_fee).map(([level, fee]) => (
                                                 <li key={level}>
-                                                    {level}: <span className="font-semibold">${fee}</span>
+                                                    {level}: <span className="font-semibold">৳ {fee}</span>
                                                 </li>
                                             ))}
                                         </ul>
@@ -97,22 +97,22 @@ const SingleProgramPage: React.FC<SingleProgramPageProps> = ({ program }) => {
                                     <div className="space-y-1 text-sm text-muted-foreground">
                                         {program.admission_form_fee && (
                                             <div>
-                                                Admission Form: <span className="font-semibold">${program.admission_form_fee}</span>
+                                                Admission Form: <span className="font-semibold">৳ {program.admission_form_fee}</span>
                                             </div>
                                         )}
                                         {program.admission_fee && (
                                             <div>
-                                                Admission Fee: <span className="font-semibold">${program.admission_fee}</span>
+                                                Admission Fee: <span className="font-semibold">৳ {program.admission_fee}</span>
                                             </div>
                                         )}
                                         {program.yearly_charge && (
                                             <div>
-                                                Yearly Charge: <span className="font-semibold">${program.yearly_charge}</span>
+                                                Yearly Charge: <span className="font-semibold">৳ {program.yearly_charge}</span>
                                             </div>
                                         )}
                                         {program.uniform_fee && (
                                             <div>
-                                                Uniform: <span className="font-semibold">${program.uniform_fee}</span>
+                                                Uniform: <span className="font-semibold">৳ {program.uniform_fee}</span>
                                             </div>
                                         )}
                                         {program.books_stationary_fee && (
@@ -122,7 +122,7 @@ const SingleProgramPage: React.FC<SingleProgramPageProps> = ({ program }) => {
                                         )}
                                         {program.khata_fee && (
                                             <div>
-                                                Khata: <span className="font-semibold">${program.khata_fee}</span>
+                                                Khata: <span className="font-semibold">৳ {program.khata_fee}</span>
                                             </div>
                                         )}
                                     </div>

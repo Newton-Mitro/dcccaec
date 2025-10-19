@@ -84,81 +84,81 @@ class ProgramSeeder extends Seeder
                 'khata_fee' => '50',
                 'monthly_fee' => json_encode(['Play Group' => 2000, 'Nursery' => 2200, 'KG' => 2400]),
             ],
-            [
-                'name' => 'STEM Explorers',
-                'slug' => 'stem-explorers',
-                'category_id' => $categories['STEM Education'] ?? null,
-                'excerpt' => 'Hands-on exploration in science, technology, and math.',
-                'description' => '
-                    <p><strong>STEM Explorers</strong> introduces children to STEM concepts through interactive activities:</p>
-                    <ul>
-                        <li>Simple coding and robotics exercises</li>
-                        <li>Creative building and problem-solving challenges</li>
-                        <li>Science experiments with everyday materials</li>
-                    </ul>
-                    <p>Encourages critical thinking, teamwork, and curiosity.</p>
-                ',
-                'objectives' => 'Promote curiosity, critical thinking, and problem-solving skills.',
-                'age_min' => 4,
-                'age_max' => 7,
-                'admission_form_fee' => '500',
-                'admission_fee' => '8000',
-                'yearly_charge' => '3000',
-                'uniform_fee' => '1400',
-                'books_stationary_fee' => 'According to class',
-                'khata_fee' => '50',
-                'monthly_fee' => json_encode(['Play Group' => 2000, 'Nursery' => 2200, 'KG' => 2400]),
-            ],
-            [
-                'name' => 'Mindfulness & Movement',
-                'slug' => 'mindfulness-and-movement',
-                'category_id' => $categories['Health & Wellness'] ?? null,
-                'excerpt' => 'Combines yoga and mindfulness for emotional balance.',
-                'description' => '
-                    <p>The <strong>Mindfulness & Movement</strong> program helps children develop focus, emotional awareness, and physical coordination:</p>
-                    <ul>
-                        <li>Yoga and movement exercises</li>
-                        <li>Breathing techniques and mindfulness games</li>
-                        <li>Relaxation and gratitude practices</li>
-                    </ul>
-                    <p>Supports self-regulation and emotional intelligence.</p>
-                ',
-                'objectives' => 'Improve emotional awareness; reduce anxiety; enhance body coordination.',
-                'age_min' => 3,
-                'age_max' => 6,
-                'admission_form_fee' => '500',
-                'admission_fee' => '8000',
-                'yearly_charge' => '3000',
-                'uniform_fee' => '1400',
-                'books_stationary_fee' => 'According to class',
-                'khata_fee' => '50',
-                'monthly_fee' => json_encode(['Play Group' => 2000, 'Nursery' => 2200, 'KG' => 2400]),
-            ],
-            [
-                'name' => 'After-School Club',
-                'slug' => 'after-school-club',
-                'category_id' => $categories['Community & Enrichment'] ?? null,
-                'excerpt' => 'Offers structured learning and fun after school hours.',
-                'description' => '
-                    <p>The <strong>After-School Club</strong> provides children with homework support and creative activities:</p>
-                    <ul>
-                        <li>Homework assistance and tutoring</li>
-                        <li>STEM and arts workshops</li>
-                        <li>Social games and team-building exercises</li>
-                    </ul>
-                    <p>Focuses on academic growth, social engagement, and confidence building.</p>
-                ',
-                'objectives' => 'Support academic growth; provide social engagement; build confidence.',
-                'age_min' => 5,
-                'age_max' => 10,
-                'admission_form_fee' => '500',
-                'admission_fee' => '8000',
-                'yearly_charge' => '3000',
-                'uniform_fee' => '1400',
-                'books_stationary_fee' => 'According to class',
-                'khata_fee' => '50',
-                'monthly_fee' => json_encode(['Play Group' => 2000, 'Nursery' => 2200, 'KG' => 2400]),
-            ],
+            // [
+            //     'name' => 'STEM Explorers',
+            //     'slug' => 'stem-explorers',
+            //     'category_id' => $categories['STEM Education'] ?? null,
+            //     'excerpt' => 'Hands-on exploration in science, technology, and math.',
+            //     'description' => '
+            //         <p><strong>STEM Explorers</strong> introduces children to STEM concepts through interactive activities:</p>
+            //         <ul>
+            //             <li>Simple coding and robotics exercises</li>
+            //             <li>Creative building and problem-solving challenges</li>
+            //             <li>Science experiments with everyday materials</li>
+            //         </ul>
+            //         <p>Encourages critical thinking, teamwork, and curiosity.</p>
+            //     ',
+            //     'objectives' => 'Promote curiosity, critical thinking, and problem-solving skills.',
+            //     'age_min' => 4,
+            //     'age_max' => 7,
+            //     'admission_form_fee' => '500',
+            //     'admission_fee' => '8000',
+            //     'yearly_charge' => '3000',
+            //     'uniform_fee' => '1400',
+            //     'books_stationary_fee' => 'According to class',
+            //     'khata_fee' => '50',
+            //     'monthly_fee' => json_encode(['Play Group' => 2000, 'Nursery' => 2200, 'KG' => 2400]),
+            // ],
+            // [
+            //     'name' => 'Mindfulness & Movement',
+            //     'slug' => 'mindfulness-and-movement',
+            //     'category_id' => $categories['Health & Wellness'] ?? null,
+            //     'excerpt' => 'Combines yoga and mindfulness for emotional balance.',
+            //     'description' => '
+            //         <p>The <strong>Mindfulness & Movement</strong> program helps children develop focus, emotional awareness, and physical coordination:</p>
+            //         <ul>
+            //             <li>Yoga and movement exercises</li>
+            //             <li>Breathing techniques and mindfulness games</li>
+            //             <li>Relaxation and gratitude practices</li>
+            //         </ul>
+            //         <p>Supports self-regulation and emotional intelligence.</p>
+            //     ',
+            //     'objectives' => 'Improve emotional awareness; reduce anxiety; enhance body coordination.',
+            //     'age_min' => 3,
+            //     'age_max' => 6,
+            //     'admission_form_fee' => '500',
+            //     'admission_fee' => '8000',
+            //     'yearly_charge' => '3000',
+            //     'uniform_fee' => '1400',
+            //     'books_stationary_fee' => 'According to class',
+            //     'khata_fee' => '50',
+            //     'monthly_fee' => json_encode(['Play Group' => 2000, 'Nursery' => 2200, 'KG' => 2400]),
+            // ],
+            // [
+            //     'name' => 'After-School Club',
+            //     'slug' => 'after-school-club',
+            //     'category_id' => $categories['Community & Enrichment'] ?? null,
+            //     'excerpt' => 'Offers structured learning and fun after school hours.',
+            //     'description' => '
+            //         <p>The <strong>After-School Club</strong> provides children with homework support and creative activities:</p>
+            //         <ul>
+            //             <li>Homework assistance and tutoring</li>
+            //             <li>STEM and arts workshops</li>
+            //             <li>Social games and team-building exercises</li>
+            //         </ul>
+            //         <p>Focuses on academic growth, social engagement, and confidence building.</p>
+            //     ',
+            //     'objectives' => 'Support academic growth; provide social engagement; build confidence.',
+            //     'age_min' => 5,
+            //     'age_max' => 10,
+            //     'admission_form_fee' => '500',
+            //     'admission_fee' => '8000',
+            //     'yearly_charge' => '3000',
+            //     'uniform_fee' => '1400',
+            //     'books_stationary_fee' => 'According to class',
+            //     'khata_fee' => '50',
+            //     'monthly_fee' => json_encode(['Play Group' => 2000, 'Nursery' => 2200, 'KG' => 2400]),
+            // ],
             [
                 'name' => 'Infant Care',
                 'slug' => 'infant-care',

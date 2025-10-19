@@ -10,6 +10,7 @@ import { MediaSelector } from '../../components/media-selector';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
+import { Select } from '../../components/ui/select';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
 import { Media } from '../../types/media';
@@ -30,7 +31,7 @@ export default function Edit({ testimonial, media }: EditProps) {
         message: testimonial.message || '',
         media_id: testimonial.media_id ?? null,
         rating: testimonial.rating ?? null,
-        status: testimonial.status || 'Active',
+        status: testimonial.status as string,
     });
 
     const [selectedMedia, setSelectedMedia] = useState<Media | null>(testimonial.client_image ?? null);
@@ -77,13 +78,37 @@ export default function Edit({ testimonial, media }: EditProps) {
                             <Input value={form.author_designation} onChange={(e) => setForm({ ...form, author_designation: e.target.value })} />
                             <InputError message={errors.author_designation} />
                         </div>
-                    </div>
+                        {/* Company */}
+                        <div className="grid gap-2">
+                            <Label>Company</Label>
+                            <Input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} />
+                            <InputError message={errors.company} />
+                        </div>
 
-                    {/* Company */}
-                    <div className="grid gap-2 md:w-1/2">
-                        <Label>Company</Label>
-                        <Input value={form.company} onChange={(e) => setForm({ ...form, company: e.target.value })} />
-                        <InputError message={errors.company} />
+                        <div className="grid gap-2">
+                            <Label>Rating (1–5)</Label>
+                            <Input
+                                type="number"
+                                min={1}
+                                max={5}
+                                value={form.rating ?? ''}
+                                onChange={(e) => setForm({ ...form, rating: Number(e.target.value) })}
+                            />
+                            <InputError message={errors.rating} />
+                        </div>
+
+                        <div className="grid gap-2">
+                            <Label>Status</Label>
+                            <Select
+                                value={form.status}
+                                onChange={(e) => setForm({ ...form, status: e.target.value })}
+                                options={[
+                                    { value: 'Active', label: 'Active ✅' },
+                                    { value: 'Inactive', label: 'Inactive 🚫' },
+                                ]}
+                            />
+                            <InputError message={errors.status} />
+                        </div>
                     </div>
 
                     {/* Message */}
@@ -100,21 +125,6 @@ export default function Edit({ testimonial, media }: EditProps) {
                             onChange={(_, editor) => setForm({ ...form, message: editor.getData() })}
                         />
                         <InputError message={errors.message} />
-                    </div>
-
-                    {/* Rating & Status */}
-                    <div className="grid gap-4 md:grid-cols-2">
-                        <div className="grid gap-2">
-                            <Label>Rating (1–5)</Label>
-                            <Input
-                                type="number"
-                                min={1}
-                                max={5}
-                                value={form.rating ?? ''}
-                                onChange={(e) => setForm({ ...form, rating: Number(e.target.value) })}
-                            />
-                            <InputError message={errors.rating} />
-                        </div>
                     </div>
 
                     {/* Media */}

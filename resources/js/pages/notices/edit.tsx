@@ -85,6 +85,12 @@ export default function Edit({ notice, categories, media }: EditProps) {
                         </div>
 
                         <div className="grid gap-2">
+                            <Label>Slug</Label>
+                            <Input value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
+                            <InputError message={errors.slug} />
+                        </div>
+
+                        <div className="grid gap-2">
                             <Label>Category</Label>
                             <Select
                                 value={form.category_id?.toString()}
@@ -96,11 +102,7 @@ export default function Edit({ notice, categories, media }: EditProps) {
                             />
                             <InputError message={errors.category_id} />
                         </div>
-                    </div>
 
-                    {/* Publish & Expiry Dates Side by Side */}
-                    <div className="grid gap-4 md:grid-cols-2">
-                        <AppDatePicker label="Publish Date" value={form.publish_date} disabled small />
                         <AppDatePicker
                             label="Expiry Date"
                             value={form?.expiry_date?.split('T')[0] || ''}

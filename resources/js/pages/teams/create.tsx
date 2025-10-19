@@ -95,10 +95,7 @@ export default function Create({ categories, media }: CreateProps) {
                             <Input value={form.designation} onChange={(e) => setForm({ ...form, designation: e.target.value })} />
                             <InputError message={errors.designation} />
                         </div>
-                    </div>
 
-                    {/* Category + Status */}
-                    <div className="grid gap-4 md:grid-cols-2">
                         <div className="flex flex-col gap-2">
                             <Label>Category</Label>
                             <Select
@@ -111,10 +108,7 @@ export default function Create({ categories, media }: CreateProps) {
                             />
                             <InputError message={errors.category_id} />
                         </div>
-                    </div>
 
-                    {/* Department + Contact Info */}
-                    <div className="grid gap-4 md:grid-cols-2">
                         <div className="flex flex-col gap-2">
                             <Label>Department</Label>
                             <Input value={form.department} onChange={(e) => setForm({ ...form, department: e.target.value })} />

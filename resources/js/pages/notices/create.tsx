@@ -10,13 +10,13 @@ import AppDatePicker from '../../components/ui/app_date_picker';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
-import { Select } from '../../components/ui/select';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
 import { Media } from '../../types/media';
 import { PaginatedData } from '../../types/paginated_meta';
 
 import toast from 'react-hot-toast';
+import { Select } from '../../components/ui/select';
 import { Category } from '../../types/category';
 import MediaBrowserModal from '../media/media_browser_modal';
 
@@ -89,6 +89,12 @@ export default function Create({ categories, media }: CreateProps) {
                         </div>
 
                         <div className="grid gap-2">
+                            <Label>Slug</Label>
+                            <Input value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
+                            <InputError message={errors.slug} />
+                        </div>
+
+                        <div className="grid gap-2">
                             <Label>Category</Label>
                             <Select
                                 value={form.category_id.toString()}
@@ -100,18 +106,18 @@ export default function Create({ categories, media }: CreateProps) {
                             />
                             <InputError message={errors.category_id} />
                         </div>
-                    </div>
 
-                    {/* Expiry Date */}
-                    <div className="grid gap-2 md:w-1/2">
-                        <AppDatePicker
-                            label="Expiry Date"
-                            value={form.expiry_date?.split('T')[0]}
-                            onChange={(val) => setForm({ ...form, expiry_date: val })}
-                            error={errors.expiry_date}
-                            small
-                        />
-                        <InputError message={errors.expiry_date} />
+                        {/* Expiry Date */}
+                        <div className="grid gap-2">
+                            <AppDatePicker
+                                label="Expiry Date"
+                                value={form.expiry_date?.split('T')[0]}
+                                onChange={(val) => setForm({ ...form, expiry_date: val })}
+                                error={errors.expiry_date}
+                                small
+                            />
+                            <InputError message={errors.expiry_date} />
+                        </div>
                     </div>
 
                     {/* Content */}

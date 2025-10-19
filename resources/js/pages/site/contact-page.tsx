@@ -70,7 +70,7 @@ const ContactPage = () => {
                         </div>
 
                         {/* Form */}
-                        <div className="rounded-xl bg-white p-8 shadow dark:bg-gray-800">
+                        <div className="rounded-xl bg-card p-8 shadow">
                             <h2 className="mb-6 text-2xl font-semibold">Send a Message</h2>
                             <form onSubmit={handleSubmit} className="space-y-2">
                                 <div>

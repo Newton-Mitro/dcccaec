@@ -19,7 +19,7 @@ class HeroSliderSeeder extends Seeder
         }
 
         // Create 6 sliders with a random media ID each
-        HeroSlider::factory(4)->create([
+        HeroSlider::factory(10)->create([
             'media_id' => function () use ($allImages) {
                 return $allImages->random();
             },

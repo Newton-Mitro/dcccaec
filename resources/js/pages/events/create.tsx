@@ -89,17 +89,13 @@ export default function Create({ media }: CreateProps) {
                             <Input value={form.slug} onChange={(e) => setForm({ ...form, slug: e.target.value })} />
                             <InputError message={errors.slug} />
                         </div>
-                    </div>
 
-                    {/* Location */}
-                    <div className="grid gap-2 md:w-1/2">
-                        <Label>Location</Label>
-                        <Input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} />
-                        <InputError message={errors.location} />
-                    </div>
+                        <div className="grid gap-2">
+                            <Label>Location</Label>
+                            <Input value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} />
+                            <InputError message={errors.location} />
+                        </div>
 
-                    {/* Dates */}
-                    <div className="grid gap-4 md:grid-cols-2">
                         <div className="grid gap-2">
                             <AppDatePicker
                                 label="Start Date"

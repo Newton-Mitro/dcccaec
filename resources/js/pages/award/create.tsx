@@ -62,17 +62,19 @@ export default function AwardsCreate({ media }: CreateProps) {
 
                 <form onSubmit={submit} className="space-y-6 rounded-lg border bg-white p-6 md:w-4xl dark:bg-gray-900">
                     {/* Title */}
-                    <div className="grid gap-2">
-                        <Label>Title</Label>
-                        <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
-                        <InputError message={errors.title} />
-                    </div>
+                    <div className="grid gap-6 md:grid-cols-2">
+                        <div className="grid gap-2">
+                            <Label>Title</Label>
+                            <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
+                            <InputError message={errors.title} />
+                        </div>
 
-                    {/* Year */}
-                    <div className="grid gap-2">
-                        <Label>Year</Label>
-                        <Input type="number" value={form.year} onChange={(e) => setForm({ ...form, year: e.target.value })} />
-                        <InputError message={errors.year} />
+                        {/* Year */}
+                        <div className="grid gap-2">
+                            <Label>Year</Label>
+                            <Input type="number" value={form.year} onChange={(e) => setForm({ ...form, year: e.target.value })} />
+                            <InputError message={errors.year} />
+                        </div>
                     </div>
 
                     {/* Description */}

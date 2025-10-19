@@ -81,7 +81,14 @@ const Edit: React.FC<EditProps> = ({ page, media }) => {
                         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                             <div>
                                 <Label>Title</Label>
-                                <Input value={formData.title} onChange={(e) => handleChange('title', e.target.value)} placeholder="Page title" />
+                                <Input
+                                    value={formData.title}
+                                    onChange={(e) => {
+                                        handleChange('title', e.target.value);
+                                        handleChange('slug', e.target.value.replace(/\s+/g, '-').toLowerCase());
+                                    }}
+                                    placeholder="Page title"
+                                />
                                 <InputError message={errors.title} />
                             </div>
 

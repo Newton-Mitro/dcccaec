@@ -61,11 +61,20 @@ export default function Edit({ award, media }: EditProps) {
             <div className="h-[calc(100vh-100px)] space-y-8 overflow-auto p-6">
                 <HeadingSmall title="Edit Award" description="Update the award details" />
                 <form onSubmit={submit} className="space-y-6 rounded-lg border bg-white p-6 md:w-4xl dark:bg-gray-900">
-                    {/* Title */}
-                    <div className="grid gap-2">
-                        <Label>Title</Label>
-                        <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
-                        <InputError message={errors.title} />
+                    <div className="grid gap-6 md:grid-cols-2">
+                        {/* Title */}
+                        <div className="grid gap-2">
+                            <Label>Title</Label>
+                            <Input value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
+                            <InputError message={errors.title} />
+                        </div>
+
+                        {/* Year */}
+                        <div className="grid gap-2">
+                            <Label>Year</Label>
+                            <Input type="number" value={form.year} onChange={(e) => setForm({ ...form, year: e.target.value })} />
+                            <InputError message={errors.year} />
+                        </div>
                     </div>
 
                     {/* Description */}
@@ -82,13 +91,6 @@ export default function Edit({ award, media }: EditProps) {
                             onChange={(_, editor) => setForm({ ...form, description: editor.getData() })}
                         />
                         <InputError message={errors.description} />
-                    </div>
-
-                    {/* Year */}
-                    <div className="grid gap-2">
-                        <Label>Year</Label>
-                        <Input type="number" value={form.year} onChange={(e) => setForm({ ...form, year: e.target.value })} />
-                        <InputError message={errors.year} />
                     </div>
 
                     {/* Media */}

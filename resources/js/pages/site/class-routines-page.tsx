@@ -1,11 +1,7 @@
 import { Head } from '@inertiajs/react';
 import PageLayout from '../../layouts/page-layout';
 import { Page } from '../../types/page';
-import ImageWrappedContentSection from './components/image-wrapped-content-section';
 import PageBanner from './components/page-banner';
-import RenderSectionContent from './components/render-section-content';
-import SectionGallery from './components/section-gallery';
-import SectionHeader from './components/section-header';
 
 interface ClassRoutinesPageProps {
     page: Page;
@@ -46,46 +42,34 @@ const ClassRoutinesPage: React.FC<ClassRoutinesPageProps> = ({ page }) => {
             </Head>
             <PageLayout>
                 {/* Hero */}
-                <PageBanner title={page?.title} />
+                <PageBanner
+                    title={page.title}
+                    subtitle=""
+                    breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Notices', href: '/notices' }, { label: page.title }]}
+                />
+                <section className="bg-background py-16">
+                    <div className="container mx-auto max-w-5xl px-4">
+                        {/* Attachment Preview */}
+                        <div className="mb-10 overflow-hidden rounded shadow">
+                            {page?.featured_image?.file_type.startsWith('image/') ? (
+                                <img src={page?.featured_image?.url} alt={page.title} className="w-full object-cover" />
+                            ) : page?.featured_image?.file_type.startsWith('application/pdf') ? (
+                                <iframe src={page?.featured_image?.url} title={page.title} className="h-[700px] w-full rounded border" />
+                            ) : (
+                                <p className="p-6 text-center text-gray-600 dark:text-gray-300">
+                                    This file type is not previewable.{' '}
+                                    <a href={page?.featured_image?.url} target="_blank" rel="noopener noreferrer" className="text-primary underline">
+                                        Download instead
+                                    </a>
+                                    .
+                                </p>
+                            )}
+                        </div>
 
-                <div className="container-custom mx-auto my-16 w-full space-y-14 p-6">
-                    <div className="">
-                        {/* Section Heading */}
-                        <SectionHeader heading={page?.title} sub_heading={page?.subtitle} />
-
-                        <ImageWrappedContentSection
-                            mediaUrl={page.featured_image?.url}
-                            mimeType={page.featured_image?.file_type}
-                            contentHtml={page.content || ''}
-                            shape="octagon-left"
-                        />
-
-                        <div className="py-6">{page.json_array && <RenderSectionContent jsonItems={page.json_array} />}</div>
-
-                        {/* Gallery */}
-                        {page?.gallery && page?.gallery.length > 0 && (
-                            <>
-                                <div className="mb-6 flex flex-col items-center justify-center text-center">
-                                    <h2 className="mb-1 text-2xl font-semibold">Gallery</h2>
-                                    <h3 className="mb-2 text-sm text-gray-500">Browse the gallery</h3>
-                                </div>
-                                <SectionGallery gallery={page.gallery} />
-                            </>
-                        )}
-
-                        {/* Button */}
-                        {page.button_text && page.button_link && (
-                            <div className="my-6 text-center">
-                                <a
-                                    href={page.button_link}
-                                    className="inline-block rounded bg-blue-600 px-3 py-1 text-sm text-white hover:bg-blue-700"
-                                >
-                                    {page.button_text}
-                                </a>
-                            </div>
-                        )}
+                        {/* Description */}
+                        <div className="prose max-w-full dark:prose-invert" dangerouslySetInnerHTML={{ __html: page.content ?? '' }} />
                     </div>
-                </div>
+                </section>
             </PageLayout>
         </>
     );

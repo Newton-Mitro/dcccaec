@@ -21,6 +21,10 @@ class PageSeeder extends Seeder
   public function run(): void
   {
     $allImages = Media::where('file_path', 'like', '%images%')->get();
+    $enrollmentForm = Media::where('file_path', 'like', '%enrollment%')->get()->first();
+    $authorizationForm = Media::where('file_path', 'like', '%authorization%')->get()->first();
+    $routine = Media::where('file_path', 'like', '%routine%')->get()->first();
+    $handbook = Media::where('file_path', 'like', '%handbook%')->get()->first();
 
     $pages = [
       [
@@ -48,15 +52,30 @@ class PageSeeder extends Seeder
       [
         'title' => 'Our Philosophy',
         'subtitle' => 'What we believe',
-        'content' => '
-                        <div class="">
-                    <div class="">
-                        <h2 class="text-3xl font-semibold">Our Philosophy</h2>
-                        <p class="mt-4">
-                            We offer a quality child care programme which will stimulate a child’s natural creativity and at the same time provide an opportunity for healthy interaction with other children in a warm and caring environment...
-                        </p>
-                    </div>
-                </div>'
+        'content' => '<section class="our-philosophy">
+  <div class="">
+    <h2 class="text-3xl font-bold mb-6">Our Philosophy</h2>
+    <p class="mb-4">
+      At <strong>Dhaka Credit Child Care and Education Centre (DCCCEC)</strong>, we believe that every child is a precious gift with unique potential waiting to unfold. Our philosophy is rooted in love, respect, and holistic development — nurturing children’s minds, bodies, and hearts in a warm, secure, and stimulating environment.
+    </p>
+    <p class="mb-4">
+      We view early childhood as the foundation of lifelong learning. By combining structured guidance with opportunities for exploration and creativity, we empower children to become curious thinkers, confident learners, and compassionate individuals.
+    </p>
+    <p class="mb-4">
+      Our approach integrates play-based learning with moral, social, and emotional growth. We believe that children learn best through joyful discovery — when they feel valued, safe, and inspired to express themselves freely.
+    </p>
+    <p class="mb-4">
+      Parents are our partners in this journey. Through open communication and collaboration, we create a bridge between home and school to ensure that every child receives consistent love, encouragement, and guidance.
+    </p>
+    <p class="mb-4">
+      At DCCCEC, education is not just about academics — it’s about building character, empathy, and responsibility. We aspire to raise children who not only succeed in life but also contribute meaningfully to their community and society.
+    </p>
+    <p class="mt-6 font-semibold">
+      “Nurturing young minds today to build a compassionate, confident, and creative generation for tomorrow.”
+    </p>
+  </div>
+</section>
+'
       ],
       [
         'title' => 'President Message',
@@ -95,8 +114,9 @@ class PageSeeder extends Seeder
       [
         'title' => 'Class Rutines',
         'subtitle' => 'A structured, joyful day.',
+        'media_id' => $routine->id,
         'content' => '<section id="class-routines" class="">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="">
     <h2 class="text-3xl font-bold mb-8">Daily Class Routines</h2>
 
     <p class="mb-6">
@@ -169,7 +189,7 @@ class PageSeeder extends Seeder
         'title' => 'Enrollment',
         'subtitle' => 'Registration & Admission',
         'content' => '<section id="enrollment" class="">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="">
     <h2 class="text-3xl font-bold mb-8">Registration & Admission</h2>
 
     <p class="mb-4">
@@ -185,14 +205,10 @@ class PageSeeder extends Seeder
       Admission will be processed immediately upon registration. A trial period of up to two weeks is allowed, during which one-half of the monthly fees may be charged if the child is withdrawn. Registration fees are non-refundable.
     </p>
 
-    <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-      <a href="/assets/Enrollment Form-z6wwqMl1.pdf" download="Enrollment Form" target="_blank" class="bg-primary text-white px-6 py-3 rounded shadow hover:bg-blue-700 transition">
-        <i class="fa-solid fa-file-arrow-down mr-2"></i>Enrollment Form
-      </a>
-      <a href="/assets/Authorization-cChuqm54.pdf" download="Authorization Form" target="_blank" class="bg-primary text-white px-6 py-3 rounded shadow hover:bg-blue-700 transition">
-        <i class="fa-solid fa-file-arrow-down mr-2"></i>Authorization Form
-      </a>
-    </div>
+     <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+                                ' . ($enrollmentForm ? '<a href="' . $enrollmentForm->url . '" download="Enrollment Form" target="_blank" class="bg-primary text-white px-6 py-3 rounded shadow hover:bg-blue-700 transition"><i class="fa-solid fa-file-arrow-down mr-2"></i>Enrollment Form</a>' : '') . '
+                                ' . ($authorizationForm ? '<a href="' . $authorizationForm->url . '" download="Authorization Form" target="_blank" class="bg-primary text-white px-6 py-3 rounded shadow hover:bg-blue-700 transition"><i class="fa-solid fa-file-arrow-down mr-2"></i>Authorization Form</a>' : '') . '
+                            </div>
 
     <h3 class="text-2xl font-semibold mb-4">Termination of Service</h3>
     <p class="mb-4">
@@ -212,7 +228,7 @@ class PageSeeder extends Seeder
         'title' => 'Curriculum',
         'subtitle' => 'Our Curriculum',
         'content' => '<section id="curriculum" class="">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="">
     <h2 class="text-3xl font-bold mb-8">Our Curriculum</h2>
     
     <p class="mb-6">
@@ -301,7 +317,7 @@ class PageSeeder extends Seeder
       [
         'title' => 'Rules & Regulations',
         'content' => '<section id="rules-regulations" class="">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="">
     <h2 class="text-3xl font-bold mb-8">Rules & Regulations</h2>
 
     <h3 class="text-xl font-semibold mt-6 mb-2">General Conduct</h3>
@@ -365,7 +381,7 @@ class PageSeeder extends Seeder
         'slug' => 'health-safety',
         'subtitle' => 'What we believe',
         'content' => '<section id="health-safety" class="">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="">
     <h2 class="text-3xl font-bold mb-8">Health & Safety</h2>
 
     <!-- Our Environment -->
@@ -431,7 +447,7 @@ class PageSeeder extends Seeder
         'title' => 'Nutrition & Meals',
         'subtitle' => 'What we believe',
         'content' => '<section id="nutrition-meals" class="">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="">
     <h2 class="text-3xl font-bold mb-8">Nutrition & Meals</h2>
 
     <!-- Healthy Meals -->
@@ -490,7 +506,7 @@ class PageSeeder extends Seeder
         'title' => 'Disclaimer',
         'subtitle' => 'Important legal information.',
         'content' => '<section id="disclaimer" class="">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="">
     <h2 class="text-3xl font-bold mb-8">Disclaimer</h2>
 
     <p class="mb-4">
@@ -519,7 +535,7 @@ class PageSeeder extends Seeder
         'title' => 'Terms of Service',
         'subtitle' => 'Important legal information.',
         'content' => '<section id="terms-of-service" class="">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="">
     <h2 class="text-3xl font-bold mb-8">Terms of Service</h2>
 
     <p class="mb-4">
@@ -561,7 +577,7 @@ class PageSeeder extends Seeder
         'title' => 'Privacy Policy',
         'subtitle' => 'Important legal information.',
         'content' => '<section id="privacy-policy" class="">
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="">
     <h2 class="text-3xl font-bold mb-8">Privacy Policy</h2>
 
     <p class="mb-4">
@@ -631,7 +647,7 @@ class PageSeeder extends Seeder
           'content' => $pageData['content'] ?? null,
           'excerpt' => $excerpt,
           'json_array' => $pageData['json_array'] ?? null,
-          'media_id' => $allImages->isNotEmpty() ? $allImages->random()->id : null,
+          'media_id' => $pageData['media_id'] ?? $allImages->random()->id,
           'predefined' => true,
           'button_text' => $pageData['button_text'] ?? null,
           'button_link' => $pageData['button_link'] ?? null,
@@ -639,17 +655,17 @@ class PageSeeder extends Seeder
       );
 
       // Create a single ResourceMedia for each page if needed
-      ResourceMedia::updateOrCreate(
-        [
-          'resource_id' => $page->id,
-          'resource_type' => Page::class,
-        ],
-        [
-          'caption' => $pageData['title'] ?? null,
-          'description' => $pageData['subtitle'] ?? null,
-          'media_id' => $allImages->isNotEmpty() ? $allImages->random()->id : null,
-        ]
-      );
+      // ResourceMedia::updateOrCreate(
+      //   [
+      //     'resource_id' => $page->id,
+      //     'resource_type' => Page::class,
+      //   ],
+      //   [
+      //     'caption' => $pageData['title'] ?? null,
+      //     'description' => $pageData['subtitle'] ?? null,
+      //     'media_id' => $allImages->isNotEmpty() ? $allImages->random()->id : null,
+      //   ]
+      // );
     }
   }
 }

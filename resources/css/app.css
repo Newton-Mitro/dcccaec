@@ -65,7 +65,7 @@
 
 :root {
     /* Backgrounds & surfaces */
-    --background: #fdf4e3; /* warm cream */
+    --background: #faf4e9; /* warm cream */
     --foreground: oklch(0.25 0.05 250); /* deep navy for text */
     --card: oklch(0.97 0.02 95); /* soft neutral background */
     --card-foreground: var(--foreground);

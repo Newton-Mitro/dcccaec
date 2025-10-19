@@ -57,18 +57,19 @@ export default function Create({ media }: CreateProps) {
                 <HeadingSmall title="Create Partner" description="Fill in the partner details" />
 
                 <form onSubmit={submit} className="space-y-6 rounded-lg border bg-white p-6 md:w-4xl dark:bg-gray-900">
-                    <div className="grid gap-2">
-                        <Label>Name</Label>
-                        <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
-                        <InputError message={errors.name} />
-                    </div>
+                    <div className="grid gap-6 md:grid-cols-2">
+                        <div className="grid gap-2">
+                            <Label>Name</Label>
+                            <Input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+                            <InputError message={errors.name} />
+                        </div>
 
-                    <div className="grid gap-2">
-                        <Label>Website</Label>
-                        <Input value={form.website} onChange={(e) => setForm({ ...form, website: e.target.value })} />
-                        <InputError message={errors.website} />
+                        <div className="grid gap-2">
+                            <Label>Website</Label>
+                            <Input value={form.website} onChange={(e) => setForm({ ...form, website: e.target.value })} />
+                            <InputError message={errors.website} />
+                        </div>
                     </div>
-
                     <div className="flex gap-4">
                         <MediaSelector
                             media={selectedMedia}
