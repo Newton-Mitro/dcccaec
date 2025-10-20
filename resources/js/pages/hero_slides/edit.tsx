@@ -8,6 +8,7 @@ import { MediaSelector } from '../../components/media-selector';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
+import { Select } from '../../components/ui/select';
 import { Textarea } from '../../components/ui/text-area';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
@@ -30,6 +31,7 @@ export default function Edit({ heroSlide, media }: EditProps) {
         button_link: heroSlide.button_link || '',
         media_id: heroSlide.media_id || null,
         sort_order: heroSlide.sort_order || 0,
+        status: heroSlide.status as string,
     });
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -80,40 +82,55 @@ export default function Edit({ heroSlide, media }: EditProps) {
                             <InputError message={errors.subtitle} />
                         </div>
 
-                        {/* Button Text */}
-                        <div className="grid gap-2">
-                            <Label htmlFor="button_text">Button Text</Label>
-                            <Input
-                                id="button_text"
-                                value={data.button_text}
-                                onChange={(e) => setData('button_text', e.target.value)}
-                                placeholder="e.g. Learn More"
-                            />
-                            <InputError message={errors.button_text} />
-                        </div>
+                        <div className="grid gap-6 md:grid-cols-2">
+                            {/* Button Text */}
+                            <div className="grid gap-2">
+                                <Label htmlFor="button_text">Button Text</Label>
+                                <Input
+                                    id="button_text"
+                                    value={data.button_text}
+                                    onChange={(e) => setData('button_text', e.target.value)}
+                                    placeholder="e.g. Learn More"
+                                />
+                                <InputError message={errors.button_text} />
+                            </div>
 
-                        {/* Button Link */}
-                        <div className="grid gap-2">
-                            <Label htmlFor="button_link">Button Link</Label>
-                            <Input
-                                id="button_link"
-                                value={data.button_link}
-                                onChange={(e) => setData('button_link', e.target.value)}
-                                placeholder="https://example.com"
-                            />
-                            <InputError message={errors.button_link} />
-                        </div>
+                            {/* Button Link */}
+                            <div className="grid gap-2">
+                                <Label htmlFor="button_link">Button Link</Label>
+                                <Input
+                                    id="button_link"
+                                    value={data.button_link}
+                                    onChange={(e) => setData('button_link', e.target.value)}
+                                    placeholder="https://example.com"
+                                />
+                                <InputError message={errors.button_link} />
+                            </div>
 
-                        {/* Sort Order */}
-                        <div className="grid gap-2">
-                            <Label htmlFor="sort_order">Sort Order</Label>
-                            <Input
-                                id="sort_order"
-                                type="number"
-                                value={data.sort_order}
-                                onChange={(e) => setData('sort_order', Number(e.target.value))}
-                            />
-                            <InputError message={errors.sort_order} />
+                            {/* Sort Order */}
+                            <div className="grid gap-2">
+                                <Label htmlFor="sort_order">Sort Order</Label>
+                                <Input
+                                    id="sort_order"
+                                    type="number"
+                                    value={data.sort_order}
+                                    onChange={(e) => setData('sort_order', Number(e.target.value))}
+                                />
+                                <InputError message={errors.sort_order} />
+                            </div>
+
+                            <div className="grid gap-2">
+                                <Label>Status</Label>
+                                <Select
+                                    value={data.status}
+                                    onChange={(e) => setData('status', e.target.value)}
+                                    options={[
+                                        { value: 'Active', label: 'Active ✅' },
+                                        { value: 'Inactive', label: 'Inactive 🚫' },
+                                    ]}
+                                />
+                                <InputError message={errors.status} />
+                            </div>
                         </div>
 
                         {/* Media Picker */}

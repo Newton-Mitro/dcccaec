@@ -15,35 +15,45 @@ export default function PageLayout({ children, ...props }: PageLayoutProps) {
     const [showModal, setShowModal] = useState(false);
     const { settings, ads } = usePage().props as any;
 
+    // --- 🧭 Scroll button visibility ---
     useEffect(() => {
-        const handleScroll = () => {
-            setShowButton(window.scrollY > 300);
-        };
+        const handleScroll = () => setShowButton(window.scrollY > 300);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // --- 🎯 Auto popup timer for ads ---
     useEffect(() => {
         const alreadyShown = sessionStorage.getItem('popup_shown');
-
         if (!alreadyShown) {
             const timer = setTimeout(() => {
                 setShowModal(true);
                 sessionStorage.setItem('popup_shown', 'true');
             }, 10000);
-
             return () => clearTimeout(timer);
         }
     }, []);
 
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
+    const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
+    // --- ⚠️ Maintenance Mode Check ---
+    if (settings?.maintenance_mode == 1) {
+        return (
+            <div className="flex min-h-screen flex-col items-center justify-center bg-background text-center text-foreground">
+                <i className="fa-solid fa-toolbox mb-6 text-8xl"></i>
+                <h1 className="mb-4 text-4xl font-bold">We’re Under Maintenance</h1>
+                <p className="max-w-md text-lg text-muted-foreground">
+                    Our site is currently undergoing scheduled maintenance. Please check back soon.
+                </p>
+                <p className="mt-6 text-sm text-muted-foreground">— The {settings.site_name || 'Team'} Team</p>
+            </div>
+        );
+    }
+
+    // --- 💫 Default Page Layout ---
     return (
         <div className="relative flex min-h-screen flex-col bg-background" {...props}>
             <Navigation />
-
             <main className="flex-grow">{children}</main>
 
             {/* Fixed Social Icons */}
@@ -51,7 +61,7 @@ export default function PageLayout({ children, ...props }: PageLayoutProps) {
                 {[
                     { href: settings.facebook || '#', icon: <FaFacebookF />, label: 'Facebook', color: 'text-blue-500' },
                     { href: settings.twitter || '#', icon: <FaTwitter />, label: 'Twitter', color: 'text-sky-400' },
-                    { href: settings.instagram || '#', icon: <FaInstagram />, label: 'WhatsApp', color: 'text-green-500' },
+                    { href: settings.instagram || '#', icon: <FaInstagram />, label: 'Instagram', color: 'text-pink-500' },
                     { href: settings.youtube || '#', icon: <FaYoutube />, label: 'YouTube', color: 'text-red-500' },
                 ].map((item, idx) => (
                     <a
@@ -79,28 +89,20 @@ export default function PageLayout({ children, ...props }: PageLayoutProps) {
                 </button>
             )}
 
-            {/* Floating SVG element */}
-            <div className="fixed -right-20 -bottom-4 z-20 hidden animate-[wiggle_3s_ease-in-out_infinite] md:-right-20 lg:-right-20 lg:block">
-                <img src="/images/panda.png" alt="Decorative element" className="w-52 opacity-80 md:w-60 lg:w-72" />
+            {/* Floating Images */}
+            <div className="fixed -right-20 -bottom-4 z-20 hidden animate-[wiggle_3s_ease-in-out_infinite] lg:block">
+                <img src="/images/panda.png" alt="Decorative element" className="w-60 opacity-80" />
             </div>
-
-            {/* Animated shapes */}
             <div className="fixed bottom-5 left-0 z-10 hidden animate-[bounce_3s_ease-in-out_infinite] lg:block">
-                <img src="/images/turtle.png" alt="Decorative element" className="w-30 animate-[spin_10s_ease-in-out_infinite] md:w-36 lg:w-44" />
+                <img src="/images/turtle.png" alt="Decorative element" className="w-36 animate-[spin_10s_ease-in-out_infinite]" />
             </div>
-
-            {/* <div className="fixed left-0 z-20 w-full bottom-5">
-                <img src="/images/dog_running.gif" alt="Decorative element" className="w-48 animate-bounce" />
-            </div> */}
 
             <FooterTemplate />
 
-            {/* Simple Modal */}
+            {/* Popup Ad */}
             {showModal && ads?.featured_image && (
                 <div className="animate-fadeIn fixed inset-0 z-[99999] flex items-center justify-center bg-black/60 backdrop-blur-md">
-                    {/* Ad Card */}
                     <div className="relative w-[90%] max-w-lg overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-background/80 to-card/70 shadow-2xl backdrop-blur-sm">
-                        {/* Image with Centered Text */}
                         {ads?.featured_image?.url && (
                             <div className="relative overflow-hidden rounded-2xl">
                                 <img
@@ -111,7 +113,6 @@ export default function PageLayout({ children, ...props }: PageLayoutProps) {
                                 <div className="absolute inset-0 flex flex-col items-center justify-center bg-black/40 px-6 text-center">
                                     {ads?.subtitle && <h2 className="text-3xl font-bold text-white drop-shadow-md">{ads.subtitle}</h2>}
                                     {ads?.excerpt && <p className="mt-2 max-w-md text-sm text-gray-200">{ads.excerpt}</p>}
-                                    {/* CTA Button */}
                                     {ads?.button_link && ads?.button_text && (
                                         <div className="mt-4 text-center">
                                             <Link
@@ -125,8 +126,6 @@ export default function PageLayout({ children, ...props }: PageLayoutProps) {
                                 </div>
                             </div>
                         )}
-
-                        {/* Close Button */}
                         <button
                             onClick={() => setShowModal(false)}
                             className="absolute top-4 right-4 text-gray-400 transition-all hover:rotate-90 hover:text-accent"
@@ -136,31 +135,16 @@ export default function PageLayout({ children, ...props }: PageLayoutProps) {
                     </div>
                 </div>
             )}
+
             <Toaster
                 position="top-center"
                 reverseOrder={false}
                 gutter={8}
-                containerClassName=""
-                containerStyle={{}}
                 toasterId="default"
                 toastOptions={{
-                    // Define default options
-                    className: '',
                     duration: 5000,
-                    removeDelay: 1000,
-                    style: {
-                        background: '#363636',
-                        color: '#fff',
-                    },
-
-                    // Default options for specific types
-                    success: {
-                        duration: 3000,
-                        iconTheme: {
-                            primary: 'green',
-                            secondary: 'black',
-                        },
-                    },
+                    style: { background: '#363636', color: '#fff' },
+                    success: { duration: 3000, iconTheme: { primary: 'green', secondary: 'black' } },
                 }}
             />
         </div>

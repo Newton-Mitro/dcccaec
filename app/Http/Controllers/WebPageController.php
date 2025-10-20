@@ -26,15 +26,15 @@ class WebPageController extends Controller
             ->orderBy('sort_order')
             ->get();
         $teams = Team::where('status', 'Active')->with('photo')->orderBy('sort_order')->take(5)->get();
-        $programs = Program::where('is_active', true)->with(['featuredImage', 'gallery', 'category'])->orderBy('sort_order')->take(3)->get();
+        $programs = Program::where('is_active', true)->with(['featuredImage', 'gallery', 'category'])->take(3)->get();
         $testimonials = Testimonial::where('status', 'Active')->with('clientImage')->orderBy('sort_order')->take(5)->get();
         $awards = Award::where('status', 'Active')->with('featuredImage')->orderBy('sort_order')->take(5)->get();
         $partners = Partner::with('logo')
             ->orderBy('created_at', 'desc')
             ->limit(5)
             ->get();
-        $notices = Notice::where('status', 'Active')->orderBy('sort_order')->take(5)->get();
-        $events = Event::where('status', 'Active')->orderBy('sort_order')->take(5)->get();
+        $notices = Notice::where('status', 'Active')->take(5)->get();
+        $events = Event::where('status', 'Active')->take(5)->get();
         $about = Page::with(['gallery.media', 'featuredImage'])
             ->where('slug', 'our-story')
             ->first();
@@ -217,10 +217,17 @@ class WebPageController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:20',
-            'subject' => 'nullable|string|max:255',
+            'subject' => 'required|string|max:255',
             'message' => 'required|string',
+            'num1' => 'required|integer',
+            'num2' => 'required|integer',
+            'math_answer' => 'required|integer',
         ]);
+
+        // 🔢 Verify math CAPTCHA
+        if ((int) $validated['math_answer'] !== ((int) $validated['num1'] + (int) $validated['num2'])) {
+            return back()->withErrors(['math_answer' => 'Incorrect answer, please try again.']);
+        }
 
         ContactMessage::create($validated);
 

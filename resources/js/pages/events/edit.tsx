@@ -11,6 +11,7 @@ import AppDatePicker from '../../components/ui/app_date_picker';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
+import { Select } from '../../components/ui/select';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
 import { Event } from '../../types/event';
@@ -32,7 +33,7 @@ export default function Edit({ event, media }: EditProps) {
         start_date: event.start_date || '',
         end_date: event.end_date || '',
         media_id: event.media_id ?? null,
-        status: event.status || 'Active',
+        status: event.status as string,
     });
 
     const [selectedMedia, setSelectedMedia] = useState<Media | null>(event.featured_image ?? null);
@@ -109,6 +110,18 @@ export default function Edit({ event, media }: EditProps) {
                                 onChange={(val) => setForm({ ...form, end_date: val })}
                                 error={errors.end_date}
                             />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Status</Label>
+                            <Select
+                                value={form.status}
+                                onChange={(e) => setForm({ ...form, status: e.target.value })}
+                                options={[
+                                    { value: 'Active', label: 'Active ✅' },
+                                    { value: 'Inactive', label: 'Inactive 🚫' },
+                                ]}
+                            />
+                            <InputError message={errors.status} />
                         </div>
                     </div>
 

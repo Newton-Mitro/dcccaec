@@ -178,11 +178,18 @@ export default function Create({ media }: CreateProps) {
                         </div>
                     </div>
 
-                    {/* Gallery */}
-                    <div className="grid gap-2">
-                        <Label>Gallery URLs (comma separated)</Label>
-                        <Input value={form.gallery.join(',')} onChange={(e) => setForm({ ...form, gallery: e.target.value.split(',') })} />
-                        <InputError message={errors.gallery} />
+                    <div className="flex items-center gap-2 pt-4">
+                        <input
+                            id="is_active"
+                            type="checkbox"
+                            checked={form.is_active}
+                            onChange={(e) => setForm({ ...form, is_active: e.target.checked })}
+                            className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                        />
+                        <Label htmlFor="is_active" className="font-medium">
+                            Is Active
+                        </Label>
+                        <InputError message={errors.is_active} />
                     </div>
 
                     {/* Media */}

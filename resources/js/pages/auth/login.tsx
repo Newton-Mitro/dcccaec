@@ -84,7 +84,11 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                             {/* Register link */}
                             <div className="pt-4 text-center text-xs text-muted-foreground">
                                 Don’t have an account?{' '}
-                                <Link href={route('register')} className="text-primary underline">
+                                <Link
+                                    // href={route('register')}
+                                    href="#"
+                                    className="text-primary underline"
+                                >
                                     Register
                                 </Link>
                             </div>

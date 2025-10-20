@@ -5,31 +5,31 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreVisitorRequest;
 use App\Http\Requests\UpdateVisitorRequest;
 use App\Infrastructure\Models\Visitor;
+use Inertia\Inertia;
+use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
+use Inertia\Response;
 
 class VisitorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): View
+    public function index(Request $request): Response
     {
-        $visitors = Visitor::latest()->paginate(20);
-        return view('visitors.index', compact('visitors'));
+        $perPage = $request->input('perPage', 20);
+
+        $visitors = Visitor::latest()
+            ->paginate($perPage)
+            ->withQueryString();
+
+        return Inertia::render('visitors/index', [
+            'visitors' => $visitors,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(): View
+    public function create(): Response
     {
-        return view('visitors.create');
+        return Inertia::render('visitors/create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreVisitorRequest $request): RedirectResponse
     {
         $data = $request->validated();
@@ -39,37 +39,13 @@ class VisitorController extends Controller
             ->with('success', 'Visitor added successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Visitor $visitor): View
+    public function show(Visitor $visitor): Response
     {
-        return view('visitors.show', compact('visitor'));
+        return Inertia::render('visitors/show', [
+            'visitor' => $visitor,
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Visitor $visitor): View
-    {
-        return view('visitors.edit', compact('visitor'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateVisitorRequest $request, Visitor $visitor): RedirectResponse
-    {
-        $data = $request->validated();
-        $visitor->update($data);
-
-        return redirect()->route('visitors.index')
-            ->with('success', 'Visitor updated successfully.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Visitor $visitor): RedirectResponse
     {
         $visitor->delete();

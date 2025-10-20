@@ -15,6 +15,8 @@ const FaqPage: React.FC<FaqPageProps> = ({ page }) => {
     const metaDescription = page?.meta_description || 'YourSite';
     const metaKeywords = page?.meta_keywords || 'YourSite';
 
+    console.log(page.json_array);
+
     // Keep track of open question for each section
     const [openQuestions, setOpenQuestions] = useState<{ [sectionId: number]: number | null }>({});
 

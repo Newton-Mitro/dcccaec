@@ -24,6 +24,7 @@ import {
     UploadIcon,
     UserRoundCheckIcon,
     Users2,
+    UserSearch,
 } from 'lucide-react';
 import AppLogo from './app-logo';
 
@@ -117,6 +118,11 @@ const mainNavItems: NavItem[] = [
         title: 'Contact Messages',
         href: '/admin/contact-messages',
         icon: MailQuestion,
+    },
+    {
+        title: 'Visitors',
+        href: '/admin/visitors',
+        icon: UserSearch,
     },
     {
         title: 'Users',

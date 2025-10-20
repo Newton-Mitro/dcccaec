@@ -1,3 +1,5 @@
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
 import { Transition } from '@headlessui/react';
 import { Head, router } from '@inertiajs/react';
 import React, { useState } from 'react';
@@ -9,15 +11,13 @@ import { Label } from '../../components/ui/label';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
 
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-
 export default function CreateUser() {
     const [form, setForm] = useState({
         name: '',
         email: '',
         username: '',
         password: '',
+        password_confirmation: '', // 🆕
         headline: '',
         bio: '',
         role: 'VISITOR',
@@ -74,6 +74,20 @@ export default function CreateUser() {
                         <Label>Password</Label>
                         <Input type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} />
                         <InputError message={errors.password} />
+                    </div>
+
+                    {/* Confirm Password */}
+                    <div className="grid gap-2">
+                        <Label>Confirm Password</Label>
+                        <Input
+                            type="password"
+                            value={form.password_confirmation}
+                            onChange={(e) => setForm({ ...form, password_confirmation: e.target.value })}
+                        />
+                        {form.password && form.password_confirmation && form.password !== form.password_confirmation && (
+                            <p className="text-sm text-red-500">Passwords do not match</p>
+                        )}
+                        <InputError message={errors.password_confirmation} />
                     </div>
 
                     {/* Headline */}

@@ -35,7 +35,7 @@ export default function Edit({ notice, categories, media }: EditProps) {
         publish_date: notice.publish_date,
         expiry_date: notice.expiry_date,
         category_id: notice.category_id,
-        status: notice.status,
+        status: notice.status as string,
         media_id: notice.media_id,
         created_at: notice.created_at,
         updated_at: notice.updated_at,
@@ -110,6 +110,19 @@ export default function Edit({ notice, categories, media }: EditProps) {
                             error={errors.expiry_date}
                             small
                         />
+
+                        <div className="grid gap-2">
+                            <Label>Status</Label>
+                            <Select
+                                value={form.status}
+                                onChange={(e) => setForm({ ...form, status: e.target.value })}
+                                options={[
+                                    { value: 'Active', label: 'Active ✅' },
+                                    { value: 'Inactive', label: 'Inactive 🚫' },
+                                ]}
+                            />
+                            <InputError message={errors.status} />
+                        </div>
                     </div>
 
                     {/* Content */}

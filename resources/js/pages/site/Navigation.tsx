@@ -36,7 +36,7 @@ export default function Navigation() {
                 { title: 'Our Philosophy', href: '/about-us/our-philosophy', label: 'about-us' },
                 { title: 'President Message', href: '/about-us/president-message', label: 'about-us' },
                 { title: 'Principal Message', href: '/about-us/principal-message', label: 'about-us' },
-                { title: 'Leadership & Staff', href: '/about-us/teams', label: 'about-us' },
+                { title: 'Our Teams', href: '/about-us/teams', label: 'about-us' },
             ],
         },
         {
@@ -128,7 +128,7 @@ export default function Navigation() {
                                     <>
                                         {isActive(menu) ? <img src="/images/bee.gif" alt="active" className="absolute -top-12 left-0" /> : ''}
                                         <button
-                                            className={`cursor-pointer text-foreground hover:font-bold ${
+                                            className={`cursor-pointer ${scrolled ? 'text-primary dark:text-white' : 'text-white'} hover:font-bold hover:text-white ${
                                                 isActive(menu) ? 'bg-primary px-2 py-1 text-primary-foreground' : 'px-2 py-1'
                                             }`}
                                         >
@@ -151,7 +151,7 @@ export default function Navigation() {
                                         {isActive(menu) ? <img src="/images/bee.gif" alt="active" className="absolute -top-8 left-0" /> : ''}
                                         <Link
                                             href={menu.href || '#'}
-                                            className={`cursor-pointer text-foreground hover:font-bold ${
+                                            className={`cursor-pointer ${scrolled ? 'text-primary dark:text-white' : 'text-white'} hover:font-bold ${
                                                 isActive(menu) ? 'bg-primary px-2 py-1 text-primary-foreground' : 'px-2 py-1'
                                             }`}
                                         >

@@ -10,7 +10,6 @@ import { Input } from '../../components/ui/input';
 import { Label } from '../../components/ui/label';
 import AppLayout from '../../layouts/app-layout';
 import { BreadcrumbItem } from '../../types';
-
 import { User } from '../../types/user';
 
 interface EditUserProps {
@@ -24,7 +23,9 @@ export default function EditUser({ user }: EditUserProps) {
         username: user.username || '',
         headline: user.headline || '',
         bio: user.bio || '',
-        role: user.role || 'VISITOR',
+        role: (user.role as string) || 'VISITOR',
+        password: '',
+        password_confirmation: '',
     });
 
     const [errors, setErrors] = useState<any>({});
@@ -32,9 +33,19 @@ export default function EditUser({ user }: EditUserProps) {
 
     const submit = (e: React.FormEvent) => {
         e.preventDefault();
+
+        // Optional frontend check before submitting
+        if (form.password && form.password !== form.password_confirmation) {
+            setErrors({ ...errors, password_confirmation: 'Passwords do not match.' });
+            return;
+        }
+
         router.put(route('users.update', user.id), form, {
             onError: (err) => setErrors(err),
-            onSuccess: () => setRecentlySuccessful(true),
+            onSuccess: () => {
+                setRecentlySuccessful(true);
+                setForm({ ...form, password: '', password_confirmation: '' }); // clear password fields
+            },
         });
     };
 
@@ -49,6 +60,7 @@ export default function EditUser({ user }: EditUserProps) {
             <Head title="Edit User" />
             <div className="h-[calc(100vh-100px)] space-y-8 overflow-auto p-6">
                 <HeadingSmall title="Edit User" description="Update the user details" />
+
                 <form onSubmit={submit} className="space-y-6 rounded-lg border bg-white p-6 md:w-4xl dark:bg-gray-900">
                     {/* Name */}
                     <div className="grid gap-2">
@@ -69,6 +81,29 @@ export default function EditUser({ user }: EditUserProps) {
                         <Label>Username</Label>
                         <Input value={form.username} onChange={(e) => setForm({ ...form, username: e.target.value })} />
                         <InputError message={errors.username} />
+                    </div>
+
+                    {/* Password */}
+                    <div className="grid gap-2">
+                        <Label>New Password</Label>
+                        <Input
+                            type="password"
+                            value={form.password}
+                            placeholder="Leave blank to keep current password"
+                            onChange={(e) => setForm({ ...form, password: e.target.value })}
+                        />
+                        <InputError message={errors.password} />
+                    </div>
+
+                    {/* Confirm Password */}
+                    <div className="grid gap-2">
+                        <Label>Confirm Password</Label>
+                        <Input
+                            type="password"
+                            value={form.password_confirmation}
+                            onChange={(e) => setForm({ ...form, password_confirmation: e.target.value })}
+                        />
+                        <InputError message={errors.password_confirmation} />
                     </div>
 
                     {/* Headline */}

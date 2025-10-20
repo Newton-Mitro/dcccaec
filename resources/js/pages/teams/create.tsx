@@ -47,7 +47,7 @@ export default function Create({ categories, media }: CreateProps) {
         email: '',
         phone: '',
         address: '',
-        status: '',
+        status: 'Active',
     });
 
     const [selectedMedia, setSelectedMedia] = useState<Media | null>(null);
@@ -131,6 +131,18 @@ export default function Create({ categories, media }: CreateProps) {
                             <Label>Address</Label>
                             <Input value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} />
                             <InputError message={errors.address} />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Status</Label>
+                            <Select
+                                value={form.status}
+                                onChange={(e) => setForm({ ...form, status: e.target.value })}
+                                options={[
+                                    { value: 'Active', label: 'Active ✅' },
+                                    { value: 'Inactive', label: 'Inactive 🚫' },
+                                ]}
+                            />
+                            <InputError message={errors.status} />
                         </div>
                     </div>
 

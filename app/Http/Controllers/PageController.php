@@ -43,7 +43,9 @@ class PageController extends Controller
                 'meta_keywords' => $request->input('meta_keywords'),
                 'content' => $request->input('content'),
                 'excerpt' => $request->input('excerpt'),
-                'json_array' => $request->input('json_array'),
+                'json_array' => $request->filled('json_array')
+                    ? json_decode($request->input('json_array'), true)
+                    : null,
                 'button_text' => $request->input('button_text'),
                 'button_link' => $request->input('button_link'),
                 'media_id' => $request->input('media_id'),
@@ -94,7 +96,9 @@ class PageController extends Controller
                 'meta_keywords' => $request->input('meta_keywords'),
                 'content' => $request->input('content'),
                 'excerpt' => $request->input('excerpt'),
-                'json_array' => $request->input('json_array'),
+                'json_array' => $request->filled('json_array')
+                    ? json_decode($request->input('json_array'), true)
+                    : null,
                 'button_text' => $request->input('button_text'),
                 'button_link' => $request->input('button_link'),
                 'media_id' => $request->input('media_id'),

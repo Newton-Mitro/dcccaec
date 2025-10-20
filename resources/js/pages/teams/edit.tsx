@@ -44,7 +44,7 @@ export default function Edit({ team, categories, media }: EditProps) {
         email: team.email ?? '',
         phone: team.phone ?? '',
         address: team.address ?? '',
-        status: team.status,
+        status: team.status as string,
     });
 
     const [selectedMedia, setSelectedMedia] = useState<Media | null>(team.photo ?? null);
@@ -134,6 +134,18 @@ export default function Edit({ team, categories, media }: EditProps) {
                             <Label>Address</Label>
                             <Input value={form.address} onChange={(e) => setForm({ ...form, address: e.target.value })} />
                             <InputError message={errors.address} />
+                        </div>
+                        <div className="grid gap-2">
+                            <Label>Status</Label>
+                            <Select
+                                value={form.status}
+                                onChange={(e) => setForm({ ...form, status: e.target.value })}
+                                options={[
+                                    { value: 'Active', label: 'Active ✅' },
+                                    { value: 'Inactive', label: 'Inactive 🚫' },
+                                ]}
+                            />
+                            <InputError message={errors.status} />
                         </div>
                     </div>
 

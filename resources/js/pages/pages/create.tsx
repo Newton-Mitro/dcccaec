@@ -53,17 +53,38 @@ const Create: React.FC<CreateProps> = ({ media }) => {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        router.post('/admin/pages', formData, {
-            preserveScroll: true,
-            onSuccess: () => {
-                toast.success('Page created successfully!');
-                router.visit('/admin/pages');
+        let jsonString = '';
+
+        // ✅ Validate JSON syntax (but send as string)
+        if (formData.json_array && typeof formData.json_array === 'string' && formData.json_array.trim() !== '') {
+            try {
+                JSON.parse(formData.json_array); // ✅ validation only
+                jsonString = formData.json_array.trim(); // ✅ send raw JSON string
+            } catch (error) {
+                console.error('Invalid JSON string:', error);
+                toast.error('Invalid JSON format in "JSON Array" field.');
+                return; // stop submission
+            }
+        }
+
+        router.post(
+            '/admin/pages',
+            {
+                ...formData,
+                json_array: jsonString, // ✅ send JSON string (not parsed)
             },
-            onError: (err) => {
-                setErrors(err);
-                toast.error('Error creating page. Please try again.');
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    toast.success('Page created successfully!');
+                    router.visit('/admin/pages');
+                },
+                onError: (err) => {
+                    setErrors(err);
+                    toast.error('Error creating page. Please try again.');
+                },
             },
-        });
+        );
     };
 
     const breadcrumbs: BreadcrumbItem[] = [

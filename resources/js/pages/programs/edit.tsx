@@ -46,6 +46,7 @@ export default function Edit({ program, media }: EditProps) {
         uniform_fee: program?.uniform_fee || '',
         books_stationary_fee: program?.books_stationary_fee || '',
         khata_fee: program?.khata_fee || '',
+        status: program?.is_active || true,
     });
 
     const [selectedMedia, setSelectedMedia] = useState<Media | null>(program?.featured_image ?? null);
@@ -178,6 +179,20 @@ export default function Edit({ program, media }: EditProps) {
                             <Label>Khata Fee</Label>
                             <Input value={form.khata_fee} onChange={(e) => setForm({ ...form, khata_fee: e.target.value })} />
                         </div>
+                    </div>
+
+                    <div className="flex items-center gap-2 pt-4">
+                        <input
+                            id="is_active"
+                            type="checkbox"
+                            checked={form.is_active}
+                            onChange={(e) => setForm({ ...form, is_active: e.target.checked })}
+                            className="h-4 w-4 rounded border-gray-300 text-primary focus:ring-primary"
+                        />
+                        <Label htmlFor="is_active" className="font-medium">
+                            Is Active
+                        </Label>
+                        <InputError message={errors.is_active} />
                     </div>
 
                     {/* Media */}

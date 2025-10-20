@@ -112,6 +112,18 @@ export default function Create({ media }: CreateProps) {
                                 error={errors.end_date}
                             />
                         </div>
+                        <div className="grid gap-2">
+                            <Label>Status</Label>
+                            <Select
+                                value={form.status}
+                                onChange={(e) => setForm({ ...form, status: e.target.value })}
+                                options={[
+                                    { value: 'Active', label: 'Active ✅' },
+                                    { value: 'Inactive', label: 'Inactive 🚫' },
+                                ]}
+                            />
+                            <InputError message={errors.status} />
+                        </div>
                     </div>
 
                     {/* Description */}

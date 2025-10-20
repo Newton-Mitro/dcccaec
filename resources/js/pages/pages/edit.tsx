@@ -53,14 +53,34 @@ const Edit: React.FC<EditProps> = ({ page, media }) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        router.put(`/admin/pages/${page.id}`, formData, {
-            preserveScroll: true,
-            onSuccess: () => toast.success('Page updated successfully!'),
-            onError: (err) => {
-                setErrors(err);
-                toast.error('Error updating page. Please try again.');
+
+        let jsonString = '';
+
+        if (formData.json_array && typeof formData.json_array === 'string' && formData.json_array.trim() !== '') {
+            try {
+                JSON.parse(formData.json_array); // ✅ just validate syntax
+                jsonString = formData.json_array.trim(); // ✅ send raw string
+            } catch (error) {
+                console.error('Invalid JSON string:', error);
+                return; // stop if invalid
+            }
+        }
+
+        router.put(
+            `/admin/pages/${page.id}`,
+            {
+                ...formData,
+                json_array: jsonString, // ✅ send JSON string, not parsed object
             },
-        });
+            {
+                preserveScroll: true,
+                onSuccess: () => toast.success('Page updated successfully!'),
+                onError: (err) => {
+                    setErrors(err);
+                    toast.error('Error updating page. Please try again.');
+                },
+            },
+        );
     };
 
     const breadcrumbs: BreadcrumbItem[] = [

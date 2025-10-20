@@ -34,7 +34,6 @@ class UserController extends Controller
     // Create user page
     public function create(Request $request)
     {
-        // Optionally fetch media for avatar selection
         $perPage = $request->input('perPage', 20);
         $media = Media::latest()->paginate($perPage)->withQueryString();
 
@@ -49,8 +48,9 @@ class UserController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed',
             'username' => 'nullable|string|unique:users,username',
+            'password' => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required|string|min:8',
             'avatar_id' => 'nullable|exists:media,id',
             'headline' => 'nullable|string|max:255',
             'bio' => 'nullable|string',
@@ -62,7 +62,8 @@ class UserController extends Controller
 
         User::create($data);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully!');
+        return redirect()->route('users.index')
+            ->with('success', 'User created successfully!');
     }
 
     // Edit user
@@ -83,8 +84,9 @@ class UserController extends Controller
         $data = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'password' => 'nullable|string|min:8|confirmed',
             'username' => 'nullable|string|unique:users,username,' . $user->id,
+            'password' => 'nullable|string|min:8|confirmed',
+            'password_confirmation' => 'nullable|string|min:8',
             'avatar_id' => 'nullable|exists:media,id',
             'headline' => 'nullable|string|max:255',
             'bio' => 'nullable|string',
@@ -92,6 +94,7 @@ class UserController extends Controller
             'role' => 'required|in:VISITOR,EDITOR,ADMIN',
         ]);
 
+        // Hash password only if provided
         if (!empty($data['password'])) {
             $data['password'] = bcrypt($data['password']);
         } else {
@@ -100,7 +103,8 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully!');
+        return redirect()->route('users.index')
+            ->with('success', 'User updated successfully!');
     }
 
     // Delete user
@@ -108,6 +112,7 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('users.index')->with('success', 'User deleted successfully!');
+        return redirect()->route('users.index')
+            ->with('success', 'User deleted successfully!');
     }
 }

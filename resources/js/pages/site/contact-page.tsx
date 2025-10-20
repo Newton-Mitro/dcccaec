@@ -1,5 +1,6 @@
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { Mail, MapPin, Phone } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Button } from '../../components/ui/button';
 import { Input } from '../../components/ui/input';
@@ -10,13 +11,33 @@ import PageBanner from './components/page-banner';
 const ContactPage = () => {
     const { settings } = usePage().props as any;
 
+    const [num1, setNum1] = useState(0);
+    const [num2, setNum2] = useState(0);
+
     const { data, setData, post, processing, errors, reset } = useForm({
         name: '',
         email: '',
         phone: '',
         subject: '',
         message: '',
+        math_answer: '',
+        num1: 0,
+        num2: 0,
     });
+
+    // 🔢 Generate random math challenge
+    const generateMath = () => {
+        const a = Math.floor(Math.random() * 9) + 1;
+        const b = Math.floor(Math.random() * 9) + 1;
+        setNum1(a);
+        setNum2(b);
+        setData('num1', a);
+        setData('num2', b);
+    };
+
+    useEffect(() => {
+        generateMath();
+    }, []);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -25,10 +46,12 @@ const ContactPage = () => {
             preserveScroll: true,
             onSuccess: () => {
                 toast.success('Message sent successfully!');
-                reset(); // clears all fields
+                reset();
+                generateMath(); // regenerate math after success
             },
             onError: () => {
                 toast.error('Please fix the errors and try again.');
+                generateMath(); // new math challenge if wrong
             },
         });
     };
@@ -41,7 +64,7 @@ const ContactPage = () => {
 
                 <section className="container-custom mx-auto px-6 py-16">
                     <div className="grid items-center gap-12 md:grid-cols-2">
-                        {/* Info */}
+                        {/* Left: Info */}
                         <div>
                             <h2 className="mb-6 text-2xl font-semibold">Get in Touch</h2>
                             <div className="space-y-6">
@@ -69,16 +92,18 @@ const ContactPage = () => {
                             </div>
                         </div>
 
-                        {/* Form */}
+                        {/* Right: Form */}
                         <div className="rounded-xl bg-card p-8 shadow">
                             <h2 className="mb-6 text-2xl font-semibold">Send a Message</h2>
                             <form onSubmit={handleSubmit} className="space-y-2">
+                                {/* Name */}
                                 <div>
                                     <label className="mb-1 block text-sm font-medium">Name</label>
                                     <Input value={data.name} onChange={(e) => setData('name', e.target.value)} placeholder="Your Name" />
                                     {errors.name && <p className="text-sm text-red-500">{errors.name}</p>}
                                 </div>
 
+                                {/* Email */}
                                 <div>
                                     <label className="mb-1 block text-sm font-medium">Email</label>
                                     <Input
@@ -90,6 +115,7 @@ const ContactPage = () => {
                                     {errors.email && <p className="text-sm text-red-500">{errors.email}</p>}
                                 </div>
 
+                                {/* Subject */}
                                 <div>
                                     <label className="mb-1 block text-sm font-medium">Subject</label>
                                     <Input
@@ -101,6 +127,7 @@ const ContactPage = () => {
                                     {errors.subject && <p className="text-sm text-red-500">{errors.subject}</p>}
                                 </div>
 
+                                {/* Message */}
                                 <div>
                                     <label className="mb-1 block text-sm font-medium">Message</label>
                                     <Textarea
@@ -112,15 +139,44 @@ const ContactPage = () => {
                                     {errors.message && <p className="text-sm text-red-500">{errors.message}</p>}
                                 </div>
 
+                                {/* Math CAPTCHA */}
+                                <div>
+                                    <label className="mb-1 block text-sm font-medium">
+                                        Are you human? What is {num1} + {num2}?
+                                    </label>
+                                    <Input
+                                        type="number"
+                                        value={data.math_answer}
+                                        onChange={(e) => setData('math_answer', e.target.value)}
+                                        placeholder="Your answer"
+                                    />
+                                    {errors.math_answer && <p className="text-sm text-red-500">{errors.math_answer}</p>}
+                                </div>
+
                                 <Button type="submit" disabled={processing} className="w-full bg-primary hover:bg-primary/90">
                                     {processing ? 'Sending...' : 'Send Message'}
                                 </Button>
                             </form>
                         </div>
                     </div>
-                    <div className="mt-10 w-full overflow-hidden rounded-xl border">
-                        {/* Render Google Map Embed */}
-                        <div className="h-[450px] w-full" dangerouslySetInnerHTML={{ __html: settings.contact_map_embed || '' }} />
+
+                    {/* Map */}
+                    <div className="mt-16 w-full overflow-hidden rounded-xl border">
+                        <div
+                            className="h-[450px] w-full"
+                            dangerouslySetInnerHTML={{
+                                __html:
+                                    settings.contact_map_embed ||
+                                    `<iframe 
+                                        src="https://maps.google.com/maps?q=Dhaka%2C%20Bangladesh&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                                        width="100%" 
+                                        height="450" 
+                                        style="border:0;" 
+                                        allowFullScreen="" 
+                                        loading="lazy">
+                                    </iframe>`,
+                            }}
+                        />
                     </div>
                 </section>
             </PageLayout>
