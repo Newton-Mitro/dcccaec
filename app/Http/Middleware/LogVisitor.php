@@ -33,9 +33,11 @@ class LogVisitor
             ]
         );
 
-        // Skip logging for admin/dashboard routes
         $routeName = $request->path();
+
+        // Skip logging for certain routes including home ('/')
         if (
+            $routeName !== '/' && // 👈 skip home page
             !Str::contains($routeName, [
                 'dashboard',
                 'admin',
