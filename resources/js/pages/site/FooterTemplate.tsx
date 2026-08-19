@@ -24,16 +24,28 @@ function FooterTemplate() {
             <div className="container-custom mx-auto px-4 py-16">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4 md:gap-10">
                     {/* Logo & App Name */}
-                    <div className="flex flex-col items-center space-y-4 text-center md:items-start md:text-left">
+                    <div className="flex flex-col items-center text-center md:items-start md:text-left">
                         <div className="rounded-full bg-white p-3">
                             <img src={settings.site_logo || '/logo.png'} alt="DC Child Care Logo" className="h-16 w-16 object-contain" />
                         </div>
-                        <div className="flex items-center justify-center gap-2 md:justify-start">
+                        <div className="flex items-center justify-center gap-2 pt-2 md:justify-start">
                             <h1 className="font-meow-script text-4xl text-primary dark:text-secondary">DC</h1>
                             <p className="font-chewy text-accent">childCare</p>
                         </div>
                         <p className="mt-2 text-sm text-muted-foreground">
                             &copy; {currentYear} {settings.site_name || appName}. All rights reserved.
+                        </p>
+                        <p className="text-onSurface/70 text-xs">
+                            Developed by{' '}
+                            <a
+                                href="https://www.facebook.com/profile.php?id=61592730722204"
+                                target="_blank"
+                                rel="noopener noreferrer "
+                                className="hover:font-semibold hover:underline"
+                            >
+                                <strong>Quantum Labs</strong>
+                            </a>{' '}
+                            Team
                         </p>
                     </div>
 

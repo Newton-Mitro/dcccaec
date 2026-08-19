@@ -112,7 +112,7 @@ class PageSeeder extends Seeder
 </section>'
       ],
       [
-        'title' => 'Class Rutines',
+        'title' => 'Class Routine',
         'subtitle' => 'A structured, joyful day.',
         'media_id' => $routine->id,
         'content' => '<section id="class-routines" class="">

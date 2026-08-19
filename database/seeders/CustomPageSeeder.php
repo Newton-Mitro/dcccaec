@@ -173,7 +173,7 @@ class CustomPageSeeder extends Seeder
           'button_link' => '#',
         ]
       ],
-      'Class Rutines' => [
+      'Class Routine' => [
         [
           'heading' => 'Daily Class Routines',
           'sub_heading' => 'A structured, joyful day.',

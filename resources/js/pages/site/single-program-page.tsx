@@ -59,7 +59,7 @@ const SingleProgramPage: React.FC<SingleProgramPageProps> = ({ program }) => {
                         )}
 
                         {/* Program Info */}
-                        <div className="flex justify-between gap-10 lg:gap-16">
+                        <div className="flex-col justify-between gap-10 md:flex lg:gap-16">
                             {/* Description */}
                             <div className="prose max-w-full dark:prose-invert">
                                 <div dangerouslySetInnerHTML={{ __html: program.description ?? '' }} />

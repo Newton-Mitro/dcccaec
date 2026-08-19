@@ -31,7 +31,7 @@ Route::get('/', [WebPageController::class, 'home'])->name('site.home');
 
 Route::get('/parents/curriculum', [WebPageController::class, 'curriculumPage'])->name('site.curriculum');
 Route::get('/parents/enrollment', [WebPageController::class, 'enrollmentPage'])->name('site.enrollment');
-Route::get('/parents/class-rutines', [WebPageController::class, 'classRoutinesPage'])->name('site.class-routines');
+Route::get('/parents/class-routine', [WebPageController::class, 'classRoutinesPage'])->name('site.class-routines');
 Route::get('/parents/health-safety', [WebPageController::class, 'healthAndSefetyPage'])->name('site.health-and-safety');
 Route::get('/parents/nutrition-meals', [WebPageController::class, 'nutritionAndMealsPage'])->name('site.nutrition-and-meals');
 

@@ -51,7 +51,7 @@ export default function Navigation() {
             subItems: [
                 { title: 'Enrollment', href: '/parents/enrollment', label: 'parents' },
                 { title: 'Curriculum', href: '/parents/curriculum', label: 'parents' },
-                { title: 'Class Rutines', href: '/parents/class-rutines', label: 'parents' },
+                { title: 'Class Routine', href: '/parents/class-routine', label: 'parents' },
                 { title: 'Health & Safety', href: '/parents/health-safety', label: 'parents' },
                 { title: 'Nutrition & Meals', href: '/parents/nutrition-meals', label: 'parents' },
             ],

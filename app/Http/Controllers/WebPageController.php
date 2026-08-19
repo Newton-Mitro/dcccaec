@@ -77,7 +77,7 @@ class WebPageController extends Controller
     public function classRoutinesPage()
     {
         $page = Page::with(['gallery.media', 'featuredImage'])
-            ->where('slug', 'class-rutines')
+            ->where('slug', 'class-routine')
             ->first();
 
         return Inertia::render('site/class-routines-page', [
@@ -261,6 +261,7 @@ class WebPageController extends Controller
     {
         $perPage = $request->input('perPage', 8);
         $programs = Program::with('featuredImage', 'gallery', 'category')
+            ->where('is_active', true)
             ->latest()
             ->get();
         return Inertia::render('site/programs-page', [
